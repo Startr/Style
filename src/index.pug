@@ -1,0 +1,127 @@
+
+nav.navbar.row(style='--d:none; --d-md: flex; --ta: center;')
+  h3.column
+    a.link.is-info(href="#home") Home
+  h3.column
+    a.link.is-info(href="#about") About
+  h3.column
+    img.shadowed(
+      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/170881/Logo.png",
+    )
+  h3.column
+    a.link.is-info(href="#shop") Shop
+  h3.column
+    a.link.is-info(href="#contact") Contact
+
+nav(role='navigation' style='--d:inherit; --d-md: none')
+  #menuToggle
+    //
+      hidden checkbox is used as click reciever,
+      so you can use the :checked selector on it.
+    input(type='checkbox')
+    //
+      Some spans to act as a hamburger.
+      They are acting like a real hamburger,
+      not that McDonalds stuff.
+    span
+    span
+    span
+    ul#menu
+      a(href='#home')
+        li Home
+      a(href='#about')
+        li About
+      a(href='#shop')
+        li Shop
+      a(href='#contact')
+        li Contact
+  //#logo(style='--d:inherit; --d-md: none')
+    img.shadowed(
+      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/170881/Logo.png",
+    )
+
+section#home.wow.animate__fadeIn(style=' --d: flex; --fd-md: row; --fw: wrap')
+  div(style='--ta: center; maxw-md:40%; --p: 2rem;')
+    h2(style='--mb: 1rem;') About Our Team
+    p(style='font-size: 1.2rem; line-height: 1.5;') Our team of experienced developers and designers are dedicated to creating high-quality, user-friendly websites and applications. We believe in using the latest technologies and design trends to bring your vision to life. 
+      a.link-mdn(href="https://www.softr.io/tools/svg-wave-generator")
+      a(href="https://www.softr.io/tools/svg-wave-generator") We like using SVG waves.
+
+
+  div#about(style='--ta: center; --d: flex; --fw: wrap')
+    - people =[{"name":"Alice","role":"Chief Designer","fact":"Alice has a strong background in business strategy and leadership."},{"name":"Bob","role":"Accounting and HR","fact":"Bob has extensive experience in technology and software development."},{"name":"Charlie","role":"Full Stack Developer","fact":"Charlie is an expert in software testing, design, and dev."},{"name":"Charlie II","role":"Full Stack Developer","fact":"Charlie is an expert in software testing, design, and dev."}]
+      each person, index in people
+        a(href='#card' + index, id='card' + index)
+          div(style='--fx: 1; --p: 1rem; --d: grid; --jc: center;')
+            figure(style='--w: 300px; --br: 5px; --bgc:var(--white); --of: hidden; --pos: relative; --pb: 7rem; --scale-hvr:105%; --levitate-hvr:5')
+              img(src='https://source.unsplash.com/random/30' + index + 'x500/?woman' style='--mb: -33%;')
+              img(src='https://assets.codepen.io/170881/wave.svg')
+              figcaption(style='--inset-bottom: 0px; --pos: absolute; --pt: none; --bgc:var(--white);')
+                div(style='--m: auto;')
+                  a(href='#!')
+                    h5= person.name
+                    p(style='--ws:pre')= person.role
+                    //p(style='')= person.fact
+                  ul(style='--d: flex; --jc:center; --p:none; gap: 0.8rem')
+                    a(href='#!')
+                      i.fa-brands.fa-facebook
+                    a(href='#!')
+                      i.fa-brands.fa-twitter
+                    a(href='#!')
+                      i.fa-brands.fa-linkedin
+                    
+section.wow.animate__fadeIn(style='--ta: center; --mb: 1rem;')
+    h2#shop(style='--ta: center; --mb: 1rem;') Our Products
+
+section.catalog.wow.animate__fadeIn(
+  data-wow-duration='2s' 
+  style='--d: flex; --jc:center; --fd: column; --fd-md: row; --fw:wrap'
+  )
+
+
+    - var n = 1;
+      while n <= 6 
+        article(style='--br: 5px; --d: grid; --m: 1rem;  --jc: center;')
+          a(href='#')
+            figure(style='--maxw: 300px; --br: 5px; --of: hidden; --pos: relative;  --scale-hvr:105%; --levitate-hvr:5')
+              img(src='https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODM5MTA0Mzl8&ixlib=rb-4.0.3&q=80&w=400' alt='Hotel Photo')
+              figcaption(style='--pt: none; --bgc:#F3F4F5;')
+                head
+                  h4
+                  | Adobe Photoshop CC 2022
+                p= n++ 
+                  h5(style='--d:inline') $850
+                  h6(style='--d:inline') /night         
+
+                  button(style=' --ft:right; --mr:0')
+                    i.fa-solid.fa-cart-plus  
+                    |  Add to cart
+
+
+section.container(style='padding: 2rem; text-align: center;')
+  h2(style='margin-bottom: 1rem;') Our Services
+  ul(style='list-style: none; text-align: left;')
+    li(style='margin-bottom: 0.5rem;') Website Design and Development
+    li(style='margin-bottom: 0.5rem;') Mobile App Development
+    li(style='margin-bottom: 0.5rem;') E-commerce Solutions
+    li(style='margin-bottom: 0.5rem;') Search Engine Optimization
+
+section.container(style='padding: 2rem; text-align: center;')
+  h2(style='margin-bottom: 1rem;') Our Process
+  p(style='font-size: 1.2rem; line-height: 1.5;') We follow a comprehensive process to ensure that every project is a success. Our process includes:
+  ol(style='text-align: left;')
+    li Discovery and Planning
+    li Design and Development
+    li Testing and Quality Assurance
+    li Deployment and Maintenance
+
+section.container(style='--p: 2rem; --ta: center;')
+  h2#contact(style='--mb: 1rem;') Contact Us
+  p(style='font-size: 1.2rem; line-height: 1.5;') If you're interested in working with us, please feel free to get in touch. We'd love to hear about your project and see how we can help.
+  a.button(href='#' style='--p: 1rem 2rem;') Get in Touch
+
+section.container(style='--p: 2rem; --ta: center;')
+  h4(style='--mb: 1rem;') Footer
+  p(style='font-size: 1.2rem; line-height: 1.5;') © 2023 
+    a(href='https://startr.ca') Startr LLC. 
+    | All rights reserved.
