@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+<link rel="preload" href="../../../style.css" as="style">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Form Sizing Helper A sizing helper allowing you to adjust the size of form elements --x The --x helper allows you to adjust form elements by percentage size. By default --x has a value of 100 (%) where a value less than 100 will reduce the size of the element and a value above 100 will increase the size of the element. The --x helper effects the font-size and padding of the element."><meta property="og:title" content="Form Sizing" />
+<meta property="og:description" content="Form Sizing Helper A sizing helper allowing you to adjust the size of form elements --x The --x helper allows you to adjust form elements by percentage size. By default --x has a value of 100 (%) where a value less than 100 will reduce the size of the element and a value above 100 will increase the size of the element. The --x helper effects the font-size and padding of the element." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://startr.ca/style/docs/helpers/form-sizing/" />
+
+<title>Form Sizing | Startr Style</title>
+<link rel="icon" href="../../../favicon.png" type="image/x-icon">
+
+<link rel="stylesheet" href="../../../style.css" >
+
+
+
+  <script>function liveprop(svar,shorthand,unit,target){let input=document.getElementById(`${svar}`);let label=document.getElementById(`${svar}-label`);let demotarget=document.getElementById(`${target}`);input.addEventListener('input',({target})=>{let propValue=target.value+unit;label.textContent=shorthand+':'+propValue+';';demotarget.style.setProperty(shorthand,propValue);});input.addEventListener('mousedown',()=>{label.classList.add('changing');});input.addEventListener('mouseup',()=>{label.classList.remove('changing');});}</script>
+
+
+<meta property="og:site_name" content="Startr Style">
+<meta property="og:url" content="https://startr.ca/style/">
+<meta property="og:title" content="Startr Style">
+<meta property="og:type" content="website">
+<meta property="og:description" content="A complete Utility First CSS Framework for less than 45kb (8kb gzipped)">
+
+<meta name="twitter:site" content="@alexandersomma">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Startr Style">
+<meta name="twitter:description" content="A complete Utility First CSS Framework for less than 45kb (8kb gzipped)">
+<meta property="og:image" content="https://repository-images.githubusercontent.com/266390410/43f95a00-9f4b-11ea-8fe8-7166a940d3a6" />
+<meta property="og:image:secure_url" content="https://repository-images.githubusercontent.com/266390410/43f95a00-9f4b-11ea-8fe8-7166a940d3a6" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="628" />
+
+<!-- <script type="tracker"> </script> -->
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" id="menu-control" class="hidden"/>
+  
+  <main style="--d:flex; --maxw:80rem; --m:0 auto;">
+    <aside class="book-menu" style="--fx:0 0 16rem; --ta:right; --pos:sticky; --top:0; --as:flex-start; --minh:100vh; --d:flex; --fd:column">
+      
+        <a href="../../../index.html">
+          <img src="../../../logo.png" alt="Startr/Style" style="--m:20px 15px 0 auto; --maxw:100px">
+        </a>
+      
+      
+  <nav style=" --pr:2rem; --br:1px solid #ddd">
+  <div style="--weight:bold;--pt:1rem">Getting Started</div>
+  <a href="../../../index.html" style="--mb:.2rem; --d:block; ">
+    Introduction
+  </a>
+
+
+
+
+
+
+
+
+  
+
+  
+  
+
+
+
+
+
+ 
+  
+    
+
+
+
+
+  
+  <ul style="--list:none; --p:0; --m:0">
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../../getting-started/installation/index.html" class="">Installation</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../../getting-started/browser-support/index.html" class="">Browser Support</a>
+  
+
+</li>
+      
+    
+      
+        
+
+  <li class="book-section-flat" >
+    
+
+  
+  <div style="--weight:bold;">Helpers</div>
+  
+
+
+    
+
+
+
+
+  
+  <ul style="--list:none; --p:0; --m:0">
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../background/index.html" class="">Background</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="index.html" class="active">Form Sizing</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../position/index.html" class="">Position</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../shadows/index.html" class="">Shadows</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../spacing/index.html" class="">Spacing</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../transform/index.html" class="">Transform</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../typography/index.html" class="">Typography</a>
+  
+
+</li>
+      
+    
+  </ul>
+  
+
+
+
+  </li>
+
+
+      
+    
+      
+        
+
+  <li class="book-section-flat" >
+    
+
+  
+  <div style="--weight:bold;">Base Elements</div>
+  
+
+
+    
+
+
+
+
+  
+  <ul style="--list:none; --p:0; --m:0">
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../../base-elements/typography/index.html" class="">Typography</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../../base-elements/buttons/index.html" class="">Buttons</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../../base-elements/fields/index.html" class="">Fields</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../../base-elements/everything-else/index.html" class="">Everything Else</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../../base-elements/variables/index.html" class="">Variables</a>
+  
+
+</li>
+      
+    
+  </ul>
+  
+
+
+
+  </li>
+
+
+      
+    
+      
+        
+
+  <li class="book-section-flat" >
+    
+
+  
+  <a href="../../utilities/index.html" class="">Utilities</a>
+  
+
+
+    
+
+
+
+
+  
+  <ul style="--list:none; --p:0; --m:0">
+    
+  </ul>
+  
+
+
+
+  </li>
+
+
+      
+    
+  </ul>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+ 
+        <a href="https://x.com/alexandersomma" style="--ta:left; --mt:auto; --d:inline-flex; --ai:center; --p:5px 10px; --m:1rem 2rem; --radius:20px; --bg:#fafafa; --as:flex-end">
+          <div style="--ml:auto;--mr:.5rem;">
+            <div style="--c:#777">@alexandersomma</div>
+          </div>
+          <div>
+              <svg style="--c:var(--primary)" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+          </div>
+        </a>
+    </aside>
+
+    <div class="book-page" style="--px:2rem;">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="../../../svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="form-sizing-helper">Form Sizing Helper</h2>
+<h4 id="a-sizing-helper-allowing-you-to-adjust-the-size-of-form-elements">A sizing helper allowing you to adjust the size of form elements</h4>
+<br>
+<h4 id="--x">--x</h4>
+<p>The <code>--x</code> helper allows you to adjust form elements by percentage size. By default <code>--x</code> has a value of <code>100</code> (%) where a value less than <code>100</code> will reduce the size of the element and a value above <code>100</code> will increase the size of the element. The <code>--x</code> helper effects the font-size and padding of the element.</p>
+<div style="--d:flex; --mb:4rem;">
+    <div style="--p:1rem; --fx:1; --bg:#eee; --as:flex-start; --maxw:600px;">
+        <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center; --ai: center; --minh: 220px"><button id="target-x" aria-label="add" style="--x:100;">
+  Button
+</button></div>
+            <div>
+                <input class="slider" type="range" id="x" name="x" min="50" max="200" value="100">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+<div class="highlight" style="--mb:0;"><pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="x-label">--x:100;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> Button <span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span></code></pre>
+            </div>
+        </div>
+    </div>  
+</div>
+<script>liveprop('x', '--x', '', 'target-x');</script>
+<h5 id="button-groups">Button Groups</h5>
+<p>The <code>--x</code> helper works across all form elements including button groups, select fields and all input types.accent</p>
+<div style="--d:flex; --mb:4rem;">
+    <div style="--p:1rem; --fx:1; --bg:#eee; --as:flex-start; --maxw:600px;">
+        <div style="--fx:1; --p:3rem 1rem; --mb:.5rem; --d:flex; --jc:center; --ai: center; --minh: 180px">
+            <div id="target-x-group" class="group"  style="--x:100;">
+  <input type="text" placeholder="John" aria-label="Name">
+  <button>Button</button>
+  <button>Button</button>
+</div>
+        </div>
+            <div>
+                <input class="slider" type="range" id="x-group" name="" min="60" max="120" value="100">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+<div class="highlight" style="--mb:0;"><pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"group"</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="x-group-label">--x:100;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> 
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"John"</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">"Name"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Button<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Button<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+            </div>
+        </div>
+    </div>  
+</div>
+<script>liveprop('x-group', '--x', '', 'target-x-group');</script>
+<h5 id="forms-and-outside-containers">Forms and outside containers</h5>
+<p>The <code>--x</code> helper can be applied to the outside container of a collection of form elements. All form elements inside the container will inherit the <code>--x</code> value.</p>
+<div style="--d:flex; --mb:4rem;">
+    <div style="--p:1rem; --fx:1; --bg:#eee; --as:flex-start; --maxw:600px;">
+        <div style="--fx:1; --p:1.5rem 1rem; --mb:.5rem; --d:flex; --ai: flex-start; --minh: 360px">
+          <form id="target-x-form" style="--x: 100;">
+          <label>Username
+            <input type="text" placeholder="John">
+          </label>
+          <label>Password
+            <input type="password" placeholder="Dow">
+          </label>
+          <button>Submit</button>
+        </form>
+        </div>
+            <div>
+                <input class="slider" type="range" id="x-form" name="" min="60" max="160" value="100">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+<div class="highlight" style="--mb:0;"><pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="x-form-label">--x:100;</span>"</span></span><span class="p"></span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Username
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"John"</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Password
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"password"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"Dow"</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Submit<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">form</span><span class="p">&gt;</span></code></pre>
+            </div>
+        </div>
+    </div>  
+</div>
+<script>liveprop('x-form', '--x', '', 'target-x-form');</script></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div style="--d:flex; --jc:center; --fd:column">
+
+<div style="--ta:center; --mb:1rem">
+<a class="github-button" href="https://github.com/Startr/Style" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star Startr/Style on GitHub">Star</a>
+<a class="github-button" href="https://github.com/Startr/Style/fork" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork Startr/Style on GitHub">Fork</a>
+<a class="github-button" href="https://github.com/Startr/Style/archive/master.zip" data-icon="octicon-cloud-download" data-size="large" aria-label="Download Startr/Style on GitHub">Download</a>
+</div>
+
+<div style="--m:auto; --ta:center; --op:.7">
+  <p style="--mb:0">Carefully crafted by the <a href="https://startr.ca">Startr Team</a> with the help of <a href="https://github.com/Startr/Style/graphs/contributors">our contributors</a>.</p>
+  <p style="--mb:2rem">Startr Style licensed <a href="hhttps://github.com/Startr/Style/blob/master/LICENSE.md" target="_blank" rel="license noopener">MIT</a>, docs <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="license noopener">CC BY 3.0</a>.</p>
+</div>
+
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

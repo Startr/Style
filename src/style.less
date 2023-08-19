@@ -654,7 +654,6 @@ header {
   }
 
   @media screen and (min-width: calc(80rem - 2rem)) {
-    //transform: translate(calc(((100vw - 80rem) / -2) - 0rem));
     min-height: 20rem;
   }
 }
@@ -714,18 +713,6 @@ tfoot {
   border-top: 1px solid rgba(100, 100, 100, .2)
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 400;
-  line-height: 1.3em;
-  margin: var(--heading-margin);
-  color: var(--text-c, inherit)
-}
-
 //TODO FIX ME -- DEDUPE
 
 p {
@@ -740,9 +727,11 @@ h5,
 h6 {
   line-height: 1.6;
   font-family: Nunito, Varela Round, sans-serif;
-  font-weight: 800;
   overflow-wrap: break-word;
   word-wrap: break-word;
+  line-height: 1.3em;
+  margin: var(--heading-margin);
+  color: var(--text-c, inherit)
 }
 
 h1 {

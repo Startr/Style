@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+<link rel="preload" href="../../style.css" as="style">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CSS Utilities Utilities allow you to quickly apply single CSS properties to an element directly within your HTML markup without having to write any code in a separate CSS file. Contrary to other CSS frameworks which use the class attribute, Startr Style is unique in that it applies utilities through CSS variables and the style attribute. This has a number of distinct improvements over class based utilities.
+ Use of all values - With class based utlities you can only assign a set number of values pre defined by the framework."><meta property="og:title" content="Utilities" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://startr.ca/style/docs/utilities/" />
+
+<title>Utilities | Startr Style</title>
+<link rel="icon" href="../../favicon.png" type="image/x-icon">
+
+<link rel="stylesheet" href="../../style.css" >
+
+
+
+  <script>function liveprop(svar,shorthand,unit,target){let input=document.getElementById(`${svar}`);let label=document.getElementById(`${svar}-label`);let demotarget=document.getElementById(`${target}`);input.addEventListener('input',({target})=>{let propValue=target.value+unit;label.textContent=shorthand+':'+propValue+';';demotarget.style.setProperty(shorthand,propValue);});input.addEventListener('mousedown',()=>{label.classList.add('changing');});input.addEventListener('mouseup',()=>{label.classList.remove('changing');});}</script>
+
+
+<meta property="og:site_name" content="Startr Style">
+<meta property="og:url" content="https://startr.ca/style/">
+<meta property="og:title" content="Startr Style">
+<meta property="og:type" content="website">
+<meta property="og:description" content="A complete Utility First CSS Framework for less than 45kb (8kb gzipped)">
+
+<meta name="twitter:site" content="@alexandersomma">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Startr Style">
+<meta name="twitter:description" content="A complete Utility First CSS Framework for less than 45kb (8kb gzipped)">
+<meta property="og:image" content="https://repository-images.githubusercontent.com/266390410/43f95a00-9f4b-11ea-8fe8-7166a940d3a6" />
+<meta property="og:image:secure_url" content="https://repository-images.githubusercontent.com/266390410/43f95a00-9f4b-11ea-8fe8-7166a940d3a6" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="628" />
+
+<!-- <script type="tracker"> </script> -->
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" id="menu-control" class="hidden"/>
+  
+  <main style="--d:flex; --maxw:80rem; --m:0 auto;">
+    <aside class="book-menu" style="--fx:0 0 16rem; --ta:right; --pos:sticky; --top:0; --as:flex-start; --minh:100vh; --d:flex; --fd:column">
+      
+        <a href="../../index.html">
+          <img src="../../logo.png" alt="Startr/Style" style="--m:20px 15px 0 auto; --maxw:100px">
+        </a>
+      
+      
+  <nav style=" --pr:2rem; --br:1px solid #ddd">
+  <div style="--weight:bold;--pt:1rem">Getting Started</div>
+  <a href="../../index.html" style="--mb:.2rem; --d:block; ">
+    Introduction
+  </a>
+
+
+
+
+
+
+
+
+  
+
+  
+  
+
+
+
+
+
+ 
+  
+    
+
+
+
+
+  
+  <ul style="--list:none; --p:0; --m:0">
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../getting-started/installation/index.html" class="">Installation</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../getting-started/browser-support/index.html" class="">Browser Support</a>
+  
+
+</li>
+      
+    
+      
+        
+
+  <li class="book-section-flat" >
+    
+
+  
+  <div style="--weight:bold;">Helpers</div>
+  
+
+
+    
+
+
+
+
+  
+  <ul style="--list:none; --p:0; --m:0">
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../helpers/background/index.html" class="">Background</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../helpers/form-sizing/index.html" class="">Form Sizing</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../helpers/position/index.html" class="">Position</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../helpers/shadows/index.html" class="">Shadows</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../helpers/spacing/index.html" class="">Spacing</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../helpers/transform/index.html" class="">Transform</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../helpers/typography/index.html" class="">Typography</a>
+  
+
+</li>
+      
+    
+  </ul>
+  
+
+
+
+  </li>
+
+
+      
+    
+      
+        
+
+  <li class="book-section-flat" >
+    
+
+  
+  <div style="--weight:bold;">Base Elements</div>
+  
+
+
+    
+
+
+
+
+  
+  <ul style="--list:none; --p:0; --m:0">
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../base-elements/typography/index.html" class="">Typography</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../base-elements/buttons/index.html" class="">Buttons</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../base-elements/fields/index.html" class="">Fields</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../base-elements/everything-else/index.html" class="">Everything Else</a>
+  
+
+</li>
+      
+    
+      
+        <li style="--mb:.2rem">
+
+  
+  <a href="../base-elements/variables/index.html" class="">Variables</a>
+  
+
+</li>
+      
+    
+  </ul>
+  
+
+
+
+  </li>
+
+
+      
+    
+      
+        
+
+  <li class="book-section-flat" >
+    
+
+  
+  <a href="index.html" class="active">Utilities</a>
+  
+
+
+    
+
+
+
+
+  
+  <ul style="--list:none; --p:0; --m:0">
+    
+  </ul>
+  
+
+
+
+  </li>
+
+
+      
+    
+  </ul>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+ 
+        <a href="https://x.com/alexandersomma" style="--ta:left; --mt:auto; --d:inline-flex; --ai:center; --p:5px 10px; --m:1rem 2rem; --radius:20px; --bg:#fafafa; --as:flex-end">
+          <div style="--ml:auto;--mr:.5rem;">
+            <div style="--c:#777">@alexandersomma</div>
+          </div>
+          <div>
+              <svg style="--c:var(--primary)" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+          </div>
+        </a>
+    </aside>
+
+    <div class="book-page" style="--px:2rem;">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="../../svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h3 id="css-utilities">CSS Utilities</h3>
+<p>Utilities allow you to quickly apply single CSS properties to an element directly within your HTML markup without having to write any code in a separate CSS file. Contrary to other CSS frameworks which use the class attribute, Startr Style is unique in that it applies utilities through CSS variables and the style attribute. This has a number of distinct improvements over class based utilities.</p>
+<ul>
+<li><strong>Use of all values</strong> - With class based utlities you can only assign a set number of values pre defined by the framework. Startr Style does not have this restraint. Any valid value for the CSS property can be applied.</li>
+<li><strong>Filesize</strong> - One of the biggest drawbacks to date with utility complete CSS frameworks is their large filesize. The developent version of Tailwind for example, minified is a rather large <strong>2413.4kB</strong>. Startr Style with the same feature set comes in at less than <strong>50kb</strong>.</li>
+</ul>
+<h4 id="what-about-responsive">What about responsive</h4>
+<p>Startr Style utilities are perfect for developing fully responsive interfaces. Each utility can be applied conditionally to a screensize allowing you total responsive control.</p>
+<p>To apply a utility to a certain screensize simply append the utility shorthand with a &lsquo;-&rsquo; followed by the screen size. Utilities use a mobile-first approach so if you append with for example <code>-md</code>, that utility will be applied to the medium screensize and up.</p>
+<p>In the following example background is red by default and blue on large screen devices.</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--bg:red; --bg-lg:blue&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">div</span><span class="p"></span><span class="p">&gt;</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Shorthand</th>
+<th>Media Queries</th>
+<th>MDN Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>align-content</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ac</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-content" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>align-items</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ai</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>align-self</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--as</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-self" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>all</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--all</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/all" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>background</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bg</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>background-attachment</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bga</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>background-color</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bgc</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-color" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>background-image</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bgi</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-image" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>background-position</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bgp</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-position" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>background-repeat</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bgr</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>background-size</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bgs</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--b</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border-bottom</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bb</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border-color</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bc</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-color" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border-bottom-left-radius</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bblr</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border-bottom-right-radius</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bbrr</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border-color</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bc</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-color" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border-left</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bl</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-left" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--radius</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border-right</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--br</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-right" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border-style</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bs</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-style" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border-top</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bt</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-top" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>border-width</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bw</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-width" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>bottom</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bottom</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/bottom" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>box-shadow</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--shadow</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>box-sizing</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--bxs</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>clear</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--cr</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clear" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>color</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--c</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>column-count</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--cc</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/column-count" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>column-fill</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--cf</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/column-fill" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>column-gap</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--cg</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>column-rule</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--cr</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>column-span</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--cs</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/column-span" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>content</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ct</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/content" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>cursor</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--cur</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/cursor" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>direction</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--dir</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/direction" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>display</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--d</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>filter</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--fr</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>flex</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--fx</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>flex-basis</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--fb</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>flex-direction</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--fd</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>flex-grow</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--fg</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>flex-shrink</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--fs</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>flex-wrap</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--fw</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>float</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ft</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>font-family</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ff</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-family" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>font-size</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--size</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>font-style</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--fs</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-style" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>font-weight</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--weight</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>grid-auto-columns</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--gac</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>grid-auto-rows</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--gar</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>grid-column</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--gc</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>grid-gap</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--gg</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-gap" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>grid-row</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--gr</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>grid-template-columns</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--gtc</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>grid-template-rows</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--gtr</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>height</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--h</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/height" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>justify-content</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--jc</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>left</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--left</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/left" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>letter-spacing</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ls</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>line-height</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--lh</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>list-style</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--lis</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/list-style" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>list-style-position</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--lisp</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>list-style-type</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--list</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>margin</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--m</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>margin-bottom</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--mb</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>margin-left</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ml</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>margin-right</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--mr</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>margin-top</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--mt</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>max-height</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--maxh</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/max-height" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>max-width</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--maxw</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/max-width" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>min-height</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--minh</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/min-height" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>min-width</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--minw</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/min-width" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>object-fit</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--objf</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>object-position</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--objp</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-position" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>opacity</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--oy</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/opacity" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>order</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--o</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/order" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>outline</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--oe</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/outline" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>overflow</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--of</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/overflow" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>overflow-x</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ofx</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-x" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>overflow-y</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ofy</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-y" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>padding</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--p</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>padding-bottom</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--pb</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>padding-left</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--pl</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>padding-right</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--pr</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>padding-top</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--pt</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>pointer-events</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--pe</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>position</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--pos</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>right</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--right</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/right" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>scroll-behavior</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--sb</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>text-align</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ta</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-align" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>text-decoration</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--td</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>text-shadow</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ts</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>text-transform</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--tt</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>top</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--top</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/top" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>transform</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--t</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>transform-origin</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ta</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>transform-style</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ts</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>transition</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--tn</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>transition-delay</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--td</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>transition-duration</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--tnd</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>transition-property</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--tp</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>transition-timing-function</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ttf</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>user-select</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--us</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/user-select" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>vertical-align</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--va</a></td>
+<td>no</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>visibility</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--v</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/visibility" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>white-space</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--ws</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/white-space" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>width</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--w</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>word-break</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--wb</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/word-break" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>writing-mode</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--wm</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode" target="_blank" class="link-mdn"></a></td>
+</tr>
+<tr>
+<td>z-index</td>
+<td><span style="--weight:bold; --us:all" class="shorthand">--z</a></td>
+<td>yes</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/z-index" target="_blank" class="link-mdn"></a></td>
+</tr>
+</tbody>
+</table>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div style="--d:flex; --jc:center; --fd:column">
+
+<div style="--ta:center; --mb:1rem">
+<a class="github-button" href="https://github.com/Startr/Style" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star Startr/Style on GitHub">Star</a>
+<a class="github-button" href="https://github.com/Startr/Style/fork" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork Startr/Style on GitHub">Fork</a>
+<a class="github-button" href="https://github.com/Startr/Style/archive/master.zip" data-icon="octicon-cloud-download" data-size="large" aria-label="Download Startr/Style on GitHub">Download</a>
+</div>
+
+<div style="--m:auto; --ta:center; --op:.7">
+  <p style="--mb:0">Carefully crafted by the <a href="https://startr.ca">Startr Team</a> with the help of <a href="https://github.com/Startr/Style/graphs/contributors">our contributors</a>.</p>
+  <p style="--mb:2rem">Startr Style licensed <a href="hhttps://github.com/Startr/Style/blob/master/LICENSE.md" target="_blank" rel="license noopener">MIT</a>, docs <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="license noopener">CC BY 3.0</a>.</p>
+</div>
+
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
