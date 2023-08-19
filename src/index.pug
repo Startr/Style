@@ -1,19 +1,22 @@
 
 nav.navbar.row(style='--d:none; --d-md: flex; --ta: center;')
   h3.column
-    a.link.is-info(href="#home") Home
-  h3.column
-    a.link.is-info(href="#about") About
-  h3.column
     img.shadowed(
-      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/170881/Logo.png",
+      src="/images/logo.jpg",
+      style='--w: 200px;'
     )
   h3.column
-    a.link.is-info(href="#shop") Shop
+    a.link.is-info(href="#about") About
+
   h3.column
-    a.link.is-info(href="#contact") Contact
+    a(href="#signup") Try it Free
+
 
 nav(role='navigation' style='--d:inherit; --d-md: none')
+  img.shadowed(
+    src="/images/logo.jpg",
+    style=''
+    )
   #menuToggle
     //
       hidden checkbox is used as click reciever,
@@ -31,47 +34,99 @@ nav(role='navigation' style='--d:inherit; --d-md: none')
         li Home
       a(href='#about')
         li About
-      a(href='#shop')
-        li Shop
-      a(href='#contact')
-        li Contact
+      a(href="#signup")
+        button.button.is-info Try it Free
   //#logo(style='--d:inherit; --d-md: none')
     img.shadowed(
       src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/170881/Logo.png",
     )
 
 section#home.row.wow.animate__fadeIn(style='--d: inherit; --d-md:flex; --ai: center; --p: 2rem;  --mb: 1rem;')
-  div(style=' --p: 2rem; --w-md: 50%; ')
-    h2(style='--mb: 1rem;') About Our Team
-    p 
-      | Our team of experienced developers and designers are dedicated to creating high-quality, 
-      | user-friendly websites and applications. We believe in using the latest technologies & 
-      | design trends to bring your vision to life. 
-      a.link-mdn(href="https://www.softr.io/tools/svg-wave-generator")
-      a(href="https://www.softr.io/tools/svg-wave-generator") We like using SVG waves.
+
+  .column(style='--ta: center; --d: grid; --fw: wrap')
+    img(src="/images/Frames.png", style='    --ps: center;') 
+
+  .column(style=' --p: 2rem; --w-md: 51%; ')
+    h2(style='--mb: 1rem;') Online spaces that actually encourage people to be together
+    h3(style='--mb: 1rem;') A video chat platform that transforms how you work, play, teach and learn online.
 
 
-  .column#about(style='--ta: center; --d: grid; --fw: wrap')
-    - people =[{"name":"Alice","role":"Chief Designer","fact":"Alice has a strong background in business strategy and leadership."},]
-      each person, index in people
-        a(href='#card' + index, id='card' + index)
-          div(style='--fx: 1; --p: 1rem; --d: grid; --jc: center; --jc-md:right')
-            figure(style='--w: 300px; --br: 5px; --bgc:var(--white); --of: hidden; --pos: relative; --pb: 7rem; --scale-hvr:105%; --levitate-hvr:5')
-              img(src='https://source.unsplash.com/random/30' + index + 'x500/?woman' style='--mb: -33%;')
-              img(src='https://assets.codepen.io/170881/wave.svg')
-              figcaption(style='--inset-bottom: 0px; --pos: absolute; --pt: none; --bgc:var(--white);')
-                div(style='--m: auto;')
-                  a(href='#!')
-                    h5= person.name
-                    p(style='--ws:pre')= person.role
-                    //p(style='')= person.fact
-                  ul(style='--d: flex; --jc:center; --p:none; gap: 0.8rem')
-                    a(href='#!')
-                      i.fa-brands.fa-facebook
-                    a(href='#!')
-                      i.fa-brands.fa-twitter
-                    a(href='#!')
-                      i.fa-brands.fa-linkedin
+section#about.row.wow.animate__fadeIn(style='--d: flex; --jc:center; --fd: column; --fd-md: row; --fw:wrap')
+  each point in {"point_1":{"image":"1_Key_Icon.svg","header":"No links or invitations to manage","paragraph":"Get the key to your own, permanant virtual building!"},"point_2":{"image":"2_Castle_Icon.svg","header":"Interconnected rooms and spaces","paragraph":"Create custom spaces and allow people to flow between them."},"point_3":{"image":"3_Apps_Icon.svg","header":"Embedded content and apps","paragraph":"Personalise rooms with whiteboards, books, videos and more."}}
+    .column(style='--m: auto; --ta: center; --d: grid; --maxw: 300px;')
+      img(src='/images/' + point.image style='--ps:center;')
+      h3= point.header
+      p= point.paragraph
+
+section.row.wow.animate__fadeIn(style='--d: inherit; --d-md:flex; --ai: center; --p: 2rem;  --mb: 1rem;')
+  .column(style='--ta: center; --bgc: #3400CA; --c: white; --p: 1rem; --d:grid') 
+    p
+      | Can virtual experiences spark joy and creativity? At Startr we think so! 
+
+    h4 
+      a(href="#signup")
+        button(style='--p: 1rem 2rem; --mr: 1rem; --ps:center') Get Started Today!
+
+section.row.wow.animate__fadeIn(style='--d: inherit; --d-md:flex; --ai: center; --p: 2rem;  --mb: 1rem;')
+  .column(style=" --ai: center; --ta: center; --d: grid; --fw: wrap")
+    h2 Just what you need, right when you need it.
+
+
+section#about.row.wow.animate__fadeIn(style='--d: flex; --jc:center; --fd: column; --fd-md: row; --fw:wrap')
+  each point in {"point_1":{"image":"1_Key_Icon.svg","header":"No links or invitations to manage","paragraph":"Get the key to your own, permanant virtual building!"},"point_2":{"image":"2_Castle_Icon.svg","header":"Interconnected rooms and spaces","paragraph":"Create custom spaces and allow people to flow between them."},"point_3":{"image":"3_Apps_Icon.svg","header":"Embedded content and apps","paragraph":"Personalise rooms with whiteboards, books, videos and more."}}
+    .column(style='--m: auto; --ta: center; --d: grid; --maxw: 300px;')
+      img(src='/images/' + point.image style='--ps:center;')
+      h3= point.header
+      p= point.paragraph
+
+
+
+
+
+p
+  | A landing page is designed to capture a visitor&apos;s attention and guide them towards a specific action. Here are the essential parts of a landing page:
+ol
+  li
+    p
+      strong Benefits/Features
+      | :
+    ul
+      li
+        | Bullet points or a brief section that explains the benefits or features of the product or service.
+
+  li
+    p
+      strong Trust Indicators
+      | :
+    ul
+      li Awards, recognitions, certifications, or logos of known clients or partners.
+  li
+    p
+      strong Footer
+      | :
+    ul
+      li
+        strong Privacy Policy
+        | : A link to a page detailing how user information will be used and protected.
+      li
+        strong Terms of Service (ToS)
+        | : A link to a page detailing the terms and conditions of using the service or product.
+      li
+        strong Contact Information
+        | : Provide ways for visitors to get in touch, which can include a phone number, email, or a contact form.
+      li
+        strong Social Media Icons
+        | : Links to company profiles on social media platforms.
+      li
+        strong FAQ (Frequently Asked Questions)
+        | : Optional, but can be helpful for answering common queries or objections.
+  li
+    p
+      strong Opt-in Form/Lead Capture
+      | :
+    ul
+      li
+        | If the goal is to collect visitor information, include a simple form. It might request an email address, name, or other relevant details.
 
 section.wow.animate__fadeIn(style='--ta: center; --mb: 1rem;')
   h2#shop(style='--ta: center; --mb: 1rem;') Our Products
@@ -108,28 +163,33 @@ section.catalog.wow.animate__fadeIn(
                     i.fa-solid.fa-cart-plus  
                     |  Add to cart
 
+.row(style='--p: 2rem;')
+  .column.is-half
+    h2(style='margin-bottom: 1rem;') Our Services
+    ul(style='list-style: none; text-align: left;')
+      li(style='margin-bottom: 0.5rem;') Website Design and Development
+      li(style='margin-bottom: 0.5rem;') Mobile App Development
+      li(style='margin-bottom: 0.5rem;') E-commerce Solutions
+      li(style='margin-bottom: 0.5rem;') Search Engine Optimization
 
-section.container(style='padding: 2rem; text-align: center;')
-  h2(style='margin-bottom: 1rem;') Our Services
-  ul(style='list-style: none; text-align: left;')
-    li(style='margin-bottom: 0.5rem;') Website Design and Development
-    li(style='margin-bottom: 0.5rem;') Mobile App Development
-    li(style='margin-bottom: 0.5rem;') E-commerce Solutions
-    li(style='margin-bottom: 0.5rem;') Search Engine Optimization
-
-section.container(style='padding: 2rem; text-align: center;')
-  h2(style='margin-bottom: 1rem;') Our Process
-  p(style='font-size: 1.2rem; line-height: 1.5;') We follow a comprehensive process to ensure that every project is a success. Our process includes:
-  ol(style='text-align: left;')
-    li Discovery and Planning
-    li Design and Development
-    li Testing and Quality Assurance
-    li Deployment and Maintenance
+  .column.is-half
+    h2(style='margin-bottom: 1rem;') Our Process
+    p 
+      | We follow a comprehensive process to ensure that every project 
+      | is a success. Our process includes:
+    ol(style='text-align: left;')
+      li Discovery and Planning
+      li Design and Development
+      li Testing and Quality Assurance
+      li Deployment and Maintenance
 
 section.container(style='--p: 2rem; --ta: center;')
   h2#contact(style='--mb: 1rem;') Contact Us
-  p(style='font-size: 1.2rem; line-height: 1.5;') If you're interested in working with us, please feel free to get in touch. We'd love to hear about your project and see how we can help.
+  p(style='font-size: 1.2rem; line-height: 1.5;')
+    | If you're interested in working with us, please feel free to get in touch. 
   a.button(href='mailto:info@startr.ca?subject=Can Startr help with ____&body=Hi,I found your amazing site and wanted to know if you could help with' style='--p: 1rem 2rem;') Get in Touch
+  p
+    | We'd love to hear about your project and see how we can help.
 
 section.container(style='--p: 2rem; --ta: center;')
   h4(style='--mb: 1rem;') Footer
