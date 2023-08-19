@@ -1,5 +1,7 @@
 # Startr Style–less
 
+** v.0.0.1 **
+
 ## Why start with Startr Style – Simplifying CSS Frameworks is hard
 
 - The pursuit of simplifying styling in CSS frameworks often leads to bulky, overcomplicated code.
