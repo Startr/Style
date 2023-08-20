@@ -64,17 +64,17 @@ html {
   text-rendering: optimizeLegibility
 }
 body {
-  margin: 0;
-  font-size: 1em
+  max-width: 80rem;
+  margin: auto; 
+  font-size: 1.4rem;
+  color: var(color: var(--text-c, inherit))
 }
 
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%
 }
-body {
-  margin: 0
-}
+
 main {
   display: block
 }
@@ -97,6 +97,9 @@ abbr[title] {
 }
 b, strong {
   font-weight: bolder
+}
+li{
+  color: var(color: var(--text-c, inherit))
 }
 code, kbd, samp {
   font-family: monospace, monospace;
