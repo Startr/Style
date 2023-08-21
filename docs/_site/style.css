@@ -64,8 +64,6 @@ html {
   text-rendering: optimizeLegibility
 }
 body {
-  max-width: 80rem;
-  margin: auto; 
   font-size: 1.4rem;
   color: var(color: var(--text-c, inherit))
 }
@@ -335,6 +333,7 @@ input[type=checkbox]:checked, input[type=radio]:checked {
 input[type=checkbox]:checked::before {
   display: flex;
   justify-content: center;
+  margin-top: -0.2rem;
   content: "✔";
   color: #fff;
   font-size: .8rem
@@ -1784,6 +1783,11 @@ mark {
   }
 }
 @media only screen and (min-width:1024px) {
+  body{
+    max-width: 80rem;
+    margin: auto; 
+  }
+
   .grid[style*="--col-lg:"] {
     grid-template-columns: repeat(var(--col-lg, 1), 1fr)
   }
