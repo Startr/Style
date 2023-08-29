@@ -377,7 +377,7 @@ For example, you can customize the default primary and secondary colors and the 
   <span class="nv">--border-radius</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
 <h3 id="scoping-css-variables">Scoping CSS Variables</h3>
-<p>One of the many advantages of using CSS variables is how they can be locally scoped. When you define a CSS variable to <code>:root</code> you are defining these variables globally. Using local scope you can define a variable within an specific element either through your own stylesheet or inline on the element it self.</p>
+<p>One great thing about utilizing CSS variables is their ability to have a limited scope. When you set a CSS variable to apply to the whole document <code>:root</code>, it affects all parts. However, by using local scope, you can create a variable that only works within a particular element. You can do this either by adjusting your stylesheet or by directly adding it to the element..</p>
 <h4 id="local-scope-in-your-style">Local scope in your style</h4>
 <p>The following example redefines the primary and secondary colors inside any <code>myelement</code> class.</p>
 <div class="highlight"><pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">myelement</span> <span class="p">{</span>
