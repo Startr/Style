@@ -1,0 +1,14 @@
+{% extends "layout.njk" %}
+
+  {% block article %}<h1 id="browser-support">Browser Support</h1>
+<p>Startr Style is built using many modern CSS features. Most notable of these features include CSS variables, also known as CSS custom properties and CSS grid. Support for these features is exceptional among modern evergreen browsers, however older, non evergreen browsers lack support for many of these same features. We therefore recommend that if support of older browsers like IE 10 and 11 are a concern then Startr Style will not be the correct fit for your project.</p>
+<p>Following are the most modern CSS features used by Startr Style along with their corresponding entry in the excellent <a href="https://caniuse.com">Can I Use</a> database.</p>
+<ul>
+<li>CSS Variables (Custom Properties) .. <a href="https://caniuse.com/#feat=css-variables">caniuse.com/#feat=css-variables</a></li>
+<li>CSS Grid .. <a href="https://caniuse.com/#feat=css-grid">caniuse.com/#feat=css-grid</a></li>
+<li>Locigcal Properties .. <a href="https://caniuse.com/#feat=css-logical-props">caniuse.com/#feat=css-logical-props</a></li>
+<li>Object Fit .. <a href="https://caniuse.com/#feat=object-fit">caniuse.com/#feat=object-fit</a></li>
+</ul>
+<h3 id="vendor-prefixes">Vendor Prefixes</h3>
+<p>The distributed version of the compiled Startr Style comes with vendor prefixes included. If you wish to control which prefixes are applied, you can import the  source files and run them through your own PostCSS setup.</p>
+{% endblock %}

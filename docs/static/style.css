@@ -3,9 +3,10 @@
 
 
 :root {
-  --white: #fff;
-  --grey: #e6e6e6;
-  --black: #262626;
+  --white: 	hsl(0, 0%, 100%);
+  --grey: hsl(0, 0%, 80%);
+  --dark-grey: hsl(0, 0%, 29%);
+  --black: 	hsl(0, 0%, 15%);
   --green: hsl(152, 87%, 22%);
   --blue: hsl(217, 71%, 53%);
   --orange: hsl(34, 100%, 50%);
@@ -16,24 +17,28 @@
 
   --primary: var(--purple);
   --secondary: var(--red);
-  --background: #fff;
-  --background-alt: #f8fafc;
-  --selection: #9e9e9e;
-  --text-main: #4a4a4a;
-  --text-bright: #000;
-  --text-muted: #707070;
+  --background: var(--white);
+  --background-alt:	hsl(210, 40%, 98%);
+  --selection: hsl(0, 0%, 62%);
+  --text-main: 	var(--dark-grey);
+  --text-bright: var(--black);
+  --text-muted:	hsl(0, 0%, 34%);
   --links: var(--primary);
   --focus: rgba(74, 105, 189, .35);
   --border: rgba(0, 0, 0, .2);
   --border-radius: 4px;
-  --code: #000;
+  --code: var(--black);
   --animation-duration: .1s;
-  --button-hover: #ddd;
+
+  --accent-border: 0;
+  --accent-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05)
+
+  --button-hover: var(var(--primary));
   --button-shadow: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -1px rgba(0, 0, 0, .06);
-  --form-placeholder: #949494;
-  --form-text: #000;
-  --variable: #39a33c;
-  --highlight: #ff0;
+  --form-placeholder: --var(--text-muted);
+  --form-text: --var(--text-bright);
+  --variable: --var(--green);
+  --highlight: --var(--yellow);
   --select-arrow: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='62.5' width='116.9' fill='%23161f27'%3E%3Cpath d='M115.3 1.6c-1.6-1.6-4.2-1.6-5.8 0l-51 51.1L7.4 1.6C5.8 0 3.2 0 1.6 1.6 0 3.2 0 5.8 1.6 7.4l53.9 53.9c.8.8 1.8 1.2 2.9 1.2 1 0 2.1-.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2.1-5.8z'/%3E%3C/svg%3E");
   --heading-margin: .5rem 0 .75rem;
   --typo-size-1: 2.8rem;
@@ -43,10 +48,7 @@
   --typo-size-5: 1.2rem;
   --typo-size-6: 1.2rem;
   --wrapper: 1280px;
-  --transition: all ease .4s;
-  --accent-border: 0;
-  --accent-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05)
-}
+  --transition: all ease .4s;}
 *, ::before, ::after {
   box-sizing: border-box
 }
@@ -179,11 +181,29 @@ textarea {
   font: inherit
 }
 details {
-  display: block
+  display: block;
+  max-height: 4em;
+  transition: max-height 500ms ease, border 0ms 400ms linear;
+  overflow: hidden;
 }
+
+details[open] {
+  max-height: 200vh; /* Set a max-height value enough to show all the content */
+  border-color: var( --primary);
+}
+
 summary {
   display: list-item
 }
+
+summary:hover {
+  cursor: pointer;
+}
+
+dialog::backdrop {
+  background-color: var(--secondary);
+}
+
 template {
   display: none
 }
@@ -227,7 +247,7 @@ button, .button, select, input[type=submit], input[type=button], input[type=chec
 input:not([type=checkbox]):not([type=radio]), select {
   display: block
 }
-input, button, textarea, select, details>summary, .button, .tag {
+input, button, textarea, input::file-selector-button, select, details>summary, .button, .tag {
   color: var(--form-text);
   background-color: var(--background);
   font-family: inherit;
@@ -289,7 +309,7 @@ select[multiple] {
   background-image: none;
   overflow-y: auto
 }
-button, .button, input[type=submit], input[type=button], input[type=reset] {
+button, .button, input[type=submit], input[type=button], input::file-selector-button, input[type=reset] {
   display: inline-block;
   padding-right: calc(var(--x, 100) * .28px);
   padding-left: calc(var(--x, 100) * .28px);

@@ -84,6 +84,8 @@
     }
   },
   "dependencies": {
+    "marked": "^9.0.0",
+    "nunjucks-markdown": "^2.0.1",
     "startr.style": "^1.0.0"
   }
 }
