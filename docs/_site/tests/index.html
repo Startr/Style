@@ -164,9 +164,10 @@
       course)
     </p>
 
-    <p contenteditable="false">
+    <details>
+  <summary><p contenteditable="false">
       Please scroll happily past the next N# lines of repetitive yet essential style code...
-    </p>
+    </p></summary>
 
     <style contenteditable="false">
 
@@ -203,6 +204,29 @@
       div::after {content:'</div>'}
       article::before {content:'<article>'}
       article::after {content:'</article>'}
+      nav::before {content:'<nav>'}
+      nav::after {content:'</nav>'}
+      ul::before {content:'<ul>'}
+      ul::after {content:'</ul>'}
+      li::before {content:'<li>'}
+      li::after {content:'</li>'}
+      ol::before {content:'<ol>'}
+      ol::after {content:'</ol>'}
+      span::before {content:'<span>'}
+      span::after {content:'</span>'}
+      summary::before {content:'<summary>'}
+      summary::after {content:'</summary>'}
+      details::before {content:'<details>'}
+      details::after {content:'</details>'}
+    </style></details>
+
+    <p>
+      Let's also make it so that whenever over a summary tag our cursor is a pointer and we'll also indent thing by 4 chars.
+    </p>
+
+    <style contenteditable="false">
+      summary {cursor:pointer;
+                margin-left:4ch}
     </style>
 
     <p contenteditable="false">
@@ -266,6 +290,14 @@
       script::before {content:'<script>'}
       script::after  {content:'</script>'; 
                       margin-left: -4ch}</span>
+    </style>
+
+    <p contenteditable="false">
+      Let us simplify navigation formating by also applying pre-fomating to our nav element.
+    </p>
+
+    <style contenteditable="false">
+      nav{white-space: pre;}
     </style>
 
     <p contenteditable="false">&nbsp;To reduce the visual weight of the before and after pseudo
