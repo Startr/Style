@@ -1,13 +1,12 @@
-<html><head>
+<html contenteditable="false"><head contenteditable="false">
 <meta charset="UTF-8">
 
-<link rel="stylesheet" href="https://raw.githack.com/opencoca/system7.css/main/style.css" />
-
+<link rel="stylesheet" href="https://raw.githack.com/opencoca/system7.css/main/style.css">
+<title contenteditable="false">HTML is truly open, brutalist html quine – it's what it is</title> 
   
 </head>
 <body contenteditable="false">
 
-  <title contenteditable="false">HTML is truly open, brutalist html quine – it's what it is</title> 
   <aside contenteditable="false">Title's are supposed to be in the head but browsers don't care.</aside>
 
   
@@ -256,7 +255,7 @@
       }
       img::after {}
 
-    </style><p contenteditable="true">
+    </style><p contenteditable="false">
       <a href="https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" class="mw-file-description" style="text-decoration-line: underline; color: rgb(51, 102, 204); background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; overflow-wrap: break-word; display: block; position: relative; border: 0px; font-family: sans-serif; font-size: 14px; text-align: center;" contenteditable="false">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/220px-The_Earth_seen_from_Apollo_17.jpg" decoding="async" width="220" height="220">
       <br>The Earth seen from Apollo as an example img</a></p><p contenteditable="false">Another other element that is special is "style" itself, which has to
@@ -286,7 +285,13 @@
       script{white-space: pre-wrap;}
       script::before {content:'<script>'}
       script::after  {content:'</script>'; 
-                      margin-left: -4ch}
+                      margin-left: -3.1ch}
+      /* N along with the style let's theme our script elements */
+      script {
+        background: hsl(210, 63.5%, 50%, 20% );
+        font-family: Geneva_9;
+        font-size: 1.4em;
+      }
     </style>
 
     <p contenteditable="false">&nbsp;On top of this if we don't do a little more tweaking the head the style and script tags are exposed, but they look messy. Their closing tags are indented 
@@ -297,8 +302,7 @@
       /* Let's reuse our a href technique to expose what 
          scripts are sourced in our page */
       script[src]::before {content: "<script='" attr(src) "'>"}
-      /* Let's reuse our a href technique to expose what 
-         styles are sourced in our page */
+      /* 
       link[href]::before {content: "<link='" attr(href) "'>"}
     </style>
     
@@ -313,41 +317,47 @@
           position: sticky;
           top:1;
           background: white}
-      nav::after  {margin-left: -4ch}
+      nav::after  {margin-left: -3ch}
       nav a[href]::before{content: '<a>'}
     </style>
 
     <p contenteditable="false">To reduce the visual weight of the before and after pseudo
-      elements we can give them a soft purple color and a low weight font:</p>
+      elements we can give them a soft purple color and a reduced line-height:</p>
 
     <style contenteditable="false">
       *::before,*::after {
         color:hsl(270, 63.5%, 50%, 60% );
-        font-weight:100;
-        font-size:1.0em
+        line-height:0.8
       }
     </style>
 
     <p contenteditable="false">
       Finally, as I believe brutalist design, even when applied to truly
       naked brutal html quines, is about function, not about deliberate
-      ugliness, I'd like to apply these humble styles that improve the
+      ugliness, I'd like to apply two humble stylestets that improve the
       readability of this brutiful stack.
     </p>
 
     <style contenteditable="false">
-      html {
+     /* 101 Startr Bytes of Style */ 
+     html {
         max-width:80ch;
         padding:2ch;
         margin:auto;
-        color:hsl(270, 0%, 0%, 80%) !important;
+        color:hsl(270, 0%, 0%, 90%) !important;
         font-size:1.4em;
+      } /**/
+      /* Hover over Style and Scripts to enjoy */
+      style, script{ 
+        transition: opacity 0.3s ease;
+        opacity: 20%;
+      }
+      style:hover, script:hover{
+        opacity: 100%;
       }
     </style>
 
-    <p contenteditable="false">
-      ...they're derived from<a href="https://jrl.ninja/etc/1/" contenteditable="false">jrl.ninja's amazing 58 bytes of css to look great nearly everywhere"</a>.
-    </p>
+    <p contenteditable="false">&nbsp;The first is our 101 Startr Bytes of Style. We apply it as the base style to our whole html to give things a clean modern feel. The second is a little bit of transition magic. It tones down the look of elements we wouldn't normally see unless we hover on them.</p>
 
     <p contenteditable="false">
       One last thing. Although this idea has bounced around in my head for a
@@ -388,7 +398,7 @@
       let isEditable = false;
 
       function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document.body);
+        const textNodes = getTextNodes(document);
         textNodes.forEach((node) => {
           node.parentElement.contentEditable = false;
         });
@@ -396,7 +406,7 @@
       }
 
       function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document.body);
+        const textNodes = getTextNodes(document);
         isEditable = !isEditable;
         textNodes.forEach((node) => {
           node.parentElement.contentEditable = isEditable;
