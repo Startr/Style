@@ -1,20 +1,14 @@
 <html><head>
 <meta charset="UTF-8">
 
-<style>
-
-</style>
-
-<script type="module" integrity="sha512-7Y25+FX/kRUbZEHtQBOSLffzofBxz8ABQErLAVpGkfzactkpJU5wtTmhIfIZeTw7VHg1JeTIC5kHkzPq7LqR1w==" src="/.11ty/reload-client.js"></script>
+<link rel="stylesheet" href="https://raw.githack.com/opencoca/system7.css/main/style.css">
 
   
 </head>
 <body contenteditable="false">
 
-  
-
   <title contenteditable="false">HTML is truly open, brutalist html quine – it's what it is</title> 
-  <aside>Title's are supposed to be in the head but browsers don't care.</aside>
+  <aside contenteditable="false">Title's are supposed to be in the head but browsers don't care.</aside>
 
   
     <h1 contenteditable="false">This page is a truly open, brutalist html quine...</h1>
@@ -25,7 +19,7 @@
     </nav>
 
     <p contenteditable="false">
-      One of my favorite things is to tweak and hack technology in creative ways.
+      I love to tweak and hack technology in creative ways.
       <br>
       We don't need to break things. 
       <br>
@@ -33,21 +27,18 @@
 
     <p contenteditable="false">I've always loved creating things. As a child I started first with 
       basic, hypercard, Pascal and VB. As I got older moving to php, python, and creating some 
-      amazing things like <a href="https://etsy.com/">Etsy</a>. This project is inspired by my 
+      amazing things like <a href="https://etsy.com/" contenteditable="false">Etsy</a>. This project is inspired by my 
       reflecting on life and reading Gödel, Escher, Bach and most importantly talking with friends 
-      and family.</a></p>
+      and family.</p>
 
-    <p>
-      Code insipration 
-      from<a href="https://github.com/secretGeek/">secretGeek</a> 
-      and <a href="https://github.com/calroc">my close friend calroc</a>.
+    <p contenteditable="false">The code inspiration <a href="https://github.com/secretGeek/" contenteditable="false">secretGeek</a> 
+      and <a href="https://github.com/calroc" contenteditable="false">my close friend Calroc</a>.
     </p>
 
-    <p contenteditable="false">
-      The world of code is filled with examples of people stretching the rules, blowing past expectations. People usimg technology in new and creative ways. In particular I love the concept of<a href="http://wiki.secretgeek.net/quine" contenteditable="false"> quines </a>. Quines are programs
+    <p contenteditable="false">The Computer Science world of&nbsp; code is filled with examples of amazing people stretching the rules, blowing past expectations. People using technology in new and fabulous ways.<br>I love the concept of&nbsp;<a href="http://wiki.secretgeek.net/quine" contenteditable="false">quines </a>. Quines are programs
       which output their own source code.</p>
       
-    <p contenteditable="false">If code is life, life is a Quine! We build new things and they build more.</p>
+    <p contenteditable="false">If code is life, life is a Quine! As we build new things...they build more.</p>
 
 
     <blockquote contenteditable="false">
@@ -125,8 +116,7 @@
       *{ font-family:Monospace; margin:1.5em 0; padding:0; text-decoration:none}
     </style>
 
-    <p contenteditable="false">
-      So far I've put style declarations all on one line, because ordinary
+    <p contenteditable="false">So far I've put style declarations all on one line, because ordinary
       html refuses to treat line breaks as "br" tags. But there is a way
       to make line-breaks display as line-breaks, and that is with this
       piece of styling:
@@ -140,8 +130,7 @@
 
     <h2 contenteditable="false">Make the internal external.</h2>
 
-    <p contenteditable="false">
-      The next trick is to make the internal external. We can start by 
+    <p contenteditable="false">The next trick is to make the internal external. We can start by 
       ensuring that the tags themselves, such as paragraph tags, are 
       exposed in their stark, brutal, beauty:
     </p>
@@ -155,8 +144,7 @@
       }
     </style>
 
-    <p contenteditable="false">
-      That works for "p" elements, but do we need to have custom styling for
+    <p contenteditable="false">That works for "p" elements, but do we need to have custom styling for
       <strong contenteditable="false">every</strong> element? If there was a way to output the "name" of
       a tag in html, then we could reduce all of the necessary style rules above
       to something like:
@@ -168,16 +156,11 @@
 
     <blockquote contenteditable="false">*::after { '&lt;\/' name() '&gt;' }</blockquote>
 
-    <p contenteditable="false">
-      But alas there is no "name()" function (yet!). So we are forced to
-      generate a chunk of style information like this (via
-      <a href="https://nimbletext.com/Live/1105905186/" contenteditable="false">NimbleText</a> of
-      course)
-    </p>
+    <p contenteditable="false">But alas there is no "name()" function (yet!). So we are forced to
+      generate a chunk of style information like this 👇</p>
 
-    <details>
-  <summary><p contenteditable="false">
-      Please scroll happily past the next N# lines of repetitive yet essential style code...
+    <details contenteditable="false">
+  <summary><p contenteditable="false">It's a lot of repetitive code so I wrapped it in a details element. Feel free to click read all the lines of repetitive yet essential style code...
     </p></summary>
 
     <style contenteditable="false">
@@ -231,8 +214,7 @@
       details::after {content:'</details>'}
     </style></details>
 
-    <p>
-      Let's also make it so that whenever over a summary tag our cursor is a pointer and we'll also indent thing by 4 chars.
+    <p contenteditable="false">Let's also make it so that whenever over a summary tag our cursor is a pointer and we'll also indent thing by 4 chars.
     </p>
 
     <style contenteditable="false">
@@ -240,8 +222,7 @@
                 margin-left:4ch}
     </style>
 
-    <p contenteditable="false">
-      Some elements are a little trickier because they have attributes. Consider
+    <p contenteditable="false">Some elements are a little trickier because they have attributes. Consider
       for example the "anchor" which often has a <code contenteditable="false">href</code> attribute. We
       <em contenteditable="false">need</em> that attribute to be visible, including its value. This is
       done like so:
@@ -257,7 +238,7 @@
       is a nifty trick, "supported" since CSS 2.
     </p>
 
-    <p contenteditable="false">A surprisingly troublesome set of tags are any that don't close. br and img for example. While we can get br's to be processed by adding empty content this isn't the case with images at this time.</p>
+    <p contenteditable="false">A surprisingly troublesome set of tags are any that don't close. br and img for example. While we can get our &lt;br&gt;s to be processed by adding empty content this isn't the case with images at this time.</p>
       <style contenteditable="false">
       br {
           content: "";
@@ -270,7 +251,7 @@
           white-space: pre;
       }
       
-      /* TODO figure out how to have imgs work ;) */
+      /* TODO ...figure out how to have imgs work ;) */
       img { margin: auto !important; 
             content: "" !important}
 
@@ -279,13 +260,19 @@
       }
       img::after {}
 
-    </style><p contenteditable="true"><a href="https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" class="mw-file-description" style="text-decoration-line: underline; color: rgb(51, 102, 204); background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; overflow-wrap: break-word; display: block; position: relative; border: 0px; font-family: sans-serif; font-size: 14px; text-align: center;" contenteditable="false"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/220px-The_Earth_seen_from_Apollo_17.jpg" decoding="async" width="220" height="220" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/330px-The_Earth_seen_from_Apollo_17.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/440px-The_Earth_seen_from_Apollo_17.jpg 2x" data-file-width="3000" data-file-height="3002" style="border: 1px solid rgb(200, 204, 209); vertical-align: middle; margin: 3px; background: rgb(255, 255, 255);"><br>The Earth seen from Apollo as an example img</a></p><p contenteditable="false">Another other style that is special is "style" itself, which has to
-      include an escape character to avoid being taken literally. Along with a little tweak to keep our closing style tags from being indented.</p>
+    </style><p contenteditable="true"><a href="https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" class="mw-file-description" style="text-decoration-line: underline; color: rgb(51, 102, 204); background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; overflow-wrap: break-word; display: block; position: relative; border: 0px; font-family: sans-serif; font-size: 14px; text-align: center;" contenteditable="false"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/220px-The_Earth_seen_from_Apollo_17.jpg" decoding="async" width="220" height="220" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/330px-The_Earth_seen_from_Apollo_17.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/440px-The_Earth_seen_from_Apollo_17.jpg 2x" data-file-width="3000" data-file-height="3002" style="border: 1px solid rgb(200, 204, 209); vertical-align: middle; margin: 3px; background: rgb(255, 255, 255);"><br>The Earth seen from Apollo as an example img</a></p><p contenteditable="false">Another other element that is special is "style" itself, which has to
+      include an escape character to avoid being taken literally. Her'e that along with a little tweak to keep our closing style tags from being indented.</p>
 
     <style contenteditable="false">
       style::before {content:'<style>'}
       style::after  {content:'<\/style>'; 
-                     margin-left: -4ch}
+                     margin-left: -3ch}
+      /* While we are at it let's have a little fun and style our style elements */
+      style {
+        background: hsl(270, 63.5%, 50%, 20% );
+        font-family: Geneva_9;
+        font-size: 1.4em;
+      }
     </style>
 
     <aside contenteditable="false">I like to think that may be a parser bug created by browser developers who
@@ -293,40 +280,43 @@
     </aside>
 
     <p contenteditable="false">Along with this we expose any script tags and make sure that their
-      content is preformated.
+      content is pre-formated.
     </p>
 
     <style contenteditable="false">
-      script{white-space: pre;}
+      script{white-space: pre-wrap;}
       script::before {content:'<script>'}
       script::after  {content:'</script>'; 
                       margin-left: -4ch}
     </style>
 
-    <p>
-      In the head the style and script tags are exposed, but they look messy. Thier closing tags are indented 
-      when unlike in our body they shouldn't be. So we just need to add a little style to the head element to fix this.
-    </p>
+    <p contenteditable="false">&nbsp;On top of this if we don't do a little more tweaking the head the style and script tags are exposed, but they look messy. Their closing tags are indented 
+      when unlike in our body they shouldn't be. So we just need to add a little style to the head element to fix this.</p>
 
-    <style>
+    <style contenteditable="false">
       head script::after, head style::after {margin-left: 0}
+      /* Let's reuse our a href technique to expose what 
+         scripts are sourced in our page */
+      script[src]::before {content: "<script='" attr(src) "'>"}
     </style>
     
 
 
     <p contenteditable="false">
-      Let us simplify navigation formating by also applying pre-fomating to our 
-      nav element. At the same time we'll make sure that the nav element's closing tag is not indented.
-    </p>
+      Let us simplify navigation formating by also applying our pre-formatting to our 
+      nav element. At the same time we can expose positioning of it and we'll make sure that the nav element's closing tag is not indented.</p>
 
     <style contenteditable="false">
-      nav{white-space: pre;}
-      nav::after  {margin-left: -4ch}</span>
+      nav{white-space: pre;
+          position: sticky;
+          top:1;
+          background: white}
+      nav::after  {margin-left: -4ch}
+      nav a[href]::before{content: '<a>'}
     </style>
 
     <p contenteditable="false">To reduce the visual weight of the before and after pseudo
-      elements we can give them a soft purple color and a low weight font:
-    </p>
+      elements we can give them a soft purple color and a low weight font:</p>
 
     <style contenteditable="false">
       *::before,*::after {
@@ -336,23 +326,16 @@
       }
     </style>
 
-    <aside contenteditable="false">
-      A different though similar thing I wanted to do was to make a
-      "markdown.css" file that displays html as markdown. Fortunately I found
-      that some other twisted person had<br><a href="https://mrcoles.com/demo/markdown-css/" contenteditable="false">already done exactly that.</a>
-      Nice work Mr Coles.
-    </aside>
-
     <p contenteditable="false">
-      Finally, because I believe brutalist design, even when applied to truly
+      Finally, as I believe brutalist design, even when applied to truly
       naked brutal html quines, is about function, not about deliberate
       ugliness, I'd like to apply these humble styles that improve the
-      readability of this brutiful missive.
+      readability of this brutiful stack.
     </p>
 
     <style contenteditable="false">
       html {
-        max-width:50em;
+        max-width:80ch;
         padding:2ch;
         margin:auto;
         color:hsl(270, 0%, 0%, 80%) !important;
@@ -432,11 +415,5 @@
         return textNodes;
       }
     </script>
-  
-
-
-
-<script src="https://webmaker.app/app/lib/screenlog.js"></script>
-
 
 </body></html>
