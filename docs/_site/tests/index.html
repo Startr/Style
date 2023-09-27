@@ -1,7 +1,7 @@
 <html><head>
 <meta charset="UTF-8">
 
-<link rel="stylesheet" href="https://raw.githack.com/opencoca/system7.css/main/style.css">
+<link rel="stylesheet" href="https://raw.githack.com/opencoca/system7.css/main/style.css" />
 
   
 </head>
@@ -97,10 +97,6 @@
       element, even some which should be "inline", such as "code" and "anchor"
       elements. We can correct this like so:
     </p>
-
-    <style contenteditable="false">
-      
-    </style>
 
     <style contenteditable="false">
       a,code,em,strong {display:inline}
@@ -234,7 +230,7 @@
 
     <p contenteditable="false">
       The <code contenteditable="false">attr()</code> function, see
-      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/attr" contenteditable="false">mozilla docs</a>
+      <a href="https://developer.mozilla.org/docs/Web/CSS/attr" contenteditable="false">mozilla docs</a>
       is a nifty trick, "supported" since CSS 2.
     </p>
 
@@ -260,7 +256,10 @@
       }
       img::after {}
 
-    </style><p contenteditable="true"><a href="https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" class="mw-file-description" style="text-decoration-line: underline; color: rgb(51, 102, 204); background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; overflow-wrap: break-word; display: block; position: relative; border: 0px; font-family: sans-serif; font-size: 14px; text-align: center;" contenteditable="false"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/220px-The_Earth_seen_from_Apollo_17.jpg" decoding="async" width="220" height="220" class="mw-file-element" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/330px-The_Earth_seen_from_Apollo_17.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/440px-The_Earth_seen_from_Apollo_17.jpg 2x" data-file-width="3000" data-file-height="3002" style="border: 1px solid rgb(200, 204, 209); vertical-align: middle; margin: 3px; background: rgb(255, 255, 255);"><br>The Earth seen from Apollo as an example img</a></p><p contenteditable="false">Another other element that is special is "style" itself, which has to
+    </style><p contenteditable="true">
+      <a href="https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" class="mw-file-description" style="text-decoration-line: underline; color: rgb(51, 102, 204); background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; overflow-wrap: break-word; display: block; position: relative; border: 0px; font-family: sans-serif; font-size: 14px; text-align: center;" contenteditable="false">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/220px-The_Earth_seen_from_Apollo_17.jpg" decoding="async" width="220" height="220">
+      <br>The Earth seen from Apollo as an example img</a></p><p contenteditable="false">Another other element that is special is "style" itself, which has to
       include an escape character to avoid being taken literally. Her'e that along with a little tweak to keep our closing style tags from being indented.</p>
 
     <style contenteditable="false">
@@ -298,6 +297,9 @@
       /* Let's reuse our a href technique to expose what 
          scripts are sourced in our page */
       script[src]::before {content: "<script='" attr(src) "'>"}
+      /* Let's reuse our a href technique to expose what 
+         styles are sourced in our page */
+      link[href]::before {content: "<link='" attr(href) "'>"}
     </style>
     
 
