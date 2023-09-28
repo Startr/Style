@@ -10,8 +10,8 @@
     <h1 contenteditable="false">This page is a truly open, brutalist html quine...</h1>
     
     <nav contenteditable="false">
-      <a href="data:text, To save enable javascript." onclick="saveDOMAsHTML();return false;" contenteditable="false">Save</a>
-      <a href="data:text, To edit enable javascript." onclick="toggleAllTextEditable();return false;" contenteditable="false">Edit</a>
+      <a id="save" href="data:text, To save enable javascript." onclick="saveDOMAsHTML();return false;" contenteditable="false">Save</a>
+      <a id="edit" href="data:text, To edit enable javascript." onclick="toggleAllTextEditable();return false;" contenteditable="false">Edit</a>
     </nav>
 
     <p contenteditable="false">
@@ -115,8 +115,15 @@
     </p>
 
     <style contenteditable="false">
-      style, blockquote, script {
+      style, script {
         white-space: pre;
+      }
+      blockquote{
+       white-space: pre-wrap;
+      }
+
+      p{
+        word-break: break-word
       }
     </style>
 
@@ -142,11 +149,15 @@
       to something like:
     </p>
 
-    <blockquote contenteditable="false">*::before { '&lt;' name() '&gt;' }</blockquote>
+    <blockquote contenteditable="false">
+      *::before {'<' name() '>'}
+    </blockquote>
 
     <p contenteditable="false">And...</p>
 
-    <blockquote contenteditable="false">*::after { '&lt;\/' name() '&gt;' }</blockquote>
+    <blockquote contenteditable="false">
+      *::after { '<' name() '>' }
+    </blockquote>
 
     <p contenteditable="false">But alas there is no "name()" function (yet!). So we are forced to
       generate a chunk of style information like this 👇</p>
@@ -267,6 +278,7 @@
         background: hsl(270, 63.5%, 50%, 20% );
         font-family: Geneva_9;
         font-size: 1.4em;
+        overflow: scroll;
       }
     </style>
 
@@ -288,6 +300,7 @@
         background: hsl(210, 63.5%, 50%, 20% );
         font-family: Geneva_9;
         font-size: 1.4em;
+        overflow: scroll;
       }
     </style>
 
@@ -314,7 +327,7 @@
           position: sticky;
           top:1;
           background: white}
-      nav::after  {margin-left: -3ch}
+      nav::after  {margin-left: -4ch}
       nav a[href]::before{content: '<a>'}
     </style>
 
@@ -327,9 +340,9 @@
         line-height:0.8
       }
     </style>
-
+    
     <p contenteditable="false">
-      Finally, as I believe brutalist design, even when applied to truly
+      Finally, I believe brutalist design, even when applied to truly
       naked brutal html quines, is about function, not about deliberate
       ugliness, I'd like to apply two humble stylestets that improve the
       readability of this brutiful stack.
@@ -402,11 +415,15 @@
           node.parentElement.contentEditable = false;
         });
         isEditable = false;
+        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
+        document.getElementById('edit').innerText = 'Edit';
       }
 
       function toggleAllTextEditable() {
         const textNodes = getTextNodes(document);
         isEditable = !isEditable;
+        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
+        document.getElementById('edit').innerText = isEditable ? 'Stop Editing' : 'Edit';
         textNodes.forEach((node) => {
           node.parentElement.contentEditable = isEditable;
         });
