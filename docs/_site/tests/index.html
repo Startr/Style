@@ -426,10 +426,10 @@
         const textNodes = getTextNodes(document);
         isEditable = !isEditable;
         // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        document.getElementById('edit').innerText = isEditable ? 'Stop Editing' : 'Edit';
         textNodes.forEach((node) => {
           node.parentElement.contentEditable = isEditable;
         });
+        document.getElementById('edit').innerText = isEditable ? 'Stop Editing' : 'Edit';
       }
       function getTextNodes(element) {
         const textNodes = [];
