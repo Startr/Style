@@ -21,14 +21,11 @@
       <br>
       Let's focus on bending the rules without breaking the rules.</p>
 
-    <p contenteditable="false">I've always loved creating things. As a child I started first with 
-      basic, hypercard, Pascal and VB. As I got older moving to php, python, and creating some 
-      amazing things like <a href="https://etsy.com/" contenteditable="false">Etsy</a>. This project is inspired by my 
-      reflecting on life and reading Gödel, Escher, Bach and most importantly talking with friends 
-      and family.</p>
+    <p contenteditable="false">I've always loved creating things. As a child I started first with Basic, Hypercard, C, Pascal and VB. As I got older I moved to PHP, then Python, and creating some amazing things like <a href="https://etsy.com/" contenteditable="false">Etsy</a>. These days I focus on <a href="https://robotinacan.com/">Robot in a Can</a> and other projects.</p> 
 
-    <p contenteditable="false">The code inspiration <a href="https://github.com/secretGeek/" contenteditable="false">secretGeek</a> 
-      and <a href="https://sr.ht/~sforman" contenteditable="false">my close friend Simon Forman</a>.
+    <p>I love to create things that are useful and beautiful. I love to create things that inspire others to create. I love to create things that are fun and silly– things that are weird and wonderful. I create things that are useful and beautiful.</p>
+
+    <p>This project is inspired by my reflecting on life and reading Gödel, Escher Bach and most importantly talking with friends and family. The code inspiration <a href="https://github.com/secretGeek/" contenteditable="false">secretGeek</a>  and <a href="https://sr.ht/~sforman" contenteditable="false">my close friend Simon Forman</a>.
     </p>
 
     <p contenteditable="false">The Computer Science world of&nbsp; code is filled with examples of amazing people stretching the rules, blowing past expectations. People using technology in new and fabulous ways.<br>I love the concept of&nbsp;<a href="http://wiki.secretgeek.net/quine" contenteditable="false">quines </a>. Quines are programs
@@ -43,8 +40,7 @@
     </blockquote>
 
     <p contenteditable="false">
-      ...the tendency to <strong contenteditable="false">make the internal external</strong>, and reveal
-      the secrets of the building, in a somehow.... brutally beautiful -<em contenteditable="false">brutaful</em> way.
+      ...the tendency to <strong contenteditable="false">make the internal external <strong> , and reveal the secrets of the building, in a somehow.... brutally beautiful -<em contenteditable="false">brutaful</em> way.
     </p>
 
     <p contenteditable="false">
@@ -150,13 +146,13 @@
     </p>
 
     <blockquote contenteditable="false">
-      *::before {'<' name() '>'}
+      *::before {'<'name()'>'}
     </blockquote>
 
     <p contenteditable="false">And...</p>
 
     <blockquote contenteditable="false">
-      *::after { '<' name() '>' }
+      *::after { '<'name()'>' }
     </blockquote>
 
     <p contenteditable="false">But alas there is no "name()" function (yet!). So we are forced to
@@ -222,7 +218,7 @@
 
     <style contenteditable="false">
       summary {cursor:pointer;
-                margin-left:4ch}
+              margin: 1ch 4ch;}
     </style>
 
     <p contenteditable="false">Some elements are a little trickier because they have attributes. Consider
@@ -264,10 +260,13 @@
       img::after {}
 
     </style><p contenteditable="false">
-      <a href="https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" class="mw-file-description" style="text-decoration-line: underline; color: rgb(51, 102, 204); background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; overflow-wrap: break-word; display: block; position: relative; border: 0px; font-family: sans-serif; font-size: 14px; text-align: center;" contenteditable="false">
+      <a href="https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" contenteditable="false">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/220px-The_Earth_seen_from_Apollo_17.jpg" decoding="async" width="220" height="220">
-      <br>The Earth seen from Apollo as an example img</a></p><p contenteditable="false">Another other element that is special is "style" itself, which has to
-      include an escape character to avoid being taken literally. Her'e that along with a little tweak to keep our closing style tags from being indented.</p>
+      <br>The Earth seen from Apollo as an example img</a></p>
+      <p contenteditable="false">Another other element that is special is 
+      "style" itself, which has to include an escape character to avoid 
+      being taken literally. Her'e that along with a little tweak 
+      to keep our closing style tags from being indented.</p>
 
     <style contenteditable="false">
       style::before {content:'<style>'}
@@ -278,20 +277,21 @@
         background: hsl(270, 63.5%, 50%, 20% );
         font-family: Geneva_9;
         font-size: 1.4em;
-        overflow: scroll;
+        overflow: auto;
       }
     </style>
 
-    <aside contenteditable="false">I like to think that may be a parser bug created by browser developers who
-      did not suspect that people would engage in such an atrocity.
+    <aside contenteditable="false">I like to think that may be a parser 
+      bug created by browser developers who did not suspect that people 
+      would engage in such an atrocity.
     </aside>
 
-    <p contenteditable="false">Along with this we expose any script tags and make sure that their
+    <p contenteditable="false">Along with this we expose any script 
+      tags and make sure that their
       content is pre-formated.
     </p>
 
     <style contenteditable="false">
-      script{white-space: pre-wrap;}
       script::before {content:'<script>'}
       script::after  {content:'</script>'; 
                       margin-left: -3.1ch}
@@ -300,12 +300,15 @@
         background: hsl(210, 63.5%, 50%, 20% );
         font-family: Geneva_9;
         font-size: 1.4em;
-        overflow: scroll;
+        overflow-y: auto;
       }
     </style>
 
-    <p contenteditable="false">&nbsp;On top of this if we don't do a little more tweaking the head the style and script tags are exposed, but they look messy. Their closing tags are indented 
-      when unlike in our body they shouldn't be. So we just need to add a little style to the head element to fix this.</p>
+    <p contenteditable="false">&nbsp;On top of this if we don't do
+      a little more tweaking the head the style and script tags are 
+      exposed, but they look messy. Their closing tags are indented 
+      when unlike in our body they shouldn't be. So we just need to 
+      add a little style to the head element to fix this.</p>
 
     <style contenteditable="false">
       head script::after, head style::after {margin-left: 0}
