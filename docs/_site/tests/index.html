@@ -3,16 +3,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://raw.githack.com/opencoca/system7.css/main/style.css">
 <title>A brutalist HTML Quine – It is what it is</title> 
-  
-<script type="module" integrity="sha512-7Y25+FX/kRUbZEHtQBOSLffzofBxz8ABQErLAVpGkfzactkpJU5wtTmhIfIZeTw7VHg1JeTIC5kHkzPq7LqR1w==" src="/.11ty/reload-client.js"></script></head>
-<body tabIndex=0>
-  
-    <h1>This page is a, truly open, brutalist html quine...</h1>
-    
+
+</head>
+<body>
     <nav>
+      <a id="quine" href="#quine">Quine</a>
+      <a href="#how it works">How</a>
+      <a href="#how_nav_works">Nav</a>
       <a id="save" href="data:text, To save enable javascript." onclick="saveDOMAsHTML();return false;">Save</a>
       <a id="edit" href="data:text, To edit enable javascript." onclick="toggleAllTextEditable();return false;">Edit</a>
     </nav>
+
+    <h1>This page is a, truly open, brutalist html quine...</h1>
+    
+
 
     <p>
       I love to tweak and hack technology in creative ways.
@@ -23,9 +27,9 @@
 
     <p>I've always loved creating things. As a child I started first with Basic, Hypercard, C, Pascal and VB. As I got older I moved to PHP, then Python, and creating some amazing things like <a href="https://etsy.com/">Etsy</a>. These days I focus on <a href="https://robotinacan.com/">Robot in a Can</a> and other projects.</p> 
 
-    <p>I love to create things that are useful and beautiful. I love to create things that inspire others to create. I love to create things that are fun and silly– things that are weird and wonderful. I create things that are useful and beautiful.</p>
+    <p>I love to create things that are useful and beautiful. Things that inspire others to create are the most powerful and rewarding to build.<br>I love to create things that are fun and silly– things that are weird and wonderful.<br>I love create things that are useful beautiful yet exposed and raw. Things that are brutally functional and feel best to me.</p>
 
-    <p>This project is inspired by my reflecting on life and reading Gödel, Escher Bach and most importantly talking with friends and family. The code inspiration <a href="https://github.com/secretGeek/">secretGeek</a>  and <a href="https://sr.ht/~sforman">my close friend Simon Forman</a>.
+    <p>To these ends this project is inspired by my reflecting on life and reading Gödel, Escher Bach and most importantly talking with friends and family. The code inspiration <a href="https://github.com/secretGeek/">secretGeek</a>  and <a href="https://sr.ht/~sforman">my close friend Simon Forman</a>.
     </p>
 
     <p>The Computer Science world of&nbsp; code is filled with examples of amazing people stretching the rules, blowing past expectations. People using technology in new and fabulous ways.<br>I love the concept of&nbsp;<a href="http://wiki.secretgeek.net/quine">quines </a>. Quines are programs
@@ -63,11 +67,11 @@
       of this page? prefix the url with "view-source:" and you'll see the source of this page. Infact you
       can do this on any page. 
     </p>
-
+    <a id="#how it works"></a>
     <h2>How it works.</h2>
 
     <p>
-      Did you know that the rules of html and css allow you to make
+      Did you know that the rules of html and css allow us to make
       <strong>every</strong> element visible, even elements like 'title' or
       'style' or 'script', that are normally hidden from view? <br>Those are just
       elements like any other.<br>You can expose them <strong>all</strong> like so:
@@ -315,23 +319,27 @@
       /* Let's reuse our a href technique to expose what 
          scripts are sourced in our page */
       script[src]::before {content: "<script='" attr(src) "'>"}
-      /* 
+      /*                                 */
       link[href]::before {content: "<link='" attr(href) "'>"}
     </style>
     
-
+    <a id="how_nav_works"></a>
 
     <p>
       Let us simplify navigation formating by also applying our pre-formatting to our 
       nav element. At the same time we can expose positioning of it and we'll make sure that the nav element's closing tag is not indented.</p>
 
     <style>
-      nav{white-space: pre;
+      nav{padding: 0.2em;
           position: sticky;
           top:1;
           background: white}
-      nav::after  {margin-left: -4ch}
       nav a[href]::before{content: '<a>'}
+
+      /*. At the same time we'll dea; with our block quotes */
+      blockquote::after{
+      margin-left: -4ch
+      }
     </style>
 
     <p>To reduce the visual weight of the before and after pseudo
