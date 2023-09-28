@@ -40,7 +40,7 @@
     </blockquote>
 
     <p contenteditable="false">
-      ...the tendency to <strong contenteditable="false">make the internal external <strong> , and reveal the secrets of the building, in a somehow.... brutally beautiful -<em contenteditable="false">brutaful</em> way.
+      ...the tendency to <strong>make the internal external </strong> , and reveal the secrets of the building, in a somehow.... brutally beautiful -<em contenteditable="false">brutaful</em> way.
     </p>
 
     <p contenteditable="false">
@@ -415,10 +415,10 @@
       function turnOffAllTextEditable() {
         const textNodes = getTextNodes(document);
         textNodes.forEach((node) => {
-          node.parentElement.contentEditable = false;
+          node.parentElement.removeAttribute('contentEditable'); 
         });
         isEditable = false;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
+        // set text of anchor #edit to "Stop Editing" to reflect state
         document.getElementById('edit').innerText = 'Edit';
       }
 
