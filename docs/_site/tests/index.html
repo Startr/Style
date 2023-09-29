@@ -8,7 +8,7 @@
 <body>
     <nav>
       <a id="quine" href="#quine">Quine</a>
-      <a href="#how it works">How</a>
+      <a href="#how_it_works">How</a>
       <a href="#how_nav_works">Nav</a>
       <a id="save" href="data:text, To save enable javascript." onclick="saveDOMAsHTML();return false;">Save</a>
       <a id="edit" href="data:text, To edit enable javascript." onclick="toggleAllTextEditable();return false;">Edit</a>
@@ -67,7 +67,7 @@
       of this page? prefix the url with "view-source:" and you'll see the source of this page. Infact you
       can do this on any page. 
     </p>
-    <a id="#how it works"></a>
+    <a id="how_it_works"></a>
     <h2>How it works.</h2>
 
     <p>
@@ -308,32 +308,39 @@
       }
     </style>
 
-    <p>&nbsp;On top of this if we don't do
-      a little more tweaking the head the style and script tags are 
+    <p>On top of this if we don't do a little more tweaking to thing
+      to our document's head element our style and script tags are  
       exposed, but they look messy. Their closing tags are indented 
       when unlike in our body they shouldn't be. So we just need to 
-      add a little style to the head element to fix this.</p>
+      add a little more style to the head element to fix this.</p>
 
     <style>
       head script::after, head style::after {margin-left: 0}
-      /* Let's reuse our a href technique to expose what 
+
+      /* We can reuse our a href technique to expose what 
          scripts are sourced in our page */
+
       script[src]::before {content: "<script='" attr(src) "'>"}
-      /*                                 */
-      link[href]::before {content: "<link='" attr(href) "'>"}
+
+      /*  Oh and we need links for external resources */
+
+      link[href]::before  {content: "<link='" attr(href) "'>"}
+      link{overflow:auto}
     </style>
     
     <a id="how_nav_works"></a>
 
     <p>
-      Let us simplify navigation formating by also applying our pre-formatting to our 
-      nav element. At the same time we can expose positioning of it and we'll make sure that the nav element's closing tag is not indented.</p>
+      So you might be wondering about that menu at the top of our
+      page. Here's how it works. First off we use the style of 
+      position: sticky to allow it stick to the .</p>
 
     <style>
-      nav{padding: 0.2em;
-          position: sticky;
+      nav{position: sticky;
           top:1;
-          background: white}
+          background: white;
+          padding: 0.2em;
+          text-align: center;}
       nav a[href]::before{content: '<a>'}
 
       /*. At the same time we'll dea; with our block quotes */
