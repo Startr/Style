@@ -3,50 +3,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://raw.githack.com/opencoca/system7.css/main/style.css">
+
     <title>A Brutalist HTML Quine – It is what it is</title>
 
   </head>
   <body>
+
+    <h1 id="quine">This page is a truly open, brutalist Quine, an HTML Quine</h1>
+
     <nav>
-      <a id="quine" href="#quine">Quine</a>
+      <a href="#quine">Quine</a>
       <a href="#how_it_works">How</a>
-      <a href="#how_nav_works">Nav</a>
       <a id="save" href="data:text, To save enable javascript." onclick="saveDOMAsHTML();return false;">Save</a>
       <a id="edit" href="data:text, To edit enable javascript." onclick="toggleAllTextEditable();return false;">Edit</a>
+      <a id="toggleDrag" href="data:text, To drag enable javascript." onclick="return false">Drag</a>
+
     </nav>
 
-    <h1>This page is a truly open, brutalist Quine, an HTML Quine</h1>
-
-    <p>
+    <p draggable="false">
       I love to tweak and hack technology in creative ways.
       <br>
       We don't need to break things to make new things, and we don't need to reinvent the wheel, either. So many amazing things exist to build on.<br>
       Let's focus on bending the rules without breaking the rules.</p>
 
-    <p>I've always loved creating things. As a child, I started first with Basic, Hypercard, C, Pascal and VB. As I got older, I moved to PHP, then Python, and created some amazing things like <a href="https://etsy.com/">Etsy</a>&nbsp;and Startr. These days I focus on&nbsp;<a href="https://robotinacan.com/">Robots </a>&nbsp;and other projects.</p>
+    <p draggable="false">I've always loved creating things. As a child, I started first with Basic, Hypercard, C, Pascal and VB. As I got older, I moved to PHP, then Python, and created some amazing things like <a href="https://etsy.com/">Etsy</a>&nbsp;and Startr. These days I focus on&nbsp;<a href="https://robotinacan.com/">Robots </a>&nbsp;and other projects.</p>
 
-    <p>I love to create things that are useful and beautiful. Things that inspire others to create are the most powerful and rewarding to build.<br>I love to create things that are fun and silly. Things that are weird and wonderful I love the most.<br>While I love creating beautiful things, I enjoy keeping them exposed and raw. Brutally functional things often feel best to me.</p>
+    <p draggable="false">I love to create things that are useful and beautiful. Things that inspire others to create are the most powerful and rewarding to build.<br>I love to create things that are fun and silly. Things that are weird and wonderful I love the most.<br>While I love creating beautiful things, I enjoy keeping them exposed and raw. Brutally functional things often feel best to me.</p>
 
-    <p>To these ends, this project is inspired by my reflecting on life and reading Gödel, Escher, Bach, and, most importantly, talking with friends and family. The code was inspired by&nbsp;<a href="https://github.com/secretGeek/">secretGeek</a>  and <a href="https://sr.ht/~sforman">my close friend Simon Forman</a>.
+    <p draggable="false">To these ends, this project is inspired by my reflecting on life and reading Gödel, Escher, Bach, and, most importantly, talking with friends and family. The code was inspired by&nbsp;<a href="https://github.com/secretGeek/">secretGeek</a>  and <a href="https://sr.ht/~sforman">my close friend Simon Forman</a>.
     </p>
 
-    <p>The computer science world of code is filled with examples of amazing people stretching the rules and blowing past expectations. People use technology in new and fabulous ways every day.</p>
+    <p draggable="false">The computer science world of code is filled with examples of amazing people stretching the rules and blowing past expectations. People use technology in new and fabulous ways every day.</p>
 
-    <p>I love the creativity that sparks further change. Quines are programs
+    <p draggable="false">I love the creativity that sparks further change. Quines are programs
       which output their source code. Used properly, they can spark all kinds of possibilities. If code is life, life is a Quine! As we build new things...they build more!</p>
 
-    <blockquote>
+    <blockquote draggable="false">
       A common theme in brutalism is the exposure of the functions of artifacts.
     </blockquote>
 
-    <p>Exposing how things work lets us&nbsp;<strong>make the internal external </strong>, and reveal the secrets of what we build, in somehow.... brutally beautiful -<em>brutaful</em> ways.
+    <p draggable="false">Exposing how things work lets us&nbsp;<strong>make the internal external </strong>, and reveal the secrets of what we build, in somehow.... brutally beautiful -<em>brutaful</em> ways.
     </p>
 
-    <p>&nbsp;A similar approach when building with code is the idea of
+    <p draggable="false">&nbsp;A similar approach when building with code is the idea of
       <a href="https://en.wikipedia.org/wiki/Naked_objects">naked objects</a>. <br>When working with naked objects:
     </p>
 
-    <blockquote>
+    <blockquote draggable="false">
      Objects represent concepts
      in their purest form, 
      without additional 
@@ -56,23 +59,22 @@
      is simplicity and
      transparency. 
     </blockquote>
-
-    <p>The "naked objects" concept was introduced by a software developer named Martin Fowler. He proposed that instead of hiding the true nature of objects behind layers of abstractions and interfaces, we should instead reveal the objects in their "naked" form.</p>
-    <p>This means exposing the objects in their purest, fundamental form without unnecessary embellishments or distractions. Basically, it's a way of thinking about software design that prioritizes simplicity and transparency over layers of indirection.</p>
-    <p>
-      Putting all this together, I decided to make this: a truly naked, brutalist html
-      page; a page itself a quine; a page that is a<em>brutaful quine.</em>
-    </p>
-
-    <p>
+    <p draggable="false">
       How to view<a href="view-source:#This won't work on it's own.">the source</a>
       of this page? prefix the url with "view-source:" and you'll see the source of this page. Infact you
       can do this on any page. 
     </p>
+    <p draggable="false">The "naked objects" concept was introduced by a software developer named Martin Fowler. He proposed that instead of hiding the true nature of objects behind layers of abstractions and interfaces, we should instead reveal the objects in their "naked" form.</p>
+    <p draggable="false">
+      Putting all this together, I decided to make this: a truly naked, brutalist html
+      page; a page itself a quine; a page that is a<em>brutaful quine.</em>
+    </p>
+    <p draggable="false">This means exposing the objects in their purest, fundamental form without unnecessary embellishments or distractions. Basically, it's a way of thinking about software design that prioritizes simplicity and transparency over layers of indirection.</p>
+
     <a id="how_it_works"></a>
     <h2>How it works.</h2>
 
-    <p>
+    <p draggable="false">
       Did you know that the rules of html and css allow us to make
       <strong>every</strong> element visible, even elements like 'title' or
       'style' or 'script', that are normally hidden from view? <br>Those are just
@@ -85,7 +87,7 @@
       }
     </style>
 
-    <p>
+    <p draggable="false">
       With that snippet of code (which <strong>is not</strong> a snippet of
       code, but an <strong>actual</strong> style block!), you can now see
       every element of this page, including that style block, the HTML and title
@@ -96,7 +98,7 @@
       You might have noticed that we have a little menu at the top of the page. There is a link to "Edit" the page in that menu. If you click that link, you can edit the page, even the style block above! Don't worry
       if you mess up; you can always refresh the page to get back to the version you last opened.<br>If you want to keep your changes, use the "Save" link and save things to work locally on your computer, tablet, or even phone. (Tell me if you run into any problems).</aside>
 
-    <p>
+    <p draggable="false">
       Our little style element does have one downside: every element on the page is now a "block"
       element, even some which should be "inline", such as "code" and "anchor"
       elements. We can correct this like so:
@@ -112,7 +114,7 @@
       }
     </style>
 
-    <p>
+    <p draggable="false">
       To make it feel more like you are viewing the source, I've also applied
       <code>monospace fonts</code>&nbsp;and a generally simple and consistent style
       to all elements, using a "*" selector, like so:
@@ -127,7 +129,7 @@
       }
     </style>
 
-    <p>So far, I've put style declarations all on one line because ordinary HTML refuses to treat line breaks as "br" tags. But there is a way
+    <p draggable="false">So far, I've put style declarations all on one line because ordinary HTML refuses to treat line breaks as "br" tags. But there is a way
       to make line breaks display as line breaks, and that is with this
       piece of styling:
     </p>
@@ -150,7 +152,7 @@
 
     <h2>Make the internal external</h2>
 
-    <p>The next step in making an HTML Quine is to make the internal external. We can start by 
+    <p draggable="false">The next step in making an HTML Quine is to make the internal external. We can start by 
       ensuring that the tags themselves, such as paragraph tags, are 
       exposed in their stark, natural, brutal beauty:
     </p>
@@ -167,28 +169,28 @@
       }
     </style>
 
-    <p>Adding these special pseudo-elements works for "&lt;p&gt;" elements, but we need to have custom styling for
+    <p draggable="false">Adding these special pseudo-elements works for "&lt;p&gt;" elements, but we need to have custom styling for
       <strong>every</strong> element. Pseudo-elements are special keywords that allow us to style specific parts of selected elements.</p>
-    <p>We'll need something to add a before and after&nbsp;pseudo-element to each element.If there was a way to output the "name" of
+    <p draggable="false">We'll need something to add a before and after&nbsp;pseudo-element to each element.If there was a way to output the "name" of
       a tag in HTML, then we could reduce all of the necessary style rules above
       to something like&nbsp;</p>
 
-    <blockquote>
+    <blockquote draggable="false">
       *::before {'&lt;'name()'&gt;'}
     </blockquote>
 
-    <p>And...</p>
+    <p draggable="false">And...</p>
 
-    <blockquote>
+    <blockquote draggable="false">
       *::after { '&lt;'name()'&gt;' }
     </blockquote>
 
-    <p>But alas there is no "name()" function (yet!). So we are forced to
+    <p draggable="false">But alas there is no "name()" function (yet!). So we are forced to
       generate a chunk of style information like this 👇</p>
 
     <details>
       <summary>
-        <p>It's a lot of repetitive code, so I wrapped it in a details and summary set. Feel free to click read all the lines of repetitive yet essential style code.&nbsp;</p>
+        <p draggable="false">It's a lot of repetitive code, so I wrapped it in a details and summary set. Feel free to click read all the lines of repetitive yet essential style code.&nbsp;</p>
       </summary>
 
       <style>
@@ -337,7 +339,7 @@
       </style>
     </details>
 
-    <p>Let's also make it so that whenever our cursor is over a summary tag, it is a pointer, and we'll also indent things by 4 characters (4 chars).
+    <p draggable="false">Let's also make it so that whenever our cursor is over a summary tag, it is a pointer, and we'll also indent things by 4 characters (4 chars).
     </p>
 
     <style>
@@ -347,7 +349,7 @@
       }
     </style>
 
-    <p>Some elements are a little trickier because they have attributes. Attributes are special variables or settings that HTML elements can have. Consider, for example, the &lt;a&gt; or ⚓️ (anchor), which often has a <code>href</code> attribute. We
+    <p draggable="false">Some elements are a little trickier because they have attributes. Attributes are special variables or settings that HTML elements can have. Consider, for example, the &lt;a&gt; or ⚓️ (anchor), which often has a <code>href</code> attribute. We
       <em>need</em> that attribute, including its value, to be visible. This is
       done like so:
     </p>
@@ -358,13 +360,13 @@
       }
     </style>
 
-    <p>
+    <p draggable="false">
       The <code>attr()</code> function, see
       <a href="https://developer.mozilla.org/docs/Web/CSS/attr">mozilla docs</a>
       is a nifty trick, "supported" since CSS 2.
     </p>
 
-    <p>A surprisingly troublesome set of tags are any that don't close. Two examples of these non-closing tags are &lt;br&gt; and &lt;img&gt;. While we can make our &lt;br&gt;s visible(on most browsers) by adding empty content, this isn't the case with images now.</p>
+    <p draggable="false">A surprisingly troublesome set of tags are any that don't close. Two examples of these non-closing tags are &lt;br&gt; and &lt;img&gt;. While we can make our &lt;br&gt;s visible(on most browsers) by adding empty content, this isn't the case with images now.</p>
     <style>
       /* This doesn't work on Safari */
       br {
@@ -389,14 +391,14 @@
       }
       img::after {}
     </style>
-    <p>
+    <p draggable="false">
       <a href="https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/220px-The_Earth_seen_from_Apollo_17.jpg" decoding="async" width="220" height="220">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/220px-The_Earth_seen_from_Apollo_17.jpg" decoding="async" width="220" height="220" draggable="false">
         <br>The Earth seen from Apollo as an example img</a>
     </p>
-    <p>TODO Add a more fun yet brutalist img or edit the img so it's more fun.<br></p>
-    <p>&nbsp;Another other special element is 
-      "style" itself, which has to include an escape character to avoid 
+    <p draggable="false">TODO Add a more fun yet brutalist img or edit the img so it's more fun.<br></p>
+    <p draggable="false">&nbsp;Another special element is 
+      "style" itself, which must include an escape character to avoid 
       being taken literally. Here is the styling code and a little tweak 
       to keep our closing style tags from being indented.</p>
 
@@ -409,7 +411,9 @@
         margin-left: -3ch;
       }
 
-      /* While we are at it, let's have a little fun and style our style elements */
+      /* While we are at it, let's have a little 
+         fun and style our style elements, giving
+         them a background and a font */
       style {
         background: hsl(270, 63.5%, 50%, 20%);
         font-family: Geneva_9;
@@ -418,11 +422,11 @@
       }
     </style>
 
-    <aside>I think the need for escaping the closing (e.g. "\/style" instead of "/style") of our style element may be a parser 
-      bug. Browser developers might not predicted that we would engage in the fun we're exploring here.
+    <aside>I think the need for escaping the closing tag (e.g. "\/style" instead of "/style") of our style element may be a parser 
+      bug. Browser developers might not have predicted that we would engage in the fun we're exploring here.
     </aside>
 
-    <p>Along with this, we will expose any script 
+    <p draggable="false">Along with this, we will expose any script 
       tags and ensure their
       content is pre-formated.
     </p>
@@ -445,8 +449,8 @@
       }
     </style>
 
-    <p>If we don't do a little more tweaking to our document's head element, our style and script tags are  
-      exposed but look messy. Their closing will be indented, unlike in our body. So we need to 
+    <p draggable="false">If we don't do a little more tweaking to our document's head element, our style and script tags are  
+      exposed but look messy. Their closing tag will be indented, unlike in our body. So we need to 
       add a little more style to the head element to fix this.</p>
 
     <style>
@@ -474,9 +478,11 @@
 
     <a id="how_nav_works"></a>
 
-    <p>
+    <p draggable="false">
       You might be wondering about that menu at the top of our
-      page. Here's how it works. First, we use the "position: sticky" style to allow it to stick to the top of our page once we scroll to it. As we want things to stay tidy in our menu, we'll hide the hrefs from our anchors.</p>
+      page.&nbsp;</p>
+    <p draggable="false">Here's how it works. First, we use the "position: sticky" style to allow it to stick to the top of our page once we scroll to it. With it stuck to the top of our viewport, it stays there unless we scroll above where we loaded it (just after we opened our body element).&nbsp;</p>
+    <p draggable="false">As we want things to stay tidy in our menu, we'll hide the hrefs from our anchors.</p>
 
     <style>
       nav {
@@ -497,7 +503,7 @@
       }
     </style>
 
-    <p>To reduce the visual weight of the before and after pseudo-elements, we can give them a soft purple color and mostly hide them until we focus on them.:</p>
+    <p draggable="false">To reduce the visual weight of the before and after pseudo-elements, we can give them a soft purple color and mostly hide them until we focus on them.:</p>
 
     <style>
       *::after,
@@ -514,9 +520,9 @@
       }
     </style>
 
-    <p>
+    <p draggable="false">
       Finally, I believe brutalist design, even when applied to truly
-      naked brutal html quines, is about function, not deliberate
+      naked brutal HTML Quines, is about function, not deliberate
       ugliness; I'd like to apply two humble style sets that improve the
       readability of this brutiful stack.
     </p>
@@ -548,153 +554,68 @@
       }
     </style>
 
-    <p>&nbsp;The first is our 101 Startr Bytes of Style. We apply it as the base style to our whole html to give things a clean, modern feel. The second is a little bit of transition magic. It tones down the look of elements we wouldn't normally see unless we hover over them.</p>
+    <p draggable="false">&nbsp;The first is our 101 Startr Bytes of Style. We apply it as the base style to our whole html to give things a clean, modern feel. The second is a little bit of transition magic. It tones down the look of elements we wouldn't normally see unless we hover over them.</p>
 
-    <p>
+    <p draggable="false">
       One last thing. Although this idea has bounced around in my head for a
       decade, the thing that reminded me to pipe it into a file was seeing this
       piece of "Code as Art" from Geoff Huntley:
       <a href="https://noyaml.com/">no yaml</a>. Bring back the world's weird web.
     </p>
 
-    <p>Kind regards</p>
-    <p>
+    <p draggable="false">Kind regards</p>
+    <p draggable="false">
       <i>P.S.</i>&nbsp;Our saving and editing features are powered by JavaScript. The following script is used to save the DOM as an HTML file and to toggle all text nodes' "contentEditable" attribute.<br>
       The attribute "contentEditable" is a special one that allows us to edit 
       the text of any element.
     </p>
-    <p>The script is as follows:</p>
+    <p draggable="false">The script is as follows:</p>
 
     <script>
+      // Function to delete script elements with src="/.11ty/reload-client.js"
+      ///This is here to help with local 11nty dev
+
+      function deleteReloadClientScripts() {
+        document
+          .querySelectorAll('script[src="/.11ty/reload-client.js"]')
+          .forEach(function (item) {
+            item.remove()
+          })
+      }
+
       // Function to save the DOM as an HTML file
       function saveDOMAsHTML() {
         // Turn off editing so we don't lock it on
         turnOffAllTextEditable();
-        //get our current title and make it filesafe
+
+        // Turn off all draggable elements
+        turnOffDraggableElements();
+
+        // Call the function to delete the script elements
+        deleteReloadClientScripts();
+
+        // Get the current title and make it filesafe
         const fileSafeTitle = () => document
           .title
           .replace(/[^\w\s]/g, '')
           .trim()
           .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
         const htmlContent = document.documentElement.outerHTML;
+
         // Create a Blob with the HTML content
         const blob = new Blob([htmlContent], {type: 'text/html'});
+
         // Create a temporary URL to the Blob
         const url = URL.createObjectURL(blob);
+
         // Create a link element to trigger the download
         const a = document.createElement('a');
         a.href = url;
         a.download = fileSafeTitle() + '.html';
+
         // Trigger a click event on the link to start the download
         a.click();
+
         // Clean up by revoking the Blob URL
         URL.revokeObjectURL(url);
       }
@@ -742,2662 +663,120 @@
         extractTextNodes(element);
         return textNodes;
       }
-    </script>
 
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
+      document
+        .body
+        .addEventListener('paste', function (e) {
+          e.preventDefault();
+
+          // Get the pasted text
+          const clipboardData = e.clipboardData || window.clipboardData;
+          const pastedText = clipboardData.getData('text/plain');
+
+          // Filter out properties that don't start with "--"
+          const filteredText = pastedText.replace(/(--[\w-]+:[^;]+;)/g, '');
+
+          // Insert the filtered text into the body's contentEditable
+          document.execCommand('insertText', false, filteredText);
         });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
+
+      // Define a debounce function
+      function debounce(func, wait) {
+        let timeout;
+        return function (...args) {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), wait);
+        };
       }
 
-      let isEditable = false;
+      // Drag and Drop
+      var isDragMode = false;
+      var draggedElement = null;
+      var placeholder = document.createElement('section');
+      var lastTarget = null;
 
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
+      placeholder.style.border = '2px dashed #0099FF'; // Placeholder styling
+      placeholder.style.height = '2rem'; // Set a default height, adjust as needed
+
+      function toggleDraggableElements() {
+        isDragMode = !isDragMode;
+        var elementsToToggle = document.querySelectorAll('img, p, ol, ul, li, blockquote, h1, h2, h3, h4, h5, h6, pre, code, a, em, strong, div, article, summary, details, nav, aside, span, script, style');
+        elementsToToggle.forEach(function (element) {
+          element.setAttribute('draggable', isDragMode);
         });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
       }
 
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
+      function turnOffDraggableElements() {
+        isDragMode = true; // Set to true so we can toggle it off
+        toggleDraggableElements();
       }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
+
+      function handleDragStart(event) {
+        if (!isDragMode) {
+          event.preventDefault();
+          return;
         }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
+        draggedElement = event.target;
       }
 
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
+      function handleDragOver(event) {
+        if (!isDragMode || !draggedElement) {
+          event.preventDefault();
+          return;
         }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
+        event.preventDefault();
+        var dropTarget = event.target;
 
-      let isEditable = false;
+        // Get the previous sibling of the drop target
+        var previousSibling = dropTarget.previousElementSibling;
 
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
+        // Only move the placeholder if it's not already in the correct position
+        if (previousSibling !== placeholder) {
+          dropTarget.insertAdjacentElement('beforebegin', placeholder);
         }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
       }
 
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
+      function handleDrop(event) {
+        if (!isDragMode || !draggedElement) {
+          event.preventDefault();
+          return;
         }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
+        event.preventDefault();
+
+        requestAnimationFrame(() => {
+          placeholder.replaceWith(draggedElement);
+          draggedElement = null; // Reset the draggedElement variable
         });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
       }
 
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
+      function handleMouseOver(event) {
+        if (isDragMode) {
+          //event.target.style.outline = '2px solid #0099FF';  Blue outline
         }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
       }
 
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
+      function handleMouseOut(event) {
+        if (isDragMode) {
+          event.target.style.outline = ''; // Remove outline
         }
-        extractTextNodes(element);
-        return textNodes;
       }
+
+      var toggleDragButton = document.getElementById('toggleDrag');
+      toggleDragButton.addEventListener('click', function () {
+        toggleDraggableElements();
+        toggleDragButton.textContent = isDragMode
+          ? 'Stop Drag'
+          : 'Drag';
+      });
+
+      document.addEventListener('dragstart', handleDragStart);
+      document.addEventListener('dragover', handleDragOver);
+      document.addEventListener('drop', handleDrop);
+      document.addEventListener('mouseover', handleMouseOver);
+      document.addEventListener('mouseout', handleMouseOut);
     </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
+    <p draggable="false">
+      <i>P.P.S.</i>&nbsp;If you want to see the source of this page, prefix the URL with "view-source:" and you'll see the source of this page. You can do this on any page!</p>
 
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-        // Get all script elements
-        const scriptElements = document.querySelectorAll('script');
-        // Filter out script elements with src="/.11ty/reload-client.js"
-        const filteredScriptElements = Array
-          .from(scriptElements)
-          .filter(script => {
-            return !script
-              .src
-              .includes('/.11ty/reload-client.js');
-          });
-        // Create a new HTML document
-        const tempDoc = document
-          .implementation
-          .createHTMLDocument();
-        // Copy the head and body of the current document to the new document
-        tempDoc.head.innerHTML = document.head.innerHTML;
-        tempDoc.body.innerHTML = document.body.innerHTML;
-        // Replace the script elements in the new document with the filtered ones
-        filteredScriptElements.forEach(script => {
-          const newScript = tempDoc.createElement('script');
-          if (script.text) {
-            newScript.text = script.text;
-          } else if (script.src) {
-            newScript.src = script.src;
-          }
-          if (script.type) {
-            newScript.type = script.type;
-          }
-          tempDoc
-            .body
-            .appendChild(newScript);
-        });
-        const htmlContent = tempDoc.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
-    <script>
-      // Function to save the DOM as an HTML file
-      function saveDOMAsHTML() {
-        // Turn off editing so we don't lock it on
-        turnOffAllTextEditable();
-        //get our current title and make it filesafe
-        const fileSafeTitle = () => document
-          .title
-          .replace(/[^\w\s]/g, '')
-          .trim()
-          .replace(/\s+/g, '-');
-
-        // Remove script elements with src="/.11ty/reload-client.js"
-        const scriptElements = document.querySelectorAll('script[src="/.11ty/reload-client.js"]');
-        scriptElements.forEach(script => script.parentNode.removeChild(script));
-
-        const htmlContent = document.documentElement.outerHTML;
-        // Create a Blob with the HTML content
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        // Create a temporary URL to the Blob
-        const url = URL.createObjectURL(blob);
-        // Create a link element to trigger the download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileSafeTitle() + '.html';
-        // Trigger a click event on the link to start the download
-        a.click();
-        // Clean up by revoking the Blob URL
-        URL.revokeObjectURL(url);
-      }
-
-      let isEditable = false;
-
-      function turnOffAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        textNodes.forEach((node) => {
-          node
-            .parentElement
-            .removeAttribute('contentEditable');
-        });
-        isEditable = false;
-        // set text of anchor #edit to "Stop Editing" to reflect state
-        document
-          .getElementById('edit')
-          .innerText = 'Edit';
-      }
-
-      function toggleAllTextEditable() {
-        const textNodes = getTextNodes(document);
-        isEditable = !isEditable;
-        // set text of anchor #edit to "Edit" or "Stop Editing" to reflect state
-        textNodes.forEach((node) => {
-          node.parentElement.contentEditable = isEditable;
-        });
-        document
-          .getElementById('edit')
-          .innerText = isEditable
-            ? 'Stop Editing'
-            : 'Edit';
-      }
-      function getTextNodes(element) {
-        const textNodes = [];
-        function extractTextNodes(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              extractTextNodes(childNode);
-            }
-          }
-        }
-        extractTextNodes(element);
-        return textNodes;
-      }
-    </script>
   </body>
 </html>
