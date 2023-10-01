@@ -15,7 +15,7 @@
       <a href="#how_it_works" draggable="false">How</a>
       <a id="save" href="data:text, To save enable javascript." onclick="saveDOMAsHTML();return false;" draggable="false">Save</a>
       <a id="edit" href="data:text, To edit enable javascript." onclick="toggleAllTextEditable();return false;" draggable="false">Edit</a>
-      <a id="toggleDrag" href="data:text, To drag enable javascript." onclick="return false" draggable="false">Stop Drag</a>
+      <a id="toggleDrag" href="data:text, To drag enable javascript." onclick="return false" draggable="false">Drag</a>
 
     </nav>
 
@@ -189,7 +189,7 @@
 
     <details draggable="false">
       <summary draggable="false">
-        <p draggable="false">It's a lot of repetitive code, so I wrapped it in a details and summary set. Feel free to click 👇 and read all the lines of repetitive yet essential style code.&nbsp;</p>
+        <p draggable="false">It's a lot of repetitive code, so I wrapped it in a details and summary set. Feel free to click read all the lines of repetitive yet essential style code.&nbsp;</p>
       </summary>
 
       <style draggable="false">
@@ -555,22 +555,22 @@
 
     <p draggable="false">&nbsp;The first is our 101 Startr Bytes of Style. We apply it as the base style to our whole html to give things a clean, modern feel. The second is a little bit of transition magic. It tones down the look of elements we wouldn't normally see unless we hover over them.</p>
 
-    <p draggable="false">Kind regards</p><p draggable="false">
+    <p draggable="false">
       One last thing. Although this idea has bounced around in my head for a
       decade, the thing that reminded me to pipe it into a file was seeing this
       piece of "Code as Art" from Geoff Huntley:
       <a href="https://noyaml.com/" draggable="false">no yaml</a>. Bring back the world's weird web.
     </p>
 
-    
+    <p draggable="false">Kind regards</p>
     <p draggable="false">
       <i>P.S.</i>&nbsp;Our saving and editing features are powered by JavaScript. The following script is used to save the DOM as an HTML file and to toggle all text nodes' "contentEditable" attribute.<br>
       The attribute "contentEditable" is a special one that allows us to edit 
       the text of any element.
     </p>
-    <details draggable="false">
+    <details draggable="false" open="">
 
-    <summary draggable="false">The script is as follows 👇.  We've wrapped it in a details element for brevity. </summary>
+    <summary draggable="false">The script is as follows👇. We've wrapped it in a details element for berevity. </summary>
 
     <script draggable="false">
       // Function to delete script elements with src="/.11ty/reload-client.js"
@@ -696,8 +696,8 @@
       var placeholder = document.createElement('section');
       var lastTarget = null;
 
-      placeholder.style.border = '2px dashed #0099FF'; // Placeholder styling
-      placeholder.style.height = '2rem'; // Set a default height, adjust as needed
+      placeholder.style.border = '3px dashed #0099FF'; // Placeholder styling
+      placeholder.style.height = '1px'; // Set a default height, adjust as needed
 
       function toggleDraggableElements() {
         isDragMode = !isDragMode;
