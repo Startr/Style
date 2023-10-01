@@ -74,10 +74,9 @@
     <h2 draggable="false">How it works.</h2>
 
     <p draggable="false">
-      Did you know that the rules of html and css allow us to make
-      <strong draggable="false">every</strong> element visible, even elements like 'title' or
-      'style' or 'script', that are normally hidden from view? <br>Those are just
-      elements like any other.<br>You can expose them <strong draggable="false">all</strong> like so:
+      Did you know that the rules of HTML (the building blocks of the Web) and CSS(the styling system of the Web) allow us to make
+      <strong draggable="false">every</strong>&nbsp;Web page element visible, even special HTML elements like 'title', 'style' and 'script', elements that are normally hidden from view? <br>Those are just
+      elements like any other.<br>You can expose&nbsp;<strong draggable="false">all</strong>&nbsp;of them like so:
     </p>
 
     <style draggable="false">
@@ -94,12 +93,12 @@
     </p>
 
     <aside draggable="false">
-      You might have noticed that we have a little menu at the top of the page. There is a link to "Edit" the page in that menu. If you click that link, you can edit the page, even the style block above! Don't worry
+      You might have noticed that we have a little menu at the 👆 top of the page. There is a link to "Edit" the page in that menu. If you click that link, you can edit the page, even the style block above! Don't worry
       if you mess up; you can always refresh the page to get back to the version you last opened.<br>If you want to keep your changes, use the "Save" link and save things to work locally on your computer, tablet, or even phone. (Tell me if you run into any problems).</aside>
 
     <p draggable="false">
       Our little style element does have one downside: every element on the page is now a "block"
-      element, even some which should be "inline", such as "code" and "anchor"
+      element, even some which should be "inline," such as "code" and "anchor"
       elements. We can correct this like so:
     </p>
 
@@ -189,7 +188,7 @@
 
     <details draggable="false">
       <summary draggable="false">
-        <p draggable="false">It's a lot of repetitive code, so I wrapped it in a details and summary set. Feel free to click read all the lines of repetitive yet essential style code.&nbsp;</p>
+        <p draggable="false">It's a lot of repetitive code, so I wrapped it in a &lt;details&gt; and &lt;summary&gt; set. Feel free to "click" if you want to read all the repetitive yet essential style code lines.&nbsp;</p>
       </summary>
 
       <style draggable="false">
@@ -393,9 +392,9 @@
     <p draggable="false">
       <a href="https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg" draggable="false">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/220px-The_Earth_seen_from_Apollo_17.jpg" decoding="async" width="220" height="220" draggable="false">
-        <br>The Earth seen from Apollo as an example img</a>
+        <br>The Earth as seen from Apollo as an example img</a>
     </p>
-    <p draggable="false">TODO Add a more fun yet brutalist img or edit the img so it's more fun.<br></p>
+    <p draggable="false">TODO: Add a more fun yet brutalist image or edit the image so it's more fun.<br></p>
     <p draggable="false">&nbsp;Another special element is 
       "style" itself, which must include an escape character to avoid 
       being taken literally. Here is the styling code and a little tweak 
@@ -523,7 +522,7 @@
       Finally, I believe brutalist design, even when applied to truly
       naked brutal HTML Quines, is about function, not deliberate
       ugliness; I'd like to apply two humble style sets that improve the
-      readability of this brutiful stack.
+      readability of this "brutiful" stack.
     </p>
 
     <style draggable="false">
@@ -568,9 +567,9 @@
       The attribute "contentEditable" is a special one that allows us to edit 
       the text of any element.
     </p>
-    <details draggable="false" open="">
+    <details draggable="false">
 
-    <summary draggable="false">The script is as follows👇. We've wrapped it in a details element for berevity. </summary>
+    <summary draggable="false">The script is as follows👇. We've wrapped it in a details element for brevity. </summary>
 
     <script draggable="false">
       // Function to delete script elements with src="/.11ty/reload-client.js"
@@ -698,6 +697,8 @@
 
       placeholder.style.border = '3px dashed #0099FF'; // Placeholder styling
       placeholder.style.height = '1px'; // Set a default height, adjust as needed
+      // set a negative margin to compensate for the additional height
+      placeholder.style.marginBottom = '-1.6rem';
 
       function toggleDraggableElements() {
         isDragMode = !isDragMode;
