@@ -1,6 +1,8 @@
-<html><head>
+<html>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://raw.githack.com/opencoca/system7.css/main/style.css">
 
     <title>A Brutalist HTML Quine – It is what it is</title>
@@ -11,23 +13,27 @@
     <h1 id="quine">This page is a truly open, brutalist Quine, an HTML Quine</h1>
 
     <nav>
-      <a href="#quine">Quine</a>
       <a href="#how_it_works">How</a>
-      <a id="save" href="data:text, To save enable javascript." onclick="saveDOMAsHTML();return false;">Save</a>
-      <a id="edit" href="data:text, To edit enable javascript." onclick="toggleAllTextEditable();return false;">Edit</a>
-      <a id="toggleDrag" href="data:text, To drag enable javascript." onclick="return false">Drag</a>
+      <a id="save" 
+         href="data:text, To save enable javascript." 
+         onclick="saveDOMAsHTML();return false;">Save</a>
+      <a id="edit" 
+         href="data:text, To edit enable javascript." 
+         onclick="toggleAllTextEditable();return false;">Edit</a>
+      <a id="toggleDrag" 
+         href="data:text, To drag enable javascript." 
+         onclick="return false" 
+         style="--d: none; --d-sm: inline;">Drag</a>
 
     </nav>
 
-    <p>I've always loved creating things. As a child, it was block and paint, but then I started first with Basic, Hypercard, C, Pascal and VB. As I got older, I moved to PHP, then Python, and created some amazing things like <a href="https://etsy.com/">Etsy</a>&nbsp;and Startr. These days I focus on&nbsp;<a href="https://robotinacan.com/">Robots </a>&nbsp;and other projects.</p><p>I love to create things that are useful and beautiful. Things that inspire others to create are the most powerful and rewarding to build.<br>I love to create things that are fun and silly. Things that are weird and wonderful I love the most.<br>While I love creating beautiful things, I enjoy keeping them exposed and raw. Brutally functional things often feel best to me.</p><p>
+    <p>I've always loved creating things. As a child, it was block and paint, but then I started first with Basic, Hypercard, C, Pascal and VB. As I got older, I moved to PHP, then Python, and created some amazing things like <a href="https://etsy.com/">Etsy</a>&nbsp;and Startr. These days I focus on&nbsp;<a href="https://robotinacan.com/">Robots </a>&nbsp;and other projects.</p>
+    <p>I love to create things that are useful and beautiful. Things that inspire others to create are the most powerful and rewarding to build.<br>I love to create things that are fun and silly. Things that are weird and wonderful I love the most.<br>While I love creating beautiful things, I enjoy keeping them exposed and raw. Brutally functional things often feel best to me.</p>
+    <p>
       I love to tweak and hack technology in creative ways.
       <br>
       We don't need to break things to make new things, and we don't need to reinvent the wheel, either. So many amazing things exist to build on.<br>
       Let's focus on bending the rules without breaking the rules.</p>
-
-    
-
-    
 
     <p>To these ends, this project is inspired by my reflecting on life and reading Gödel, Escher, Bach, and, most importantly, talking with friends and family. The code was inspired by&nbsp;<a href="https://github.com/secretGeek/">secretGeek</a>  and <a href="https://sr.ht/~sforman">my close friend Simon Forman</a>.
     </p>
@@ -187,8 +193,7 @@
       generate a chunk of style information like this 👇</p>
 
     <details>
-      <summary>
-        <p>It's a lot of repetitive code, so I wrapped it in a &lt;details&gt; and &lt;summary&gt; set. Feel free to "click" if you want to read all the repetitive yet essential style code lines.&nbsp;</p>
+      <summary>It's a lot of repetitive code, so "click" if you want to read it all.&nbsp;
       </summary>
 
       <style>
@@ -378,196 +383,202 @@
         white-space: pre;
       }
 
-      /* TODO ...figure out how to have imgs work ;) */
-      img {
-        margin: auto !important;
-        content: "" !important;
-      }
+      /* TODO ...figure out how to have imgs show thier src ;) */
 
       img::before {
         content: "<img src='" attr(src) "'>";
       }
       img::after {}
+
+      img {
+        margin: auto !important;
+        content: "" !important;
+      }
     </style>
-    <p>
-      <a href="https://en.wikipedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/220px-The_Earth_seen_from_Apollo_17.jpg" decoding="async" width="220" height="220">
-        <br>The Earth as seen from Apollo as an example img</a>
-    </p>
-    <p>TODO: Add a more fun yet brutalist image or edit the image so it's more fun.<br></p>
-    <p>&nbsp;Another special element is 
+    <p style="--ta:center">
+      <img src="me_myself_somma_small.avif" 
+        decoding="async" width="220" height="220" 
+        alt="Me, Myself, Somma" loading="lazy" 
+        style="display: block; margin: auto;" 
+        title="Me, Myself, Somma">
+      <br>Me Myself Somma on a good day outside Tokyo.</p>
+  </p>
+  <p>TODO: Add a more fun yet brutalist image or edit the image so it's more fun.<br></p>
+  <p>&nbsp;Another special element is 
       "style" itself, which must include an escape character to avoid 
       being taken literally. Here is the styling code and a little tweak 
       to keep our closing style tags from being indented.</p>
 
-    <style>
-      style::before {
-        content: '<style>';
-      }
-      style::after {
-        content: '<\/style>';
-        margin-left: -3ch;
-      }
+  <style>
+    style::before {
+      content: '<style>';
+    }
+    style::after {
+      content: '<\/style>';
+      margin-left: -3ch;
+    }
 
-      /* While we are at it, let's have a little 
+    /* While we are at it, let's have a little 
          fun and style our style elements, giving
          them a background and a font */
-      style {
-        background: hsl(270, 63.5%, 50%, 20%);
-        font-family: Geneva_9;
-        font-size: 1.4em;
-        overflow: auto;
-      }
-    </style>
+    style {
+      background: hsl(270, 63.5%, 50%, 20%);
+      font-family: Geneva_9;
+      font-size: 1.4em;
+      overflow: auto;
+    }
+  </style>
 
-    <aside>I think the need for escaping the closing tag (e.g. "\/style" instead of "/style") of our style element may be a parser 
+  <aside>I think the need for escaping the closing tag (e.g. "\/style" instead of "/style") of our style element may be a parser 
       bug. Browser developers might not have predicted that we would engage in the fun we're exploring here.
     </aside>
 
-    <p>Along with this, we will expose any script 
+  <p>Along with this, we will expose any script 
       tags and ensure their
       content is pre-formated.
     </p>
 
-    <style>
-      script::before {
-        content: '<script>';
-      }
-      script::after {
-        content: '</script>';
-        margin-left: -3.1ch;
-      }
+  <style>
+    script::before {
+      content: '<script>';
+    }
+    script::after {
+      content: '</script>';
+      margin-left: -3.1ch;
+    }
 
-      /* Let's theme our script elements */
-      script {
-        background: hsl(210, 63.5%, 50%, 20%);
-        font-family: Geneva_9;
-        font-size: 1.4em;
-        overflow: auto;
-      }
-    </style>
+    /* Let's theme our script elements */
+    script {
+      background: hsl(210, 63.5%, 50%, 20%);
+      font-family: Geneva_9;
+      font-size: 1.4em;
+      overflow: auto;
+    }
+  </style>
 
-    <p>If we don't do a little more tweaking to our document's head element, our style and script tags are  
+  <p>If we don't do a little more tweaking to our document's head element, our style and script tags are  
       exposed but look messy. Their closing tag will be indented, unlike in our body. So we need to 
       add a little more style to the head element to fix this.</p>
 
-    <style>
-      head script::after,
-      head style::after {
-        margin-left: 0;
-      }
+  <style>
+    head script::after,
+    head style::after {
+      margin-left: 0;
+    }
 
-      /* We can reuse our a href technique to expose what 
+    /* We can reuse our a href technique to expose what 
          scripts are sourced in the page */
 
-      script[src]::before {
-        content: "<script='" attr(src) "'>";
-      }
+    script[src]::before {
+      content: "<script='" attr(src) "'>";
+    }
 
-      /*  Oh, and we need links for external resources */
+    /*  Oh, and we need links for external resources */
 
-      link[href]::before {
-        content: "<link='" attr(href) "'>";
-      }
-      link {
-        overflow: auto;
-      }
-    </style>
+    link[href]::before {
+      content: "<link='" attr(href) "'>";
+    }
+    link {
+      overflow: auto;
+    }
+  </style>
 
-    <a id="how_nav_works"></a>
+  <a id="how_nav_works"></a>
 
-    <p>
+  <p>
       You might be wondering about that menu at the top of our
       page.&nbsp;</p>
-    <p>Here's how it works. First, we use the "position: sticky" style to allow it to stick to the top of our page once we scroll to it. With it stuck to the top of our viewport, it stays there unless we scroll above where we loaded it (just after we opened our body element).&nbsp;</p>
-    <p>As we want things to stay tidy in our menu, we'll hide the hrefs from our anchors.</p>
+  <p>Here's how it works. First, we use the "position: sticky" style to allow it to stick to the top of our page once we scroll to it. With it stuck to the top of our viewport, it stays there unless we scroll above where we loaded it (just after we opened our body element).&nbsp;</p>
+  <p>As we want things to stay tidy in our menu, we'll hide the hrefs from our anchors.</p>
 
-    <style>
-      nav {
-        position: sticky;
-        top: 1;
-        background: white;
-        padding: 0.2em;
-        text-align: center;
-      }
-      /* This will hide the hrefs of our navigation links */
-      nav a[href]::before {
-        content: '<a>';
-      }
+  <style>
+    nav {
+      position: sticky;
+      top: 1;
+      background: white;
+      padding: 0.2em;
+      text-align: center;
+    }
+    /* This will hide the hrefs of our navigation links */
+    nav a[href]::before {
+      content: '<a>';
+    }
 
-      /*. At the same time, we'll deal with our block quotes */
-      blockquote::after {
-        margin-left: -4ch;
-      }
-    </style>
+    /*. At the same time, we'll deal with our block quotes */
+    blockquote::after {
+      margin-left: -4ch;
+    }
+  </style>
 
-    <p>To reduce the visual weight of the before and after pseudo-elements, we can give them a soft purple color and mostly hide them until we focus on them.:</p>
+  <p>To reduce the visual weight of the before and after pseudo-elements, we can give them a soft purple color and mostly hide them until we focus on them.:</p>
 
-    <style>
-      *::after,
-      *::before {
-        color: hsl(270, 63.5%, 50%, 20%);
-        line-height: 0.7;
-        transition: all 0.3s ease;
-      }
-      *:hover::after,
-      *:hover::before,
-      a::after,
-      a::before {
-        color: hsl(270, 63.5%, 50%, 80%);
-      }
-    </style>
+  <style>
+    *::after,
+    *::before {
+      color: hsl(270, 63.5%, 50%, 20%);
+      line-height: 0.7;
+      transition: all 0.3s ease;
+    }
+    *:hover::after,
+    *:hover::before,
+    a::after,
+    a::before {
+      color: hsl(270, 63.5%, 50%, 80%);
+    }
+  </style>
 
-    <p>
+  <p>
       Finally, I believe brutalist design, even when applied to truly
       naked brutal HTML Quines, is about function, not deliberate
       ugliness; I'd like to apply two humble style sets that improve the
       readability of this "brutiful" stack.
     </p>
 
-    <style>
-      /* 101 Startr Bytes of Style */
-      html {
-        max-width: 80ch;
-        padding: 2ch;
-        margin: auto;
-        color: hsl(270, 0%, 0%, 90%) !important;
-        font-size: 1.4em;
-      }
+  <style>
+    /* 101 Startr Bytes of Style */
+    html {
+      max-width: 80ch;
+      padding: 2ch;
+      margin: auto;
+      color: hsl(270, 0%, 0%, 90%) !important;
+      font-size: 1.4em;
+    }
 
-      /* Hover over link, Style and Script elements to enjoy */
-      link, script, style {
-        transition: all 0.3s ease;
-        opacity: 20%;
-        max-height:24rem
-      }
-      script:hover,
-      style:hover {
-        opacity: 100%;
-        
-      }
-      /* Fix for nav flicker  */
-      nav {
-        z-index: 1000;
-      }
-    </style>
+    /* Hover over link, Style and Script elements to enjoy */
+    link,
+    script,
+    style {
+      transition: all 0.3s ease;
+      opacity: 20%;
+      max-height: 24rem;
+    }
+    script:hover,
+    style:hover {
+      opacity: 100%;
 
-    <p>&nbsp;The first is our 101 Startr Bytes of Style. We apply it as the base style to our whole html to give things a clean, modern feel. The second is a little bit of transition magic. It tones down the look of elements we wouldn't normally see unless we hover over them.</p>
+    }
+    /* Fix for nav flicker  */
+    nav {
+      z-index: 1000;
+    }
+  </style>
 
-    <p>
+  <p>&nbsp;The first is our 101 Startr Bytes of Style. We apply it as the base style to our whole html to give things a clean, modern feel. The second is a little bit of transition magic. It tones down the look of elements we wouldn't normally see unless we hover over them.</p>
+
+  <p>
       One last thing. Although this idea has bounced around in my head for a
       decade, the thing that reminded me to pipe it into a file was seeing this
       piece of "Code as Art" from Geoff Huntley:
       <a href="https://noyaml.com/">no yaml</a>. Bring back the world's weird web.
     </p>
 
-    <p>Kind regards</p>
-    <p>
-      <i>P.S.</i>&nbsp;Our saving and editing features are powered by JavaScript. The following script is used to save the DOM as an HTML file and to toggle all text nodes' "contentEditable" attribute.<br>
+  <p>Kind regards</p>
+  <p>
+    <i>P.S.</i>&nbsp;Our saving and editing features are powered by JavaScript. The following script is used to save the DOM as an HTML file and to toggle all text nodes' "contentEditable" attribute.<br>
       The attribute "contentEditable" is a special one that allows us to edit 
       the text of any element.
     </p>
-    <details open="">
+  <details open="">
 
     <summary>The script is as follows👇. We've wrapped it in a details element for brevity. </summary>
 
@@ -709,7 +720,7 @@
       }
 
       function turnOffDraggableElements() {
-        
+
         isDragMode = false;
         // set text of anchor #toggleDrag to "Drag" to reflect state
         document
@@ -787,11 +798,10 @@
       document.addEventListener('mouseover', handleMouseOver);
       document.addEventListener('mouseout', handleMouseOut);
     </script>
-    </details>
+  </details>
 
+  <p>
+    <i>P.P.S.</i>&nbsp;If you want to see the source of this page, prefix the URL with "view-source:" and you'll see the source. You can do this on any page!</p>
 
-    <p>
-      <i>P.P.S.</i>&nbsp;If you want to see the source of this page, prefix the URL with "view-source:" and you'll see the source. You can do this on any page!</p>
-
-  
-</body></html>
+</body>
+</html>

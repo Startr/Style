@@ -1,4 +1,4 @@
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
   let options = {
     html: true,
     breaks: true,
@@ -9,7 +9,15 @@ module.exports = function(eleventyConfig) {
 };
 
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addPassthroughCopy({ static: "/"  })
+  eleventyConfig.addPassthroughCopy({ static: "/" });
+  // Copy any .jpg file to `_site`, via Glob pattern
+  // Keeps the same directory structure.
+  eleventyConfig.addPassthroughCopy("**/*.jpg");
+  eleventyConfig.addPassthroughCopy("**/*.png");
+  eleventyConfig.addPassthroughCopy("**/*.svg");
+  eleventyConfig.addPassthroughCopy("**/*.gif");
+  eleventyConfig.addPassthroughCopy("**/*.avif");
+  
   return {
     markdownTemplateEngine: "njk"
   };

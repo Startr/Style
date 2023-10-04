@@ -41,12 +41,12 @@
   --highlight: --var(--yellow);
   --select-arrow: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='62.5' width='116.9' fill='%23161f27'%3E%3Cpath d='M115.3 1.6c-1.6-1.6-4.2-1.6-5.8 0l-51 51.1L7.4 1.6C5.8 0 3.2 0 1.6 1.6 0 3.2 0 5.8 1.6 7.4l53.9 53.9c.8.8 1.8 1.2 2.9 1.2 1 0 2.1-.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2.1-5.8z'/%3E%3C/svg%3E");
   --heading-margin: .5rem 0 .75rem;
-  --typo-size-1: 2.8rem;
-  --typo-size-2: 2.2rem;
-  --typo-size-3: 1.8rem;
-  --typo-size-4: 1.4rem;
-  --typo-size-5: 1.2rem;
-  --typo-size-6: 1.2rem;
+  --typo-size-1: calc(var(--typo-size-6, 1) * 280%);
+  --typo-size-2: calc(var(--typo-size-6, 1) * 220%);
+  --typo-size-3: calc(var(--typo-size-6, 1) * 180%);
+  --typo-size-4: calc(var(--typo-size-6, 1) * 140%);
+  --typo-size-5: calc(var(--typo-size-6, 1) * 120%);
+  --typo-size-6: 1.0rem;
   --wrapper: 1280px;
   --transition: all ease .4s;}
 *, ::before, ::after {
@@ -66,7 +66,7 @@ html {
   text-rendering: optimizeLegibility
 }
 body {
-  font-size: 1.4rem;
+  font-size: var(--typo-size-4);
   color: var(color: var(--text-c, inherit))
 }
 
@@ -2453,9 +2453,7 @@ html {
   scroll-behavior: smooth;
   touch-action: manipulation
 }
-html, body {
-  min-width: 20rem
-}
+
 body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
