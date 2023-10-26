@@ -15,6 +15,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("**/*.jpg");
   eleventyConfig.addPassthroughCopy("**/*.gif");
   eleventyConfig.addPassthroughCopy("**/*.avif");
+
+  eleventyConfig.addCollection("excludeFolders", (collection) => {
+    return collection.getAll().filter((item) => {
+      return !item.inputPath.includes("/_");
+    });
+  });
+
   return {
     markdownTemplateEngine: "njk"
   };
