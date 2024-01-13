@@ -1,91 +1,17 @@
 {
-  "name": "strartr-less-flex-cards",
-  "version": "2023.08.11-11.25.02",
-  "license": "MIT",
-  "homepage": "https://codepen.io/openco/pen/xxJYvgR",
+  "name": "startr_style",
+  "version": "1.0.0",
+  "description": "** v.0.1.0 **",
+  "main": "index.js",
   "scripts": {
-    "build": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
-    "serve": "gulp serve -f ./build/gulpfile.js --cwd ./ --continue",
-    "task": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
-    "tasks": "gulp --tasks-simple -f ./build/gulpfile.js --cwd ./ --continue"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd src && npx @11ty/eleventy --serve --output=../dist",
+    "build": "cd src && npx @11ty/eleventy --output=../dist"
   },
-  "config": {
-    "srcDir": "src/",
-    "distDir": "dist/"
-  },
-  "devDependencies": {
-    "browser-sync": "^2.26.7",
-    "del": "^4.1.1",
-    "glob": "^7.1.4",
-    "gulp": "^4.0.2",
-    "gulp-inject-partials": "^1.0.5",
-    "gulp-less": "^4.0.1",
-    "gulp-pug": "^4.0.1",
-    "gulp-rename": "^1.4.0",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1"
-  },
-  "browserslist": [
-    "last 5 version"
-  ],
-  "tasks": {
-    "partials": {
-      "order": 999,
-      "src": [
-        "**/*.template.html"
-      ],
-      "pipe": [
-        {
-          "require": "gulp-inject-partials",
-          "args": [
-            {
-              "removeTags": true,
-              "quiet": true,
-              "ignoreError": true
-            }
-          ]
-        }
-      ],
-      "rename": {
-        "find": ".template",
-        "replace": ""
-      },
-      "cleanup": [
-        "**/*.partial.html",
-        "**/*.template.html"
-      ]
-    },
-    "pug": {
-      "order": 1,
-      "src": [
-        "**/*.pug"
-      ],
-      "pipe": [
-        {
-          "require": "gulp-pug"
-        }
-      ],
-      "rename": {
-        "suffix": ".partial"
-      },
-      "cleanup": true
-    },
-    "less": {
-      "src": [
-        "**/*.less"
-      ],
-      "pipe": [
-        {
-          "require": "gulp-less"
-        }
-      ],
-      "cleanup": true
-    }
-  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "marked": "^9.0.0",
-    "nunjucks-markdown": "^2.0.1",
-    "startr.style": "^1.0.0"
+    "@11ty/eleventy": "^2.0.1"
   }
 }
