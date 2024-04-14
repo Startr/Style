@@ -15,6 +15,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("**/*.jpg");
   eleventyConfig.addPassthroughCopy("**/*.gif");
   eleventyConfig.addPassthroughCopy("**/*.avif");
+  eleventyConfig.addPassthroughCopy({ "static/favicon": "/" });
 
   eleventyConfig.addCollection("excludeFolders", (collection) => {
     return collection.getAll().filter((item) => {
