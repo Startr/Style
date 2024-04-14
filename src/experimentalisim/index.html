@@ -889,24 +889,24 @@
       the source. You can do this on any page!
     </p>
 
-    <section id="prompt_wrapper">
+    <section id="prompt_wrapper" style="display: none;">
       <form>
+        <!-- Hidden input for handling autocomplete -->
+        <input
+          type="text"
+          id="autocompleteInput"
+          style="--pos: fixed; --bottom: 1rem; --maxw: 47rem;"
+          list="utility-hints"
+        />
+        <datalist id="utility-hints">
+          <!-- Options will be dynamically populated via JavaScript -->
+        </datalist>
         <input
           id="prompt"
           name="prompt"
           placeholder="Type utility shorthand (e.g., --m for margin)"
           style="--pos: fixed; --bottom: 1rem; --maxw: 47rem;"
         />
-        <!-- Hidden input for handling autocomplete -->
-        <input
-          type="text"
-          id="autocompleteInput"
-          style="--pos: fixed; --bottom: 1rem; --maxw: 47rem; display: none;"
-          list="utility-hints"
-        />
-        <datalist id="utility-hints">
-          <!-- Options will be dynamically populated via JavaScript -->
-        </datalist>
       </form>
     </section>
 
