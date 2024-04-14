@@ -810,12 +810,13 @@
       <i>P.P.S.</i>&nbsp;If you want to see the source of this page, prefix the URL with "view-source:" and you'll see the source. You can do this on any page!</p>
 
     <section style="display: none;" id="prompt_wrapper">
+      <!-- Suggestions list, initially hidden -->
+      <ul id="suggestions" style="--d: none; --pos: fixed; --bottom: 5rem; "></ul>
       <!-- Text input -->
       <form>
         <input id="prompt" name="prompt" style="--pos: fixed; --bottom: 1rem; --maxw: 47rem;">
       </form>
-      <!-- Suggestions list, initially hidden -->
-      <ul id="suggestions" style="display: none;"></ul>
+
     </section>
 
     <style>
@@ -841,8 +842,8 @@
       // And this is the initial script for our suggestions
 
       const utilities = {
-        "ma": "margin",
-        "pa": "padding",
+        "m": "margin",
+        "p": "padding",
         "ta": "text-align",
         "fs": "font-size",
         "fw": "font-weight",
