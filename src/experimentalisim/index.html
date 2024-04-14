@@ -16,7 +16,7 @@
         id="toggleDrag"
         href="data:text, To drag enable javascript."
         onclick="return false"
-        style="--d: none; --d-sm: inline;"
+        style="--d: none; --d-sm: inline"
         >Drag</a
       >
     </nav>
@@ -40,7 +40,7 @@
     <p style="--ta: center">FUNCTION</p>
     <p style="--ta: right">- Louis Sullivan, Architect</p>
 
-    <img src="./dither_it_Bauhaus_Dessau_2018.avif" style="--mt:2em; --mb:2em; --shadow:10" />
+    <img src="./dither_it_Bauhaus_Dessau_2018.avif" style="--mt: 2em; --mb: 2em; --shadow: 10" />
 
     <p>
       Modernism transcends the tactile structures, infiltrating the digital architecture of the web. Much like the
@@ -213,10 +213,10 @@
          before and after styling for our <p></p>, otherwise
          known as paragraph elements. */
       p::before {
-        content: '<p>';
+        content: "<p>";
       }
       p::after {
-        content: '</p>';
+        content: "</p>";
       }
     </style>
 
@@ -245,147 +245,146 @@
       <summary>It's a lot of repetitive code, so "click" if you want to read it all.&nbsp;</summary>
 
       <style>
-
         html::before {
-          content: '<html>';
+          content: "<html>";
         }
         html::after {
-          content: '</html>';
+          content: "</html>";
         }
         head::before {
-          content: '<head>';
+          content: "<head>";
         }
         head::after {
-          content: '</head>';
+          content: "</head>";
         }
         title::before {
-          content: '<title>';
+          content: "<title>";
         }
         title::after {
-          content: '</title>';
+          content: "</title>";
         }
         body::before {
-          content: '<body>';
+          content: "<body>";
         }
         body::after {
-          content: '</body>';
+          content: "</body>";
         }
         h1::before {
-          content: '<h1>';
+          content: "<h1>";
         }
         h1::after {
-          content: '</h1>';
+          content: "</h1>";
         }
         h2::before {
-          content: '<h2>';
+          content: "<h2>";
         }
         h2::after {
-          content: '</h2>';
+          content: "</h2>";
         }
         p::before {
-          content: '<p>';
+          content: "<p>";
         }
         p::after {
-          content: '</p>';
+          content: "</p>";
         }
         pre::before {
-          content: '<pre>';
+          content: "<pre>";
         }
         pre::after {
-          content: '</pre>';
+          content: "</pre>";
         }
         code::before {
-          content: '<code>';
+          content: "<code>";
         }
         code::after {
-          content: '</code>';
+          content: "</code>";
         }
         a::before {
-          content: '<a>';
+          content: "<a>";
         }
         a::after {
-          content: '</a>';
+          content: "</a>";
         }
         img::before {
-          content: '<img>';
+          content: "<img>";
         }
         aside::before {
-          content: '<aside>';
+          content: "<aside>";
         }
         aside::after {
-          content: '</aside>';
+          content: "</aside>";
         }
         blockquote::before {
-          content: '<blockquote>';
+          content: "<blockquote>";
         }
         blockquote::after {
-          content: '</blockquote>';
+          content: "</blockquote>";
         }
         em::before {
-          content: '<em>';
+          content: "<em>";
         }
         em::after {
-          content: '</em>';
+          content: "</em>";
         }
         strong::before {
-          content: '<strong>';
+          content: "<strong>";
         }
         strong::after {
-          content: '</strong>';
+          content: "</strong>";
         }
         div::before {
-          content: '<div>';
+          content: "<div>";
         }
         div::after {
-          content: '</div>';
+          content: "</div>";
         }
         article::before {
-          content: '<article>';
+          content: "<article>";
         }
         article::after {
-          content: '</article>';
+          content: "</article>";
         }
         nav::before {
-          content: '<nav>';
+          content: "<nav>";
         }
         nav::after {
-          content: '</nav>';
+          content: "</nav>";
         }
         ul::before {
-          content: '<ul>';
+          content: "<ul>";
         }
         ul::after {
-          content: '</ul>';
+          content: "</ul>";
         }
         li::before {
-          content: '<li>';
+          content: "<li>";
         }
         li::after {
-          content: '</li>';
+          content: "</li>";
         }
         ol::before {
-          content: '<ol>';
+          content: "<ol>";
         }
         ol::after {
-          content: '</ol>';
+          content: "</ol>";
         }
         span::before {
-          content: '<span>';
+          content: "<span>";
         }
         span::after {
-          content: '</span>';
+          content: "</span>";
         }
         summary::before {
-          content: '<summary>';
+          content: "<summary>";
         }
         summary::after {
-          content: '</summary>';
+          content: "</summary>";
         }
         details::before {
-          content: '<details>';
+          content: "<details>";
         }
         details::after {
-          content: '</details>';
+          content: "</details>";
         }
       </style>
     </details>
@@ -429,28 +428,30 @@
       this isn't the case with images now.
     </p>
     <style>
-      /* This doesn't work on Safari */ br {
-               content: "";
-               margin: 0;
-             }
+      /* This doesn't work on Safari */
+      br {
+        content: "";
+        margin: 0;
+      }
 
-             br::after {
-               content: "<br>";
-               margin-top: -1em;
-               white-space: pre;
-             }
+      br::after {
+        content: "<br>";
+        margin-top: -1em;
+        white-space: pre;
+      }
 
-             /* TODO ...figure out how to have imgs show thier src ;) */
+      /* TODO ...figure out how to have imgs show thier src ;) */
 
-             img::before {
-               content: "<img src='" attr(src) "'>";
-             }
-             img::after {}
+      img::before {
+        content: "<img src='" attr(src) "'>";
+      }
+      img::after {
+      }
 
-             img {
-               margin: auto !important;
-               image-rendering: crisp-edges;
-             }
+      img {
+        margin: auto !important;
+        image-rendering: crisp-edges;
+      }
     </style>
 
     <p>TODO: Add a more fun yet brutalist image or edit the image so it's more fun.<br /></p>
@@ -461,10 +462,10 @@
 
     <style>
       style::before {
-        content: '<style>';
+        content: "<style>";
       }
       style::after {
-        content: '<\/style>';
+        content: "<\/style>";
         margin-left: -3ch;
       }
 
@@ -488,10 +489,10 @@
 
     <style>
       script::before {
-        content: '<script>';
+        content: "<script>";
       }
       script::after {
-        content: '</script>';
+        content: "</script>";
         margin-left: -3.1ch;
       }
 
@@ -557,7 +558,7 @@
       }
       /* This will hide the hrefs of our navigation links */
       nav a[href]::before {
-        content: '<a>';
+        content: "<a>";
       }
 
       /*. At the same time, we'll deal with our block quotes */
@@ -613,7 +614,6 @@
       script:hover,
       style:hover {
         opacity: 100%;
-
       }
       /* Fix for nav flicker  */
       nav {
@@ -639,7 +639,7 @@
       the DOM as an HTML file and to toggle all text nodes' "contentEditable" attribute.<br />
       The attribute "contentEditable" is a special one that allows us to edit the text of any element.
     </p>
-    <details open="">
+    <details>
       <summary>The script is as follows👇. We've wrapped it in a details element for brevity.</summary>
 
       <script>
@@ -864,9 +864,9 @@
 
             if (newStyle) {
               target.setAttribute("style", newStyle);
-            } else {
+            } /* else {
               target.removeAttribute("style");
-            }
+            }*/
           });
           // Intercept the "submit" event and hide the prompt_wrapper
           promptWrapper.addEventListener("submit", function (event) {
@@ -889,111 +889,104 @@
       the source. You can do this on any page!
     </p>
 
-    <section id="prompt_wrapper" style="display: none;">
+    <section style="display: none" id="prompt_wrapper">
       <form>
-        <!-- Hidden input for handling autocomplete -->
-        <input
-          type="text"
-          id="autocompleteInput"
-          style="--pos: fixed; --bottom: 1rem; --maxw: 47rem;"
-          list="utility-hints"
-        />
-        <datalist id="utility-hints">
-          <!-- Options will be dynamically populated via JavaScript -->
-        </datalist>
         <input
           id="prompt"
           name="prompt"
           placeholder="Type utility shorthand (e.g., --m for margin)"
-          style="--pos: fixed; --bottom: 1rem; --maxw: 47rem;"
+          style="--pos: fixed; --bottom: 1rem; --maxw: 47rem; --fs: 1rem; --lh: 1.5"
         />
+        <pre
+          id="customSuggestions"
+          style="
+            --d: block;
+            --pos: fixed;
+            --radius: 0.2rem;
+            --bottom: 2.4rem;
+            --w: 47rem;
+            --fs: 1rem;
+            --lh: 1.5;
+            --overflow-y: auto;
+            --p: 0.6rem;
+            --bg: rgb(159, 79, 139);
+            --c: white;
+          "
+        >
+
+    Utilities start with --, end with a ;
+</pre
+        >
       </form>
     </section>
 
-    <style>
-        /* These are the styles for our suggestions */
-        #suggestions {
-          position: absolute;
-          background-color: white;
-          border: 1px solid #ddd;
-          list-style-type: none;
-          padding: 0;
-          width: auto; /* Adjust based on actual need */
-      }
-      #suggestions li {
-          padding: 5px 10px;
-          cursor: pointer;
-      }
-      #suggestions li:hover {
-          background-color: #f0f0f0;
-      }
-    </style>
-
     <script>
       const utilities = {
-        m: "margin",
-        p: "padding",
-        ta: "text-align",
-        fs: "font-size",
-        fw: "font-weight",
-        lh: "line-height",
-        ls: "letter-spacing",
-        td: "text-decoration",
-        va: "vertical-align",
-        bg: "background",
+        m: "margin: eg. --m:1rem",
+        p: "padding: eg. --p:1rem",
+        ta: "text-align: eg. --ta:center",
+        fs: "font-size: eg. --fs:16pt",
+        fw: "font-weight: eg. --fw:bold",
+        lh: "line-height: eg. --lh:1.5",
+        ls: "letter-spacing: eg. --ls:0.1em",
+        td: "text-decoration: eg. --td:underline",
+        va: "vertical-align: eg. --va:middle",
+        bg: "background: eg. --bg:lightblue",
+        shadow: "startr.style's --shadow helper eg. --shadow:10",
+        d: "display: eg. --d:block; other options (inline, none, or flex)",
+        pos: "position: eg. --pos:relative; other options (absolute, fixed, or sticky)",
+        top: "top: eg. --top:1rem",
+        right: "right: eg. --right:1rem",
+        bottom: "bottom: eg. --bottom:1rem",
+        left: "left: eg. --left:1rem",
+        w: "width: eg. --w:100%",
+        h: "height: eg. --h:100%",
+        maxw: "max-width: eg. --maxw:100%",
+        maxh: "max-height: eg. --maxh:100%",
       };
 
       const inputPrompt = document.getElementById("prompt");
-      const autoCompleteInput = document.getElementById("autocompleteInput");
-      const dataList = document.getElementById("utility-hints");
+      const customSuggestions = document.getElementById("customSuggestions");
 
-      // Initially populate the datalist
-      populateDataList();
+      // Function to update suggestions based on the filter
+      function updateSuggestions(filter) {
+        customSuggestions.textContent = ""; // Clear existing suggestions first
+
+        if (!filter) {
+          // If no filter, add all utilities as suggestions
+          Object.keys(utilities).forEach((key) => {
+            customSuggestions.textContent += `--${key} (${utilities[key]})\n`;
+          });
+        } else {
+          // Filter the utilities based on the input and add them to suggestions
+          const filteredKeys = Object.keys(utilities).filter((key) => key.startsWith(filter));
+          filteredKeys.forEach((key) => {
+            customSuggestions.textContent += `--${key} (${utilities[key]})\n`;
+          });
+        }
+      }
 
       inputPrompt.addEventListener("input", function (e) {
-        const val = e.target.value;
-        const lastDash = val.lastIndexOf("--");
-        const lastIndex = val.lastIndexOf(";");
-        if (lastDash > lastIndex) {
-          // Capture everything after the last "--"
-          const currentInput = val.substring(lastDash + 2).trim();
-          autoCompleteInput.value = currentInput;
-          filterDataList(currentInput);
-          autoCompleteInput.focus(); // Move focus to hidden input to trigger autocomplete
-        } else {
-          autoCompleteInput.value = ""; // Clear the hidden input
+        const text = e.target.value;
+        const entries = text.split(";"); // Split by semicolon to process each style separately
+        const lastEntry = entries[entries.length - 1].trim(); // Get the last entry after the most recent semicolon
+
+        // Reset the suggestions if the last character is a semicolon
+        if (text.charAt(text.length - 1) === ";") {
+          updateSuggestions("");
+        } else if (lastEntry.startsWith("--")) {
+          // If the last entry starts with --, update suggestions based on the filter
+          const colonIndex = lastEntry.indexOf(":");
+          if (colonIndex !== -1) {
+            updateSuggestions(lastEntry.slice(2, colonIndex).trim());
+          } else {
+            updateSuggestions(lastEntry.slice(2).trim());
+          }
         }
       });
 
-      function populateDataList() {
-        dataList.innerHTML = "";
-        Object.keys(utilities).forEach((key) => {
-          const option = document.createElement("option");
-          option.value = key; // Only use the shorthand key as the value
-          option.label = `--${key} (${utilities[key]})`;
-          dataList.appendChild(option);
-        });
-      }
-
-      function filterDataList(filter) {
-        dataList.innerHTML = ""; // Clear existing options
-        const filteredKeys = Object.keys(utilities).filter((key) => key.startsWith(filter));
-        filteredKeys.forEach((key) => {
-          const option = document.createElement("option");
-          option.value = key; // Match filter logic
-          option.label = `--${key} (${utilities[key]})`;
-          dataList.appendChild(option);
-        });
-      }
-
-      autoCompleteInput.addEventListener("input", function () {
-        const fullValue = "--" + autoCompleteInput.value;
-        // Replace the last shorthand after the last "--" with the selected value
-        const lastDash = inputPrompt.value.lastIndexOf("--");
-        inputPrompt.value = inputPrompt.value.substring(0, lastDash) + fullValue;
-        autoCompleteInput.value = ""; // Clear the hidden input after selection
-        inputPrompt.focus(); // Focus back to the main input
-      });
+      // don't show the wrapper on load
+      //document.getElementById("prompt_wrapper").style.display = "block";
     </script>
   </body>
 </html>
