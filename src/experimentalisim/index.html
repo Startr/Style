@@ -889,17 +889,20 @@
       the source. You can do this on any page!
     </p>
 
-    <section style="display: none;" id="prompt_wrapper">
-      <input
-        list="utility-hints"
-        id="prompt"
-        name="prompt"
-        placeholder="Type utility shorthand (e.g., --m for margin)"
-        style="--pos: fixed; --bottom: 1rem; --maxw: 47rem;"
-      />
-      <datalist id="utility-hints">
-        <!-- Options will be dynamically populated via JavaScript -->
-      </datalist>
+    <section id="prompt_wrapper">
+      <form>
+        <input
+          id="prompt"
+          name="prompt"
+          placeholder="Type utility shorthand (e.g., --m for margin)"
+          style="--pos: fixed; --bottom: 1rem; --maxw: 47rem;"
+        />
+        <!-- Hidden input for handling autocomplete -->
+        <input type="text" id="autocompleteInput" style="display: none;" list="utility-hints" />
+        <datalist id="utility-hints">
+          <!-- Options will be dynamically populated via JavaScript -->
+        </datalist>
+      </form>
     </section>
 
     <style>
@@ -936,32 +939,36 @@
       };
 
       const inputPrompt = document.getElementById("prompt");
+      const autoCompleteInput = document.getElementById("autocompleteInput");
       const dataList = document.getElementById("utility-hints");
 
-      // Populate datalist initially
-      Object.keys(utilities).forEach((key) => {
-        const option = document.createElement("option");
-        option.value = `--${key}`;
-        option.label = utilities[key];
-        dataList.appendChild(option);
-      });
+      populateDataList();
 
       inputPrompt.addEventListener("input", function (e) {
         const val = e.target.value;
         const lastIndex = val.lastIndexOf(";");
-        // Checks for '--' specifically after the last ';'
-        const lastDash = val.lastIndexOf("--", lastIndex);
-        if (lastDash > lastIndex) {
-          const currentInput = val.substring(lastDash + 2).trim();
-          filterDataList(currentInput);
-        } else {
-          filterDataList(""); // Reset filter if not in a shorthand context
-        }
+        const relevantPart = val.substring(lastIndex + 1).trim();
+        autoCompleteInput.value = relevantPart; // Sync the hidden input for autocomplete
+        filterDataList(relevantPart);
       });
 
+      function populateDataList() {
+        dataList.innerHTML = "";
+        Object.keys(utilities).forEach((key) => {
+          const option = document.createElement("option");
+          option.value = `--${key}`;
+          option.label = utilities[key];
+          dataList.appendChild(option);
+        });
+      }
+
       function filterDataList(filter) {
-        dataList.innerHTML = ""; // Clear existing options
+        const lastDash = filter.lastIndexOf("--");
+        if (lastDash !== -1) {
+          filter = filter.substring(lastDash + 2);
+        }
         const filteredKeys = Object.keys(utilities).filter((key) => key.startsWith(filter));
+        dataList.innerHTML = "";
         filteredKeys.forEach((key) => {
           const option = document.createElement("option");
           option.value = `--${key}`;
@@ -969,6 +976,13 @@
           dataList.appendChild(option);
         });
       }
+
+      autoCompleteInput.addEventListener("input", function () {
+        const selectedValue = autoCompleteInput.value;
+        inputPrompt.value += selectedValue + "; ";
+        autoCompleteInput.value = ""; // Clear the hidden input after selection
+        inputPrompt.focus(); // Bring focus back to the main input
+      });
     </script>
   </body>
 </html>
