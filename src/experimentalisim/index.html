@@ -951,13 +951,19 @@
           if (filter.includes(":")) {
             const exactKey = filter.split(":")[0];
             if (utilities.hasOwnProperty(exactKey)) {
-              customSuggestions.textContent = `--${exactKey} (${utilities[exactKey]})\n`;
+              var textContent = `--${exactKey} (${utilities[exactKey]})\n`;
+              // prefix textContent var with newline char
+              textContent = "\n" + textContent;
+              customSuggestions.textContent = textContent;
             }
           } else {
             // Otherwise, filter the utilities based on the input and add them to suggestions
             const filteredKeys = Object.keys(utilities).filter((key) => key.startsWith(filter));
             filteredKeys.forEach((key) => {
-              customSuggestions.textContent += `--${key} (${utilities[key]})\n`;
+              var textContent = `--${key} (${utilities[key]})\n`;
+              // prefix textContent var with newline char
+              textContent = "\n" + textContent;
+              customSuggestions.textContent = textContent;
             });
           }
         }
