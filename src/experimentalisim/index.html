@@ -942,46 +942,52 @@
       const autoCompleteInput = document.getElementById("autocompleteInput");
       const dataList = document.getElementById("utility-hints");
 
+      // Initially populate the datalist
       populateDataList();
 
       inputPrompt.addEventListener("input", function (e) {
         const val = e.target.value;
+        const lastDash = val.lastIndexOf("--");
         const lastIndex = val.lastIndexOf(";");
-        const relevantPart = val.substring(lastIndex + 1).trim();
-        autoCompleteInput.value = relevantPart; // Sync the hidden input for autocomplete
-        filterDataList(relevantPart);
+        if (lastDash > lastIndex) {
+          // Capture everything after the last "--"
+          const currentInput = val.substring(lastDash + 2).trim();
+          autoCompleteInput.value = currentInput;
+          filterDataList(currentInput);
+          autoCompleteInput.focus(); // Move focus to hidden input to trigger autocomplete
+        } else {
+          autoCompleteInput.value = ""; // Clear the hidden input
+        }
       });
 
       function populateDataList() {
         dataList.innerHTML = "";
         Object.keys(utilities).forEach((key) => {
           const option = document.createElement("option");
-          option.value = `--${key}`;
-          option.label = utilities[key];
+          option.value = key; // Only use the shorthand key as the value
+          option.label = `--${key} (${utilities[key]})`;
           dataList.appendChild(option);
         });
       }
 
       function filterDataList(filter) {
-        const lastDash = filter.lastIndexOf("--");
-        if (lastDash !== -1) {
-          filter = filter.substring(lastDash + 2);
-        }
+        dataList.innerHTML = ""; // Clear existing options
         const filteredKeys = Object.keys(utilities).filter((key) => key.startsWith(filter));
-        dataList.innerHTML = "";
         filteredKeys.forEach((key) => {
           const option = document.createElement("option");
-          option.value = `--${key}`;
-          option.label = utilities[key];
+          option.value = key; // Match filter logic
+          option.label = `--${key} (${utilities[key]})`;
           dataList.appendChild(option);
         });
       }
 
       autoCompleteInput.addEventListener("input", function () {
-        const selectedValue = autoCompleteInput.value;
-        inputPrompt.value += selectedValue + "; ";
+        const fullValue = "--" + autoCompleteInput.value;
+        // Replace the last shorthand after the last "--" with the selected value
+        const lastDash = inputPrompt.value.lastIndexOf("--");
+        inputPrompt.value = inputPrompt.value.substring(0, lastDash) + fullValue;
         autoCompleteInput.value = ""; // Clear the hidden input after selection
-        inputPrompt.focus(); // Bring focus back to the main input
+        inputPrompt.focus(); // Focus back to the main input
       });
     </script>
   </body>
