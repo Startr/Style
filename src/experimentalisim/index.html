@@ -810,13 +810,11 @@
       <i>P.P.S.</i>&nbsp;If you want to see the source of this page, prefix the URL with "view-source:" and you'll see the source. You can do this on any page!</p>
 
     <section style="display: none;" id="prompt_wrapper">
-      <!-- Suggestions list, initially hidden -->
-      <ul id="suggestions" style="--d: none; --pos: fixed; --bottom: 5rem; "></ul>
-      <!-- Text input -->
-      <form>
-        <input id="prompt" name="prompt" style="--pos: fixed; --bottom: 1rem; --maxw: 47rem;">
-      </form>
-
+      <input list="utility-hints" id="prompt" name="prompt" placeholder="Type utility shorthand (e.g., --m for margin)"
+      style="--pos: fixed; --bottom: 1rem; --maxw: 47rem;">
+      <datalist id="utility-hints">
+        <!-- Options will be dynamically populated via JavaScript -->
+      </datalist>
     </section>
 
     <style>
@@ -839,8 +837,6 @@
     </style>
   
     <script>
-      // And this is the initial script for our suggestions
-
       const utilities = {
         "m": "margin",
         "p": "padding",
@@ -852,44 +848,40 @@
         "td": "text-decoration",
         "va": "vertical-align",
         "bg": "background",
-        // Additional utilities can be added here
     };
     
     const inputPrompt = document.getElementById('prompt');
-    const suggestionsList = document.getElementById('suggestions');
+    const dataList = document.getElementById('utility-hints');
+    
+    // Populate datalist initially
+    Object.keys(utilities).forEach(key => {
+        const option = document.createElement('option');
+        option.value = `--${key}`;
+        option.label = utilities[key];
+        dataList.appendChild(option);
+    });
     
     inputPrompt.addEventListener('input', function(e) {
-        const text = e.target.value;
-        const lastSemiColon = text.lastIndexOf(';');
-        const lastDash = text.lastIndexOf('--');
+        const val = e.target.value;
+        const lastSemiColon = val.lastIndexOf(';');
+        const lastDash = val.lastIndexOf('--');
         if (lastDash > lastSemiColon) {
-            updateSuggestions(text.substring(lastDash + 2));
+            const currentInput = val.substring(lastDash + 2).trim();
+            filterDataList(currentInput);
         } else {
-            suggestionsList.style.display = 'none';
+            filterDataList(''); // reset filter if not in a shorthand context
         }
     });
     
-    function updateSuggestions(filter) {
-        const filteredKeys = Object.keys(utilities).filter(key => key.startsWith(filter.trim()));
-        suggestionsList.innerHTML = '';
+    function filterDataList(filter) {
+        dataList.innerHTML = '';  // Clear existing options
+        const filteredKeys = Object.keys(utilities).filter(key => key.startsWith(filter));
         filteredKeys.forEach(key => {
-            const li = document.createElement('li');
-            li.textContent = `--${key} (${utilities[key]})`;
-            li.onclick = function() {
-                inputPrompt.value += key + ': ';
-                suggestionsList.style.display = 'none';
-                inputPrompt.focus(); // Refocus on the input element after selection
-            };
-            suggestionsList.appendChild(li);
+            const option = document.createElement('option');
+            option.value = `--${key}`;
+            option.label = utilities[key];
+            dataList.appendChild(option);
         });
-        if (filteredKeys.length > 0) {
-            suggestionsList.style.display = 'block';
-            const inputRect = inputPrompt.getBoundingClientRect();
-            suggestionsList.style.left = `${inputRect.left}px`;
-            suggestionsList.style.top = `${inputRect.bottom + window.scrollY}px`;
-        } else {
-            suggestionsList.style.display = 'none';
-        }
     }
     
     </script>
