@@ -922,27 +922,16 @@
 
     <script>
       const utilities = {
-        m: "margin: eg. --m:1rem",
-        p: "padding: eg. --p:1rem",
-        ta: "text-align: eg. --ta:center",
-        fs: "font-size: eg. --fs:16pt",
-        fw: "font-weight: eg. --fw:bold",
-        lh: "line-height: eg. --lh:1.5",
-        ls: "letter-spacing: eg. --ls:0.1em",
-        td: "text-decoration: eg. --td:underline",
-        va: "vertical-align: eg. --va:middle",
-        bg: "background: eg. --bg:lightblue",
-        shadow: "startr.style's --shadow helper eg. --shadow:10",
-        d: "display: eg. --d:block; other options (inline, none, or flex)",
-        pos: "position: eg. --pos:relative; other options (absolute, fixed, or sticky)",
-        top: "top: eg. --top:1rem",
-        right: "right: eg. --right:1rem",
-        bottom: "bottom: eg. --bottom:1rem",
-        left: "left: eg. --left:1rem",
-        w: "width: eg. --w:100%",
-        h: "height: eg. --h:100%",
-        maxw: "max-width: eg. --maxw:100%",
-        maxh: "max-height: eg. --maxh:100%",
+        m: "margin: eg. --m:1rem;",
+        p: "padding: eg. --p:1rem;",
+        c: "color: eg. --c:red;",
+        ta: "text-align: eg. --ta:center;",
+        fw: "font-weight: eg. --fw:bold;",
+        td: "text-decoration: eg. --td:underline;",
+        bg: "background: eg. --bg:lightblue;",
+        shadow: "startr.style's --shadow helper eg. --shadow:10;",
+        w: "width: eg. --w:40ch;",
+        h: "height: eg. --h:10ch;",
       };
 
       const inputPrompt = document.getElementById("prompt");
@@ -958,11 +947,19 @@
             customSuggestions.textContent += `--${key} (${utilities[key]})\n`;
           });
         } else {
-          // Filter the utilities based on the input and add them to suggestions
-          const filteredKeys = Object.keys(utilities).filter((key) => key.startsWith(filter));
-          filteredKeys.forEach((key) => {
-            customSuggestions.textContent += `--${key} (${utilities[key]})\n`;
-          });
+          // If there is a colon, only show exact matches
+          if (filter.includes(":")) {
+            const exactKey = filter.split(":")[0];
+            if (utilities.hasOwnProperty(exactKey)) {
+              customSuggestions.textContent = `--${exactKey} (${utilities[exactKey]})\n`;
+            }
+          } else {
+            // Otherwise, filter the utilities based on the input and add them to suggestions
+            const filteredKeys = Object.keys(utilities).filter((key) => key.startsWith(filter));
+            filteredKeys.forEach((key) => {
+              customSuggestions.textContent += `--${key} (${utilities[key]})\n`;
+            });
+          }
         }
       }
 
@@ -978,7 +975,7 @@
           // If the last entry starts with --, update suggestions based on the filter
           const colonIndex = lastEntry.indexOf(":");
           if (colonIndex !== -1) {
-            updateSuggestions(lastEntry.slice(2, colonIndex).trim());
+            updateSuggestions(lastEntry.slice(2, colonIndex + 1).trim()); // Include the colon in the filter
           } else {
             updateSuggestions(lastEntry.slice(2).trim());
           }
