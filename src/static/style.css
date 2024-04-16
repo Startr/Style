@@ -322,13 +322,15 @@ button, .button, input[type=submit], input[type=button], input::file-selector-bu
   box-shadow: var(--button-shadow)
 }
 button:hover, .button:hover, input[type=submit]:hover, input[type=button]:hover {
-  box-shadow: inset 0 0 2rem rgba(0, 0, 0, .25)
+  box-shadow: inset 0 0 2rem rgba(0, 0, 0, .25);
+  filter: brightness(110%);
 }
 input:not([readonly]):hover, select:not([readonly]):hover, textarea:not([readonly]):hover {
   border-color: rgba(100, 100, 100, .75)
 }
 input[type=checkbox]:active, input[type=radio]:active, input[type=submit]:active, input[type=button]:active, input[type=range]:active, button:active {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
+  filter: brightness(115%)
 }
 input:focus, select:focus, button:focus, .button:focus, textarea:focus {
   border-color: var(--primary);
@@ -355,7 +357,7 @@ input[type=checkbox]:checked, input[type=radio]:checked {
 input[type=checkbox]:checked::before {
   display: flex;
   justify-content: center;
-  margin-top: -0.2rem;
+  margin-top: -0.1rem;
   content: "✔";
   color: #fff;
   font-size: .8rem
@@ -366,16 +368,28 @@ input[type=range] {
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   background: var(--primary);
-  height: 18px;
-  width: 18px;
-  border-radius: 50%
+  height: 1.4rem;
+  width: 1.4rem;
+  margin: -0.4rem 0;
+  border-radius: 46%
 }
+
+input[type=range]::-webkit-slider-thumb:hover {
+  filter: brightness(125%);
+}
+
 input[type=range]::-moz-range-thumb {
   background: var(--primary);
-  height: 18px;
-  width: 18px;
-  border-radius: 50%
+  height: 1.4rem;
+  width: 1.4rem;
+  margin: -0.4rem 0;
+  border-radius: 46%
 }
+
+input[type=range]::-moz-range-thumb:hover {
+  filter: brightness(125%);
+}
+
 input[type=color] {
   padding: 2px;
   width: 5rem;

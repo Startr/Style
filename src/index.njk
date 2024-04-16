@@ -132,12 +132,12 @@
     "
   >
     <h3 id="why-build-with-startr">Why build with Startr Style</h3>
-    <h4 style="--lh: 2.2rem">
+    <p>
       Startr.Style accelerates and standardizes web design through custom property helpers and utilities, all seamlessly
       integrated within the style attribute. This innovative approach streamlines styling, making it faster and more
       consistent across projects. By embedding the power of customization directly where it's needed, Startr.Style
       ensures a lean, efficient workflow without sacrificing flexibility or control.
-    </h4>
+    </p>
     <ul>
       <li>A complete set of tools for styling with CSS</li>
       <li>Out of the box with ready-to-use styles for important HTML elements, no need for extra classes</li>
@@ -146,19 +146,18 @@
     </ul>
   </div>
 </header>
-{% endblock %} {% block page %}
-<header class="book-header">
-  <div class="flex align-center justify-between">
-    <label for="menu-control"><img alt="Menu" class="book-icon" src="svg/menu.svg" /></label>
-  </div>
-</header>
+
+{% endblock %} 
+
+{% block page %}
+
 <article class="markdown">
   <div id="learn">
     <h3 id="Easy-Styling-Without-Classes">Easy Styling Without Classes</h3>
     <p>
-      With&nbsp;<strong>Startr Style</strong>, you don't need to add any special classes or styles right away. When you
-      include&nbsp;<strong>Startr Style</strong> in your project, it automatically applies nice styles to your regular
-      HTML elements. It&apos;s as easy as that!
+      With <strong>Startr Style</strong>, you don't need to add any special classes or styles right away. When you
+      include <strong>Startr Style</strong> in your project, it automatically applies nice styles to your regular HTML
+      elements. It's as easy as that!
     </p>
     <p>Here's how you can do it in your HTML:</p>
     <div class="highlight">
@@ -173,15 +172,29 @@
           &lt;<span class="nt">p</span>&gt;This paragraph will look great without any extra effort!&lt;/<span class="nt">p</span>&gt;
           &lt;<span class="nt">button</span>&gt;This button will also have a nice style.&lt;/<span class="nt">button</span>&gt;
       &lt;/<span class="nt">body</span>&gt;
-      &lt;/<span class="nt">html</span>&gt;</code></pre>
+&lt;/<span class="nt">html</span>&gt;</code></pre>
     </div>
     <p>
       Just include the link to the <strong>Startr Style</strong> CSS file in the <code>&lt;head&gt;</code> of your HTML,
       and your basic elements like paragraphs and buttons will be automatically styled. No need to add any classes or
       extra code!
     </p>
-    <code></code><br />
+    <p>
+      Just ad one line of code and you are good to go.<br /><br />
+      <code>&lt;link rel="stylesheet" href="https://startr.style/style.css" /&gt;</code>
+      <br /><br />
+      It is all you need to get started. No need to compile anything, just add and start building. When you want to take
+      advantage of the full power of Startr Style, you can start adding custom properties to your elements. This will
+      allow you to customize your styles even further.
+    </p>
     <h3 id="utility-complete-css">Utility Complete CSS</h3>
+    <p>
+      Wouldn't it be great if we could take the best parts of utility-first CSS frameworks and combine them with the
+      best parts of traditional CSS frameworks? That's exactly what <strong>Startr Style</strong> does. It provides a
+      complete set of utilities for the majority of CSS properties, making it easy to style your elements without
+      leaving your HTML. This is perfect for super quick prototyping or when you want to keep your CSS size constant as
+      your project grows.
+    </p>
     <p>
       In terms of CSS frameworks, utilities commonly refer to a CSS class which applies a single CSS property to an
       element. For example a class name of <code>.bg-green</code> would apply <code>background-color: green</code> to
@@ -310,7 +323,7 @@
           aria-hidden="true"
           class="svg-inline--fa fa-download fa-w-18"
           role="img"
-          style="transform-origin: 0.5625em 0.4375em 0px"
+          style="--m: 10px 6px 10px -6px; transform-origin: 0.5625em 0.4375em 0px"
           viewbox="0 0 576 512"
           xmlns="https://www.w3.org/2000/svg"
         >
@@ -461,7 +474,7 @@
         <button aria-label="Sample Button" style="--fx: 1; --btrr: 0; --b: 0">Sign Up</button>
       </div>
     </div>
-    <div style="--mb: 1.5rem; --p: 1rem">
+    <div style="--mb: 1.5rem; --p: 1rem; --bg: white; --shadow: 4">
       <div style="--d: flex; --ai: flex-start; --bb: 1px solid #ddd; --my: 0.5rem">
         <img
           alt="Aliquam erat volutpat"
@@ -501,19 +514,19 @@
       <p>Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.</p>
       <div style="--m: 0.5rem">
         <input id="component-checkbox-1" type="checkbox" />
-        <label for="component-checkbox-1">Cras ornare tristique elit</label>
+        <label for="component-checkbox-1">Cras ornare tristique</label>
       </div>
       <div style="--m: 0.5rem">
         <input id="component-checkbox-2" type="checkbox" />
-        <label for="component-checkbox-2">Praesent placerat risus quis</label>
+        <label for="component-checkbox-2">Praesent placerat</label>
       </div>
       <div style="--m: 0.5rem">
         <input id="component-checkbox-3" type="checkbox" />
-        <label for="component-checkbox-3">Fusce pellentesque suscipit</label>
+        <label for="component-checkbox-3">Fusce pellentesque</label>
       </div>
       <div style="--m: 0.5rem">
         <input id="component-checkbox-4" type="checkbox" />
-        <label for="component-checkbox-4">Vestibulum commodo felis</label>
+        <label for="component-checkbox-4">Vestibulum commodo</label>
       </div>
       <button aria-label="Sample Button" style="--mt: 1rem">Submit</button>
     </div>
@@ -721,50 +734,5 @@
   </div>
   <h2 style="--ta: center">Discover limitless possibilities</h2>
 </article>
-<footer class="book-footer">
-  <div style="--d: flex; --jc: center; --fd: column">
-    <div style="--ta: center; --mb: 1rem">
-      <a
-        aria-label="Star Startr/Style on GitHub"
-        class="github-button"
-        data-icon="octicon-star"
-        data-show-count="true"
-        data-size="large"
-        href="https://github.com/Startr/Style"
-        >Star</a
-      >
-      <a
-        aria-label="Fork Startr/Style on GitHub"
-        class="github-button"
-        data-icon="octicon-repo-forked"
-        data-show-count="true"
-        data-size="large"
-        href="https://github.com/Startr/Style/fork"
-        >Fork</a
-      >
-      <a
-        aria-label="Download Startr/Style on GitHub"
-        class="github-button"
-        data-icon="octicon-cloud-download"
-        data-size="large"
-        href="https://github.com/Startr/Style/archive/master.zip"
-        >Download</a
-      >
-    </div>
-    <div style="--m: auto; --ta: center; --op: 0.7">
-      <p style="--mb: 0">
-        Carefully crafted by the <a href="https://startr.ca">Startr Team</a> with the help of
-        <a href="https://github.com/Startr/Style/graphs/contributors">our contributors</a>.
-      </p>
-      <p style="--mb: 2rem">
-        Startr Style licensed
-        <a href="hhttps://github.com/Startr/Style/blob/master/LICENSE.md" rel="license noopener" target="_blank">MIT</a
-        >, docs
-        <a href="https://creativecommons.org/licenses/by/3.0/" rel="license noopener" target="_blank">CC BY 3.0</a>.
-      </p>
-    </div>
-  </div>
-</footer>
-<div class="book-comments"></div>
-<label class="hidden book-menu-overlay" for="menu-control"></label>
+
 {% endblock %}

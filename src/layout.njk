@@ -211,58 +211,6 @@
 
         <article class="markdown">{% block article %} {% endblock %}</article>
 
-        <footer class="book-footer">
-          {% block footer %}
-          <div style="--d: flex; --jc: center; --fd: column">
-            <div style="--ta: center; --mb: 1rem">
-              <a
-                class="github-button"
-                href="https://github.com/Startr/Style"
-                data-icon="octicon-star"
-                data-size="large"
-                data-show-count="true"
-                aria-label="Star Startr/Style on GitHub"
-                >Star</a
-              >
-              <a
-                class="github-button"
-                href="https://github.com/Startr/Style/fork"
-                data-icon="octicon-repo-forked"
-                data-size="large"
-                data-show-count="true"
-                aria-label="Fork Startr/Style on GitHub"
-                >Fork</a
-              >
-              <a
-                class="github-button"
-                href="https://github.com/Startr/Style/archive/master.zip"
-                data-icon="octicon-cloud-download"
-                data-size="large"
-                aria-label="Download Startr/Style on GitHub"
-                >Download</a
-              >
-            </div>
-
-            <div style="--m: auto; --ta: center; --op: 0.7">
-              <p style="--mb: 0">
-                Carefully crafted by the
-                <a href="https://startr.ca">Startr Team</a> with the help of
-                <a href="https://github.com/Startr/Style/graphs/contributors">our contributors</a>.
-              </p>
-              <p style="--mb: 2rem">
-                Startr Style licensed
-                <a href="hhttps://github.com/Startr/Style/blob/master/LICENSE.md" target="_blank" rel="license noopener"
-                  >MIT</a
-                >, docs
-                <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="license noopener"
-                  >CC BY 3.0</a
-                >.
-              </p>
-            </div>
-          </div>
-          {% endblock %}
-        </footer>
-
         <label for="menu-control" class="hidden book-menu-overlay"></label>
         {% endblock %}
       </div>
@@ -270,5 +218,57 @@
 
     <script defer src="https://buttons.github.io/buttons.js"></script>
     {% endblock %}
+    <footer class="book-footer" style="--d: flex; --maxw: 80rem; --m: 0 auto">
+      <aside style="--fx: 0 0 16rem; --ta: center">
+        <div>♥️</div>
+      </aside>
+      {% block footer %}
+      <div style="--d: flex; --jc: center; --fd: column; --fg: 1">
+        <div style="--ta: center; --mb: 1rem">
+          <a
+            class="github-button"
+            href="https://github.com/Startr/Style"
+            data-icon="octicon-star"
+            data-size="large"
+            data-show-count="true"
+            aria-label="Star Startr/Style on GitHub"
+            >Star</a
+          >
+          <a
+            class="github-button"
+            href="https://github.com/Startr/Style/fork"
+            data-icon="octicon-repo-forked"
+            data-size="large"
+            data-show-count="true"
+            aria-label="Fork Startr/Style on GitHub"
+            >Fork</a
+          >
+          <a
+            class="github-button"
+            href="https://github.com/Startr/Style/archive/master.zip"
+            data-icon="octicon-cloud-download"
+            data-size="large"
+            aria-label="Download Startr/Style on GitHub"
+            >Download</a
+          >
+        </div>
+
+        <div style="--m: auto; --ta: center; --op: 0.7">
+          <p style="--mb: 0">
+            Carefully crafted by the
+            <a href="https://startr.ca">Startr Team</a> with the help of
+            <a href="https://github.com/Startr/Style/graphs/contributors">our contributors</a>.
+          </p>
+          <p style="--mb: 2rem; --c: black">
+            Startr Style licensed
+            <a href="hhttps://github.com/Startr/Style/blob/master/LICENSE.md" target="_blank" rel="license noopener"
+              >MIT</a
+            >, docs
+            <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="license noopener">CC BY 3.0</a>.
+          </p>
+        </div>
+      </div>
+      {% endblock %}
+    </footer>
   </body>
 </html>
