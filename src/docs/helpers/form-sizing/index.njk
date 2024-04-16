@@ -7,7 +7,7 @@
   <h4 id="--x">--x</h4>
   <p>The <code>--x</code> helper allows you to adjust form elements by percentage size. By default <code>--x</code> has a value of <code>100</code> (%) where a value less than <code>100</code> will reduce the size of the element and a value above <code>100</code> will increase the size of the element. The <code>--x</code> helper effects the font-size and padding of the element.</p>
   <div style="--d:flex; --mb:4rem;">
-    <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px">
+    <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4;">
       <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center; --ai: center; --minh: 220px">
         <button id="target-x" aria-label="add" style="--x:100;">
   Button
@@ -17,7 +17,7 @@
         <input class="slider" type="range" id="x" name="x" min="50" max="200" value="100">
       </div>
       <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
-        <div class="highlight" style="--mb:0;">
+        <div class="highlight" style="--shadow-soft: 4; --br:0.4rem; --mb:0;">
           <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="x-label">--x:100;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> Button <span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span></code></pre>
         </div>
       </div>
@@ -29,7 +29,7 @@
   <h5 id="button-groups">Button Groups</h5>
   <p>The <code>--x</code> helper works across all form elements including button groups, select fields and all input types.accent</p>
   <div style="--d:flex; --mb:4rem;">
-    <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px">
+    <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4;">
       <div style="--fx:1; --p:3rem 1rem; --mb:.5rem; --d:flex; --jc:center; --ai: center; --minh: 180px">
         <div id="target-x-group" class="group"  style="--x:100;">
           <input type="text" placeholder="John" aria-label="Name">
@@ -41,7 +41,7 @@
         <input class="slider" type="range" id="x-group" name="" min="60" max="120" value="100">
       </div>
       <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
-        <div class="highlight" style="--mb:0;">
+        <div class="highlight" style="--shadow-soft: 4; --br:0.4rem; --mb:0;">
           <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"group"</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="x-group-label">--x:100;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> 
   <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"John"</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">"Name"</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Button<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
@@ -57,7 +57,7 @@
   <h5 id="forms-and-outside-containers">Forms and outside containers</h5>
   <p>The <code>--x</code> helper can be applied to the outside container of a collection of form elements. All form elements inside the container will inherit the <code>--x</code> value.</p>
   <div style="--d:flex; --mb:4rem;">
-    <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px">
+    <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4;">
       <div style="--fx:1; --p:1.5rem 1rem; --mb:.5rem; --d:flex; --ai: flex-start; --minh: 360px">
         <form id="target-x-form" style="--x: 100;">
           <label>Username
@@ -73,7 +73,7 @@
         <input class="slider" type="range" id="x-form" name="" min="60" max="160" value="100">
       </div>
       <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
-        <div class="highlight" style="--mb:0;">
+        <div class="highlight" style="--shadow-soft: 4; --br:0.4rem; --mb:0;">
           <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="x-form-label">--x:100;</span>"</span></span><span class="p"></span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Username
     <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"John"</span><span class="p">&gt;</span>

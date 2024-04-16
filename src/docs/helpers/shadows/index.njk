@@ -9,8 +9,8 @@
   The <code>--shadow</code> helper is the default shadow helper and adds a smooth box shadow to an element. Value of
   this helper collectively sets the offset, blur and intensity of the shadow.
 </p>
-<div style="--d: flex; --mb: 4rem">
-  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px">
+<div style="--d: flex; --mb: 4rem" >
+  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4;">
     <div style="--fx: 1; --p: 3rem; --ml: -0.5rem; --d: flex; --jc: center">
       <figure id="target-shadow" style="--maxw: 300px; --br: 5px; --bg: #fff; --of: hidden; --shadow: 4">
         <img alt="sample" src="https://source.unsplash.com/random/300x150" />
@@ -23,8 +23,8 @@
       <input class="slider" id="shadow" max="20" min="0" name="shadow" type="range" value="4" />
     </div>
     <div class="markdown" style="--maxw: 800px; --w: 100%; --pos: relative">
-      <div class="highlight" style="--mb: 0">
-        <pre class="chroma"style="--mt: 0.75rem"
+      <div class="highlight" style="--shadow-soft: 4; --br:0.4rem; --mb: 0">
+        <pre class="chroma"style="--mt: 0.75rem" 
         ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="shadow-label">--shadow:4;</span>"</span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
       </div>
     </div>
@@ -39,8 +39,8 @@
   the effect of a element levitating from the page. Value of this helper collectively sets the offset, blur and
   intensity of the shadow and the translate distance.
 </p>
-<div style="--d: flex; --mb: 4rem">
-  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px">
+<div style="--d: flex; --mb: 4rem" >
+  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4;">
     <div style="--fx: 1; --p: 3rem; --mb: 0.5rem; --d: flex; --jc: center">
       <figure id="target-levitate" style="--maxw: 300px; --br: 5px; --bg: #fff; --of: hidden; --levitate: 4">
         <img alt="sample" src="https://source.unsplash.com/random/600x300" />
@@ -53,10 +53,10 @@
       <input class="slider" id="levitate" max="15" min="0" name="levitate" type="range" value="4" />
     </div>
     <div class="markdown" style="--maxw: 800px; --w: 100%; --pos: relative">
-      <div class="highlight" style="--mb: 0">
+      <div class="highlight" style="--shadow-soft: 4; --br:0.4rem; --mb: 0">
         <pre
           class="chroma"
-          style="--mt: 0.75rem"
+          style="--mt: 0.75rem" 
         ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="levitate-label">--levitate:4;</span>"</span></code><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></pre>
       </div>
     </div>
@@ -70,8 +70,8 @@
   The <code>--shadow-soft</code> helper adds a soft box shadow to an element. Value of this helper collectively sets the
   offset, blur and intensity of the shadow.
 </p>
-<div style="--d: flex; --mb: 4rem">
-  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px">
+<div style="--d: flex; --mb: 4rem" >
+  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4;">
     <div style="--fx: 1; --p: 3rem; --mb: 0.5rem; --d: flex; --jc: center">
       <figure id="target-shadow-soft" style="--maxw: 300px; --br: 5px; --bg: #fff; --of: hidden; --shadow-soft: 4">
         <img alt="sample" src="https://source.unsplash.com/random/300x150" />
@@ -84,10 +84,10 @@
       <input class="slider" id="shadow-soft" max="20" min="0" name="shadow-soft" type="range" value="4" />
     </div>
     <div class="markdown" style="--maxw: 800px; --w: 100%; --pos: relative">
-      <div class="highlight" style="--mb: 0">
+      <div class="highlight" style="--shadow-soft: 4; --br:0.4rem; --mb: 0">
         <pre
           class="chroma"
-          style="--mt: 0.75rem"
+          style="--mt: 0.75rem" 
         ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="shadow-soft-label">--shadow-soft:4;</span>"</span></code><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></pre>
       </div>
     </div>
@@ -101,8 +101,8 @@
   The <code>--shadow-hard</code> helper adds a hard box shadow to an element. Value of this helper collectively sets the
   offset, blur and intensity of the shadow.
 </p>
-<div style="--d: flex; --mb: 4rem">
-  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px">
+<div style="--d: flex; --mb: 4rem" >
+  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4;">
     <div style="--fx: 1; --p: 3rem; --mb: 0.5rem; --d: flex; --jc: center">
       <figure id="target-shadow-hard" style="--maxw: 300px; --br: 5px; --bg: #fff; --of: hidden; --shadow-hard: 4">
         <img alt="sample" src="https://source.unsplash.com/random/300x150" />
@@ -115,10 +115,10 @@
       <input class="slider" id="shadow-hard" max="20" min="0" name="shadow-hard" type="range" value="4" />
     </div>
     <div class="markdown" style="--maxw: 800px; --w: 100%; --pos: relative">
-      <div class="highlight" style="--mb: 0">
+      <div class="highlight" style="--shadow-soft: 4; --br:0.4rem; --mb: 0">
         <pre
           class="chroma"
-          style="--mt: 0.75rem"
+          style="--mt: 0.75rem" 
         ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="shadow-hard-label">--shadow-hard:4;</span>"</span></code><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></pre>
       </div>
     </div>
@@ -132,8 +132,8 @@
   The <code>--shadow-vert</code> helper adds a box shadow below the element. Value of this helper collectively sets the
   offset, blur and intensity of the shadow.
 </p>
-<div style="--d: flex; --mb: 4rem">
-  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px">
+<div style="--d: flex; --mb: 4rem" >
+  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4;">
     <div style="--fx: 1; --p: 3rem; --mb: 0.5rem; --d: flex; --jc: center">
       <figure id="target-shadow-vert" style="--maxw: 300px; --br: 5px; --bg: #fff; --of: hidden; --shadow-vert: 4">
         <img alt="sample" src="https://source.unsplash.com/random/300x150" />
@@ -146,10 +146,10 @@
       <input class="slider" id="shadow-vert" max="20" min="0" name="shadow-vert" type="range" value="4" />
     </div>
     <div class="markdown" style="--maxw: 800px; --w: 100%; --pos: relative">
-      <div class="highlight" style="--mb: 0">
+      <div class="highlight" style="--shadow-soft: 4; --br:0.4rem; --mb: 0">
         <pre
           class="chroma"
-          style="--mt: 0.75rem"
+          style="--mt: 0.75rem" 
         ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="shadow-vert-label">--shadow-vert:4;</span>"</span></code><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></pre>
       </div>
     </div>
@@ -163,8 +163,8 @@
   The <code>--shadow-inset</code> helper adds an inset box shadow to the element. Value of this helper collectively sets
   the offset, blur and intensity of the shadow.
 </p>
-<div style="--d: flex; --mb: 4rem">
-  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px">
+<div style="--d: flex; --mb: 4rem" >
+  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4;">
     <div style="--fx: 1; --p: 3rem; --mb: 0.5rem; --d: flex; --jc: center">
       <figure style="--maxw: 300px; --br: 5px; --bg: #fff; --of: hidden; --pos: relative">
         <img alt="sample" src="https://source.unsplash.com/random/300x150" />
@@ -178,10 +178,10 @@
       <input class="slider" id="shadow-inset" max="30" min="0" name="shadow-inset" type="range" value="10" />
     </div>
     <div class="markdown" style="--maxw: 800px; --w: 100%; --pos: relative">
-      <div class="highlight" style="--mb: 0">
+      <div class="highlight" style="--shadow-soft: 4; --br:0.4rem; --mb: 0">
         <pre
           class="chroma"
-          style="--mt: 0.75rem"
+          style="--mt: 0.75rem" 
         ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="shadow-inset-label">--shadow-inset:10;</span>"</span></code><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></pre>
       </div>
     </div>
@@ -195,8 +195,8 @@
   The <code>--shadow-hvr</code> helper adds the same effect as the <code>--shadow</code> helper however is only applied
   on hover of the element.
 </p>
-<div style="--d: flex; --mb: 4rem">
-  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px">
+<div style="--d: flex; --mb: 4rem" >
+  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4;">
     <div style="--fx: 1; --p: 3rem; --mb: 0.5rem; --d: flex; --jc: center">
       <div class="hover-me">
         <figure id="target-shadow-hvr" style="--maxw: 300px; --br: 5px; --bg: #fff; --of: hidden; --shadow-hvr: 8">
@@ -211,10 +211,10 @@
       <input class="slider" id="shadow-hvr" max="20" min="0" name="shadow-hvr" type="range" value="8" />
     </div>
     <div class="markdown" style="--maxw: 800px; --w: 100%; --pos: relative">
-      <div class="highlight" style="--mb: 0">
+      <div class="highlight" style="--shadow-soft: 4; --br:0.4rem; --mb: 0">
         <pre
           class="chroma"
-          style="--mt: 0.75rem"
+          style="--mt: 0.75rem" 
         ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="shadow-hvr-label">--shadow-hvr:8;</span>"</span></code><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></pre>
       </div>
     </div>
@@ -228,8 +228,8 @@
   The <code>--levitate-hvr</code> helper adds the same effect as the <code>--levitate</code> helper however is only
   applied on hover of the element.
 </p>
-<div style="--d: flex; --mb: 4rem">
-  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px">
+<div style="--d: flex; --mb: 4rem" >
+  <div style="--p: 1rem; --fx: 1; --bg: #eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4;">
     <div style="--fx: 1; --p: 3rem; --mb: 0.5rem; --d: flex; --jc: center">
       <div class="hover-me">
         <figure id="target-levitate-hvr" style="--maxw: 300px; --br: 5px; --bg: #fff; --of: hidden; --levitate-hvr: 8">
@@ -244,10 +244,10 @@
       <input class="slider" id="levitate-hvr" max="15" min="0" name="levitate-hvr" type="range" value="8" />
     </div>
     <div class="markdown" style="--maxw: 800px; --w: 100%; --pos: relative">
-      <div class="highlight" style="--mb: 0">
+      <div class="highlight" style="--shadow-soft: 4; --br:0.4rem; --mb: 0">
         <pre
           class="chroma"
-          style="--mt: 0.75rem"
+          style="--mt: 0.75rem" 
         ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="levitate-hvr-label">--levitate-hvr:8;</span>"</span></code><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></pre>
       </div>
     </div>

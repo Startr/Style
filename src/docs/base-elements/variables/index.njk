@@ -4,7 +4,7 @@
 <p>The Startr Style framework offers a range of basic element styles that can be easily modified using CSS variables. To personalize these styles, you only need to change specific variables located in the src/variables.css file.</p>
 
 <p>For instance, if you want to adjust the default primary and secondary colors or change the default border-radius, you can achieve this by incorporating the following code into your stylesheet. Just make sure to include these customizations in a stylesheet that is loaded after you've integrated Startr Style.</p>
-<div class="highlight"><pre class="chroma"><code class="language-css" data-lang="css"><span class="p">:</span><span class="nd">root</span> <span class="p">{</span>
+<div class="highlight" style="--shadow-soft: 4; --br:0.4rem;"><pre class="chroma"><code class="language-css" data-lang="css"><span class="p">:</span><span class="nd">root</span> <span class="p">{</span>
   <span class="nv">--primary</span><span class="p">:</span> <span class="mh">#A46313</span><span class="p">;</span>
   <span class="nv">--secondary</span><span class="p">:</span> <span class="mh">#E02E06</span><span class="p">;</span>
   <span class="nv">--text-main</span><span class="p">:</span> <span class="mh">#1a1a1a</span><span class="p">;</span><span class="p">;</span>
@@ -14,13 +14,13 @@
 <p>One great thing about utilizing CSS variables is their ability to have a limited scope. When you set a CSS variable to apply to the whole document <code>:root</code>, it affects all parts. However, by using local scope, you can create a variable that only works within a particular element. You can do this either by adjusting your stylesheet or by directly adding it to the element..</p>
 <h4 id="local-scope-in-your-style">Local scope in your style</h4>
 <p>The following example redefines the primary and secondary colors inside any <code>myelement</code> class.</p>
-<div class="highlight"><pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">myelement</span> <span class="p">{</span>
+<div class="highlight" style="--shadow-soft: 4; --br:0.4rem;"><pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">myelement</span> <span class="p">{</span>
   <span class="nv">--primary</span><span class="p">:</span> <span class="mh">#A46313</span><span class="p">;</span>
   <span class="nv">--secondary</span><span class="p">:</span> <span class="mh">#E02E06</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
 <h4 id="local-scope-inline">Local scope inline</h4>
 <p>The following example redefines the primary and secondary colors inline on the element itself.</p>
-<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--primary: #A46313; --secondary: #E02E06;&#34;</span><span class="p"></span><span class="p">&gt;</span>
+<div class="highlight" style="--shadow-soft: 4; --br:0.4rem;"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--primary: #A46313; --secondary: #E02E06;&#34;</span><span class="p"></span><span class="p">&gt;</span>
   ...
 <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></div>
 {% endblock %}

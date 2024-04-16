@@ -7,11 +7,11 @@
   --grey: hsl(0, 0%, 80%);
   --dark-grey: hsl(0, 0%, 29%);
   --black: 	hsl(0, 0%, 15%);
-  --green: hsl(152, 87%, 22%);
+  --green: hsla(166, 88%, 25%, 0.83);
   --blue: hsl(217, 71%, 53%);
   --orange: hsl(34, 100%, 50%);
   --red: hsl(348, 100%, 61%);
-  --purple: hsl(273, 99%, 31%);
+  --purple: hsl(273, 99%, 31%, 0.83);
   --yellow: hsl(48, 100%, 67%);
   --pink: hsl(330, 100%, 69%);
 
