@@ -1,6 +1,6 @@
 # Startr Style–less
 
-** v.0.0.1 **
+** v.1.1.0 **
 
 ## Why start with Startr Style – Simplifying CSS Frameworks is hard
 

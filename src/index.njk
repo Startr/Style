@@ -1,0 +1,724 @@
+{% extends "layout.njk" %} {% block header %}
+<header
+  style="
+    --pos: relative;
+    --z: 1;
+    --w-xl: calc(100vw + 1rem);
+    --t-xl: translate(calc(((100vw - var(--maxw-md)) / -2) - 0rem));
+  "
+>
+  <div style="--d: flex; --jc: space-between; --ai: center; --mb: 2rem; --mt: 1rem; --pr-xl: 1rem">
+    <img alt="Startr/Style" src="logo.png" style="--w: 6rem; --p: 0.8rem" />
+    <nav aria-label="Navigation" style="--ta: right; --size: 1.6em; --x: 60">
+      <a href="#learn">
+        <button class="white">Get Started with Startr</button>
+      </a>
+      <a href="#components">
+        <button class="white">Amazing Components</button>
+      </a>
+      <a href="/docs/utilities/index.html">
+        <button class="white">Utilities</button>
+      </a>
+    </nav>
+  </div>
+
+  <div style="--ta: center; --mb: 2rem; --d: grid; --d-sm: flex">
+    <div style="--d: grid; --w: 100%; --w-md: 50%; --fd: column; --ai: center; --jc: center; --mb: 2rem">
+      <h1>Startr/Style</h1>
+      <h4 style="--ta: center; --mw: 450px; --m: auto auto 0.5rem; --px: 1rem">
+        A Utility Complete CSS Framework for less than 50k <em style="--fw:light">8kb&nbsp;Zipped</em>
+      </h4>
+      <div style="--p: 0.5rem; --ta: center">
+        <a href="#learn">
+          <button>Getting Startrd</button>
+        </a>
+        <a href="index.html#learn-more">
+          <button class="blue" style="--c:var(--black)">Learn Startr Styling</button>
+        </a>
+        <a href="https://github.com/Startr/Style" target="_blank">
+          <button style="--bg: #282c34">Github</button>
+        </a>
+      </div>
+      <h6 style="--ta: center; --mt: 2rem">
+        - Style by <a href="https://github.com/Startr" target="_blank">Startr</a> -
+      </h6>
+    </div>
+    <div style="--w: 100%; --w-md: 50%; --d: flex; --fd: column; --fd-lg: row; --jc: center; --ai: center">
+      <div style="--w: 100%; --maxw-lg: 260px; --p: 1rem; --o: 1; --o-lg: 0">
+        <label for="levitate">Levitate</label>
+        <input class="slider" id="levitate" max="20" min="0" name="levitate" type="range" value="3" />
+        <label for="padding">Padding</label>
+        <input class="slider" id="padding" max="30" min="0" name="padding" type="range" value="0" />
+        <label for="br">Border Radius</label>
+        <input class="slider" id="br" max="80" min="0" name="br" type="range" value="5" />
+      </div>
+      <div
+        class="markdown"
+        style="
+          --maxw: 100%;
+          --maxw-lg: 800px;
+          --w: 100%;
+          --pos: relative;
+          --p-md: 0;
+          --p: 0 1rem;
+          --d: flex;
+          --fd: column-reverse;
+        "
+      >
+        <div
+          style="
+            --m: 1rem auto;
+            --m-md: 4rem;
+            --pos-md: absolute;
+            --top: 100px;
+            --top-lg: 220px;
+            --right-lg: -50px;
+            --z: 1;
+            --d: flex;
+            --jc: center;
+          "
+        >
+          <figure id="demo" style="--mb: 1.5rem; --maxw: 450px; --levitate: 16; --br: 5px; --px: 0; --bg: #eee">
+            <img
+              alt="sample"
+              src="https://source.unsplash.com/random/110x110"
+              style="--mt: 2rem; --mr: auto; --ml: auto; --br: 50%"
+            />
+            <figcaption style="--ta: center">
+              <h4>Plante</h4>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.</p>
+            </figcaption>
+          </figure>
+        </div>
+        <script>
+          (function () {
+            document.addEventListener("DOMContentLoaded", function () {
+              liveprop("padding", "--p", "px", "demo");
+              liveprop("br", "--br", "px", "demo");
+              liveprop("levitate", "--levitate", "", "demo");
+            });
+          })();
+        </script>
+        <div
+          class="highlight"
+          style="--shadow-soft: 4; --levitate-hvr: 16; --br: 0.4rem; --m: 2em; --d: none; --d-sm: block"
+        >
+          <pre class="chroma" style="--m: 0">{% include "example.njk" %}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="about"
+    style="
+      --pos: relative;
+      --z: -1;
+      --grad: 150deg;
+      --grad-color: var(--purple);
+      --bg: var(--purple);
+      --p: 3rem;
+      --mt: 5rem;
+      --c: white;
+    "
+  >
+    <h3 id="why-build-with-startr">Why build with Startr Style</h3>
+    <p>
+      Startr.Style accelerates and standardizes web design through custom property helpers and utilities, all seamlessly
+      integrated within the style attribute. This innovative approach streamlines styling, making it faster and more
+      consistent across projects. By embedding the power of customization directly where it's needed, Startr.Style
+      ensures a lean, efficient workflow without sacrificing flexibility or control.
+    </p>
+    <ul>
+      <li>A complete set of tools for styling with CSS</li>
+      <li>Out of the box with ready-to-use styles for important HTML elements, no need for extra classes</li>
+      <li>Takes up only <strong>8 kilobytes</strong> of space when <em>compressed</em></li>
+      <li class="green">Easy to use – just add and start building, no need to compile anything</li>
+    </ul>
+  </div>
+</header>
+
+{% endblock %} {% block page %}
+
+<article class="markdown">
+  <div id="learn">
+    <h3 id="Easy-Styling-Without-Classes">Easy Styling Without Classes</h3>
+    <p>
+      With <strong>Startr Style</strong>, you don't need to add any special classes or styles right away. When you
+      include <strong>Startr Style</strong> in your project, it automatically applies nice styles to your regular HTML
+      elements. It's as easy as that!
+    </p>
+    <p>Here's how you can do it in your HTML:</p>
+    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
+      <pre class="chroma"><code class="language-html" data-lang="html">&lt;<span class="nt">html</span>&gt;
+      &lt;<span class="nt">head</span>&gt;
+          &lt;!-- Include Startr Style CSS --&gt;
+          &lt;<span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span> <span class="na">href</span><span class=
+      "o">=</span><span class="s">"https://startr.style/style.css"</span>&gt;
+      &lt;/<span class="nt">head</span>&gt;
+      &lt;<span class="nt">body</span>&gt;
+          &lt;!-- Your HTML content --&gt;
+          &lt;<span class="nt">p</span>&gt;This paragraph will look great without any extra effort!&lt;/<span class="nt">p</span>&gt;
+          &lt;<span class="nt">button</span>&gt;This button will also have a nice style.&lt;/<span class="nt">button</span>&gt;
+      &lt;/<span class="nt">body</span>&gt;
+&lt;/<span class="nt">html</span>&gt;</code></pre>
+    </div>
+    <p>
+      Just include the link to the <strong>Startr Style</strong> CSS file in the <code>&lt;head&gt;</code> of your HTML,
+      and your basic elements like paragraphs and buttons will be automatically styled. No need to add any classes or
+      extra code!
+    </p>
+    <p>
+      Just ad one line of code and you are good to go.<br /><br />
+      <code>&lt;link rel="stylesheet" href="https://startr.style/style.css" /&gt;</code>
+      <br /><br />
+      It is all you need to get started. No need to compile anything, just add and start building. When you want to take
+      advantage of the full power of Startr Style, you can start adding custom properties to your elements. This will
+      allow you to customize your styles even further.
+    </p>
+    <h3 id="utility-complete-css">Utility Complete CSS</h3>
+    <p>
+      Wouldn't it be great if we could take the best parts of utility-first CSS frameworks and combine them with the
+      best parts of traditional CSS frameworks? That's exactly what <strong>Startr Style</strong> does. It provides a
+      complete set of utilities for the majority of CSS properties, making it easy to style your elements without
+      leaving your HTML. This is perfect for super quick prototyping or when you want to keep your CSS size constant as
+      your project grows.
+    </p>
+    <p>
+      In terms of CSS frameworks, utilities commonly refer to a CSS class which applies a single CSS property to an
+      element. For example a class name of <code>.bg-green</code> would apply <code>background-color: green</code> to
+      that element. A <strong>Utility Complete</strong> framework provide a complete set of utilities for the majority
+      of CSS properties.
+    </p>
+    <ul>
+      <li>Super quick prototyping without leaving your HTML</li>
+      <li>
+        CSS size remains constant as your project grows
+        <button class="white" style="--d: inline; --m: 2rem">
+          <a href="#learn">Learn More</a></button
+        ><br />
+      </li>
+    </ul>
+  </div>
+  <h3 id="components">Components</h3>
+  <div
+    style="--c: var(--black); --cc: 1; --cc-sm: 2; --cc-md: 3; --cg: 1.5rem; --bg: #eee; --p: 1.5rem; --pos: relative"
+  >
+    <figure class="accent" style="--mb: 1.5rem">
+      <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/340x220" />
+      <figcaption>
+        <h4>Nullam malesuada erat</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam
+          malesuada erat ut turpis.
+        </p>
+        <button aria-label="Sample Button">Read More</button>
+      </figcaption>
+    </figure>
+    <figure class="accent" style="--mb: 1.5rem">
+      <img
+        alt="Aliquam erat volutpat"
+        src="https://source.unsplash.com/random/460x460"
+        style="--mt: 2rem; --mr: auto; --ml: auto; --p: 2rem; --br: 50%"
+      />
+      <figcaption style="--ta: center">
+        <h4>Isabelle Plante</h4>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.</p>
+      </figcaption>
+    </figure>
+    <div style="--d: grid; --mb: 1.5rem">
+      <div style="--gc: 1/4; --gr: 1/4">
+        <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/400x400?blue" />
+      </div>
+      <div style="--gc: 2/5; --gr: 2/5">
+        <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/400x401?blue" />
+      </div>
+    </div>
+    <figure class="accent" style="--mb: 1.5rem; --w: 100%">
+      <figcaption>
+        <label>First Name <input placeholder="John" type="text" /></label>
+        <label>Last Name <input placeholder="John" type="text" /></label>
+        <button aria-label="Sample Button" style="--w: 100%">Submit</button>
+      </figcaption>
+    </figure>
+    <figure class="accent" style="--mb: 1.5rem">
+      <figcaption>
+        <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/50x50" style="--br: 4px; --mt: 1rem" />
+        <h4>Donec odio</h4>
+        <p>Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.</p>
+      </figcaption>
+    </figure>
+    <figure style="--mb: 1.5rem">
+      <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/340x280" style="--br: 4px" />
+      <figcaption class="accent" style="--mt: -3rem; --ml: 1rem; --mr: 1rem; --pb: 2rem">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.
+      </figcaption>
+    </figure>
+    <div class="accent" style="--mb: 1.5rem; --p: 1rem">
+      <div style="--d: flex; --ai: flex-start; --bb: 1px solid #ddd; --my: 0.5rem">
+        <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/55x55" style="--mt: 1rem; --br: 50%" />
+        <div style="--ml: 1rem; --fx: 1">
+          <h5 style="--mb: 0">Jane Doe</h5>
+          <p style="--size: 0.85em">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        </div>
+      </div>
+      <div style="--d: flex; --ai: flex-start; --bb: 1px solid #ddd; --my: 0.5rem">
+        <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/55x55" style="--mt: 1rem; --br: 50%" />
+        <div style="--ml: 1rem; --fx: 1">
+          <h5 style="--mb: 0">Viktor Jones</h5>
+          <p style="--size: 0.85em">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        </div>
+      </div>
+      <div style="--d: flex; --ai: flex-start; --bb: 1px solid #ddd; --my: 0.5rem">
+        <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/55x55" style="--mt: 1rem; --br: 50%" />
+        <div style="--ml: 1rem; --fx: 1">
+          <h5 style="--mb: 0">Marcia Stanley</h5>
+          <p style="--size: 0.85em">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        </div>
+      </div>
+      <div style="--d: flex; --ai: flex-start; --mt: 0.5rem">
+        <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/55x55" style="--mt: 1rem; --br: 50%" />
+        <div style="--ml: 1rem; --fx: 1">
+          <h5 style="--mb: 0">Giovanni Santana</h5>
+          <p style="--size: 0.85em">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        </div>
+      </div>
+    </div>
+    <figure class="accent" style="--mb: 1.5rem">
+      <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/340x220" />
+      <figcaption>
+        <h4 style="--m: 0">Nullam malesuada erat</h4>
+        <span style="--size: 0.85em; --c: var(grey)">18 hours ago | <a href="index.html#">Entertainment</a> </span>
+      </figcaption>
+    </figure>
+    <div class="accent primary" style="--p: 2rem 1rem; --ta: center; --mb: 1.5rem">
+      <svg style="--w: 50px; --h: auto" viewbox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
+        <path
+          d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+        ></path>
+        <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
+        <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
+        <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+        <line x1="12" x2="12" y1="22.08" y2="12"></line>
+      </svg>
+      <h4>Isabelle Plante</h4>
+      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque volutpat mattis eros.</p>
+    </div>
+    <span class="accent group" style="--p: 1.5rem; --mb: 1.5rem; --w: 100%"></span>
+    <div aria-label="upload" class="white">
+      <span class="accent group" style="--p: 1.5rem; --mb: 1.5rem; --w: 100%">
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-download fa-w-18"
+          role="img"
+          style="--m: 10px 6px 10px -6px; transform-origin: 0.5625em 0.4375em 0px"
+          viewbox="0 0 576 512"
+          xmlns="https://www.w3.org/2000/svg"
+        >
+          <g class transform="translate(288 256)">
+            <g class transform="translate(0, -32) scale(1, 1) rotate(0 0 0)">
+              <path
+                class
+                d="M528 288h-92.1l46.1-46.1c30.1-30.1 8.8-81.9-33.9-81.9h-64V48c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v112h-64c-42.6 0-64.2 51.7-33.9 81.9l46.1 46.1H48c-26.5 0-48 21.5-48 48v128c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V336c0-26.5-21.5-48-48-48zm-400-80h112V48h96v160h112L288 368 128 208zm400 256H48V336h140.1l65.9 65.9c18.8 18.8 49.1 18.7 67.9 0l65.9-65.9H528v128zm-88-64c0-13.3 10.7-24 24-24s24 10.7 24 24-10.7 24-24 24-24-10.7-24-24z"
+                fill="currentColor"
+                transform="translate(-288 -256)"
+              ></path>
+            </g>
+          </g>
+        </svg>
+        <input aria-label="Filename" placeholder="filename.txt" type="text"
+      /></span>
+    </div>
+    <span class="accent group" style="--p: 1.5rem; --mb: 1.5rem; --w: 100%"></span>
+    <div class="accent primary" style="--mb: 1.5rem; --pos: relative; --pt: 75%">
+      <div style="--pos: absolute; --inset: 0">
+        <img
+          alt="Aliquam erat volutpat"
+          src="https://source.unsplash.com/random/300x400"
+          style="--objf: cover; --h: 100%; --w: 100%"
+        />
+      </div>
+      <div style="--p: 1rem">
+        <button aria-label="Sample Button" class="white" style="--w: 100%">Sign in</button>
+        <button aria-label="Sample Button" style="--w: 100%; --bc: var(--primary)">Create an account</button>
+      </div>
+    </div>
+    <div style="--p: 2rem 1rem; --ta: center; --mb: 1.5rem">
+      <svg style="--w: 50px; --h: auto" viewbox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
+        <path
+          d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+        ></path>
+        <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
+        <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
+        <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+        <line x1="12" x2="12" y1="22.08" y2="12"></line>
+      </svg>
+      <h3>Be Inspired</h3>
+      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque volutpat mattis eros.</p>
+    </div>
+    <div class="accent primary" style="--mb: 1.5rem; --pos: relative; --pt: 75%">
+      <div style="--pos: absolute; --inset: 0">
+        <img
+          alt="Aliquam erat volutpat"
+          src="https://source.unsplash.com/random/400x350"
+          style="--objf: cover; --h: 100%; --w: 100%"
+        />
+      </div>
+      <button
+        aria-label="Sample Button"
+        style="--pos: absolute; --top: 8px; --right: 0; --bg: var(--primary); --p: 8px 5px"
+      >
+        <svg
+          class="feather feather-heart"
+          height="24"
+          viewbox="0 0 24 24"
+          width="24"
+          xmlns="https://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+          ></path>
+        </svg>
+      </button>
+      <div style="--p: 1rem; --pos: relative">
+        <h6 style="--m: 0">Quisque volutpat mattis eros.</h6>
+        <h4 style="--mb: 0.2rem; --weight: bold">New Beginnings</h4>
+      </div>
+    </div>
+    <div class="accent" style="--p: 4rem 1.5rem; --mb: 1.5rem">
+      <h4 style="--c: var(--primary); --m: 0">Welcome</h4>
+      <h3 style="--weight: 600">Quisque imperdiet</h3>
+      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque volutpat mattis eros.</p>
+      <button aria-label="Sample Button">View More</button>
+    </div>
+    <div class="accent" style="--mb: 1.5rem; --p: 1rem; --cc: 2">
+      <div style="--mb: 1rem; --d: inline-block; --bi: avoid">
+        <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/120x120" style="--br: 4px" />
+        <h6 style="--m: 0">Quisque volutpat</h6>
+        <h5 style="--m: 0; --weight: bold">€30.00</h5>
+      </div>
+      <div style="--mb: 1rem; --d: inline-block; --bi: avoid">
+        <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/120x120" style="--br: 4px" />
+        <h6 style="--m: 0">Lorem ipsum dolor sit amet</h6>
+        <h5 style="--m: 0; --weight: bold">€90.00</h5>
+      </div>
+      <div style="--mb: 1rem; --mt: 3rem; --d: inline-block; --bi: avoid">
+        <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/120x120" style="--br: 4px" />
+        <h6 style="--m: 0">Consectetuer adipiscing elit</h6>
+        <h5 style="--m: 0; --weight: bold">€60.00</h5>
+      </div>
+      <div style="--d: inline-block; --bi: avoid">
+        <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/120x120" style="--br: 4px" />
+        <h6 style="--m: 0">Quisque volutpat mattis</h6>
+        <h5 style="--m: 0; --weight: bold">€120.00</h5>
+      </div>
+    </div>
+    <div class="accent" style="--mb: 1.5rem; --p: 1rem; --bg: #fafafa">
+      <div style="--d: flex; --ai: flex-start; --bb: 1px solid #ddd; --my: 0.5rem">
+        <div style="--size: 2em; --bg: #eee; --w: 60px; --lh: 60px; --ta: center; --mt: 0.75rem; --c: var(--primary)">
+          1
+        </div>
+        <div style="--ml: 1rem; --fx: 1">
+          <h5 style="--mb: 0">Quisque volutpat</h5>
+          <p style="--size: 0.85em">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        </div>
+      </div>
+      <div style="--d: flex; --ai: flex-start; --bb: 1px solid #ddd; --my: 0.5rem">
+        <div style="--size: 2em; --bg: #eee; --w: 60px; --lh: 60px; --ta: center; --mt: 0.75rem; --c: var(--primary)">
+          2
+        </div>
+        <div style="--ml: 1rem; --fx: 1">
+          <h5 style="--mb: 0">Nunc dignissim risus</h5>
+          <p style="--size: 0.85em">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        </div>
+      </div>
+      <div style="--d: flex; --ai: flex-start; --bb: 1px solid #ddd; --my: 0.5rem">
+        <div style="--size: 2em; --bg: #eee; --w: 60px; --lh: 60px; --ta: center; --mt: 0.75rem; --c: var(--primary)">
+          3
+        </div>
+        <div style="--ml: 1rem; --fx: 1">
+          <h5 style="--mb: 0">Cras ornare tristique</h5>
+          <p style="--size: 0.85em">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        </div>
+      </div>
+      <div style="--d: flex; --ai: flex-start; --mt: 0.5rem">
+        <div style="--size: 2em; --bg: #eee; --w: 60px; --lh: 60px; --ta: center; --mt: 0.75rem; --c: var(--primary)">
+          4
+        </div>
+        <div style="--ml: 1rem; --fx: 1">
+          <h5 style="--mb: 0">Praesent placerat</h5>
+          <p style="--size: 0.85em">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        </div>
+      </div>
+    </div>
+    <div class="accent" style="--mb: 1.5rem">
+      <div style="--p: 1.5rem">
+        <h4 style="--weight: bold; --mb: 0.5rem">Join us today!</h4>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.</p>
+      </div>
+      <div class="group" style="--m: 0; --w: 100%; --x: 80">
+        <button aria-label="Sample Button" class="grey" style="--fx: 1; --btlr: 0; --b: 0">Learn More</button>
+        <button aria-label="Sample Button" style="--fx: 1; --btrr: 0; --b: 0">Sign Up</button>
+      </div>
+    </div>
+    <div style="--mb: 1.5rem; --p: 1rem; --bg: white; --shadow: 4">
+      <div style="--d: flex; --ai: flex-start; --bb: 1px solid #ddd; --my: 0.5rem">
+        <img
+          alt="Aliquam erat volutpat"
+          src="https://source.unsplash.com/random/55x55"
+          style="--mt: 1rem; --br: var(--border-radius)"
+        />
+        <div style="--ml: 1rem; --fx: 1">
+          <h5 style="--mb: 0; --weight: bold">Lorem ipsum dolor sit amet</h5>
+          <p style="--size: 0.85em; --op: 0.5">January 18, 2020</p>
+        </div>
+      </div>
+      <div style="--d: flex; --ai: flex-start; --bb: 1px solid #ddd; --my: 0.5rem">
+        <img
+          alt="Aliquam erat volutpat"
+          src="https://source.unsplash.com/random/55x55"
+          style="--mt: 1rem; --br: var(--border-radius)"
+        />
+        <div style="--ml: 1rem; --fx: 1">
+          <h5 style="--mb:0 --weight:bold">Ut enim ad minim veniam</h5>
+          <p style="--size: 0.85em; --op: 0.5">March 24, 2020</p>
+        </div>
+      </div>
+      <div style="--d: flex; --ai: flex-start; --my: 0.5rem">
+        <img
+          alt="Aliquam erat volutpat"
+          src="https://source.unsplash.com/random/55x55"
+          style="--mt: 1rem; --br: var(--border-radius)"
+        />
+        <div style="--ml: 1rem; --fx: 1">
+          <h5 style="--mb:0 --weight:bold">Nemo enim ipsam voluptatem</h5>
+          <p style="--size: 0.85em; --op: 0.5">Arpil 04, 2020</p>
+        </div>
+      </div>
+    </div>
+    <div class="accent" style="--p: 1.5rem; --mb: 1.5rem">
+      <h3>Questions</h3>
+      <p>Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.</p>
+      <div style="--m: 0.5rem">
+        <input id="component-checkbox-1" type="checkbox" />
+        <label for="component-checkbox-1">Cras ornare tristique</label>
+      </div>
+      <div style="--m: 0.5rem">
+        <input id="component-checkbox-2" type="checkbox" />
+        <label for="component-checkbox-2">Praesent placerat</label>
+      </div>
+      <div style="--m: 0.5rem">
+        <input id="component-checkbox-3" type="checkbox" />
+        <label for="component-checkbox-3">Fusce pellentesque</label>
+      </div>
+      <div style="--m: 0.5rem">
+        <input id="component-checkbox-4" type="checkbox" />
+        <label for="component-checkbox-4">Vestibulum commodo</label>
+      </div>
+      <button aria-label="Sample Button" style="--mt: 1rem">Submit</button>
+    </div>
+    <div class="accent primary" style="--mb: 1.5rem; --pos: relative; --pt: 75%">
+      <div style="--pos: absolute; --inset: 0">
+        <img
+          alt="Aliquam erat volutpat"
+          src="https://source.unsplash.com/random/350x400"
+          style="--objf: cover; --h: 100%; --w: 100%; --op: 0.7"
+        />
+      </div>
+      <button
+        aria-label="Sample Button"
+        class="white"
+        style="--pos: absolute; --top: 8px; --right: 0; --p: 8px 5px; --bc: transparent"
+      >
+        <svg
+          class="feather feather-bookmark"
+          height="24"
+          viewbox="0 0 24 24"
+          width="24"
+          xmlns="https://www.w3.org/2000/svg"
+        >
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </button>
+      <div style="--p: 1rem; --pos: relative">
+        <h6 style="--m: 0; --tt: uppercase; --ls: 1px">CULTURE</h6>
+        <h4 style="--m: 0 0 0.2rem">Lorem ipsum dolor</h4>
+        <span style="--c: gold"
+          >5.0
+          <svg
+            class="feather feather-star"
+            height="24"
+            viewbox="0 0 24 24"
+            width="24"
+            xmlns="https://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+            ></polygon>
+          </svg>
+        </span>
+        <span style="--size: 0.85em">(48 Reviews)</span>
+      </div>
+    </div>
+    <div style="--d: grid; --gar: 200px; --gg: 10px; --mb: 1.5rem">
+      <div style="--gc: 1/2; --gr: 1/3">
+        <img
+          alt="Aliquam erat volutpat"
+          src="https://source.unsplash.com/random/400x400"
+          style="--h: 100%; --objf: cover"
+        />
+      </div>
+      <div style="--gc: 2/3; --gr: 1/2">
+        <img
+          alt="Aliquam erat volutpat"
+          src="https://source.unsplash.com/random/400x401"
+          style="--h: 100%; --objf: cover"
+        />
+      </div>
+      <div style="--gc: 1/2; --gr: 3/4">
+        <img
+          alt="Aliquam erat volutpat"
+          src="https://source.unsplash.com/random/400x402"
+          style="--h: 100%; --objf: cover"
+        />
+      </div>
+      <div style="--gc: 2/3; --gr: 2/4">
+        <img
+          alt="Aliquam erat volutpat"
+          src="https://source.unsplash.com/random/400x403"
+          style="--h: 100%; --objf: cover"
+        />
+      </div>
+    </div>
+    <div class="accent" style="--bg: white; --p: 1.5rem; --mb: 1.5rem">
+      <p style="--c: #aaa">
+        Our site uses cookies. Learn more about our use of cookies: <a href="index.html#">Cookie policy</a>
+      </p>
+      <button aria-label="Sample Button" style="--w: 100%">Submit</button>
+    </div>
+    <div style="--d: flex; --p: 2rem 1rem; --mb: 1.5rem">
+      <svg style="--w: 50px; --h: auto; --mr: 0.5rem" viewbox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
+        <path
+          d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+        ></path>
+        <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
+        <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
+        <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+        <line x1="12" x2="12" y1="22.08" y2="12"></line>
+      </svg>
+      <div>
+        <h3 style="--m: 0">Be Creative</h3>
+        <p style="--m: 0">Lorem ipsum dolor sit amet</p>
+      </div>
+    </div>
+    <div class="accent primary" style="--d: flex; --fd: column; --mb: 1.5rem">
+      <img alt="Aliquam erat volutpat" src="https://source.unsplash.com/random/340x220" />
+      <a aria-label="Sample Link" href="index.html#" style="--c: white; --px: 10px; --ml: auto; --size: 2rem">
+        <svg
+          class="feather feather-arrow-right"
+          height="24"
+          style="--ml: auto"
+          viewbox="0 0 24 24"
+          width="24"
+          xmlns="https://www.w3.org/2000/svg"
+        >
+          <line x1="5" x2="19" y1="12" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+    <div class="accent" style="--mb: 1.5rem">
+      <h5 style="--p: 0.25rem 1.5rem 0.75rem; --bb: 1px solid #ddd">Beautiful Designs</h5>
+      <div style="--p: 0.25rem 1.5rem 1.5rem; --bg: white">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo ex fugiat quisquam.</p>
+        <button aria-label="Sample Button">Read More...</button>
+      </div>
+    </div>
+    <div style="--d: grid; --gtc: auto 2.2rem; --mb: 1.5rem">
+      <div style="--gc: 1/2">
+        <img
+          alt="Aliquam erat volutpat"
+          src="https://source.unsplash.com/random/400x400"
+          style="--h: 100%; --objf: cover"
+        />
+      </div>
+      <div style="--gc: 2/3">
+        <h3 style="--wm: vertical-lr">A Perfect Place</h3>
+      </div>
+    </div>
+    <div style="--pos: absolute; --left: 0; --right: 0; --bottom: 0; --grad-bottom: white; --p: 600px 0 200px">
+      <img alt="Startr/Style" src="logo.png" style="--m: 40px auto 0; --d: block" />
+      <h1 style="--ta: center">Get creative with Startr Style</h1>
+    </div>
+  </div>
+  <br />
+  <hr />
+  <h3 id="learn-more">Learn More</h3>
+  <p>
+    There is nothing new about the concept of utility complete CSS and today you will find any number of utility first
+    frameworks to pick from. What is unique about Startr Style however, is how these utilities are implemented.
+    Traditionally utility complete frameworks include a rule for every common CSS property/value combination. Not only
+    does this result in an incredibly large CSS file size it also means you are restricted to a set number of
+    property/value combinations as defined by the framework developers. Startr Style uses a different approach. Instead
+    utilities are defined by just the property and you the developer define the value. Not only is the resulting CSS a
+    fraction of the size, you also have full access to the CSS spec for each property.
+  </p>
+  <h5 id="style-based-utilities">Style based utilities</h5>
+  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
+    <pre
+      class="chroma"
+    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--bg:var(--dark)&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">div</span><span class="p"></span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--bg:#2A2A2A&#34;</span><span class=
+      "p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">div</span><span class="p"></span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--bg:rgb(42,42,42)&#34;</span><span class=
+      "p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">div</span><span class="p"></span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--bg:rgba(0,0,0,.8)&#34;</span><span class=
+      "p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">div</span><span class="p"></span><span class="p">&gt;</span></code></pre>
+  </div>
+  <br />
+  <h3 id="responsive-design-and-media-queries">Responsive Design and Media Queries</h3>
+  <p>
+    In situations where certain tools need to be used depending on the screen size, you can use them selectively for
+    each size. This lets you use these tools for particular screen sizes, simplifying the process of creating adaptable
+    designs.
+  </p>
+  <p>By default, we set four predefined points for the most common device resolutions.</p>
+  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
+    <pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* Small &#39;-sm&#39; */</span>
+<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">640px</span><span class=
+"o">)</span> <span class="p">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="p">}</span>
+
+<span class="c">/* Medium &#39;-md&#39; */</span>
+<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">768px</span><span class=
+"o">)</span> <span class="p">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="p">}</span>
+
+<span class="c">/* Large &#39;-lg&#39; */</span>
+<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">1024px</span><span class=
+"o">)</span> <span class="p">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="p">}</span>
+
+<span class="c">/* Extra Large &#39;-xl&#39; */</span>
+<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">1280px</span><span class=
+"o">)</span> <span class="p">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="p">}</span></code></pre>
+  </div>
+  <p>
+    To use our style utilites with different screen sizes, just add the tool's name along with a <code>-</code> and the
+    short name of the screen size you want. By default, media queries start with mobile screens and then adjust for
+    larger ones. This means we design for the smallest screens first and then go bigger from there.
+  </p>
+  <p>
+    Consider the following example where <code>--d</code> is the Startr Style utility for the <code>display</code> CSS
+    property. Button is <code>display:block</code> by default. <code>display:none</code> from medium size screens up.
+  </p>
+  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
+    <pre
+      class="chroma"
+    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">style</span><span class=
+          "o">=</span><span class="s">&#34;--d:block; --d-md:none&#34;</span><span class="p"></span><span class="p">&gt;</span>Only visible on small screens<span class=
+          "p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span></code></pre>
+  </div>
+  <h2 style="--ta: center">Discover limitless possibilities</h2>
+</article>
+
+{% endblock %}

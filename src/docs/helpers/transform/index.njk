@@ -1,0 +1,257 @@
+{% extends "layout.njk" %}
+
+{% block article %}
+    <h2 id="transform-helpers">Transform Helpers</h2>
+    <h4 id="collection-of-helpers-for-setting-transition-of-elements-these-variables-can-be-mixed-so-get-creative">Collection of helpers for setting transition of elements. These variables can be mixed so get creative!</h4>
+    <br>
+    <h4 id="--translatey">--translatey</h4>
+    <p>The <code>--translatey</code> helper set the <code>transform: tansitionY()</code> property allowing you to transform an element on the vertical axis.</p>
+    <div style="--d:flex; --mb:4rem;">
+        <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+            <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+                <figure style="--maxw:300px; --br:5px; --pos:relative; --bg:#eee">
+                    <figcaption id="target-translatey" style="--bg:rgba(0,0,0,.8); --c:white; --br:5px; ">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </figcaption>
+                </figure>
+            </div>
+            <div>
+                <input class="slider" type="range" id="translatey" name="translatey" min="-45" max="40" value="0">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+                    <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="translatey-label">--translatey:0px;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        liveprop('translatey', '--translatey', 'px', 'target-translatey');
+    </script>
+    <h4 id="--translatey-hvr">--translatey-hvr</h4>
+    <p>The <code>--translatey-hvr</code> helper set the <code>transform: tansitionY()</code> property allowing you to transform an element on the vertical axis on hover.</p>
+    <div style="--d:flex; --mb:4rem;">
+        <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+            <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+                <div class="hover-me">
+                    <figure style="--maxw:300px; --br:5px; --pos:relative; --bg:#eee">
+                        <figcaption id="target-translatey-hvr" style="--bg:rgba(0,0,0,.8); --c:white; --br:5px; --translatey-hvr:-30px;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div>
+                <input class="slider" type="range" id="translatey-hvr" name="translatey-hvr" min="-45" max="40" value="-30">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+                    <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="translatey-hvr-label">--translatey-hvr:-30px;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        liveprop('translatey-hvr', '--translatey-hvr', 'px', 'target-translatey-hvr');
+    </script>
+    <h4 id="--translatex">--translatex</h4>
+    <p>The <code>--translatex</code> helper set the <code>transform: tansitionX()</code> property allowing you to transform an element on the vertical axis.</p>
+    <div style="--d:flex; --mb:4rem;">
+        <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+            <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+                <figure style="--maxw:300px; --br:5px; --pos:relative; --bg:#eee">
+                    <figcaption id="target-translatex" style="--bg:rgba(0,0,0,.8); --c:white; --br:5px; ">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </figcaption>
+                </figure>
+            </div>
+            <div>
+                <input class="slider" type="range" id="translatex" name="translatex" min="-50" max="50" value="0">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+                    <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="translatex-label">--translatex:0px;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        liveprop('translatex', '--translatex', 'px', 'target-translatex');
+    </script>
+    <h4 id="--translatex-hvr">--translatex-hvr</h4>
+    <p>The <code>--translatex-hvr</code> helper set the <code>transform: tansitionX()</code> property allowing you to transform an element on the vertical axis on hover.</p>
+    <div style="--d:flex; --mb:4rem;">
+        <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+            <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+                <div class="hover-me">
+                    <figure style="--maxw:300px; --br:5px; --pos:relative; --bg:#eee">
+                        <figcaption id="target-translatex-hvr" style="--bg:rgba(0,0,0,.8); --c:white; --br:5px; --translatex-hvr:-25px;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div>
+                <input class="slider" type="range" id="translatex-hvr" name="translatex-hvr" min="-80" max="80" value="-25">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+                    <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="translatex-hvr-label">--translatex-hvr:-25px;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        liveprop('translatex-hvr', '--translatex-hvr', 'px', 'target-translatex-hvr');
+    </script>
+    <h4 id="--scale">--scale</h4>
+    <p>The <code>--scale</code> helper set the <code>transform: scale()</code> property allowing you to transform an element scale.</p>
+    <div style="--d:flex; --mb:4rem;">
+        <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+            <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+                <figure style="--maxw:300px; --br:5px; --pos:relative; --bg:#eee">
+                    <figcaption id="target-scale" style="--bg:rgba(0,0,0,.8); --c:white; --br:5px; ">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </figcaption>
+                </figure>
+            </div>
+            <div>
+                <input class="slider" type="range" id="scale" name="scale" min="50" max="150" value="100">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+                    <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="scale-label">--scale:100%;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        liveprop('scale', '--scale', '%', 'target-scale');
+    </script>
+    <h4 id="--scale-hvr">--scale-hvr</h4>
+    <p>The <code>--scale-hvr</code> helper set the <code>transform: scale()</code> property allowing you to transform an element scale on hover.</p>
+    <div style="--d:flex; --mb:4rem;">
+        <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+            <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+                <div class="hover-me">
+                    <figure style="--maxw:300px; --br:5px; --pos:relative; --bg:#eee">
+                        <figcaption id="target-scale-hvr" style="--bg:rgba(0,0,0,.8); --c:white; --br:5px; --scale-hvr: 75%;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div>
+                <input class="slider" type="range" id="scale-hvr" name="scale-hvr" min="50" max="150" value="75">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+                    <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="scale-hvr-label">--scale-hvr:75%;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        liveprop('scale-hvr', '--scale-hvr', '%', 'target-scale-hvr');
+    </script>
+    <h4 id="--rotate">--rotate</h4>
+    <p>The <code>--rotate</code> helper set the <code>transform: rotate()</code> property allowing you to transform an element rotation.</p>
+    <div style="--d:flex; --mb:4rem;">
+        <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+            <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+                <figure style="--maxw:150px; --br:5px; --pos:relative; --bg:#eee">
+                    <figcaption id="target-rotate" style="--bg:rgba(0,0,0,.8); --c:white; --br:5px; ">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </figcaption>
+                </figure>
+            </div>
+            <div>
+                <input class="slider" type="range" id="rotate" name="rotate" min="-50" max="50" value="0">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+                    <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="rotate-label">--rotate:0deg;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        liveprop('rotate', '--rotate', 'deg', 'target-rotate');
+    </script>
+    <h4 id="--rotate-hvr">--rotate-hvr</h4>
+    <p>The <code>--rotate-hvr</code> helper set the <code>transform: rotate()</code> property allowing you to transform an element rotate on hover.</p>
+    <div style="--d:flex; --mb:4rem;">
+        <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+            <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+                <div class="hover-me">
+                    <figure style="--maxw:150px; --br:5px; --pos:relative; --bg:#eee">
+                        <figcaption id="target-rotate-hvr" style="--bg:rgba(0,0,0,.8); --c:white; --br:5px; --rotate-hvr: 30deg;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div>
+                <input class="slider" type="range" id="rotate-hvr" name="rotate-hvr" min="-50" max="50" value="30">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+                    <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="rotate-hvr-label">--rotate-hvr:30deg;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        liveprop('rotate-hvr', '--rotate-hvr', 'deg', 'target-rotate-hvr');
+    </script>
+    <h4 id="--skew">--skew</h4>
+    <p>The <code>--skew</code> helper set the <code>transform: skew()</code> property allowing you to transform an element rotation.</p>
+    <div style="--d:flex; --mb:4rem;">
+        <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+            <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+                <figure style="--maxw:150px; --br:5px; --pos:relative; --bg:#eee">
+                    <figcaption id="target-skew" style="--bg:rgba(0,0,0,.8); --c:white; --br:5px; ">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </figcaption>
+                </figure>
+            </div>
+            <div>
+                <input class="slider" type="range" id="skew" name="skew" min="-50" max="50" value="0">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+                    <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="skew-label">--skew:0deg;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        liveprop('skew', '--skew', 'deg', 'target-skew');
+    </script>
+    <h4 id="--skew-hvr">--skew-hvr</h4>
+    <p>The <code>--skew-hvr</code> helper set the <code>transform: skew()</code> property allowing you to transform an element skew on hover.</p>
+    <div style="--d:flex; --mb:4rem;">
+        <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+            <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+                <div class="hover-me">
+                    <figure style="--maxw:150px; --br:5px; --pos:relative; --bg:#eee">
+                        <figcaption id="target-skew-hvr" style="--bg:rgba(0,0,0,.8); --c:white; --br:5px; --skew-hvr: 30deg;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div>
+                <input class="slider" type="range" id="skew-hvr" name="skew-hvr" min="-50" max="50" value="30">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+                    <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="skew-hvr-label">--skew-hvr:30deg;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        liveprop('skew-hvr', '--skew-hvr', 'deg', 'target-skew-hvr');
+    </script>
+{% endblock %}

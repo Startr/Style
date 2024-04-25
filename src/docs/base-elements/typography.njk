@@ -1,0 +1,146 @@
+{% extends "layout.njk" %} {% block article %}
+<h2 id="typography">Automatic Typography Styling</h2>
+<h3 id="paragraphs--inline-elements">Paragraphs &amp; Inline Elements</h3>
+<div
+  class="code-block"
+  style="--bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
+>
+  <p>
+    Sed egestas, ante et <a href="index.html#">vulputate volutpat</a>, eros pede semper est,
+    <i>vitae luctus metus</i> libero eu augue. Morbi purus libero, faucibus adipiscing, <b>commodo quis</b>, gravida id,
+    est. Sed lectus. <code>Praesent elementum</code> hendrerit tortor.
+  </p>
+  <p>
+    <mark>Sed semper lorem at felis</mark>. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui,
+    <small>eu pulvinar nunc sapien ornare nisl</small>. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed,
+    urna. <code>Morbi interdum mollis sapien</code>.
+  </p>
+  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
+    <pre
+      class="chroma"
+    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>
+  Sed egestas, ante et <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;#&#34;</span><span class="p"></span><span class="p">&gt;</span>vulputate volutpat<span class="p">&lt;</span><span class="p">/</span><span class="nt">a</span><span class="p">&gt;</span>, eros pede semper est, <span class="p">&lt;</span><span class="nt">i</span><span class="p"></span><span class="p">&gt;</span>vitae luctus metus<span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span> libero eu augue. Morbi purus libero, faucibus adipiscing, <span class="p">&lt;</span><span class="nt">b</span><span class="p"></span><span class="p">&gt;</span>commodo quis<span class="p">&lt;</span><span class="p">/</span><span class="nt">b</span><span class="p">&gt;</span>, gravida id, est. Sed lectus. <span class="p">&lt;</span><span class="nt">code</span><span class="p"></span><span class="p">&gt;</span>Praesent elementum<span class="p">&lt;</span><span class="p">/</span><span class="nt">code</span><span class="p">&gt;</span> hendrerit tortor. 
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">mark</span><span class="p"></span><span class="p">&gt;</span>Sed semper lorem at felis<span class="p">&lt;</span><span class="p">/</span><span class="nt">mark</span><span class="p">&gt;</span>. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, <span class="p">&lt;</span><span class="nt">small</span><span class="p"></span><span class="p">&gt;</span>eu pulvinar nunc sapien ornare nisl<span class="p">&lt;</span><span class="p">/</span><span class="nt">small</span><span class="p">&gt;</span>. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna. <span class="p">&lt;</span><span class="nt">code</span><span class="p"></span><span class="p">&gt;</span>Morbi interdum mollis sapien<span class="p">&lt;</span><span class="p">/</span><span class="nt">code</span><span class="p">&gt;</span>.
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span></code></pre>
+  </div>
+</div>
+
+<h3 id="blockquotes">Blockquotes</h3>
+<div
+  class="code-block"
+  style="--bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
+>
+  <blockquote>
+    <p>
+      Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer
+      adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus
+      non, congue vel, arcu. Ut scelerisque hendrerit tellus. Integer sagittis. Vivamus a mauris eget arcu gravida
+      tristique.
+    </p>
+    <footer>—Parmenides, <cite>Nunc sem lacus, accumsan quis</cite></footer>
+  </blockquote>
+  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
+    <pre
+      class="chroma"
+    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">blockquote</span><span class="p"></span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel, arcu. Ut scelerisque hendrerit tellus. Integer sagittis. Vivamus a mauris eget arcu gravida tristique.<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">footer</span><span class="p"></span><span class="p">&gt;</span>—Parmenides, <span class="p">&lt;</span><span class="nt">cite</span><span class="p"></span><span class="p">&gt;</span>Nunc sem lacus, accumsan quis<span class="p">&lt;</span><span class="p">/</span><span class="nt">cite</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">footer</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">blockquote</span><span class="p">&gt;</span></code></pre>
+  </div>
+</div>
+
+<h3 id="headings">Headings</h3>
+<div
+  class="code-block"
+  style="--bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
+>
+  <h1>Heading Level 1</h1>
+  <h2>Heading Level 2</h2>
+  <h3>Heading Level 3</h3>
+  <h4>Heading Level 4</h4>
+  <h5>Heading Level 5</h5>
+  <h6>Heading Level 6</h6>
+  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
+    <pre
+      class="chroma"
+    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">h1</span><span class="p"></span><span class="p">&gt;</span>Heading Level 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h2</span><span class="p"></span><span class="p">&gt;</span>Heading Level 2<span class="p">&lt;</span><span class="p">/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h3</span><span class="p"></span><span class="p">&gt;</span>Heading Level 3<span class="p">&lt;</span><span class="p">/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h4</span><span class="p"></span><span class="p">&gt;</span>Heading Level 4<span class="p">&lt;</span><span class="p">/</span><span class="nt">h4</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h5</span><span class="p"></span><span class="p">&gt;</span>Heading Level 5<span class="p">&lt;</span><span class="p">/</span><span class="nt">h5</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h6</span><span class="p"></span><span class="p">&gt;</span>Heading Level 6<span class="p">&lt;</span><span class="p">/</span><span class="nt">h6</span><span class="p">&gt;</span></code></pre>
+  </div>
+</div>
+
+<h3 id="unordered-lists">Unordered Lists</h3>
+<div
+  class="code-block"
+  style="--bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
+>
+  <ul>
+    <li>Unordered list item 1</li>
+    <li>
+      Unordered list item 2
+      <ul>
+        <li>Unordered list sub-item 1</li>
+        <li>Unordered list sub-item 2</li>
+      </ul>
+    </li>
+    <li>Unordered list item 3</li>
+    <li>Unordered list item 4</li>
+  </ul>
+  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
+    <pre
+      class="chroma"
+    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">ul</span><span class="p"></span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>Unordered list item 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>
+  Unordered list item 2
+    <span class="p">&lt;</span><span class="nt">ul</span><span class="p"></span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>Unordered list sub-item 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>Unordered list sub-item 2<span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">ul</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>Unordered list item 3<span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>Unordered list item 4<span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">ul</span><span class="p">&gt;</span></code></pre>
+  </div>
+</div>
+
+<h3 id="ordered-lists">Ordered Lists</h3>
+<div
+  class="code-block"
+  style="--bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
+>
+  <ol>
+    <li>Ordered list item 1</li>
+    <li>
+      Ordered list item 2
+      <ol>
+        <li>Ordered list sub-item 1</li>
+        <li>Ordered list sub-item 2</li>
+      </ol>
+    </li>
+    <li>Ordered list item 3</li>
+    <li>Ordered list item 4</li>
+  </ol>
+  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
+    <pre
+      class="chroma"
+    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">ol</span><span class="p"></span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>Ordered list item 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>
+  Ordered list item 2
+    <span class="p">&lt;</span><span class="nt">ol</span><span class="p"></span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>Ordered list sub-item 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>Ordered list sub-item 2<span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">ol</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>Ordered list item 3<span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p"></span><span class="p">&gt;</span>Ordered list item 4<span class="p">&lt;</span><span class="p">/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">ol</span><span class="p">&gt;</span></code></pre>
+  </div>
+</div>
+{% endblock %}

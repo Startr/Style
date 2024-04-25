@@ -1,0 +1,144 @@
+{% extends "layout.njk" %}
+
+{% block article %}
+  <h2 id="everything-else">Everything Else</h2>
+  <h4 id="base-styling-for-tables-definition-lists-and-everything-else">Base styling for tables, definition lists and everything else.</h4>
+  <h3 id="tables">Tables</h3>
+  <div class="code-block" style="--bg:#f5f5f5; --radius: 4px; --p:1rem; --mb:3rem; --border-1:var(--br-grey);--fw:bold; --shadow-soft: 4; ">
+    <table>
+      <thead>
+        <tr>
+          <th scope="row">Column 1</th>
+          <th>Column 2</th>
+          <th>Column 3</th>
+          <th>Column 4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Row 1 Value 1</th>
+          <td>Row 1 Value 2</td>
+          <td>Row 1 Value 3</td>
+          <td>Row 1 Value 4</td>
+        </tr>
+        <tr>
+          <th scope="row">Row 2 Value 1</th>
+          <td>Row 2 Value 2</td>
+          <td>Row 2 Value 3</td>
+          <td>Row 2 Value 4</td>
+        </tr>
+        <tr>
+          <th scope="row">Row 3 Value 1</th>
+          <td>Row 3 Value 2</td>
+          <td>Row 3 Value 3</td>
+          <td>Row 3 Value 4</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th scope="row">Total 1</th>
+          <th>Total 2</th>
+          <th>Total 3</th>
+          <th>Total 4</th>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
+      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">table</span><span class="p"></span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">thead</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p"></span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span> <span class="na">scope</span><span class="o">=</span><span class="s">&#34;row&#34;</span><span class="p"></span><span class="p">&gt;</span>Column 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p"></span><span class="p">&gt;</span>Column 2<span class="p">&lt;</span><span class="p">/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p"></span><span class="p">&gt;</span>Column 3<span class="p">&lt;</span><span class="p">/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p"></span><span class="p">&gt;</span>Column 4<span class="p">&lt;</span><span class="p">/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">tr</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="p">/</span><span class="nt">thead</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">tbody</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p"></span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span> <span class="na">scope</span><span class="o">=</span><span class="s">&#34;row&#34;</span><span class="p"></span><span class="p">&gt;</span>Row 1 Value 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span>Row 1 Value 2<span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span>Row 1 Value 3<span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span>Row 1 Value 4<span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p"></span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span> <span class="na">scope</span><span class="o">=</span><span class="s">&#34;row&#34;</span><span class="p"></span><span class="p">&gt;</span>Row 2 Value 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span>Row 2 Value 2<span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span>Row 2 Value 3<span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span>Row 2 Value 4<span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p"></span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span> <span class="na">scope</span><span class="o">=</span><span class="s">&#34;row&#34;</span><span class="p"></span><span class="p">&gt;</span>Row 3 Value 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span>Row 3 Value 2<span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span>Row 3 Value 3<span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p"></span><span class="p">&gt;</span>Row 3 Value 4<span class="p">&lt;</span><span class="p">/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">tr</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="p">/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">tfoot</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p"></span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span> <span class="na">scope</span><span class="o">=</span><span class="s">&#34;row&#34;</span><span class="p"></span><span class="p">&gt;</span>Total 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p"></span><span class="p">&gt;</span>Total 2<span class="p">&lt;</span><span class="p">/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p"></span><span class="p">&gt;</span>Total 3<span class="p">&lt;</span><span class="p">/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p"></span><span class="p">&gt;</span>Total 4<span class="p">&lt;</span><span class="p">/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">tr</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="p">/</span><span class="nt">tfoot</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">table</span><span class="p">&gt;</span></code></pre>
+    </div>
+  </div>
+
+  <h3 id="horizontal-rule">Horizontal Rule</h3>
+  <div class="code-block" style="--bg:#f5f5f5; --radius: 4px; --p:1rem; --mb:3rem; --border-1:var(--br-grey);--fw:bold; --shadow-soft: 4; "><hr>
+    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
+      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">hr</span><span class="p"></span><span class="p">&gt;</span></code></pre>
+    </div>
+  </div>
+
+  <h3 id="details">Details</h3>
+  <div class="code-block" style="--bg:#f5f5f5; --radius: 4px; --p:1rem; --mb:3rem; --border-1:var(--br-grey);--fw:bold; --shadow-soft: 4; ">
+    <details>
+      <summary>Details/Summary example</summary>
+      <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent placerat velit
+    lorem, feugiat congue lacus laoreet quis. Praesent maximus ex nec justo iaculis, in
+    euismod eros dictum. Cras ac lorem sit amet purus malesuada blandit. Mauris gravida
+    augue non urna sodales porttitor. Etiam ullamcorper luctus ullamcorper. In lobortis
+    consequat ante.
+  </p>
+    </details>
+    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
+      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">details</span><span class="p"></span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">summary</span><span class="p"></span><span class="p">&gt;</span>Details/Summary example<span class="p">&lt;</span><span class="p">/</span><span class="nt">summary</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent placerat velit
+    lorem, feugiat congue lacus laoreet quis. Praesent maximus ex nec justo iaculis, in
+    euismod eros dictum. Cras ac lorem sit amet purus malesuada blandit. Mauris gravida
+    augue non urna sodales porttitor. Etiam ullamcorper luctus ullamcorper. In lobortis
+    consequat ante.
+  <span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">details</span><span class="p">&gt;</span></code></pre>
+    </div>
+  </div>
+
+  <h3 id="definition-lists">Definition Lists</h3>
+  <div class="code-block" style="--bg:#f5f5f5; --radius: 4px; --p:1rem; --mb:3rem; --border-1:var(--br-grey);--fw:bold; --shadow-soft: 4; ">
+    <dl>
+      <dt>Term 1</dt>
+      <dd>Definition for term 1.</dd>
+      <dt>Term 2</dt>
+      <dd>Definition for term 2.</dd>
+      <dt>Term 3</dt>
+      <dd>Definition for term 3.</dd>
+    </dl>
+    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
+      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">dl</span><span class="p"></span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">dt</span><span class="p"></span><span class="p">&gt;</span>Term 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">dt</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">dd</span><span class="p"></span><span class="p">&gt;</span>Definition for term 1.<span class="p">&lt;</span><span class="p">/</span><span class="nt">dd</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">dt</span><span class="p"></span><span class="p">&gt;</span>Term 2<span class="p">&lt;</span><span class="p">/</span><span class="nt">dt</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">dd</span><span class="p"></span><span class="p">&gt;</span>Definition for term 2.<span class="p">&lt;</span><span class="p">/</span><span class="nt">dd</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">dt</span><span class="p"></span><span class="p">&gt;</span>Term 3<span class="p">&lt;</span><span class="p">/</span><span class="nt">dt</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">dd</span><span class="p"></span><span class="p">&gt;</span>Definition for term 3.<span class="p">&lt;</span><span class="p">/</span><span class="nt">dd</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">dl</span><span class="p">&gt;</span></code></pre>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.njk" %}
+
+{% block article %}
+    <h2 id="background-helpers">Background Helpers</h2>
+    <h4 id="collection-of-helpers-for-element-background">Collection of helpers for element background</h4>
+    <br>
+    <h4 id="--grad">--grad</h4>
+    <p>The <code>--grad</code> helper adds a linear gradient on the background of an element. By itself <code>--grad</code> sets the gradient from black to transparent. The value can define either the direction (eg. <code>to top</code>, <code>to right</code>, etc) or the angle (eg. <code>180deg</code>). The gradient color can be changed from the default of black with the addition of the <code>--grad-color</code> helper. This helper sets the <code>background-image</code> CSS property.</p>
+    <div style="--d:flex; --mb:4rem;">
+        <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+            <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+                <figure style="--br:5px; --of:hidden; --grad:0deg; --pos:relative">
+                    <img src="https://source.unsplash.com/random/300x300" alt="sample">
+                    <figcaption id="target-grad" style="--inset:0; --pos:absolute; --grad:180deg; --grad-color: hsl(273, 99%, 31%);"></figcaption>
+                </figure>
+            </div>
+            <div>
+                <input type="color" id="grad-color" name="grad-color" value=" hsl(273, 99%, 31%)">
+                <input class="slider" type="range" id="grad" min="0" max="260" id="grad" name="grad" value="180">
+            </div>
+            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+                    <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="grad-label">--grad:180deg;</span> <span id="grad-color-label">--grad-color: hsl(273, 99%, 31%);</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        liveprop('grad', '--grad', 'deg', 'target-grad');
+    </script>
+    <script>
+        liveprop('grad-color', '--grad-color', '', 'target-grad');
+    </script>
+{% endblock %}
+</article>

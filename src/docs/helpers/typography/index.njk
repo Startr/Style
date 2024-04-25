@@ -1,0 +1,55 @@
+{% extends "layout.njk" %}
+
+{% block article %}
+  <h2 id="typography-helpers">Typography Helpers</h2>
+  <h4 id="style-includes-a-collection-of-typography-helpers-for-creating-beautiful-shadow-effects-to-any-box-element">Startr Style includes a collection of typography helpers for creating beautiful shadow effects to any box element.</h4>
+  <br>
+  <h3 id="--line-clamp">--line-clamp</h3>
+  <p>The <code>--line-clamp</code> helper allows you to easily set a line clamp on an element. The value of this helper defines the number of lines at which text will be clamped.</p>
+  <div style="--d:flex; --mb:4rem;">
+    <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+      <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+        <div style="--maxw:400px; --br:5px; --bg:#fff; --of:hidden;">
+          <div id="target-line-clamp" style="--line-clamp:4; --m:1rem" >
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est.
+    </div>
+        </div>
+      </div>
+      <div>
+        <input class="slider" type="range" id="line-clamp" name="line-clamp" min="1" max="10" value="4">
+      </div>
+      <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+        <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+          <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="line-clamp-label">--line-clamp:4;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    liveprop('line-clamp', '--line-clamp', '', 'target-line-clamp');
+  </script>
+  <h3 id="--text-3d">--text-3d</h3>
+  <p>The <code>--text-3d</code> helper gives text a 3D. Value of this helper sets the 3D color using the text-shadow CSS property. This can be used alongside the <code>--c</code> ulility to set the text color as demonstrated below.</p>
+  <div style="--d:flex; --mb:4rem;">
+    <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
+      <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+        <span id="target-text-3d" style="--text-3d:#470182; --c:#b9e1fd; --weight:bold; --size: 5rem" >Hello World!</span>
+      </div>
+      <div>
+        <input type="color" id="color" name="color" value="#470182" style="--d:inline-block;">
+        <input type="color" id="text-3d" name="text-3d" value="#b9e1fd" style="--d:inline-block;">
+      </div>
+      <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+        <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;">
+          <pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="text-3d-label">--text-3d:#406DC4;</span> <span id="color-label">--c:#57A1DB;</span>"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    liveprop('text-3d', '--text-3d', '', 'target-text-3d');
+  </script>
+  <script>
+    liveprop('color', '--c', '', 'target-text-3d');
+  </script>
+{% endblock %}
