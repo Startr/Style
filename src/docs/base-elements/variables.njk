@@ -10,40 +10,35 @@
   can achieve this by incorporating the following code into your stylesheet. Just make sure to include these
   customizations in a stylesheet that is loaded after you've integrated Startr Style.
 </p>
-<div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br: 0.4rem">
-  <pre
-    class="chroma"
-  ><code class="language-css" data-lang="css"><span class="p">:</span><span class="nd">root</span> <span class="p">{</span>
-  <span class="nv">--primary</span><span class="p">:</span> <span class="mh">  darkblue</span><span class="p">;</span>
-  <span class="nv">--secondary</span><span class="p">:</span> <span class="mh">darkorange</span><span class="p">;</span>
-  <span class="nv">--text-main</span><span class="p">:</span> <span class="mh">darkslategrey</span><span class="p">;</span><span class="p">;</span>
-  <span class="nv">--border-radius</span><span class="p">:</span> <span class="mi">3pt</span><span class="p">;</span>
-<span class="p">}</span></code></pre>
-</div>
+{% highlight "css" %}
+:root {
+  --primary:   darkblue;
+  --secondary: darkorange;
+  --text-main: darkslategrey;;
+  --border-radius: 3pt;
+}
+{% endhighlight %}
 <h3 id="scoping-css-variables">Scoping CSS Variables</h3>
 <p>
   One great thing about utilizing CSS variables is their ability to have a limited scope. When you set a CSS variable to
   apply to the whole document <code>:root</code>, it affects all parts. However, by using local scope, you can create a
   variable that only works within a particular element. You can do this either by adjusting your stylesheet or by
-  directly adding it to the element..
+  directly adding it to the element...
 </p>
+
 <h4 id="local-scope-in-your-style">Local scope in your style</h4>
 <p>The following example redefines the primary and secondary colors inside any <code>myelement</code> class. You can use any valid style definition including other varables.</p>
-<div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br: 0.4rem;">
-  <pre
-    class="chroma"
-  ><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">myelement</span> <span class="p">{</span>
-  <span class="nv">--primary</span><span class="p">:</span> <span class="mh">var(--blue)</span><span class="p">;</span>
-  <span class="nv">--secondary</span><span class="p">:</span> <span class="mh">var(--dark-grey)</span><span class="p">;</span>
-<span class="p">}</span></code></pre>
-</div>
+{% highlight "css" %}
+.myelement {
+  --primary: var(--blue);
+  --secondary: var(--dark-grey);
+}
+{% endhighlight %}
 <h4 id="local-scope-inline">Local scope inline</h4>
 <p>The following example redefines the primary and secondary colors inline on the element itself.</p>
-<div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br: 0.4rem">
-  <pre
-    class="chroma"
-  ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--primary: #A46313; --secondary: #E02E06;&#34;</span><span class="p"></span><span class="p">&gt;</span>
+{% highlight "html" %}
+<div  style="--primary: var(--blue); --secondary: var(--dark-grey);">
   ...
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
 </div>
+{% endhighlight %}
 {% endblock %}
