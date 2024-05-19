@@ -150,11 +150,13 @@
   class="code-block"
   style="--bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
 >
-  <label>Message
+  <label
+    >Message
     <textarea placeholder="Hello People..."></textarea>
   </label>
   {% highlight "html" %}
-  <label>Message
+  <label
+    >Message
     <textarea placeholder="Hello People..."></textarea>
   </label>
   {% endhighlight %}
@@ -204,17 +206,17 @@
   <br />
   <input type="checkbox" id="checkbox-3" disabled="" />
   <label for="checkbox-3">Disabled Checkbox</label>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
-    <pre class="chroma"
-    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;checkbox-1&#34;</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;checkbox-1&#34;</span><span class="p"></span><span class="p">&gt;</span>Checkbox<span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">br</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;checkbox-2&#34;</span> <span class="na">checked</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;checkbox-2&#34;</span><span class="p"></span><span class="p">&gt;</span>Checked Checkbox<span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">br</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;checkbox-3&#34;</span> <span class="na">disabled</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;checkbox-3&#34;</span><span class="p"></span><span class="p">&gt;</span>Disabled Checkbox<span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span></code></pre>
-  </div>
+
+  {% highlight "html"%}
+  <input type="checkbox" id="checkbox-1" />
+  <label for="checkbox-1">Checkbox</label>
+  <br />
+  <input type="checkbox" id="checkbox-2" checked="" />
+  <label for="checkbox-2">Checked Checkbox</label>
+  <br />
+  <input type="checkbox" id="checkbox-3" disabled="" />
+  <label for="checkbox-3">Disabled Checkbox</label>
+  {% endhighlight %}
 </div>
 
 <h3 id="fieldset">Fieldset</h3>
@@ -240,26 +242,27 @@
     </div>
     <button>Submit</button>
   </fieldset>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
-    <pre
-      class="chroma"
-    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">fieldset</span><span class="p"></span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">legend</span><span class="p"></span><span class="p">&gt;</span>Fieldset<span class="p">&lt;</span><span class="p">/</span><span class="nt">legend</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;grid&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--col: 2&#34;</span><span class="p"></span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">label</span><span class="p"></span><span class="p">&gt;</span>Username
-        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;John&#34;</span><span class="p"></span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">label</span><span class="p"></span><span class="p">&gt;</span>Password
-        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;Dow&#34;</span><span class="p"></span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Submit<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">fieldset</span><span class="p">&gt;</span></code></pre>
-  </div>
+  {% highlight "html" %}
+  <fieldset>
+    <legend>Fieldset</legend>
+    <div class="grid" style="--col: 2">
+      <p>
+        <label
+          >Username
+          <input type="text" placeholder="John" />
+        </label>
+      </p>
+      <p>
+        <label
+          >Password
+          <input type="password" placeholder="Dow" />
+        </label>
+      </p>
+    </div>
+    <button>Submit</button>
+  </fieldset>
+  {% endhighlight %}
+
 </div>
 
 <h3 id="select">Select</h3>
@@ -267,8 +270,7 @@
   class="code-block"
   style="--bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
 >
-  <label for="select"
-    >Select
+  <label for="select">Select
     <select id="select">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
@@ -279,21 +281,21 @@
       </optgroup>
     </select>
   </label>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
-    <pre
-      class="chroma"
-    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;select&#34;</span><span class="p"></span><span class="p">&gt;</span>Select
-  <span class="p">&lt;</span><span class="nt">select</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;select&#34;</span><span class="p"></span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;1&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;2&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 2<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;3&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 3<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">optgroup</span> <span class="na">label</span><span class="o">=</span><span class="s">&#34;Subgroup&#34;</span><span class="p"></span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;4&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 4<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;5&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 5<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="p">/</span><span class="nt">optgroup</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="p">/</span><span class="nt">select</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span>       </code></pre>
-  </div>
+
+  {% highlight "html" %}
+  <label for="select">Select
+    <select id="select">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <optgroup label="Subgroup">
+        <option value="4">Option 4</option>
+        <option value="5">Option 5</option>
+      </optgroup>
+    </select>
+  </label>
+  {% endhighlight %}
+
 </div>
 
 <h3 id="multi-select">Multi Select</h3>
@@ -316,27 +318,28 @@
       </optgroup>
     </select>
   </label>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
-    <pre
-      class="chroma"
-    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;selectmultiple&#34;</span><span class="p"></span><span class="p">&gt;</span>Multiselect
-  <span class="p">&lt;</span><span class="nt">select</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;selectmultiple&#34;</span> <span class="na">multiple</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p"></span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;1&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 1<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;2&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 2<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;3&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 3<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;4&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 4<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;5&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 5<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;6&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 6<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">optgroup</span> <span class="na">label</span><span class="o">=</span><span class="s">&#34;Subgroup&#34;</span><span class="p"></span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;7&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 7<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;8&#34;</span><span class="p"></span><span class="p">&gt;</span>Option 8<span class="p">&lt;</span><span class="p">/</span><span class="nt">option</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="p">/</span><span class="nt">optgroup</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="p">/</span><span class="nt">select</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span></code></pre>
-  </div>
+
+  {% highlight "html" %}
+  <label for="selectmultiple"
+    >Multiselect
+    <select id="selectmultiple" multiple="">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+      <option value="6">Option 6</option>
+      <optgroup label="Subgroup">
+        <option value="7">Option 7</option>
+        <option value="8">Option 8</option>
+      </optgroup>
+    </select>
+  </label>
+  {% endhighlight %}
+
 </div>
 
-<h3 id="file-input">FIle Input</h3>
+<h3 id="file-input">File Input</h3>
 <div
   class="code-block"
   style="--bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
@@ -345,48 +348,47 @@
     >Input File
     <input type="file" />
   </label>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
-    <pre
-      class="chroma"
-    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;input-file&#34;</span><span class="p"></span><span class="p">&gt;</span>Input File
-  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;file&#34;</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span>      </code></pre>
-  </div>
+
+  {% highlight "html" %}
+  <label for="input-file"
+    >Input File
+    <input type="file" />
+  </label>
+  {% endhighlight %}
+
 </div>
 
 <h3 id="color-input">Color Input</h3>
-<div
-  class="code-block"
+<div class="code-block"
   style="--bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
 >
-  <label for="input-color"
-    >Input Color
+  <label for="input-color">Input Color
     <input type="color" value="#4a69bd" />
   </label>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
-    <pre
-      class="chroma"
-    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;input-color&#34;</span><span class="p"></span><span class="p">&gt;</span>Input Color
-  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;color&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;#4a69bd&#34;</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span></code></pre>
-  </div>
+  
+  {% highlight "html" %}
+  <label for="input-color">Input Color
+    <input type="color" value="#4a69bd" />
+  </label>
+  {% endhighlight %}
+
 </div>
 
 <h3 id="range-input">Range Input</h3>
-<div
-  class="code-block"
+<div class="code-block"
   style="--bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
 >
   <label for="input-range"
     >Input Range
     <input type="range" />
   </label>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
-    <pre
-      class="chroma"
-    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;input-range&#34;</span><span class="p"></span><span class="p">&gt;</span>Input Range
-  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;range&#34;</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">label</span><span class="p">&gt;</span></code></pre>
-  </div>
+  
+    {% highlight "html" %}
+  <label for="input-range"
+    >Input Range
+    <input type="range" />
+  </label>
+  {% endhighlight %}
+
 </div>
 {% endblock %}
