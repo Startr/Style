@@ -57,6 +57,69 @@
   box-sizing: border-box
 }
 
+
+
+[data-theme="dark"] {
+  --background: hsl(0, 0%, 10%);
+  --background-alt: hsl(0, 0%, 15%);
+  --text-main: hsl(0, 0%, 85%);
+  --text-bright: hsl(0, 0%, 95%);
+  --text-muted: hsl(0, 0%, 70%);
+  --links: var(--blue);
+  --focus: rgba(255, 255, 255, 0.35);
+  --border: rgba(255, 255, 255, 0.2);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-main);
+  transition: var(--transition);
+}
+
+.container {
+  max-width: var(--wrapper);
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.hero {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.section {
+  padding: 2rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section img {
+  width: 100%;
+  border-radius: var(--border-radius);
+}
+
+.section h2 {
+  color: var(--text-bright);
+  margin: var(--heading-margin);
+}
+
+.section p {
+  color: var(--text-muted);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: var(--background-alt);
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+
+
 html {
   font-family: -apple-system, BlinkMacSystemFont, Avenir, avenir next, segoe ui, roboto, oxygen, ubuntu, cantarell, fira sans, droid sans, helvetica neue, sans-serif;
   font-size: var(--typo-size-6) line-height: 1.6;
@@ -3740,8 +3803,14 @@ code {
     color: #3677a9
   }
 
-  .s {
-    color: #ed9d13
+  .s, span.token.attr-value {
+    color: #ed9d13;
+    font-weight: 400;
+  }
+
+  span.token.attr-name {
+    color: lightgrey;
+    font-weight: 400;
   }
 
   .na {
