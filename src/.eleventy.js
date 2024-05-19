@@ -4,7 +4,7 @@ module.exports = function (eleventyConfig) {
   let options = {
     html: true,
     breaks: true,
-    linkify: true
+    linkify: true,
   };
 
   eleventyConfig.setLibrary("md", markdownIt(options));
@@ -13,6 +13,14 @@ module.exports = function (eleventyConfig) {
 module.exports = function (eleventyConfig) {
   // Syntax Highlighting
   eleventyConfig.addPlugin(syntaxHighlight);
+
+  eleventyConfig.addTransform("addPreStyles", function (content, outputPath) {
+    if (outputPath.endsWith(".html")) {
+      return content.replace(/<pre/g, '<pre style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb: 0"');
+    }
+    return content;
+  });
+
   // set directories to pass through to the dist directory
   eleventyConfig.addPassthroughCopy({ static: "/" });
   // Copy any .jpg file to `_site`, via Glob pattern
@@ -29,7 +37,6 @@ module.exports = function (eleventyConfig) {
   });
 
   return {
-    markdownTemplateEngine: "njk"
+    markdownTemplateEngine: "njk",
   };
 };
-
