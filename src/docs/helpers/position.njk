@@ -7,17 +7,19 @@
 <p>The <code>--inset</code> helper anchors absolutely positioned elements relative to all edges of the nearest positioned parent. The value of this helper collectively sets the distance of the <code>top</code>, <code>left</code>, <code>right</code> and <code>bottom</code> CSS properties. For responsive control this helper can be used in partnership with the <code>top</code>, <code>left</code>, <code>right</code> and <code>bottom</code> ultilies.</p>
 <div style="--d:flex; --mb:4rem;">
     <div style="--p:1rem; --fx:1; --bg:#eee; --m: 2rem auto; --maxw: 600px; --br: 0.3rem; --shadow-soft: 4; ">
-        <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;"><figure style="--maxw:300px; --br:5px; --of:hidden; --pos:relative">
-<img src="https://source.unsplash.com/random/300x300" alt="sample">
-<figcaption id="target-inset" style="--inset:10px; --pos:absolute; --bg:rgba(0,0,0,.8); --c:white; --br:5px; ">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-</figcaption>
-</figure></div>
-            <div>
-                <input class="slider" type="range" id="inset" name="inset" min="0" max="78" value="10">
-            </div>
-            <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
-                <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;"><pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--pos:relative;"</span></span><span class="p"></span><span class="p">&gt;</span>
+        <div style="--fx:1; --p:3rem; --mb:.5rem; --d:flex; --jc:center;">
+            <figure style="--maxw:300px; --br:5px; --of:hidden; --pos:relative">
+                <img src="https://source.unsplash.com/random/300x300" alt="sample">
+                <figcaption id="target-inset" style="--inset:10px; --pos:absolute; --bg:rgba(0,0,0,.8); --c:white; --br:5px; ">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </figcaption>
+            </figure>
+        </div>
+        <div>
+            <input class="slider" type="range" id="inset" name="inset" min="0" max="78" value="10">
+        </div>
+        <div class="markdown" style="--maxw:800px; --w:100%; --pos:relative;">
+            <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb:0;"><pre class="chroma" style="--mt:.75rem;"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--pos:relative;"</span></span><span class="p"></span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"<span id="inset-label">--inset:3;</span> --pos:absolute;"</span></span><span class="p"></span><span class="p">&gt;</span> ... <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
             </div>
