@@ -108,14 +108,28 @@ body {
 
 .theme-toggle {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
+  top: -3px;
+  right: -3px;
+  z-index: 100;
   background: var(--background-alt);
   border: 1px solid var(--border);
   padding: 0.5rem;
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: var(--transition);
+
+  .stroke-sun {
+    stroke: #FD0;
+}
+
+.fill-sun {
+    fill: #FE5;
+}
+
+.fill-moon {
+    fill: #44a;
+    stroke:#55a
+}
 }
 
 
