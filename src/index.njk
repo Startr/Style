@@ -148,31 +148,31 @@
       elements. It's as easy as that!
     </p>
     <p>Here's how you can do it in your HTML:</p>
-    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
-      <pre class="chroma"><code class="language-html" data-lang="html">&lt;<span class="nt">html</span>&gt;
-      &lt;<span class="nt">head</span>&gt;
-          &lt;!-- Include Startr Style CSS --&gt;
-          &lt;<span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span> <span class="na">href</span><span class=
-      "o">=</span><span class="s">"https://startr.style/style.css"</span>&gt;
-      &lt;/<span class="nt">head</span>&gt;
-      &lt;<span class="nt">body</span>&gt;
-          &lt;!-- Your HTML content --&gt;
-          &lt;<span class="nt">p</span>&gt;This paragraph will look great without any extra effort!&lt;/<span class="nt">p</span>&gt;
-          &lt;<span class="nt">button</span>&gt;This button will also have a nice style.&lt;/<span class="nt">button</span>&gt;
-      &lt;/<span class="nt">body</span>&gt;
-&lt;/<span class="nt">html</span>&gt;</code></pre>
-    </div>
+
+    {% highlight "html" %}
+<html>
+      <head>
+          <!-- Include Startr Style CSS -->
+          <link rel="stylesheet" href="https://startr.style/style.css">
+      </head>
+      <body>
+          <!-- Your HTML content -->
+          <p>This paragraph will look great without any extra effort!</p>
+          <button>This button will also have a nice style.</button>
+      </body>
+</html>
+    {% endhighlight %}
+<br>
     <p>
       Just include the link to the <strong>Startr Style</strong> CSS file in the <code>&lt;head&gt;</code> of your HTML,
       and your basic elements like paragraphs and buttons will be automatically styled. No need to add any classes or
       extra code!
     </p>
     <p>
-      Just ad one line of code and you are good to go.<br /><br />
+      Just ad one line of code and you are good to go.<br />
       {% highlight "html" %}
       <link rel="stylesheet" href="https://startr.style/style.css">
-      {% endhighlight %}<br /><br />
-      <br /><br />
+      {% endhighlight %}<br>
       It is all you need to get started. No need to compile anything, just add and start building. When you want to take
       advantage of the full power of Startr Style, you can start adding custom properties to your elements. This will
       allow you to customize your styles even further.
@@ -191,17 +191,18 @@
       that element. A <strong>Utility Complete</strong> framework provide a complete set of utilities for the majority
       of CSS properties.
     </p>
-    <ul>
+    <ul style="    --w: fit-content;
+    --m: 2em auto;">
       <li>Super quick HTML prototyping</li>
       <li>No need to leave your HTML </li>
       <li>Style your elements fast</li>
         <button class="white" style="--d: inline; --m: 2rem">
-          <a href="#learn-more">Learn More</a></button
-        ><br />
-      </li>
+          <a href="#learn-more">Learn More</a></button><br/>
+
     </ul>
   </div>
   <h3 id="components">Components</h3>
+  <h6>The following are example components from our upcoming componet library.</h6>
   <div
     style="--c: var(--black); --cc: 1; --cc-sm: 2; --cc-md: 3; --cg: 1.5rem; --bg: #eee; --p: 1.5rem; --pos: relative; --element-bg: var(--background-alt); --btn-c: var(--text-bright)"
   >
@@ -342,7 +343,7 @@
       </div>
       <div style="--p: 1rem">
         <button aria-label="Sample Button" class="white" style="--w: 100%">Sign in</button>
-        <button aria-label="Sample Button" style="--w: 100%; --bc: var(--primary)">Create an account</button>
+        <button aria-label="Sample Button" style="--w: 100%; --bc: var(--primary); --c:white">Create an account</button>
       </div>
     </div>
     <div style="--p: 2rem 1rem; --ta: center; --mb: 1.5rem">
