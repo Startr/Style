@@ -192,11 +192,11 @@
       of CSS properties.
     </p>
     <ul>
-      <li>Super quick prototyping without leaving your HTML</li>
-      <li>
-        CSS size remains constant as your project grows
+      <li>Super quick HTML prototyping</li>
+      <li>No need to leave your HTML </li>
+      <li>Style your elements fast</li>
         <button class="white" style="--d: inline; --m: 2rem">
-          <a href="#learn">Learn More</a></button
+          <a href="#learn-more">Learn More</a></button
         ><br />
       </li>
     </ul>
@@ -661,24 +661,21 @@
   <p>
     There is nothing new about the concept of utility complete CSS and today you will find any number of utility first
     frameworks to pick from. What is unique about Startr Style however, is how these utilities are implemented.
-    Traditionally utility complete frameworks include a rule for every common CSS property/value combination. Not only
-    does this result in an incredibly large CSS file size it also means you are restricted to a set number of
+    Traditionally utility complete frameworks include a rule for every common CSS property/value combination. </p>
+    
+    <p>
+    Not only does this result in an incredibly large CSS file size it also means you are restricted to a set number of
     property/value combinations as defined by the framework developers. Startr Style uses a different approach. Instead
-    utilities are defined by just the property and you the developer define the value. Not only is the resulting CSS a
-    fraction of the size, you also have full access to the CSS spec for each property.
-  </p>
+    utilities are defined by just the property and you the developer define the value.</p>
+    
+    <p>The resulting CSS a fraction of the size & you also have full access to the CSS spec for each property.</p>
   <h5 id="style-based-utilities">Style based utilities</h5>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
-    <pre
-      class="chroma"
-    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--bg:var(--dark)&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">div</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--bg:#2A2A2A&#34;</span><span class=
-      "p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">div</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--bg:rgb(42,42,42)&#34;</span><span class=
-      "p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">div</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;--bg:rgba(0,0,0,.8)&#34;</span><span class=
-      "p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">div</span><span class="p"></span><span class="p">&gt;</span></code></pre>
-  </div>
+{% highlight "html" %}
+<div style="--bg:var(--dark)"><div>
+<div style="--bg:#2A2A2A"><div>
+<div style="--bg:rgb(42,42,42)"><div>
+<div style="--bg:rgba(0,0,0,.8)"><div>
+{% endhighlight %}
   <br />
   <h3 id="responsive-design-and-media-queries">Responsive Design and Media Queries</h3>
   <p>
@@ -687,23 +684,21 @@
     designs.
   </p>
   <p>By default, we set four predefined points for the most common device resolutions.</p>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
-    <pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* Small &#39;-sm&#39; */</span>
-<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">640px</span><span class=
-"o">)</span> <span class="p">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="p">}</span>
 
-<span class="c">/* Medium &#39;-md&#39; */</span>
-<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">768px</span><span class=
-"o">)</span> <span class="p">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="p">}</span>
+  {% highlight "css" %}
+  /* Small '-sm' */
+@media (min-width: 640px) { ... }
 
-<span class="c">/* Large &#39;-lg&#39; */</span>
-<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">1024px</span><span class=
-"o">)</span> <span class="p">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="p">}</span>
+/* Medium '-md' */
+@media (min-width: 768px) { ... }
 
-<span class="c">/* Extra Large &#39;-xl&#39; */</span>
-<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">1280px</span><span class=
-"o">)</span> <span class="p">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="p">}</span></code></pre>
-  </div>
+/* Large '-lg' */
+@media (min-width: 1024px) { ... }
+
+/* Extra Large '-xl' */
+@media (min-width: 1280px) { ... }
+{% endhighlight %}
+
   <p>
     To use our style utilites with different screen sizes, just add the tool's name along with a <code>-</code> and the
     short name of the screen size you want. By default, media queries start with mobile screens and then adjust for
@@ -713,13 +708,11 @@
     Consider the following example where <code>--d</code> is the Startr Style utility for the <code>display</code> CSS
     property. Button is <code>display:block</code> by default. <code>display:none</code> from medium size screens up.
   </p>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr: 4; --br: 0.4rem">
-    <pre
-      class="chroma"
-    ><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">style</span><span class=
-          "o">=</span><span class="s">&#34;--d:block; --d-md:none&#34;</span><span class="p"></span><span class="p">&gt;</span>Only visible on small screens<span class=
-          "p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span></code></pre>
-  </div>
+
+  {% highlight "html" %}
+  <button style="--d:block; --d-md:none">Only visible on small screens</button>
+  {% endhighlight %}
+  
   <h2 style="--ta: center" id="discover">Discover limitless possibilities</h2>
   <p style="--ta: center">
     Explore our lab of resources and experiment with the endless possibilities of Startr Style.
