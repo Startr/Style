@@ -23,6 +23,8 @@ module.exports = function (eleventyConfig) {
 
   // set directories to pass through to the dist directory
   eleventyConfig.addPassthroughCopy({ static: "/" });
+  // include run folder for passing users scripts that can be called with curl
+  eleventyConfig.addPassthroughCopy({ run: "/run" });
   // Copy any .jpg file to `_site`, via Glob pattern
   // Keeps the same directory structure.
   eleventyConfig.addPassthroughCopy("**/*.jpg");
