@@ -1,17 +1,32 @@
+
 #!/bin/bash
-# Version 1.3
+# Version 1.4
 
 # Copyright (c) Startr LLC. All rights reserved.
 # This script is licensed under the GNU Affero General Public License v3.0.
 # For more information, see https://www.gnu.org/licenses/agpl-3.0.en.html
 
-# Startr OpenCo™ Build Script
+# Combined Build and Build 'n' Run Script
 
-# PLATFORM variable can be set via the first script argument. If not set, no platform will be specified in the docker build.
-PLATFORM=$1
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
 
-# This simple script builds this 
-#directory 's Dockerfile Image
+# Emojis
+BUILD_EMOJI='🛠️'
+RUN_EMOJI='🚀'
+SUCCESS_EMOJI='✅'
+ERROR_EMOJI='❌'
+
+# RUN variable to decide whether to run the Docker container after building. 
+# Set to 'run' if you want to run after building.
+RUN=$1
+
+# PLATFORM variable can be set via the second script argument. If not set, no platform will be specified in the docker build.
+PLATFORM=$2
 
 # Set PROJECTPATH to the path of the current directory
 PROJECTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -25,22 +40,29 @@ BRANCH=${FULL_BRANCH##*/}
 TAG=$(git describe --always --tag)
 
 # Print the values of the variables
-echo PROJECTPATH=$PROJECTPATH
-echo     PROJECT=$PROJECT
-echo FULL_BRANCH=$FULL_BRANCH
-echo      BRANCH=$BRANCH
+echo -e "${BLUE}PROJECTPATH=${NC}$PROJECTPATH"
+echo -e "${BLUE}PROJECT=${NC}$PROJECT"
+echo -e "${BLUE}FULL_BRANCH=${NC}$FULL_BRANCH"
+echo -e "${BLUE}BRANCH=${NC}$BRANCH"
+
+# Check if the RUN variable is set to 'run'
+if [ "$RUN" == "run" ]; then
+    echo -e "${YELLOW}${BUILD_EMOJI} Building Docker image...${NC}"
+else
+    echo -e "${YELLOW}${BUILD_EMOJI} Building Docker image without running...${NC}"
+fi
 
 # Check if PLATFORM is set and not empty
 if [ -n "$PLATFORM" ]; then
-    echo "Building with specified platform: $PLATFORM"
+    echo -e "${YELLOW}Building with specified platform: ${GREEN}$PLATFORM${NC}"
     PLATFORM_ARG="--platform $PLATFORM"
     BUILD_ARG="--build-arg PLATFORM=$PLATFORM"
-    # If PLATFORM is set, build the prerequisites Dockerfile
-    DOCKERFILE="-f Dockerfile.prerequisites"
     # Replace '/' with '-' in PLATFORM to create FLATPLATFORM
     FLATPLATFORM=$(echo "$PLATFORM" | tr '/' '-')
+    # Use Dockerfile.$FLATPLATFORM
+    DOCKERFILE="-f Dockerfile.$FLATPLATFORM"
 else
-    echo "Building without specifying platform."
+    echo -e "${YELLOW}Building without specifying platform.${NC}"
     PLATFORM_ARG=""
     BUILD_ARG=""
     # If PLATFORM is not set, build the default Dockerfile
@@ -48,13 +70,36 @@ else
     FLATPLATFORM="default"
 fi
 
-echo docker build -t openco/$PROJECT-$BRANCH:$TAG .
-echo docker tag -f openco/$PROJECT-$BRANCH:$TAG openco/$PROJECT-$BRANCH:latest
+echo -e "${BLUE}docker build -t openco/$PROJECT-$BRANCH:$TAG .${NC}"
+echo -e "${BLUE}docker tag -f openco/$PROJECT-$BRANCH:$TAG openco/$PROJECT-$BRANCH:latest${NC}"
 
 # Build the Docker image
-docker build $PLATFORM_ARG $BUILD_ARG \
+if docker build $PLATFORM_ARG $BUILD_ARG \
   $DOCKERFILE \
   -t openco/$PROJECT-$BRANCH:$TAG \
   -t openco/$PROJECT-$BRANCH:$FLATPLATFORM \
   -t openco/$PROJECT-$BRANCH:latest \
-  .
+  .; then
+    echo -e "${GREEN}${SUCCESS_EMOJI} Build successful!${NC}"
+else
+    echo -e "${RED}${ERROR_EMOJI} Build failed!${NC}"
+    exit 1
+fi
+
+# If the RUN variable is set to 'run', execute the docker run command
+if [ "$RUN" == "run" ]; then
+    echo -e "${YELLOW}${RUN_EMOJI} Running the Docker container...${NC}"
+    if docker run \
+      -p 8888:8888 \
+      -p 8080:8080 \
+      -p 443:443 \
+      -p 80:80 \
+      -it openco/$PROJECT-$BRANCH:latest; then
+        echo -e "${GREEN}${SUCCESS_EMOJI} Docker container is running!${NC}"
+    else
+        echo -e "${RED}${ERROR_EMOJI} Failed to run Docker container!${NC}"
+        exit 1
+    fi
+else
+    echo -e "${GREEN}${SUCCESS_EMOJI} Build completed. Not running the Docker container.${NC}"
+fi
