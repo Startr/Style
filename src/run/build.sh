@@ -1,6 +1,5 @@
-
 #!/bin/bash
-# Version 1.4
+# Version 1.5
 
 # Copyright (c) Startr LLC. All rights reserved.
 # This script is licensed under the GNU Affero General Public License v3.0.
@@ -86,15 +85,22 @@ else
     exit 1
 fi
 
+# Check if running in an interactive shell
+if [ -t 1 ]; then
+    DOCKER_RUN_FLAGS="-it"
+else
+    DOCKER_RUN_FLAGS=""
+fi
+
 # If the RUN variable is set to 'run', execute the docker run command
 if [ "$RUN" == "run" ]; then
     echo -e "${YELLOW}${RUN_EMOJI} Running the Docker container...${NC}"
-    if docker run \
+    if docker run $DOCKER_RUN_FLAGS \
       -p 8888:8888 \
       -p 8080:8080 \
       -p 443:443 \
       -p 80:80 \
-      -it openco/$PROJECT-$BRANCH:latest; then
+      openco/$PROJECT-$BRANCH:latest; then
         echo -e "${GREEN}${SUCCESS_EMOJI} Docker container is running!${NC}"
     else
         echo -e "${RED}${ERROR_EMOJI} Failed to run Docker container!${NC}"
