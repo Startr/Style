@@ -1,5 +1,5 @@
 #!/bin/bash
-# Version 1.5
+# Version 1.5.01
 
 # Copyright (c) Startr LLC. All rights reserved.
 # This script is licensed under the GNU Affero General Public License v3.0.
@@ -96,10 +96,9 @@ fi
 if [ "$RUN" == "run" ]; then
     echo -e "${YELLOW}${RUN_EMOJI} Running the Docker container...${NC}"
     if docker run $DOCKER_RUN_FLAGS \
-      -p 8888:8888 \
-      -p 8080:8080 \
-      -p 443:443 \
-      -p 80:80 \
+      -p 9999:8888 \
+      -p 9090:8080 \
+      -p 6000:5000 \
       openco/$PROJECT-$BRANCH:latest; then
         echo -e "${GREEN}${SUCCESS_EMOJI} Docker container is running!${NC}"
     else
