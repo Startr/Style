@@ -1,5 +1,5 @@
-#!/bin/bash
-# Version 1.5.01
+#!/bin/bash -e
+# Version 1.6.0
 
 # Copyright (c) Startr LLC. All rights reserved.
 # This script is licensed under the GNU Affero General Public License v3.0.
@@ -20,9 +20,21 @@ RUN_EMOJI='🚀'
 SUCCESS_EMOJI='✅'
 ERROR_EMOJI='❌'
 
+# Validate script arguments
+if [ "$#" -lt 1 ]; then
+    echo -e "${RED}Usage: $0 <build|run> [platform]${NC}"
+    exit 1
+fi
+
 # RUN variable to decide whether to run the Docker container after building. 
 # Set to 'run' if you want to run after building.
 RUN=$1
+
+# Validate RUN variable
+if [ "$RUN" != "build" ] && [ "$RUN" != "run" ]; then
+    echo -e "${RED}Invalid argument for RUN: $RUN. Use 'build' or 'run'.${NC}"
+    exit 1
+fi
 
 # PLATFORM variable can be set via the second script argument. If not set, no platform will be specified in the docker build.
 PLATFORM=$2
@@ -30,7 +42,7 @@ PLATFORM=$2
 # Set PROJECTPATH to the path of the current directory
 PROJECTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Set PROJECT to the lowercase version of the name of this directory
-PROJECT=`echo ${PROJECTPATH##*/}|awk '{print tolower($0)}'`
+PROJECT=$(echo ${PROJECTPATH##*/} | awk '{print tolower($0)}')
 # Set FULL_BRANCH to the name of the current Git branch
 FULL_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 # Set BRANCH to the lowercase version of this name, with everything after the last forward slash removed
@@ -59,25 +71,29 @@ if [ -n "$PLATFORM" ]; then
     # Replace '/' with '-' in PLATFORM to create FLATPLATFORM
     FLATPLATFORM=$(echo "$PLATFORM" | tr '/' '-')
     # Use Dockerfile.$FLATPLATFORM
-    DOCKERFILE="-f Dockerfile.$FLATPLATFORM"
+    DOCKERFILE="Dockerfile.$FLATPLATFORM"
+    if [ ! -f "$DOCKERFILE" ]; then
+        echo -e "${RED}Dockerfile for platform $FLATPLATFORM not found!${NC}"
+        exit 1
+    fi
 else
     echo -e "${YELLOW}Building without specifying platform.${NC}"
     PLATFORM_ARG=""
     BUILD_ARG=""
     # If PLATFORM is not set, build the default Dockerfile
-    DOCKERFILE=""
+    DOCKERFILE="Dockerfile"
     FLATPLATFORM="default"
 fi
 
-echo -e "${BLUE}docker build -t openco/$PROJECT-$BRANCH:$TAG .${NC}"
-echo -e "${BLUE}docker tag -f openco/$PROJECT-$BRANCH:$TAG openco/$PROJECT-$BRANCH:latest${NC}"
+echo -e "${BLUE}docker build -t startr/$PROJECT-$BRANCH:$TAG .${NC}"
+echo -e "${BLUE}docker tag startr/$PROJECT-$BRANCH:$TAG startr/$PROJECT-$BRANCH:latest${NC}"
 
 # Build the Docker image
 if docker build $PLATFORM_ARG $BUILD_ARG \
-  $DOCKERFILE \
-  -t openco/$PROJECT-$BRANCH:$TAG \
-  -t openco/$PROJECT-$BRANCH:$FLATPLATFORM \
-  -t openco/$PROJECT-$BRANCH:latest \
+  -f $DOCKERFILE \
+  -t startr/$PROJECT-$BRANCH:$TAG \
+  -t startr/$PROJECT-$BRANCH:$FLATPLATFORM \
+  -t startr/$PROJECT-$BRANCH:latest \
   .; then
     echo -e "${GREEN}${SUCCESS_EMOJI} Build successful!${NC}"
 else
@@ -99,7 +115,7 @@ if [ "$RUN" == "run" ]; then
       -p 9999:8888 \
       -p 9090:8080 \
       -p 6000:5000 \
-      openco/$PROJECT-$BRANCH:latest; then
+      startr/$PROJECT-$BRANCH:latest; then
         echo -e "${GREEN}${SUCCESS_EMOJI} Docker container is running!${NC}"
     else
         echo -e "${RED}${ERROR_EMOJI} Failed to run Docker container!${NC}"
