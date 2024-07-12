@@ -4253,3 +4253,8 @@ h4 {
   padding: 2px 4px;
   border-radius: .75rem
 }
+
+/* Snap.startr.cloud logo fix */
+img.logo.clickable {
+  max-width: 60% !important;
+}
