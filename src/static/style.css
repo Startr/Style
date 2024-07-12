@@ -4256,5 +4256,5 @@ h4 {
 
 /* Snap.startr.cloud logo fix */
 img.logo.clickable {
-  max-width: 60% !important;
+  width: 4rem; 
 }
