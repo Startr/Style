@@ -61,7 +61,15 @@
 
   <body style="--maxw-md: 80rem; --m: auto; --size: 1.2rem">
     {% block themetoggle %}
-    <div class="theme-toggle" onclick="toggleTheme()" style="--shadow: 10; --bgc: var(--background-alt); --op:50%">
+    <div class="theme-toggle" onclick="toggleTheme()" 
+      style="
+        --shadow: 10; 
+        --bgc: var(--background-alt); 
+        --op:50%; 
+        --pos: fixed;
+        --t: 0;
+        --r: 0;
+        --z: 1000;">
       <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path
           d="M12 2a10 10 0 0110 10 10 10 0 01-10 10A10 10 0 112 12 10 10 0 0112 2zm0-2a12 12 0 1012 12A12 12 0 0012 0z"
@@ -231,7 +239,7 @@
           </div>
         </header>
 
-        <article class="markdown">{% block article %} {% endblock %}</article>
+        <article class="markdown" style="--maxw: calc(100vw - 3em);">{% block article %} {% endblock %}</article>
 
         <label for="menu-control" class="hidden book-menu-overlay"></label>
         {% endblock %}

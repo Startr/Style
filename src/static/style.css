@@ -47,6 +47,28 @@
   --wrapper: 1280px;
   --transition: all ease .6s;
 }
+
+[data-theme="dark"] {
+  --background: hsl(210, 30%, 8%);
+  --background-alt: hsl(210, 30%, 15%);
+  --text-main: hsl(0, 0%, 92%);
+  --text-bright: hsl(0, 0%, 49%);
+  --text-muted: hsl(0, 0%, 70%);
+  --links: var(--primary);
+  --focus: rgba(74, 105, 189, .35);
+  --border: rgba(255, 255, 255, 0.2);
+  --selection: hsl(210, 40%, 30%);
+  --button-hover: hsl(273, 99%, 41%);
+  --accent-border: hsl(273, 99%, 31%);
+  --accent-shadow: 0 10px 15px -3px rgba(255, 255, 255, .1), 0 4px 6px -2px rgba(255, 255, 255, .05);
+  --button-shadow: 0 4px 6px -1px rgba(255, 255, 255, .1), 0 2px 4px -1px rgba(255, 255, 255, .06);
+  --form-placeholder: var(--text-muted);
+  --form-text: var(--text-bright);
+  --variable: var(--green);
+  --highlight: var(--yellow);
+  --select-arrow: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='62.5' width='116.9' fill='%23FFFFFF'%3E%3Cpath d='M115.3 1.6c-1.6-1.6-4.2-1.6-5.8 0l-51 51.1L7.4 1.6C5.8 0 3.2 0 1.6 1.6 0 3.2 0 5.8 1.6 7.4l53.9 53.9c.8.8 1.8 1.2 2.9 1.2 1 0 2.1-.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2.1-5.8z'/%3E%3C/svg%3E");
+}
+
 *,
 ::before,
 ::after {
