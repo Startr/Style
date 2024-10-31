@@ -2983,7 +2983,7 @@ pre .changing {
 
 .markdown pre {
   padding: 0;
-  background: #282c34;
+  background: black;
   border-radius: .25rem;
   overflow-x: auto;
   margin-top: 1.5rem;
