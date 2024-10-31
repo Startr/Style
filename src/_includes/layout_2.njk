@@ -90,7 +90,7 @@
     {% block body %}
     <input type="checkbox" id="menu-control" class="hidden" />
     {% block header %}{% endblock %}
-    <main style="--d: flex; --maxw: 80rem; --m: 0 auto">
+    <main style="--d: flex; --maxw: min(80rem, 100vw); --m: 0 auto">
       <aside aria-label="Table of Contents"
         class="book-menu"
         style="
@@ -227,7 +227,7 @@
         {% endblock %}
       </aside>
 
-      <div class="book-page" style="--px: 2rem">
+      <div class="book-page" style="--px: 2rem; --maxw: min(80rem, 100vw);">
         {% block page %}
         <header class="book-header">
           <div class="flex align-center justify-between">
@@ -246,7 +246,7 @@
 
     <script defer src="https://buttons.github.io/buttons.js"></script>
     {% endblock %}
-    <footer class="book-footer" style="--d: flex; --maxw: 80rem; --m: 0 auto">
+    <footer class="book-footer" style="--d: flex; --maxw: min(80rem, 100vw); --m: 0 auto">
       <aside style="--fx: 0 0 16rem; --ta: center; --d:none; --d-md:block">
         <div>♥️</div>
       </aside>

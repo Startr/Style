@@ -61,14 +61,17 @@
 
   <body style="--maxw-md: 80rem; --m: auto; --size: 1.2rem">
     {% block themetoggle %}
-    <div class="theme-toggle" onclick="toggleTheme()" 
+    <theme-toggle  onclick="toggleTheme()" 
       style="
         --shadow: 10; 
-        --bgc: var(--background-alt); 
+        --bgc: var(--background-alt);
+        --c: var(--text); 
         --op:50%; 
         --pos: fixed;
-        --t: 0;
-        --r: 0;
+        --top: 0;
+        --right: 0;
+        --p:0.2em;
+        --bblr: 1em;
         --z: 1000;">
       <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path
@@ -88,11 +91,11 @@
           d="M17 3a1 1 0 0 1 1 1 2 2 0 0 0 2 2 1 1 0 1 1 0 2 2 2 0 0 0-2 2 1 1 0 1 1-2 0 2 2 0 0 0-2-2 1 1 0 1 1 0-2 2 2 0 0 0 2-2 1 1 0 0 1 1-1Z"
         ></path>
       </svg>
-    </div>
+    </theme-toggle
     {% endblock %} {% block body %}
-    <input type="checkbox" id="menu-control" class="hidden" />
+    <input type="checkbox" id="menu-control" style="--d:none" />
     {% block header %}{% endblock %}
-    <main style="--d: flex; --maxw: 80rem; --m: 0 auto">
+    <main style="--d: flex; --maxw: min(80rem, 100vw); --m: 0 auto; --of: hidden;">
       <aside
         aria-label="Table of Contents"
         class="book-menu"
@@ -229,7 +232,7 @@
         {% endblock %}
       </aside>
 
-      <div class="book-page" style="--px: 2rem">
+      <div class="book-page" style="--px: 2rem; --maxw: min(80rem, 100vw);">
         {% block page %}
         <header class="book-header">
           <div class="flex align-center justify-between">
