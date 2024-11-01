@@ -5,10 +5,10 @@
   --dark-grey: hsl(0, 0%, 29%);
   --black: hsl(0, 0%, 15%);
   --green: hsla(166, 88%, 25%, 0.83);
-  --blue: hsl(207.37, 85.07%, 86.86%);
+  --blue: hsla(226, 97%, 58%, 0.668);
   --orange: hsl(34, 100%, 50%);
   --red: hsl(348, 100%, 61%);
-  --purple: hsl(273, 99%, 31%, 0.83);
+  --purple: hsl(272deg 98% 26%);
   --yellow: hsl(48, 100%, 67%);
   --pink: hsl(330, 100%, 69%);
 
@@ -16,7 +16,7 @@
   --primary: var(--purple);
   --secondary: var(--red);
   --background: var(--white);
-  --background-alt: color-mix(in srgb, var(--white) 85%, var(--black) 15%);
+  --background-alt: color-mix(in srgb, var(--white) 85%, var(--primary) 35%);
   --selection: color-mix(in srgb, var(--grey) 60%, var(--black) 40%);
   --text-main: var(--black);
   --text-bright: color-mix(in srgb, var(--black) 60%, var(--white) 40%);
@@ -2975,10 +2975,10 @@ pre .changing {
 
 .markdown code {
   padding: 0 .25rem;
-  background: var(--background-alt);
+  background: var(--focus);
   border-radius: .25rem;
   font-size: .875em;
-  color: var(--text-muted);
+  color: var(--text);
 }
 
 .markdown pre {
