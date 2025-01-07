@@ -1,19 +1,22 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = function (eleventyConfig) {
+
   let options = {
     html: true,
     breaks: true,
     linkify: true,
   };
 
-  eleventyConfig.setLibrary("md", markdownIt(options));
-};
-
-module.exports = function (eleventyConfig) {
   // Syntax Highlighting
-  eleventyConfig.addPlugin(syntaxHighlight);
-
+  eleventyConfig.addPlugin(syntaxHighlight, {
+    preAttributes: {
+      tabindex: 0, // Optional, for keyboard navigation
+    },
+    codeAttributes: {
+      "data-lang": "{language}", // Add custom attributes
+    },
+  });
   eleventyConfig.addTransform("addPreStyles", function (content, outputPath) {
     if (outputPath.endsWith(".html")) {
       return content.replace(/<pre/g, '<pre style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem; --mb: 0"');
