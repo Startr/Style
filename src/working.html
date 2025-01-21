@@ -27,6 +27,7 @@
                 border-radius: 4px;
                 line-height: 1.6;
                 min-height: 100px;
+                white-space: pre-wrap;
             }
 
             button {
@@ -197,17 +198,15 @@
             // Initialize grammar
             let grammar = {
                 "origin": [
-                    "#persona# #adverb# #lessonRequest# (#subject#: #specificTopic#) #additional# #context#",
-                    "#persona# #adverb.capitalize# #lessonRequest# #subject# concepts (#specificTopic#) #additional# #context#"
+                    "#persona# #adverb# #lessonRequest# (#subject#: #specificTopic#) #additional# #context#.",
+                    "#persona# #adverb.capitalize# #lessonRequest# #subject# concepts (#specificTopic#) #additional# #context#."
                 ],
-
                 "persona": [
                     "As a #teacherType# who #teacherTrait#,",
                     "Being a #teacherType# focused on #teacherValue# with #experience# experience,",
                     "As #schoolRole# specializing in #teacherSpecialty#,",
                     "Working as #teacherType# committed to #teacherValue# through #pedagogyStyle# approaches,"
                 ],
-
                 "schoolRole": [
                     "a lead teacher",
                     "an IB educator",
@@ -220,7 +219,6 @@
                     "a trauma-informed practitioner",
                     "a decolonized curriculum advocate"
                 ],
-
                 "teacherType": [
                     "veteran educator",
                     "first-year teacher",
@@ -233,7 +231,6 @@
                     "adaptive learning expert",
                     "place-based education mentor"
                 ],
-
                 "experience": [
                     "5+ years",
                     "10+ years",
@@ -246,7 +243,6 @@
                     "charter school",
                     "magnet school"
                 ],
-
                 "teacherTrait": [
                     "prioritizes metacognitive strategies",
                     "emphasizes heutagogical principles",
@@ -259,7 +255,6 @@
                     "practices contemplative education",
                     "models growth mindset principles"
                 ],
-
                 "teacherValue": [
                     "cultural sustainability",
                     "digital citizenship",
@@ -272,7 +267,6 @@
                     "neurodiversity affirmation",
                     "community partnerships"
                 ],
-
                 "teacherSpecialty": [
                     "multimodal literacy",
                     "computational thinking",
@@ -285,7 +279,6 @@
                     "decolonized assessment",
                     "socio-emotional intelligence"
                 ],
-
                 "adverb": [
                     "urgently",
                     "reflectively",
@@ -298,7 +291,6 @@
                     "dialogically",
                     "iteratively"
                 ],
-
                 "lessonRequest": [
                     "create a #timeframe# #lessonFormat# focusing on",
                     "design #adjective# learning experiences exploring",
@@ -311,7 +303,6 @@
                     "evaluate #assessmentFocus# through",
                     "facilitate #collabType# investigations of"
                 ],
-
                 "lessonFormat": [
                     "hyperdoc",
                     "learning station rotation",
@@ -324,7 +315,6 @@
                     "community action project",
                     "phenomenon-based investigation"
                 ],
-
                 "techIntegration": [
                     "VR-enhanced",
                     "AI-assisted",
@@ -337,7 +327,6 @@
                     "data-visualization",
                     "wiki-collaborative"
                 ],
-
                 "resourceType": [
                     "primary source",
                     "manipulative-based",
@@ -350,7 +339,6 @@
                     "ethnographic",
                     "generative AI"
                 ],
-
                 "framework": [
                     "Bloom's Digital Taxonomy",
                     "TPACK model",
@@ -363,7 +351,6 @@
                     "Habits of Mind",
                     "UN Sustainable Development Goals"
                 ],
-
                 "existingResource": [
                     "existing OER materials",
                     "textbook chapters",
@@ -376,7 +363,6 @@
                     "museum collections",
                     "archival documents"
                 ],
-
                 "assessmentFocus": [
                     "conceptual understanding",
                     "transversal competencies",
@@ -389,7 +375,6 @@
                     "epistemic cognition",
                     "collective intelligence"
                 ],
-
                 "collabType": [
                     "cross-grade",
                     "community-engaged",
@@ -402,7 +387,6 @@
                     "cross-ability",
                     "human-AI collaborative"
                 ],
-
                 "subject": [
                     "Mathematics",
                     "Literacy",
@@ -415,7 +399,6 @@
                     "Media Literacy",
                     "Creative Computing"
                 ],
-
                 "specificTopic": [
                     "decolonizing colonial narratives in local history",
                     "modeling climate change impacts through systems thinking",
@@ -428,7 +411,6 @@
                     "examining linguistic power structures through discourse analysis",
                     "developing AI ethics case studies for digital citizenship"
                 ],
-
                 "additional": [
                     "for #studentGroup#",
                     "aligned with #standards#",
@@ -441,7 +423,6 @@
                     "to cultivate #outcome#",
                     ""
                 ],
-
                 "studentGroup": [
                     "neurodivergent learners",
                     "emergent bilingual students",
@@ -454,7 +435,6 @@
                     "first-generation scholars",
                     "digitally divided populations"
                 ],
-
                 "standards": [
                     "ISTE standards",
                     "NGSS performance expectations",
@@ -467,7 +447,6 @@
                     "district equity indicators",
                     "school-wide graduate competencies"
                 ],
-
                 "tools": [
                     "Arduino microcontrollers",
                     "Epic! digital library",
@@ -480,7 +459,6 @@
                     "Merge EDU augmented reality",
                     "Mural digital whiteboards"
                 ],
-
                 "strategy": [
                     "thinking routines from Project Zero",
                     "translanguaging strategies",
@@ -493,7 +471,6 @@
                     "participatory action research",
                     "indigenous knowledge systems"
                 ],
-
                 "adaptation": [
                     "multi-sensory supports",
                     "language scaffolding",
@@ -506,7 +483,6 @@
                     "universal design principles",
                     "cultural interface options"
                 ],
-
                 "assessment": [
                     "dynamic portfolio reviews",
                     "learning story documentation",
@@ -519,7 +495,6 @@
                     "speculative future scenarios",
                     "ethnographic process journals"
                 ],
-
                 "support": [
                     "instructional paraeducators",
                     "assistive technologies",
@@ -532,7 +507,6 @@
                     "behavior support teams",
                     "indigenous knowledge keepers"
                 ],
-
                 "challenge": [
                     "chronic absenteeism",
                     "digital access disparities",
@@ -545,7 +519,6 @@
                     "generational knowledge gaps",
                     "institutional bias structures"
                 ],
-
                 "outcome": [
                     "critical consciousness",
                     "ethical leadership",
@@ -558,15 +531,69 @@
                     "community resilience",
                     "transformative agency"
                 ],
-
                 "context": [
-                    "| School Context: #schoolType# |",
-                    "| Classroom Model: #classroomModel# |",
-                    "| Resource Constraints: #constraints# |",
-                    "| Timeline: #timeline# |",
-                    ""
-                ],
+                    "\n\n School Context: #schoolType# \n Classroom Model: #classroomModel# \n Resource Constraints: #constraints# \n Timeline: #timeline# "
 
+                ],
+                "pedagogyStyle": [
+                    "project-based",
+                    "problem-based",
+                    "inquiry-driven",
+                    "flipped classroom",
+                    "blended learning",
+                    "gamified",
+                    "experiential",
+                    "differentiated",
+                    "Universal Design for Learning",
+                    "competency-based",
+                    "trauma-informed",
+                    "culturally sustaining",
+                    "place-based",
+                    "phenomenon-based",
+                    "speculative pedagogy",
+                    "critical digital pedagogy",
+                    "embodied learning",
+                    "transdisciplinary",
+                    "restorative practice",
+                    "heutagogical",
+                    "maker education",
+                    "design thinking",
+                    "community-connected",
+                    "decolonized",
+                    "anti-bias",
+                    "contemplative",
+                    "multispecies learning",
+                    "participatory action",
+                    "neurodiversity-affirming",
+                    "translanguaging"
+                ],
+                "timeframe": [
+                    "30-minute microlesson",
+                    "45-minute class",
+                    "90-minute block",
+                    "single-day intensive",
+                    "3-day sprint",
+                    "5-day immersion",
+                    "week-long exploration",
+                    "2-week deep dive",
+                    "month-long module",
+                    "quarter-long sequence",
+                    "semester-long program",
+                    "year-long curriculum",
+                    "biweekly sessions",
+                    "rolling fortnight",
+                    "flexible pacing",
+                    "self-directed timeline",
+                    "intensive weekend",
+                    "after-school series",
+                    "summer bridge program",
+                    "interim intersession",
+                    "customizable duration",
+                    "ongoing inquiry",
+                    "project-cycle based",
+                    "competency-paced",
+                    "event-anchored"
+                ],
                 "schoolType": [
                     "Title I public school",
                     "rural K-8",
@@ -579,7 +606,6 @@
                     "microschool collective",
                     "forest school program"
                 ],
-
                 "classroomModel": [
                     "hyflex instruction",
                     "multi-age grouping",
@@ -592,7 +618,6 @@
                     "trauma-sensitive environment",
                     "personalized learning studio"
                 ],
-
                 "constraints": [
                     "limited tech access",
                     "high teacher turnover",
@@ -605,7 +630,6 @@
                     "transportation challenges",
                     "staffing shortages"
                 ],
-
                 "timeline": [
                     "concurrent with #currentEvent#",
                     "during #culturalObservance#",
@@ -613,7 +637,6 @@
                     "preparing for #upcomingEvent#",
                     "following #recentEvent#"
                 ],
-
                 "currentEvent": [
                     "local elections",
                     "climate protests",
@@ -621,7 +644,6 @@
                     "global health awareness week",
                     "youth activism campaigns"
                 ],
-
                 "culturalObservance": [
                     "Indigenous Peoples' Day",
                     "Ramadan",
@@ -629,7 +651,6 @@
                     "Earth Week",
                     "Black History Month"
                 ],
-
                 "communityInitiative": [
                     "food justice project",
                     "digital equity campaign",
@@ -637,7 +658,6 @@
                     "neighborhood oral history",
                     "environmental restoration"
                 ],
-
                 "upcomingEvent": [
                     "student-led conferences",
                     "community science fair",
