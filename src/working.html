@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Post-Apocalyptic World Generator</title>
+        <style>
+            body {
+                font-family: system-ui, -apple-system, sans-serif;
+                max-width: 800px;
+                margin: 2rem auto;
+                padding: 0 1rem;
+                background: #1a1a1a;
+                color: #e0e0e0;
+            }
+
+            .container {
+                background: #2a2a2a;
+                padding: 2rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            }
+
+            .output {
+                margin: 1.5rem 0;
+                padding: 1.5rem;
+                background: #333;
+                border-radius: 4px;
+                line-height: 1.6;
+                min-height: 100px;
+            }
+
+            button {
+                background: #4a9eff;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: background 0.2s;
+            }
+
+            button:hover {
+                background: #3b7fd9;
+            }
+
+            button:disabled {
+                background: #2a5a8a;
+                cursor: not-allowed;
+            }
+
+            .spinner {
+                display: inline-block;
+                width: 1.5rem;
+                height: 1.5rem;
+                margin-right: 0.5rem;
+                border: 3px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                border-top-color: white;
+                animation: spin 1s ease-in-out infinite;
+                vertical-align: middle;
+            }
+
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .button-content {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            h1 {
+                color: #4a9eff;
+                margin-bottom: 1.5rem;
+            }
+
+            .grammar-editor {
+                margin-top: 2rem;
+                border-top: 1px solid #444;
+                padding-top: 1.5rem;
+            }
+
+            details {
+                background: #2a2a2a;
+                border-radius: 4px;
+                margin: 1rem 0;
+            }
+
+            summary {
+                padding: 1rem;
+                cursor: pointer;
+                color: #4a9eff;
+                font-weight: bold;
+            }
+
+            #grammarText {
+                width: 100%;
+                height: 400px;
+                font-family: monospace;
+                background: #1a1a1a;
+                color: #e0e0e0;
+                border: 1px solid #444;
+                padding: 1rem;
+                white-space: pre;
+                overflow-x: auto;
+                margin-bottom: 1rem;
+            }
+
+            #reloadGrammar {
+                background: #666;
+                margin-bottom: 1rem;
+            }
+
+            #reloadGrammar:hover {
+                background: #555;
+            }
+
+            .error-message {
+                color: #ff4444;
+                margin-top: 0.5rem;
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Education Prompt Generator</h1>
+            <button onclick="generateWorld()" id="generateBtn">
+                <span class="button-content">
+                    <span class="spinner" style="display: none;"></span>
+                    Generate Education Prompt
+                </span>
+            </button>
+            <div class="output" id="output">Click the button to generate an education prompt.</div>
+
+            <div class="grammar-editor">
+                <details>
+                    <summary>Edit Grammar Rules</summary>
+                    <div>
+                        <textarea id="grammarText"></textarea>
+                        <button onclick="reloadGrammar()" id="reloadGrammar">
+                            Reload Grammar from Text
+                        </button>
+                        <div class="error-message" id="grammarError"></div>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <script>
+            const tracery = {
+                createGrammar: function (rules) {
+                    return {
+                        rules: rules,
+                        modifiers: {
+                            capitalize: function (s) {
+                                return s.charAt(0).toUpperCase() + s.slice(1);
+                            }
+                        },
+                        flatten: function (start) {
+                            const self = this;
+                            let output = start;
+                            let count = 0;
+                            const max_iterations = 100;
+
+                            while (output.includes('#') && count < max_iterations) {
+                                output = output.replace(/#(\w+)(?:\.(\w+))?#/g, (match, rule, modifier) => {
+                                    if (self.rules[rule]) {
+                                        const choices = self.rules[rule];
+                                        let selected = choices[Math.floor(Math.random() * choices.length)];
+
+                                        // Process nested rules first
+                                        selected = self.flatten(selected);
+
+                                        // Apply modifier after resolving nested rules
+                                        if (modifier && self.modifiers[modifier]) {
+                                            selected = self.modifiers[modifier](selected);
+                                        }
+                                        return selected;
+                                    }
+                                    return match;
+                                });
+                                count++;
+                            }
+                            return output;
+                        }
+                    };
+                }
+            };
+
+            // Initialize grammar
+            let grammar = {
+                "origin": [
+                    "#persona# #adverb# #lessonRequest# (#subject#: #specificTopic#) #additional# #context#",
+                    "#persona# #adverb.capitalize# #lessonRequest# #subject# concepts (#specificTopic#) #additional# #context#"
+                ],
+
+                "persona": [
+                    "As a #teacherType# who #teacherTrait#,",
+                    "Being a #teacherType# focused on #teacherValue# with #experience# experience,",
+                    "As #schoolRole# specializing in #teacherSpecialty#,",
+                    "Working as #teacherType# committed to #teacherValue# through #pedagogyStyle# approaches,"
+                ],
+
+                "schoolRole": [
+                    "a lead teacher",
+                    "an IB educator",
+                    "a Montessori guide",
+                    "a Reggio Emilia practitioner",
+                    "a department chair",
+                    "a curriculum designer",
+                    "a special needs coordinator",
+                    "a bilingual education specialist",
+                    "a trauma-informed practitioner",
+                    "a decolonized curriculum advocate"
+                ],
+
+                "teacherType": [
+                    "veteran educator",
+                    "first-year teacher",
+                    "instructional coach",
+                    "STEM/STEAM coordinator",
+                    "literacy interventionist",
+                    "digital pedagogy specialist",
+                    "ESL/EAL instructor",
+                    "gifted education consultant",
+                    "adaptive learning expert",
+                    "place-based education mentor"
+                ],
+
+                "experience": [
+                    "5+ years",
+                    "10+ years",
+                    "15+ years",
+                    "district-level",
+                    "Title I",
+                    "urban education",
+                    "rural education",
+                    "international baccalaureate",
+                    "charter school",
+                    "magnet school"
+                ],
+
+                "teacherTrait": [
+                    "prioritizes metacognitive strategies",
+                    "emphasizes heutagogical principles",
+                    "integrates UDL frameworks",
+                    "champions anti-bias education",
+                    "utilizes translanguaging approaches",
+                    "implements restorative practices",
+                    "leverages educational neuroscience",
+                    "advocates for indigenous pedagogies",
+                    "practices contemplative education",
+                    "models growth mindset principles"
+                ],
+
+                "teacherValue": [
+                    "cultural sustainability",
+                    "digital citizenship",
+                    "ecological literacy",
+                    "global competence",
+                    "social justice",
+                    "design thinking",
+                    "maker education",
+                    "data-informed instruction",
+                    "neurodiversity affirmation",
+                    "community partnerships"
+                ],
+
+                "teacherSpecialty": [
+                    "multimodal literacy",
+                    "computational thinking",
+                    "phenomenon-based learning",
+                    "speculative pedagogy",
+                    "embodied cognition",
+                    "critical digital pedagogy",
+                    "transdisciplinary approaches",
+                    "deeper learning frameworks",
+                    "decolonized assessment",
+                    "socio-emotional intelligence"
+                ],
+
+                "adverb": [
+                    "urgently",
+                    "reflectively",
+                    "collaboratively",
+                    "innovatively",
+                    "equitably",
+                    "inclusively",
+                    "experimentally",
+                    "mindfully",
+                    "dialogically",
+                    "iteratively"
+                ],
+
+                "lessonRequest": [
+                    "create a #timeframe# #lessonFormat# focusing on",
+                    "design #adjective# learning experiences exploring",
+                    "develop #pedagogyStyle# assessments for",
+                    "generate #techIntegration# activities about",
+                    "construct #adjective# instructional scaffolds for",
+                    "curate #resourceType# resources addressing",
+                    "implement #framework# strategies to teach",
+                    "adapt #existingResource# for teaching",
+                    "evaluate #assessmentFocus# through",
+                    "facilitate #collabType# investigations of"
+                ],
+
+                "lessonFormat": [
+                    "hyperdoc",
+                    "learning station rotation",
+                    "playlist",
+                    "quest-based module",
+                    "project-based unit",
+                    "genius hour structure",
+                    "flipped classroom sequence",
+                    "speculative design challenge",
+                    "community action project",
+                    "phenomenon-based investigation"
+                ],
+
+                "techIntegration": [
+                    "VR-enhanced",
+                    "AI-assisted",
+                    "multimedia-rich",
+                    "GIS-mapped",
+                    "podcast-based",
+                    "digital storytelling",
+                    "coding-integrated",
+                    "AR-supported",
+                    "data-visualization",
+                    "wiki-collaborative"
+                ],
+
+                "resourceType": [
+                    "primary source",
+                    "manipulative-based",
+                    "OER-licensed",
+                    "multilingual",
+                    "accessible-design",
+                    "community-sourced",
+                    "archival",
+                    "speculative fiction",
+                    "ethnographic",
+                    "generative AI"
+                ],
+
+                "framework": [
+                    "Bloom's Digital Taxonomy",
+                    "TPACK model",
+                    "SAMR framework",
+                    "Culturally Responsive Sustaining Education",
+                    "Visible Thinking Routines",
+                    "Understanding by Design",
+                    "Challenge-Based Learning",
+                    "Universal Design for Learning",
+                    "Habits of Mind",
+                    "UN Sustainable Development Goals"
+                ],
+
+                "existingResource": [
+                    "existing OER materials",
+                    "textbook chapters",
+                    "standardized curriculum",
+                    "legacy lesson plans",
+                    "district-mandated resources",
+                    "commercial educational products",
+                    "open-source datasets",
+                    "community knowledge banks",
+                    "museum collections",
+                    "archival documents"
+                ],
+
+                "assessmentFocus": [
+                    "conceptual understanding",
+                    "transversal competencies",
+                    "disciplinary literacy",
+                    "transfer skills",
+                    "metacognitive awareness",
+                    "cultural responsiveness",
+                    "design thinking processes",
+                    "ethical reasoning",
+                    "epistemic cognition",
+                    "collective intelligence"
+                ],
+
+                "collabType": [
+                    "cross-grade",
+                    "community-engaged",
+                    "global partnership",
+                    "interdisciplinary",
+                    "peer-to-peer",
+                    "expert-apprentice",
+                    "family-involved",
+                    "multilingual exchange",
+                    "cross-ability",
+                    "human-AI collaborative"
+                ],
+
+                "subject": [
+                    "Mathematics",
+                    "Literacy",
+                    "Science",
+                    "Social Studies",
+                    "Digital Citizenship",
+                    "Environmental Education",
+                    "Civic Engagement",
+                    "Ethical Technology",
+                    "Media Literacy",
+                    "Creative Computing"
+                ],
+
+                "specificTopic": [
+                    "decolonizing colonial narratives in local history",
+                    "modeling climate change impacts through systems thinking",
+                    "analyzing algorithmic bias in social media",
+                    "designing accessible public spaces through geometry",
+                    "investigating microbiomes through citizen science",
+                    "reimagining folktales through transmedia storytelling",
+                    "mapping food justice issues using geospatial data",
+                    "creating speculative designs for sustainable cities",
+                    "examining linguistic power structures through discourse analysis",
+                    "developing AI ethics case studies for digital citizenship"
+                ],
+
+                "additional": [
+                    "for #studentGroup#",
+                    "aligned with #standards#",
+                    "using #tools#",
+                    "incorporating #strategy#",
+                    "differentiated through #adaptation#",
+                    "assessed via #assessment#",
+                    "supported by #support#",
+                    "while addressing #challenge#",
+                    "to cultivate #outcome#",
+                    ""
+                ],
+
+                "studentGroup": [
+                    "neurodivergent learners",
+                    "emergent bilingual students",
+                    "high-ability clusters",
+                    "trauma-affected youth",
+                    "rural student populations",
+                    "urban communities",
+                    "migrant students",
+                    "refugee-background learners",
+                    "first-generation scholars",
+                    "digitally divided populations"
+                ],
+
+                "standards": [
+                    "ISTE standards",
+                    "NGSS performance expectations",
+                    "Common Core shifts",
+                    "UN SDG targets",
+                    "CASEL competencies",
+                    "local indigenous education frameworks",
+                    "IB learner profile attributes",
+                    "state computational thinking standards",
+                    "district equity indicators",
+                    "school-wide graduate competencies"
+                ],
+
+                "tools": [
+                    "Arduino microcontrollers",
+                    "Epic! digital library",
+                    "GeoGebra mathematics software",
+                    "Flip video journals",
+                    "Tinkercad 3D modeling",
+                    "Scratch computational creations",
+                    "Padlet idea boards",
+                    "Canva infographic tools",
+                    "Merge EDU augmented reality",
+                    "Mural digital whiteboards"
+                ],
+
+                "strategy": [
+                    "thinking routines from Project Zero",
+                    "translanguaging strategies",
+                    "culturally sustaining pedagogies",
+                    "anti-racist teaching practices",
+                    "desire-centered frameworks",
+                    "speculative education approaches",
+                    "embodied learning techniques",
+                    "critical making processes",
+                    "participatory action research",
+                    "indigenous knowledge systems"
+                ],
+
+                "adaptation": [
+                    "multi-sensory supports",
+                    "language scaffolding",
+                    "cognitive accessibility features",
+                    "alternative input methods",
+                    "tiered complexity levels",
+                    "multiple representation systems",
+                    "self-paced modules",
+                    "choice-based assessments",
+                    "universal design principles",
+                    "cultural interface options"
+                ],
+
+                "assessment": [
+                    "dynamic portfolio reviews",
+                    "learning story documentation",
+                    "competency-based badging",
+                    "peer-to-peer feedback protocols",
+                    "self-assessment reflections",
+                    "community exhibition nights",
+                    "design thinking showcases",
+                    "solution pitch presentations",
+                    "speculative future scenarios",
+                    "ethnographic process journals"
+                ],
+
+                "support": [
+                    "instructional paraeducators",
+                    "assistive technologies",
+                    "community cultural bearers",
+                    "peer mentoring systems",
+                    "family engagement networks",
+                    "trauma-informed specialists",
+                    "multilingual interpreters",
+                    "digital learning coaches",
+                    "behavior support teams",
+                    "indigenous knowledge keepers"
+                ],
+
+                "challenge": [
+                    "chronic absenteeism",
+                    "digital access disparities",
+                    "intergenerational trauma",
+                    "language marginalization",
+                    "environmental racism",
+                    "curriculum censorship",
+                    "standardized testing pressures",
+                    "teacher burnout factors",
+                    "generational knowledge gaps",
+                    "institutional bias structures"
+                ],
+
+                "outcome": [
+                    "critical consciousness",
+                    "ethical leadership",
+                    "systems thinking",
+                    "radical imagination",
+                    "cultural humility",
+                    "ecological stewardship",
+                    "digital wisdom",
+                    "transdisciplinary synthesis",
+                    "community resilience",
+                    "transformative agency"
+                ],
+
+                "context": [
+                    "| School Context: #schoolType# |",
+                    "| Classroom Model: #classroomModel# |",
+                    "| Resource Constraints: #constraints# |",
+                    "| Timeline: #timeline# |",
+                    ""
+                ],
+
+                "schoolType": [
+                    "Title I public school",
+                    "rural K-8",
+                    "urban charter network",
+                    "international baccalaureate world school",
+                    "indigenous language immersion",
+                    "career technical education center",
+                    "therapeutic day school",
+                    "virtual academy",
+                    "microschool collective",
+                    "forest school program"
+                ],
+
+                "classroomModel": [
+                    "hyflex instruction",
+                    "multi-age grouping",
+                    "competency-based progression",
+                    "community-connected learning",
+                    "outdoor classroom",
+                    "makerspace embedded",
+                    "co-teaching inclusion model",
+                    "language immersion setting",
+                    "trauma-sensitive environment",
+                    "personalized learning studio"
+                ],
+
+                "constraints": [
+                    "limited tech access",
+                    "high teacher turnover",
+                    "large class sizes",
+                    "restricted budget",
+                    "mandated curriculum",
+                    "standardized test focus",
+                    "aging facilities",
+                    "limited parental involvement",
+                    "transportation challenges",
+                    "staffing shortages"
+                ],
+
+                "timeline": [
+                    "concurrent with #currentEvent#",
+                    "during #culturalObservance#",
+                    "aligned with #communityInitiative#",
+                    "preparing for #upcomingEvent#",
+                    "following #recentEvent#"
+                ],
+
+                "currentEvent": [
+                    "local elections",
+                    "climate protests",
+                    "cultural heritage month",
+                    "global health awareness week",
+                    "youth activism campaigns"
+                ],
+
+                "culturalObservance": [
+                    "Indigenous Peoples' Day",
+                    "Ramadan",
+                    "Pride Month",
+                    "Earth Week",
+                    "Black History Month"
+                ],
+
+                "communityInitiative": [
+                    "food justice project",
+                    "digital equity campaign",
+                    "public art installation",
+                    "neighborhood oral history",
+                    "environmental restoration"
+                ],
+
+                "upcomingEvent": [
+                    "student-led conferences",
+                    "community science fair",
+                    "social justice symposium",
+                    "capstone exhibition",
+                    "cultural heritage festival"
+                ]
+            };
+
+            // Initialize editor
+            const grammarTextarea = document.getElementById('grammarText');
+            grammarTextarea.value = JSON.stringify(grammar, null, 4);
+
+            function reloadGrammar() {
+                const errorDisplay = document.getElementById('grammarError');
+                try {
+                    grammar = JSON.parse(grammarTextarea.value);
+                    errorDisplay.style.display = 'none';
+                    generateWorld();
+                } catch (e) {
+                    errorDisplay.textContent = `JSON Error: ${e.message}`;
+                    errorDisplay.style.display = 'block';
+                }
+            }
+
+            function generateWorld() {
+                const btn = document.getElementById('generateBtn');
+                const spinner = btn.querySelector('.spinner');
+                const output = document.getElementById('output');
+
+                spinner.style.display = 'inline-block';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    try {
+                        const traceryGrammar = tracery.createGrammar(grammar);
+                        const world = traceryGrammar.flatten('#origin#');
+                        output.textContent = world;
+                    } catch (e) {
+                        output.textContent = "Error generating world. Please check your grammar rules.";
+                    }
+
+                    spinner.style.display = 'none';
+                    btn.disabled = false;
+                }, 500);
+            }
+        </script>
+    </body>
+
+</html>
