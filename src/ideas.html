@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post-Apocalyptic World Generator</title>
+    <!-- Previous styles remain the same -->
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .container {
+            background: #2a2a2a;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .output {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: #333;
+            border-radius: 4px;
+            line-height: 1.6;
+            min-height: 100px;
+        }
+        button {
+            background: #4a9eff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #3b7fd9;
+        }
+        button:disabled {
+            background: #2a5a8a;
+            cursor: not-allowed;
+        }
+        .spinner {
+            display: inline-block;
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.5rem;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .button-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        h1 {
+            color: #4a9eff;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Post-Apocalyptic World Generator</h1>
+        <button onclick="generateWorld()" id="generateBtn">
+            <span class="button-content">
+                <span class="spinner" style="display: none;"></span>
+                Generate New World
+            </span>
+        </button>
+        <div class="output" id="output">Click the button to generate a world...</div>
+    </div>
+
+    <script>
+        // Enhanced Tracery implementation with modifiers
+        const tracery = {
+            createGrammar: function(rules) {
+                return {
+                    modifiers: {
+                        capitalize: function(s) {
+                            return s.charAt(0).toUpperCase() + s.slice(1);
+                        }
+                    },
+                    flatten: function(start) {
+                        let output = start;
+                        let count = 0;
+                        const max_iterations = 100;
+                        
+                        while (output.includes('#') && count < max_iterations) {
+                            output = output.replace(/#(\w+)(?:\.(\w+))?#/g, (match, rule, modifier) => {
+                                if (rules[rule]) {
+                                    const choices = rules[rule];
+                                    let selected = choices[Math.floor(Math.random() * choices.length)];
+                                    if (modifier && this.modifiers[modifier]) {
+                                        selected = this.modifiers[modifier](selected);
+                                    }
+                                    return selected;
+                                }
+                                return match;
+                            });
+                            count++;
+                        }
+                        return output;
+                    }
+                };
+            }
+        };
+
+        // Updated grammar with capitalization
+        const grammar = {
+            "origin": ["#worldName.capitalize# is a harsh world where #apocalypseCause#. In this #climate# realm, #survivingPeoples# struggle to survive among #majorLandmarks#. #resourceScarcity# #magicSystem# #powerStructure#"],
+            "worldName": ["#consonant##vowel##consonant##vowel##consonant#", "#consonant##vowel##consonant#-#consonant##vowel##consonant#"],
+            "consonant": ["th", "k", "n", "r", "s", "t", "v", "x", "z", "d", "b"],
+            "vowel": ["a", "e", "i", "o", "u", "ai", "ei"],
+            "apocalypseCause": [
+                "ancient sorcerer-kings drained the life force from the land",
+                "a devastating magical war turned verdant forests to ash",
+                "the gods abandoned the world after a great betrayal",
+                "powerful psionics shattered the old civilization",
+                "the sun's magic grew too strong and scorched the earth"
+            ],
+            "climate": [
+                "sun-scorched",
+                "wind-ravaged",
+                "dust-choked",
+                "magically-blighted",
+                "elementally-scarred"
+            ],
+            "survivingPeoples": [
+                "#tribeType.capitalize# tribes of #raceType.capitalize#",
+                "nomadic clans of #raceType.capitalize#",
+                "hardy settlements of #raceType.capitalize#",
+                "scattered enclaves of #raceType.capitalize#"
+            ],
+            "tribeType": [
+                "desert-dwelling",
+                "ruins-haunting",
+                "oasis-guarding",
+                "wasteland-ranging",
+                "mountain-hiding"
+            ],
+            "raceType": [
+                "mutated humans",
+                "savage halflings",
+                "twisted elves",
+                "hardy dwarves",
+                "adapted thri-kreen",
+                "mysterious muls"
+            ],
+            "majorLandmarks": [
+                "the ruins of #ancientCity.capitalize#",
+                "vast obsidian plains",
+                "deadly crystal forests",
+                "bottomless dust canyons",
+                "ancient pyramids of #materialType#"
+            ],
+            "ancientCity": [
+                "#consonant##vowel##consonant##vowel##consonant#-thresh",
+                "#consonant##vowel##consonant#-gate",
+                "#consonant##vowel##consonant#-spire"
+            ],
+            "materialType": [
+                "black glass",
+                "sun-forged stone",
+                "crystalline metal",
+                "bone-white marble",
+                "magical ore"
+            ],
+            "resourceScarcity": [
+                "Water is more precious than gold, #waterControl#",
+                "Metal is rare and carefully guarded, #metalUse#",
+                "Magic itself has become a scarce resource, #magicScarcity#"
+            ],
+            "waterControl": [
+                "controlled by powerful merchant houses",
+                "protected by ancient magical seals",
+                "hoarded by tribal alliances",
+                "traded through complex political networks"
+            ],
+            "metalUse": [
+                "with most weapons crafted from bone and stone",
+                "causing wars over ancient technological relics",
+                "leading to the rise of primitive but effective alternatives"
+            ],
+            "magicScarcity": [
+                "forcing spellcasters to draw power from life itself",
+                "creating a dangerous black market for magical artifacts",
+                "leading to the rise of psionic alternatives"
+            ],
+            "magicSystem": [
+                "Magic is #magicType#, and its use #magicConsequence#",
+                "Psionics have largely replaced traditional magic, with #psionicEffect#"
+            ],
+            "magicType": [
+                "defiling and corrupting",
+                "unstable and dangerous",
+                "tied to elemental forces",
+                "drawn from life essence",
+                "bound to ancient artifacts"
+            ],
+            "magicConsequence": [
+                "leaves the land scarred and lifeless",
+                "drives its practitioners to madness",
+                "attracts dangerous creatures",
+                "requires terrible sacrifices"
+            ],
+            "psionicEffect": [
+                "powerful mentalists ruling from hidden sanctuaries",
+                "psychic abilities becoming crucial for survival",
+                "mind wars replacing physical conflicts"
+            ],
+            "powerStructure": [
+                "The land is ruled by #rulerType.capitalize#, who maintain their power through #powerMeans#",
+                "Scattered city-states are governed by #leaderType.capitalize#, each controlling #resourceType#"
+            ],
+            "rulerType": [
+                "immortal sorcerer-kings",
+                "powerful psionic councils",
+                "tribal confederations",
+                "merchant princes",
+                "dragon-blessed lords"
+            ],
+            "powerMeans": [
+                "control of vital water sources",
+                "ancient magical knowledge",
+                "powerful psionic abilities",
+                "vast networks of spies",
+                "control of rare resources"
+            ],
+            "leaderType": [
+                "templar-mages",
+                "tribal elders",
+                "water barons",
+                "psionic lords",
+                "merchant kings"
+            ],
+            "resourceType": [
+                "precious water reserves",
+                "ancient artifacts",
+                "rare metal deposits",
+                "magical knowledge",
+                "vital trade routes"
+            ]
+        };
+
+        function generateWorld() {
+            const btn = document.getElementById('generateBtn');
+            const spinner = btn.querySelector('.spinner');
+            const output = document.getElementById('output');
+            
+            // Show spinner
+            spinner.style.display = 'inline-block';
+            btn.disabled = true;
+            
+            // Simulate a brief loading time for effect
+            setTimeout(() => {
+                try {
+                    // Create grammar
+                    const traceryGrammar = tracery.createGrammar(grammar);
+                    
+                    // Generate new world
+                    const world = traceryGrammar.flatten('#origin#');
+                    
+                    // Update output
+                    output.textContent = world;
+                } catch (e) {
+                    output.textContent = "Error generating world. Please refresh and try again.";
+                }
+                
+                // Hide spinner
+                spinner.style.display = 'none';
+                btn.disabled = false;
+            }, 500);
+        }
+    </script>
+</body>
+</html>
