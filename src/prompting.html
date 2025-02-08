@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Prompt Generator</title>
+        <style>
+            body {
+                font-family: system-ui, -apple-system, sans-serif;
+                max-width: 800px;
+                margin: 2rem auto;
+                padding: 0 1rem;
+                background: #1a1a1a;
+                color: #e0e0e0;
+            }
+
+            .container {
+                background: #2a2a2a;
+                padding: 2rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            }
+
+            .output {
+                margin: 1.5rem 0;
+                padding: 1.5rem;
+                background: #333;
+                border-radius: 4px;
+                line-height: 1.6;
+                min-height: 100px;
+                white-space: pre-wrap;
+            }
+
+            button {
+                background: #4a9eff;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: background 0.2s;
+            }
+
+            button:hover {
+                background: #3b7fd9;
+            }
+
+            button:disabled {
+                background: #2a5a8a;
+                cursor: not-allowed;
+            }
+
+            .spinner {
+                display: inline-block;
+                width: 1.5rem;
+                height: 1.5rem;
+                margin-right: 0.5rem;
+                border: 3px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                border-top-color: white;
+                animation: spin 1s ease-in-out infinite;
+                vertical-align: middle;
+            }
+
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .button-content {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            h1 {
+                color: #4a9eff;
+                margin-bottom: 1.5rem;
+            }
+
+            .grammar-editor {
+                margin-top: 2rem;
+                border-top: 1px solid #444;
+                padding-top: 1.5rem;
+            }
+
+            details {
+                background: #2a2a2a;
+                border-radius: 4px;
+                margin: 1rem 0;
+            }
+
+            summary {
+                padding: 1rem;
+                cursor: pointer;
+                color: #4a9eff;
+                font-weight: bold;
+            }
+
+            #grammarText {
+                width: 100%;
+                height: 400px;
+                font-family: monospace;
+                background: #1a1a1a;
+                color: #e0e0e0;
+                border: 1px solid #444;
+                padding: 1rem;
+                white-space: pre;
+                overflow-x: auto;
+                margin-bottom: 1rem;
+            }
+
+            #reloadGrammar {
+                background: #666;
+                margin-bottom: 1rem;
+            }
+
+            #reloadGrammar:hover {
+                background: #555;
+            }
+
+            .error-message {
+                color: #ff4444;
+                margin-top: 0.5rem;
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Prompt Generator</h1>
+            <button onclick="generateWorld()" id="generateBtn">
+                <span class="button-content">
+                    <span class="spinner" style="display: none;"></span>
+                    Generate Education Prompt
+                </span>
+            </button>
+            <div class="output" id="output">Generate a prompt or edit the grammar.</div>
+
+            <div class="grammar-editor">
+                <details>
+                    <summary>Edit Grammar Rules</summary>
+                    <button onclick="reloadGrammar()" id="reloadGrammar">
+                        Reload Grammar from Text
+                    </button>
+                    <div>
+                        <textarea id="grammarText"></textarea>
+                        <button onclick="reloadGrammar()" id="reloadGrammar">
+                            Reload Grammar from Text
+                        </button>
+                        <div class="error-message" id="grammarError"></div>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <script>
+            const tracery = {
+                createGrammar: function (rules) {
+                    return {
+                        rules: rules,
+                        modifiers: {
+                            capitalize: function (s) {
+                                return s.charAt(0).toUpperCase() + s.slice(1);
+                            }
+                        },
+                        flatten: function (start) {
+                            const self = this;
+                            let output = start;
+                            let count = 0;
+                            const max_iterations = 100;
+
+                            while (output.includes('#') && count < max_iterations) {
+                                output = output.replace(/#(\w+)(?:\.(\w+))?#/g, (match, rule, modifier) => {
+                                    if (self.rules[rule]) {
+                                        const choices = self.rules[rule];
+                                        let selected = choices[Math.floor(Math.random() * choices.length)];
+
+                                        // Process nested rules first
+                                        selected = self.flatten(selected);
+
+                                        // Apply modifier after resolving nested rules
+                                        if (modifier && self.modifiers[modifier]) {
+                                            selected = self.modifiers[modifier](selected);
+                                        }
+                                        return selected;
+                                    }
+                                    return match;
+                                });
+                                count++;
+                            }
+                            return output;
+                        }
+                    };
+                }
+            };
+
+            // Initialize grammar
+            let grammar = {
+                "origin": [
+                    "#verb.capitalize# the #adjective# _noun_; #adverb# #reason#."
+                ],
+                "verb": [
+                    "create",
+                    "build",
+                    "design",
+                    "write",
+                    "develop",
+                    "implement",
+                    "analyze",
+                    "evaluate",
+                    "optimize",
+                    "test"
+                ],
+                "noun": [
+                    "#syllable.capitalize#",
+                    "#syllable#-#syllable.capitalize#",
+                    "#syllable.capitalize##syllable#"
+                ],
+                "adjective": [
+                    "detailed",
+                    "interactive",
+                    "user-friendly",
+                    "efficient",
+                    "robust",
+                    "scalable",
+                    "secure",
+                    "intuitive",
+                    "comprehensive",
+                    "innovative"
+                ],
+                "adverb": [
+                    "carefully",
+                    "efficiently",
+                    "quickly",
+                    "thoroughly",
+                    "methodically",
+                    "creatively",
+                    "effectively",
+                    "productively",
+                    "accurately",
+                    "collaboratively"
+                ],
+                "reason": [
+                    "we need to improve user experience",
+                    "we need to meet the project deadline",
+                    "we need to increase productivity",
+                    "to enhance functionality",
+                    "to ensure compliance",
+                    "to provide better results",
+                    "to support team collaboration",
+                    "to optimize performance",
+                    "to deliver high-quality output",
+                    "to achieve project goals"
+                ],
+                "syllable": [
+                    "#consonant##consonant##vowel#",
+                    "#consonant##vowel##consonant#",
+                    "#consonant##vowel##vowel##consonant#",
+                    "#consonant##vowel##vowel##vowel##consonant#"
+                ],
+                "consonant": [
+                    "th",
+                    "k",
+                    "n",
+                    "r",
+                    "s",
+                    "t",
+                    "v",
+                    "x",
+                    "z",
+                    "d",
+                    "b"
+                ],
+                "vowel": [
+                    "a",
+                    "e",
+                    "i",
+                    "o",
+                    "u",
+                    "ai",
+                    "ei"
+                ]
+            };
+
+            // Initialize editor
+            const grammarTextarea = document.getElementById('grammarText');
+            grammarTextarea.value = JSON.stringify(grammar, null, 4);
+
+            function reloadGrammar() {
+                const errorDisplay = document.getElementById('grammarError');
+                try {
+                    grammar = JSON.parse(grammarTextarea.value);
+                    errorDisplay.style.display = 'none';
+                    generateWorld();
+                } catch (e) {
+                    errorDisplay.textContent = `JSON Error: ${e.message}`;
+                    errorDisplay.style.display = 'block';
+                }
+            }
+
+            function generateWorld() {
+                const btn = document.getElementById('generateBtn');
+                const spinner = btn.querySelector('.spinner');
+                const output = document.getElementById('output');
+
+                spinner.style.display = 'inline-block';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    try {
+                        const traceryGrammar = tracery.createGrammar(grammar);
+                        const world = traceryGrammar.flatten('#origin#');
+                        output.textContent = world;
+                    } catch (e) {
+                        output.textContent = "Error generating world. Please check your grammar rules.";
+                    }
+
+                    spinner.style.display = 'none';
+                    btn.disabled = false;
+                }, 500);
+            }
+        </script>
+    </body>
+
+</html>
