@@ -122,9 +122,11 @@
 
         <nav style="--pr: 2rem;
         --c: black;
-                  --br: 1px solid #ddd;
                   --bg: #b9e1fd;
-                  --pb: 2em;">
+                  --pb: 2em;
+                  --br: 4px;
+                  --shadow: 4
+                  ">
           <div style="--weight: bold; --pt: 1rem; ">Getting Started</div>
           <a href="/" style="--mb: 0.2rem; --d: block"> Introduction </a>
 
@@ -246,33 +248,7 @@
       <aside style="--fx: 0 0 16rem; --ta: center; --d: none; --d-md: block">
         <div>♥️</div>
       </aside>
-      {% block footer %}
-      <div style="--d: flex; --jc: center; --fd: column; --fg: 1">
-        <div style="--ta: center; --mb: 1rem">
-          <a class="github-button" href="https://github.com/Startr/Style" data-icon="octicon-star" data-size="large"
-            data-show-count="true" aria-label="Star Startr/Style on GitHub">Star</a>
-          <a class="github-button" href="https://github.com/Startr/Style/fork" data-icon="octicon-repo-forked"
-            data-size="large" data-show-count="true" aria-label="Fork Startr/Style on GitHub">Fork</a>
-          <a class="github-button" href="https://github.com/Startr/Style/archive/master.zip"
-            data-icon="octicon-cloud-download" data-size="large"
-            aria-label="Download Startr/Style on GitHub">Download</a>
-        </div>
 
-        <div style="--m: auto; --ta: center; --op: 0.7">
-          <p style="--mb: 0">
-            Carefully crafted by the
-            <a href="https://startr.ca">Startr Team</a> with the help of
-            <a href="https://github.com/Startr/Style/graphs/contributors">our contributors</a>.
-          </p>
-          <p style="--mb: 2rem; --c: var(--text-bright)">
-            Startr Style licensed
-            <a href="hhttps://github.com/Startr/Style/blob/master/LICENSE.md" target="_blank"
-              rel="license noopener">MIT</a>, docs
-            <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="license noopener">CC BY 3.0</a>.
-          </p>
-        </div>
-      </div>
-      {% endblock %}
     </footer>
     {% block scripts %}
     <script>
@@ -326,6 +302,8 @@
       applyTheme();
     </script>
     {% endblock %}
+    
+    {% include "footer.njk" %}
   </body>
 
 </html>
