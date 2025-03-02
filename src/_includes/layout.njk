@@ -99,7 +99,7 @@
       </svg>
     </theme-toggle {% endblock %} {% block body %} <input type="checkbox" id="menu-control" style="--d:none" />
     {% block header %}{% endblock %}
-    <main style="--d: flex; --maxw: min(80rem, 100vw); --m: 0 auto; --of: hidden;">
+    <main style="--d: flex; --maxw: min(80rem, 100vw); --m: 0 auto;">
       <aside aria-label="Table of Contents" class="book-menu" style="
           --fx: 0 0 16rem;
           --ta: right;
@@ -109,13 +109,21 @@
           --minh: 100vh;
           --d: flex;
           --fd: column;
+          --w: 14rem;
+          --ml: -14rem;
+          --ml-hvr: -4rem;
+          --ml-hvr-lg: -14rem;
         ">
         {% block aside %}
-        <a href="/">
-          <img src="/logo.png" alt="Startr/Style" style="--m: 20px 15px 0 auto; --maxw: 100px" />
-        </a>
 
-        <nav style="--pr: 2rem; --br: 1px solid #ddd">
+        <img src="/logo.png" alt="Startr/Style"
+          style="--m: 20px -15px 1.6em auto; --maxw: 100px; --bg: var(--background); --pos:sticky; --top:0;" />
+
+
+        <nav style="--pr: 2rem;
+                  --br: 1px solid #ddd;
+                  --bg: #89A;
+                  --pb: 2em;">
           <div style="--weight: bold; --pt: 1rem">Getting Started</div>
           <a href="/" style="--mb: 0.2rem; --d: block"> Introduction </a>
 
@@ -198,11 +206,11 @@
 
         <a href="https://x.com/alexandersomma" style="
             --ta: left;
-            --mt: auto;
             --d: inline-flex;
             --ai: center;
             --p: 5px 10px;
-            --m: 1rem 2rem;
+            --mt: 3em;
+            --mr: -1em;
             --radius: 20px;
             --bg: #fafafa;
             --as: flex-end;

@@ -7,31 +7,31 @@
   ">
   <div style="--d: flex; --jc: space-between; --ai: center; --mb: 2rem; --mt: 1rem; --pr-xl: 1rem">
     <img alt="Startr/Style" src="logo.png" style="--w: 6rem; --p: 0.8rem" />
-    <nav aria-label="Navigation" style="--ta: right; --size: 1.6em; --x: 60; gap:0.6em">
+    <nav aria-label="Navigation" style="--ta: right; --size: 1.6em; --x: 60; gap:0.6em; --pr:0.6em">
       <a href="#learn" class="button" style="--c:white">Get Started with Startr</button>
       </a>
-      <a href="#components" class="button" class="white">Amazing Components
+      <a href="#components" class="button" style="--c:white">Amazing Components
       </a>
-      <a href="/docs/utilities/index.html" class="button" class="white">Utilities
+      <a href="/docs/utilities/index.html" class="button" style="--c: white">Utilities
       </a>
     </nav>
   </div>
 
   <div style="--ta: center; --mb: 2rem; --d: grid; --d-sm: flex">
     <div style="--d: grid; --w: 100%; --w-md: 50%; --fd: column; --ai: center; --jc: center; --mb: 2rem">
-      <h1>Startr/Style</h1>
-      <h4 style="--ta: center; --mw: 450px; --m: auto auto 0.5rem; --px: 1rem">
+      <h1>Startr.Style</h1>
+      <h4 style="--ta: center; --mw: 450px; --px: 1rem">
         A Utility Complete CSS Framework for less than 50kb, <em style="--fw: light">8kb&nbsp;Zipped</em>
       </h4>
       <div style="--p: 0.5rem; --ta: center">
         <a href="#learn" class="button" style="--c:white">Getting Startrd</a>
-        <a href="/#learn-more" class="button blue" style="--c: black ">Learn Startr Styling
+        <a href="/#learn-more" class="button blue" style="--c: white ">Learn Startr Styling
         </a>
         <a href="https://github.com/Startr/Style" target="_blank" class="button" style="--bg: #282c34; --c:white">Github
         </a>
       </div>
-      <h6 style="--ta: center; --mt: 2rem">
-        - Style by <a href="https://github.com/Startr" target="_blank">Startr</a> -
+      <h6 style="--ta: center; --mt: 0.2rem">
+        - Style by <a href="https://github.com/Startr" target="_blank" style="--c:grey; --fw:bold; --td:underline">Startr</a> -
       </h6>
     </div>
     <div style="--w: 100%; --w-md: 50%; --d: flex; --fd: column; --fd-lg: row; --jc: center; --ai: center">
@@ -127,22 +127,23 @@
     </p>
     <p>Here's how you can do it in your HTML:</p>
 
-{% highlight "plaintext" %}
-{% raw %}
-    <html>
-      <head>
-        <!-- Include Startr Style CSS -->
-        <link rel="stylesheet" href="https://startr.style/style.css">
-      </head>
 
-      <body>
-        <!-- Your HTML content -->
-        <p>This paragraph will look great without any extra effort!</p>
-        <button>This button will also have a nice style.</button>
-      </body>
-    </html>
-{% endraw %}
-{% endhighlight %}
+  {% highlight "plaintext" %}
+  {% raw %}
+<html>
+  <head>
+    <!-- Include Startr Style CSS -->
+    <link rel="stylesheet" href="https://startr.style/style.css">
+  </head>
+
+  <body>
+    <!-- Your HTML content -->
+    <p>This paragraph will look great without any extra effort!</p>
+    <button>This button will also have a nice style.</button>
+  </body>
+</html>
+  {% endraw %}
+  {% endhighlight %}
     <br>
     <p>
       Just include the link to the <strong>Startr Style</strong> CSS file in the <code>&lt;head&gt;</code> of your HTML,
@@ -577,69 +578,72 @@
   <h5 id="style-based-utilities">Style based utilities</h5>
   {% highlight "html" %}
   <div style="--bg:var(--dark)">
-    <div>
-      <div style="--bg:#2A2A2A">
-        <div>
-          <div style="--bg:rgb(42,42,42)">
-            <div>
-              <div style="--bg:rgba(0,0,0,.8)">
-                <div>
-                  {% endhighlight %}
-                  <br />
-                  <h3 id="responsive-design-and-media-queries">Responsive Design and Media Queries</h3>
-                  <p>
-                    In situations where certain tools need to be used depending on the screen size, you can use them
-                    selectively for
-                    each size. This lets you use these tools for particular screen sizes, simplifying the process of
-                    creating adaptable
-                    designs.
-                  </p>
-                  <p>By default, we set four predefined points for the most common device resolutions.</p>
+  <div>
+  
+  <div style="--bg:#2A2A2A">
+  <div>
+  
+  <div style="--bg:rgb(42,42,42)">
+  <div>
+  
+  <div style="--bg:rgba(0,0,0,.8)">
+  <div>
+  {% endhighlight %}
+  <br />
+  <h3 id="responsive-design-and-media-queries">Responsive Design and Media Queries</h3>
+  <p>
+    In situations where certain tools need to be used depending on the screen size, you can use them
+    selectively for
+    each size. This lets you use these tools for particular screen sizes, simplifying the process of
+    creating adaptable
+    designs.
+  </p>
+  <p>By default, we set four predefined points for the most common device resolutions.</p>
 
-                  {% highlight "css" %}
-/* Small '-sm' */
-@media (min-width: 640px) { ... }
+  {% highlight "css" %}
+  /* Small '-sm' */
+  @media (min-width: 640px) { ... }
 
-/* Medium '-md' */
-@media (min-width: 768px) { ... }
+  /* Medium '-md' */
+  @media (min-width: 768px) { ... }
 
-/* Large '-lg' */
-@media (min-width: 1024px) { ... }
+  /* Large '-lg' */
+  @media (min-width: 1024px) { ... }
 
-/* Extra Large '-xl' */
-@media (min-width: 1280px) { ... }
-                  {% endhighlight %}
+  /* Extra Large '-xl' */
+  @media (min-width: 1280px) { ... }
+  {% endhighlight %}
 
-                  <p>
-                    To use our style utilites with different screen sizes, just add the tool's name along with a
-                    <code>-</code> and the
-                    short name of the screen size you want. By default, media queries start with mobile screens and then
-                    adjust for
-                    larger ones. This means we design for the smallest screens first and then go bigger from there.
-                  </p>
-                  <p>
-                    Consider the following example where <code>--d</code> is the Startr Style utility for the
-                    <code>display</code> CSS
-                    property. Button is <code>display:block</code> by default. <code>display:none</code> from medium
-                    size screens up.
-                  </p>
+  <p>
+    To use our style utilites with different screen sizes, just add the tool's name along with a
+    <code>-</code> and the
+    short name of the screen size you want. By default, media queries start with mobile screens and then
+    adjust for
+    larger ones. This means we design for the smallest screens first and then go bigger from there.
+  </p>
+  <p>
+    Consider the following example where <code>--d</code> is the Startr Style utility for the
+    <code>display</code> CSS
+    property. Button is <code>display:block</code> by default. <code>display:none</code> from medium
+    size screens up.
+  </p>
 
-                  {% highlight "html" %}
-                  <button style="--d:block; --d-md:none">Only visible on small screens</button>
-                  {% endhighlight %}
+  {% highlight "html" %}
+  <button style="--d:block; --d-md:none">Only visible on small screens</button>
+  {% endhighlight %}
 
-                  <h2 style="--ta: center" id="discover">Discover limitless possibilities</h2>
-                  <p style="--ta: center">
-                    Explore our lab of resources and experiment with the endless possibilities of Startr Style.
-                  </p>
-                  <p style="--ta: center;--c: aliceblue">
-                    <a href='/brutalism' style="--c: var(--blue)">Brutalism</a> ·
-                    <a href='/modernism' style="--c: var(--blue)">Modernism</a> ·
-                    Minimalism ·
-                    Skeuomorphism ·
-                    Neumorphism ·
-                    <a href='/experimentalisim' onclick="null" style="--c: var(--blue)">Experimentalisim</a> & more.
-                  </p>
+  <h2 style="--ta: center" id="discover">Discover limitless possibilities</h2>
+  <p style="--ta: center">
+    Explore our lab of resources and experiment with the endless possibilities of Startr Style.
+  </p>
+  <p style="--ta: center;--c: aliceblue">
+    <a href='/brutalism' style="--c: var(--blue)">Brutalism</a> ·
+    <a href='/modernism' style="--c: var(--blue)">Modernism</a> ·
+    Minimalism ·
+    Skeuomorphism ·
+    Neumorphism ·
+    <a href='/experimentalisim' onclick="null" style="--c: var(--blue)">Experimentalisim</a> & more.
+  </p>
 </article>
 
 {% endblock %}
