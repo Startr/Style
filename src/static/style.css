@@ -45,11 +45,11 @@
   --heading-margin: 0.5rem 0 0.75rem;
 
   --typo-size-6: 16px;
-  --typo-size-5: calc(1.4 * var(--typo-size-6));
-  --typo-size-4: calc(1.75 * var(--typo-size-6));
-  --typo-size-3: calc(2.25 * var(--typo-size-6));
-  --typo-size-2: calc(2.8 * var(--typo-size-6));
-  --typo-size-1: calc(3 * var(--typo-size-6));
+  --typo-size-5: calc(1.1 * var(--typo-size-6));
+  --typo-size-4: calc(1.2 * var(--typo-size-6));
+  --typo-size-3: calc(1.3 * var(--typo-size-6));
+  --typo-size-2: calc(1.5 * var(--typo-size-6));
+  --typo-size-1: calc(1.618 * var(--typo-size-6));
 
   --wrapper: 1280px;
   --transition: all ease 0.6s;
