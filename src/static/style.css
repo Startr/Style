@@ -114,6 +114,7 @@ html {
 }
 
 body {
+  overscroll-behavior-y: none;
   margin: 0;
   font-size: 1em;
 }
