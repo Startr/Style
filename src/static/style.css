@@ -94,6 +94,17 @@
   box-sizing: border-box;
 }
 
+/* TODO: Remove this SAGE PATCH */
+.px-3.max-h-64.overflow-y-auto.scrollbar-hidden.group.relative {
+  
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  width: 100%;
+
+}
+
+
 html {
   font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, Avenir, "Avenir Next", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 15px;
