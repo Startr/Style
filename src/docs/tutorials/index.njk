@@ -1,0 +1,213 @@
+{% extends "layout.njk" %}
+
+{% block article %}
+<article class="markdown">
+  <h1 id="startr-style-tutorials">Step-by-Step Tutorials</h1>
+  <p>
+    Learn Startr.Style through practical, hands-on tutorials. Each tutorial builds upon the previous ones,
+    taking you from basic utility usage to advanced design patterns.
+  </p>
+
+  <nav style="--bg: #f8f9fa; --p: 2rem; --br: 8px; --mb: 3rem;">
+    <h3 style="--fs: 1.2rem; --fw: 600; --mb: 1.5rem;">Tutorial Navigation</h3>
+    <ul style="--list-style: none; --p: 0;">
+      <li style="--mb: 0.5rem;"><a href="#tutorial-1" style="--c: #007bff; --td: none;">1. Your First Startr.Style Component</a></li>
+      <li style="--mb: 0.5rem;"><a href="#tutorial-2" style="--c: #007bff; --td: none;">2. Building a Responsive Card Layout</a></li>
+      <li style="--mb: 0.5rem;"><a href="#tutorial-3" style="--c: #007bff; --td: none;">3. Creating Interactive Buttons</a></li>
+      <li style="--mb: 0.5rem;"><a href="#tutorial-4" style="--c: #007bff; --td: none;">4. Designing a Navigation Header</a></li>
+      <li style="--mb: 0.5rem;"><a href="#tutorial-5" style="--c: #007bff; --td: none;">5. Advanced Grid Layouts</a></li>
+    </ul>
+  </nav>
+
+  <section id="tutorial-1" style="--mb: 4rem;">
+    <h2 style="--fs: 2rem; --fw: 600; --c: #333; --mb: 2rem;">Tutorial 1: Your First Startr.Style Component</h2>
+    
+    <div style="--bg: #e3f2fd; --p: 1.5rem; --br: 8px; --mb: 2rem; --border-left: 4px solid #2196f3;">
+      <h4 style="--fs: 1.1rem; --fw: 600; --c: #1565c0; --mb: 1rem;">What you'll learn:</h4>
+      <ul style="--c: #1565c0;">
+        <li>How to apply basic utilities using CSS variables</li>
+        <li>Understanding the style attribute approach</li>
+        <li>Creating your first styled element</li>
+      </ul>
+    </div>
+
+    <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem;">Step 1: Basic Setup</h3>
+    <p style="--mb: 1.5rem;">
+      First, ensure you have Startr.Style included in your HTML document:
+    </p>
+    <div class="highlight" style="--mb: 2rem;">
+      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span> <span class="na">href</span><span class="o">=</span><span class="s">"https://unpkg.com/Startr/Style@latest/dist/style.min.css"</span><span class="p">&gt;</span></code></pre>
+    </div>
+
+    <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem;">Step 2: Create a Simple Button</h3>
+    <p style="--mb: 1rem;">
+      Let's start with a basic button. Instead of using classes, we'll use CSS variables in the style attribute:
+    </p>
+    <div class="highlight" style="--mb: 1.5rem;">
+      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">style</span><span class="o">=</span><span class="s">"--bg: #007bff; --c: white; --p: 1rem 2rem; --br: 4px; --border: none;"</span><span class="p">&gt;</span>
+  Click Me
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span></code></pre>
+    </div>
+    
+    <div style="--bg: #fff; --p: 2rem; --border: 1px solid #dee2e6; --br: 8px; --mb: 2rem;">
+      <h4 style="--fs: 1.1rem; --fw: 600; --mb: 1rem;">Live Example:</h4>
+      <button style="--bg: #007bff; --c: white; --p: 1rem 2rem; --br: 4px; --border: none; --cursor: pointer;">
+        Click Me
+      </button>
+    </div>
+
+    <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem;">Step 3: Understanding the Utilities</h3>
+    <p style="--mb: 1rem;">Each CSS variable corresponds to a CSS property:</p>
+    <table style="--w: 100%; --border-collapse: collapse; --mb: 2rem;">
+      <thead>
+        <tr style="--bg: #f8f9fa;">
+          <th style="--p: 1rem; --border: 1px solid #dee2e6; --ta: left;">Utility</th>
+          <th style="--p: 1rem; --border: 1px solid #dee2e6; --ta: left;">CSS Property</th>
+          <th style="--p: 1rem; --border: 1px solid #dee2e6; --ta: left;">Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;"><code>--bg</code></td>
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;">background</td>
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;"><code>--bg: #007bff</code></td>
+        </tr>
+        <tr style="--bg: #f8f9fa;">
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;"><code>--c</code></td>
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;">color</td>
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;"><code>--c: white</code></td>
+        </tr>
+        <tr>
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;"><code>--p</code></td>
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;">padding</td>
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;"><code>--p: 1rem 2rem</code></td>
+        </tr>
+        <tr style="--bg: #f8f9fa;">
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;"><code>--br</code></td>
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;">border-radius</td>
+          <td style="--p: 1rem; --border: 1px solid #dee2e6;"><code>--br: 4px</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="--bg: #d4edda; --p: 1.5rem; --br: 8px; --border-left: 4px solid #28a745;">
+      <h4 style="--fs: 1.1rem; --fw: 600; --c: #155724; --mb: 1rem;">🎉 Congratulations!</h4>
+      <p style="--c: #155724; --mb: 0;">
+        You've created your first Startr.Style component! Try changing the values to see how it affects the appearance.
+      </p>
+    </div>
+  </section>
+
+  <section id="tutorial-2" style="--mb: 4rem;">
+    <h2 style="--fs: 2rem; --fw: 600; --c: #333; --mb: 2rem;">Tutorial 2: Building a Responsive Card Layout</h2>
+    
+    <div style="--bg: #e3f2fd; --p: 1.5rem; --br: 8px; --mb: 2rem; --border-left: 4px solid #2196f3;">
+      <h4 style="--fs: 1.1rem; --fw: 600; --c: #1565c0; --mb: 1rem;">What you'll learn:</h4>
+      <ul style="--c: #1565c0;">
+        <li>Creating responsive grid layouts</li>
+        <li>Using breakpoint-specific utilities</li>
+        <li>Building card components</li>
+      </ul>
+    </div>
+
+    <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem;">Step 1: Create the Container</h3>
+    <div class="highlight" style="--mb: 1.5rem;">
+      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--d: grid; --grid-template-columns: 1fr; --grid-template-columns-md: repeat(2, 1fr); --grid-template-columns-lg: repeat(3, 1fr); --gap: 2rem; --p: 2rem;"</span><span class="p">&gt;</span>
+  <span class="c">&lt;!-- Cards will go here --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+    </div>
+
+    <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem;">Step 2: Create Individual Cards</h3>
+    <div class="highlight" style="--mb: 1.5rem;">
+      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--bg: white; --p: 1.5rem; --br: 8px; --shadow: 0 2px 8px rgba(0,0,0,0.1); --transition: all 0.3s ease;"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h3</span> <span class="na">style</span><span class="o">=</span><span class="s">"--fs: 1.25rem; --fw: 600; --mb: 1rem;"</span><span class="p">&gt;</span>Card Title<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"--c: #666; --lh: 1.6; --mb: 1.5rem;"</span><span class="p">&gt;</span>Card content goes here. This is a sample description.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">style</span><span class="o">=</span><span class="s">"--bg: #007bff; --c: white; --p: 0.5rem 1rem; --br: 4px; --border: none; --cursor: pointer;"</span><span class="p">&gt;</span>
+    Learn More
+  <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+    </div>
+
+    <div style="--bg: #fff; --p: 2rem; --border: 1px solid #dee2e6; --br: 8px; --mb: 2rem;">
+      <h4 style="--fs: 1.1rem; --fw: 600; --mb: 1rem;">Live Example:</h4>
+      <div style="--d: grid; --grid-template-columns: 1fr; --grid-template-columns-md: repeat(2, 1fr); --gap: 1rem;">
+        <div style="--bg: white; --p: 1.5rem; --br: 8px; --shadow: 0 2px 8px rgba(0,0,0,0.1); --border: 1px solid #e9ecef;">
+          <h3 style="--fs: 1.25rem; --fw: 600; --mb: 1rem;">Card One</h3>
+          <p style="--c: #666; --lh: 1.6; --mb: 1.5rem;">This is the first card in our responsive grid layout.</p>
+          <button style="--bg: #007bff; --c: white; --p: 0.5rem 1rem; --br: 4px; --border: none; --cursor: pointer;">
+            Learn More
+          </button>
+        </div>
+        <div style="--bg: white; --p: 1.5rem; --br: 8px; --shadow: 0 2px 8px rgba(0,0,0,0.1); --border: 1px solid #e9ecef;">
+          <h3 style="--fs: 1.25rem; --fw: 600; --mb: 1rem;">Card Two</h3>
+          <p style="--c: #666; --lh: 1.6; --mb: 1.5rem;">This is the second card showing responsive behavior.</p>
+          <button style="--bg: #28a745; --c: white; --p: 0.5rem 1rem; --br: 4px; --border: none; --cursor: pointer;">
+            Get Started
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem;">Step 3: Understanding Responsive Utilities</h3>
+    <p style="--mb: 1rem;">
+      Startr.Style uses breakpoint suffixes to apply different styles at different screen sizes:
+    </p>
+    <ul style="--mb: 2rem;">
+      <li style="--mb: 0.5rem;"><code>-sm</code>: Small screens (576px and up)</li>
+      <li style="--mb: 0.5rem;"><code>-md</code>: Medium screens (768px and up)</li>
+      <li style="--mb: 0.5rem;"><code>-lg</code>: Large screens (992px and up)</li>
+      <li style="--mb: 0.5rem;"><code>-xl</code>: Extra large screens (1200px and up)</li>
+    </ul>
+  </section>
+
+  <section id="tutorial-3" style="--mb: 4rem;">
+    <h2 style="--fs: 2rem; --fw: 600; --c: #333; --mb: 2rem;">Tutorial 3: Creating Interactive Buttons</h2>
+    
+    <div style="--bg: #e3f2fd; --p: 1.5rem; --br: 8px; --mb: 2rem; --border-left: 4px solid #2196f3;">
+      <h4 style="--fs: 1.1rem; --fw: 600; --c: #1565c0; --mb: 1rem;">What you'll learn:</h4>
+      <ul style="--c: #1565c0;">
+        <li>Creating hover effects with CSS variables</li>
+        <li>Building different button variants</li>
+        <li>Adding transitions and animations</li>
+      </ul>
+    </div>
+
+    <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem;">Step 1: Basic Button with Hover</h3>
+    <div class="highlight" style="--mb: 1.5rem;">
+      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">style</span><span class="o">=</span><span class="s">"--bg: #007bff; --bg-hvr: #0056b3; --c: white; --p: 0.75rem 1.5rem; --br: 4px; --border: none; --cursor: pointer; --transition: all 0.3s ease;"</span><span class="p">&gt;</span>
+  Hover Me
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span></code></pre>
+    </div>
+
+    <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem;">Step 2: Button Variants</h3>
+    <div style="--bg: #fff; --p: 2rem; --border: 1px solid #dee2e6; --br: 8px; --mb: 2rem;">
+      <h4 style="--fs: 1.1rem; --fw: 600; --mb: 1rem;">Primary Button:</h4>
+      <button style="--bg: #007bff; --bg-hvr: #0056b3; --c: white; --p: 0.75rem 1.5rem; --br: 4px; --border: none; --cursor: pointer; --transition: all 0.3s ease; --mr: 1rem;">
+        Primary
+      </button>
+      
+      <h4 style="--fs: 1.1rem; --fw: 600; --mb: 1rem; --mt: 1.5rem;">Secondary Button:</h4>
+      <button style="--bg: transparent; --bg-hvr: #6c757d; --c: #6c757d; --c-hvr: white; --p: 0.75rem 1.5rem; --br: 4px; --border: 1px solid #6c757d; --cursor: pointer; --transition: all 0.3s ease; --mr: 1rem;">
+        Secondary
+      </button>
+      
+      <h4 style="--fs: 1.1rem; --fw: 600; --mb: 1rem; --mt: 1.5rem;">Success Button:</h4>
+      <button style="--bg: #28a745; --bg-hvr: #1e7e34; --c: white; --p: 0.75rem 1.5rem; --br: 4px; --border: none; --cursor: pointer; --transition: all 0.3s ease;">
+        Success
+      </button>
+    </div>
+  </section>
+
+  <div style="--bg: #f8f9fa; --p: 2rem; --br: 8px; --ta: center; --mt: 4rem;">
+    <h3 style="--fs: 1.4rem; --fw: 600; --mb: 1rem;">Ready for More?</h3>
+    <p style="--mb: 1.5rem; --c: #666;">
+      Continue with more advanced tutorials or explore the utility reference for complete documentation.
+    </p>
+    <a href="/docs/utilities/" style="--bg: #007bff; --c: white; --p: 1rem 2rem; --br: 4px; --td: none; --d: inline-block; --transition: all 0.3s ease;" 
+       onmouseover="this.style.setProperty('--bg', '#0056b3')" 
+       onmouseout="this.style.setProperty('--bg', '#007bff')">
+      View Utility Reference
+    </a>
+  </div>
+</article>
+{% endblock %}

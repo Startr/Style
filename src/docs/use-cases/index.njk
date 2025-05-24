@@ -1,0 +1,263 @@
+{% extends "layout.njk" %}
+
+{% block article %}
+<article class="markdown">
+  <h1 id="practical-use-cases">Practical Use Cases for Startr.Style Utilities</h1>
+  <p>
+    Real-world examples showing how to solve common design challenges using Startr.Style utilities.
+    Each use case includes the problem, solution, and complete code examples.
+  </p>
+
+  <section style="--mb: 4rem;">
+    <h2 style="--fs: 1.8rem; --fw: 600; --c: #333; --mb: 2rem;">🎯 Common Layout Challenges</h2>
+
+    <div style="--mb: 3rem;">
+      <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem; --c: #007bff;">Use Case 1: Centering Content Vertically and Horizontally</h3>
+      
+      <div style="--bg: #fff3cd; --p: 1.5rem; --br: 8px; --mb: 1.5rem; --border-left: 4px solid #ffc107;">
+        <h4 style="--fs: 1.1rem; --fw: 600; --c: #856404; --mb: 1rem;">The Challenge:</h4>
+        <p style="--c: #856404; --mb: 0;">
+          You need to center a login form both vertically and horizontally in the viewport.
+        </p>
+      </div>
+
+      <div style="--bg: #d1ecf1; --p: 1.5rem; --br: 8px; --mb: 1.5rem; --border-left: 4px solid #17a2b8;">
+        <h4 style="--fs: 1.1rem; --fw: 600; --c: #0c5460; --mb: 1rem;">The Solution:</h4>
+        <p style="--c: #0c5460; --mb: 0;">
+          Use flexbox utilities to create a full-height container with centered content.
+        </p>
+      </div>
+
+      <div class="highlight" style="--mb: 1.5rem;">
+        <pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- Full height container with centered content --&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--d: flex; --ai: center; --jc: center; --h: 100vh; --bg: #f8f9fa;"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--bg: white; --p: 2rem; --br: 8px; --shadow: 0 4px 16px rgba(0,0,0,0.1); --w: 100%; --maxw: 400px;"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h2</span> <span class="na">style</span><span class="o">=</span><span class="s">"--ta: center; --mb: 2rem;"</span><span class="p">&gt;</span>Login<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"email"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"Email"</span> <span class="na">style</span><span class="o">=</span><span class="s">"--w: 100%; --p: 0.75rem; --mb: 1rem; --border: 1px solid #ddd; --br: 4px;"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"password"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"Password"</span> <span class="na">style</span><span class="o">=</span><span class="s">"--w: 100%; --p: 0.75rem; --mb: 1.5rem; --border: 1px solid #ddd; --br: 4px;"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">style</span><span class="o">=</span><span class="s">"--w: 100%; --bg: #007bff; --c: white; --p: 1rem; --border: none; --br: 4px; --cursor: pointer;"</span><span class="p">&gt;</span>Login<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+      </div>
+
+      <div style="--bg: #fff; --p: 2rem; --border: 1px solid #dee2e6; --br: 8px;">
+        <h4 style="--fs: 1.1rem; --fw: 600; --mb: 1rem;">Live Preview:</h4>
+        <div style="--d: flex; --ai: center; --jc: center; --h: 300px; --bg: #f8f9fa; --br: 4px;">
+          <div style="--bg: white; --p: 2rem; --br: 8px; --shadow: 0 4px 16px rgba(0,0,0,0.1); --w: 100%; --maxw: 300px;">
+            <h3 style="--ta: center; --mb: 1.5rem; --fs: 1.2rem;">Login</h3>
+            <input type="email" placeholder="Email" style="--w: 100%; --p: 0.75rem; --mb: 1rem; --border: 1px solid #ddd; --br: 4px;">
+            <input type="password" placeholder="Password" style="--w: 100%; --p: 0.75rem; --mb: 1.5rem; --border: 1px solid #ddd; --br: 4px;">
+            <button style="--w: 100%; --bg: #007bff; --c: white; --p: 1rem; --border: none; --br: 4px; --cursor: pointer;">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="--mb: 3rem;">
+      <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem; --c: #007bff;">Use Case 2: Responsive Navigation Bar</h3>
+      
+      <div style="--bg: #fff3cd; --p: 1.5rem; --br: 8px; --mb: 1.5rem; --border-left: 4px solid #ffc107;">
+        <h4 style="--fs: 1.1rem; --fw: 600; --c: #856404; --mb: 1rem;">The Challenge:</h4>
+        <p style="--c: #856404; --mb: 0;">
+          Create a navigation bar that stacks vertically on mobile and horizontally on desktop.
+        </p>
+      </div>
+
+      <div class="highlight" style="--mb: 1.5rem;">
+        <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">nav</span> <span class="na">style</span><span class="o">=</span><span class="s">"--bg: #343a40; --p: 1rem; --d: flex; --fd: column; --fd-md: row; --ai: center; --jc: space-between;"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--c: white; --fs: 1.5rem; --fw: 600; --mb: 1rem; --mb-md: 0;"</span><span class="p">&gt;</span>
+    Brand
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">style</span><span class="o">=</span><span class="s">"--d: flex; --fd: column; --fd-md: row; --gap: 0; --gap-md: 2rem; --list-style: none; --p: 0; --m: 0;"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"#"</span> <span class="na">style</span><span class="o">=</span><span class="s">"--c: #adb5bd; --td: none; --p: 0.5rem 0; --d: block;"</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"#"</span> <span class="na">style</span><span class="o">=</span><span class="s">"--c: #adb5bd; --td: none; --p: 0.5rem 0; --d: block;"</span><span class="p">&gt;</span>About<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"#"</span> <span class="na">style</span><span class="o">=</span><span class="s">"--c: #adb5bd; --td: none; --p: 0.5rem 0; --d: block;"</span><span class="p">&gt;</span>Contact<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span></code></pre>
+      </div>
+
+      <div style="--bg: #fff; --p: 2rem; --border: 1px solid #dee2e6; --br: 8px;">
+        <h4 style="--fs: 1.1rem; --fw: 600; --mb: 1rem;">Live Preview:</h4>
+        <nav style="--bg: #343a40; --p: 1rem; --d: flex; --fd: column; --fd-md: row; --ai: center; --jc: space-between; --br: 4px;">
+          <div style="--c: white; --fs: 1.5rem; --fw: 600; --mb: 1rem; --mb-md: 0;">
+            Brand
+          </div>
+          <ul style="--d: flex; --fd: column; --fd-md: row; --gap: 0; --gap-md: 2rem; --list-style: none; --p: 0; --m: 0;">
+            <li><a href="#" style="--c: #adb5bd; --td: none; --p: 0.5rem 0; --d: block;">Home</a></li>
+            <li><a href="#" style="--c: #adb5bd; --td: none; --p: 0.5rem 0; --d: block;">About</a></li>
+            <li><a href="#" style="--c: #adb5bd; --td: none; --p: 0.5rem 0; --d: block;">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div style="--mb: 3rem;">
+      <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem; --c: #007bff;">Use Case 3: Image Gallery with Hover Effects</h3>
+      
+      <div style="--bg: #fff3cd; --p: 1.5rem; --br: 8px; --mb: 1.5rem; --border-left: 4px solid #ffc107;">
+        <h4 style="--fs: 1.1rem; --fw: 600; --c: #856404; --mb: 1rem;">The Challenge:</h4>
+        <p style="--c: #856404; --mb: 0;">
+          Create an image gallery that scales images on hover and maintains aspect ratio.
+        </p>
+      </div>
+
+      <div class="highlight" style="--mb: 1.5rem;">
+        <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--d: grid; --grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); --gap: 1rem;"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--pos: relative; --overflow: hidden; --br: 8px; --aspect-ratio: 16/9; --cursor: pointer;"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"image1.jpg"</span> <span class="na">style</span><span class="o">=</span><span class="s">"--w: 100%; --h: 100%; --object-fit: cover; --transition: transform 0.3s ease; --transform-hvr: scale(1.1);"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--pos: absolute; --bottom: 0; --left: 0; --right: 0; --bg: linear-gradient(transparent, rgba(0,0,0,0.7)); --c: white; --p: 1rem;"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h3</span> <span class="na">style</span><span class="o">=</span><span class="s">"--fs: 1.2rem; --fw: 600; --mb: 0.5rem;"</span><span class="p">&gt;</span>Image Title<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">"--fs: 0.9rem; --opacity: 0.8;"</span><span class="p">&gt;</span>Description<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section style="--mb: 4rem;">
+    <h2 style="--fs: 1.8rem; --fw: 600; --c: #333; --mb: 2rem;">💼 Business Component Patterns</h2>
+
+    <div style="--mb: 3rem;">
+      <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem; --c: #28a745;">Use Case 4: Pricing Cards</h3>
+      
+      <div class="highlight" style="--mb: 1.5rem;">
+        <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--d: grid; --grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); --gap: 2rem; --p: 2rem;"</span><span class="p">&gt;</span>
+  <span class="c">&lt;!-- Basic Plan --&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--bg: white; --border: 2px solid #e9ecef; --br: 12px; --p: 2rem; --ta: center; --transition: all 0.3s ease;"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h3</span> <span class="na">style</span><span class="o">=</span><span class="s">"--fs: 1.5rem; --fw: 600; --mb: 1rem; --c: #495057;"</span><span class="p">&gt;</span>Basic<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--fs: 3rem; --fw: 700; --c: #007bff; --mb: 1rem;"</span><span class="p">&gt;</span>$9<span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"--fs: 1rem; --fw: 400; --c: #6c757d;"</span><span class="p">&gt;</span>/month<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">style</span><span class="o">=</span><span class="s">"--list-style: none; --p: 0; --mb: 2rem;"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">li</span> <span class="na">style</span><span class="o">=</span><span class="s">"--mb: 0.5rem; --c: #495057;"</span><span class="p">&gt;</span>5 Projects<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">li</span> <span class="na">style</span><span class="o">=</span><span class="s">"--mb: 0.5rem; --c: #495057;"</span><span class="p">&gt;</span>10GB Storage<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">li</span> <span class="na">style</span><span class="o">=</span><span class="s">"--mb: 0.5rem; --c: #495057;"</span><span class="p">&gt;</span>Email Support<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">style</span><span class="o">=</span><span class="s">"--w: 100%; --bg: transparent; --c: #007bff; --border: 2px solid #007bff; --p: 1rem; --br: 8px; --cursor: pointer; --transition: all 0.3s ease;"</span><span class="p">&gt;</span>
+      Choose Plan
+    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  
+  <span class="c">&lt;!-- Popular Plan (Featured) --&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--bg: #007bff; --c: white; --br: 12px; --p: 2rem; --ta: center; --transform: scale(1.05); --shadow: 0 10px 30px rgba(0,123,255,0.3);"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--bg: #ffc107; --c: #000; --p: 0.5rem 1rem; --br: 20px; --fs: 0.8rem; --fw: 600; --mb: 1rem; --d: inline-block;"</span><span class="p">&gt;</span>POPULAR<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h3</span> <span class="na">style</span><span class="o">=</span><span class="s">"--fs: 1.5rem; --fw: 600; --mb: 1rem;"</span><span class="p">&gt;</span>Pro<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--fs: 3rem; --fw: 700; --mb: 1rem;"</span><span class="p">&gt;</span>$29<span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"--fs: 1rem; --fw: 400; --opacity: 0.8;"</span><span class="p">&gt;</span>/month<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">style</span><span class="o">=</span><span class="s">"--w: 100%; --bg: white; --c: #007bff; --border: none; --p: 1rem; --br: 8px; --cursor: pointer; --fw: 600;"</span><span class="p">&gt;</span>
+      Choose Plan
+    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+      </div>
+
+      <div style="--bg: #fff; --p: 2rem; --border: 1px solid #dee2e6; --br: 8px;">
+        <h4 style="--fs: 1.1rem; --fw: 600; --mb: 1rem;">Live Preview:</h4>
+        <div style="--d: grid; --grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); --gap: 1.5rem;">
+          <!-- Basic Plan -->
+          <div style="--bg: white; --border: 2px solid #e9ecef; --br: 12px; --p: 1.5rem; --ta: center;">
+            <h3 style="--fs: 1.3rem; --fw: 600; --mb: 1rem; --c: #495057;">Basic</h3>
+            <div style="--fs: 2.5rem; --fw: 700; --c: #007bff; --mb: 1rem;">$9<span style="--fs: 0.9rem; --fw: 400; --c: #6c757d;">/month</span></div>
+            <ul style="--list-style: none; --p: 0; --mb: 1.5rem; --fs: 0.9rem;">
+              <li style="--mb: 0.5rem; --c: #495057;">5 Projects</li>
+              <li style="--mb: 0.5rem; --c: #495057;">10GB Storage</li>
+              <li style="--mb: 0.5rem; --c: #495057;">Email Support</li>
+            </ul>
+            <button style="--w: 100%; --bg: transparent; --c: #007bff; --border: 2px solid #007bff; --p: 0.75rem; --br: 8px; --cursor: pointer;">
+              Choose Plan
+            </button>
+          </div>
+          
+          <!-- Popular Plan -->
+          <div style="--bg: #007bff; --c: white; --br: 12px; --p: 1.5rem; --ta: center; --transform: scale(1.02); --shadow: 0 8px 25px rgba(0,123,255,0.3);">
+            <div style="--bg: #ffc107; --c: #000; --p: 0.3rem 0.8rem; --br: 20px; --fs: 0.7rem; --fw: 600; --mb: 1rem; --d: inline-block;">POPULAR</div>
+            <h3 style="--fs: 1.3rem; --fw: 600; --mb: 1rem;">Pro</h3>
+            <div style="--fs: 2.5rem; --fw: 700; --mb: 1rem;">$29<span style="--fs: 0.9rem; --fw: 400; --opacity: 0.8;">/month</span></div>
+            <ul style="--list-style: none; --p: 0; --mb: 1.5rem; --fs: 0.9rem;">
+              <li style="--mb: 0.5rem;">20 Projects</li>
+              <li style="--mb: 0.5rem;">100GB Storage</li>
+              <li style="--mb: 0.5rem;">Priority Support</li>
+            </ul>
+            <button style="--w: 100%; --bg: white; --c: #007bff; --border: none; --p: 0.75rem; --br: 8px; --cursor: pointer; --fw: 600;">
+              Choose Plan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="--mb: 4rem;">
+    <h2 style="--fs: 1.8rem; --fw: 600; --c: #333; --mb: 2rem;">⚡ Performance & Accessibility</h2>
+
+    <div style="--mb: 3rem;">
+      <h3 style="--fs: 1.4rem; --fw: 500; --mb: 1.5rem; --c: #dc3545;">Use Case 5: Loading States</h3>
+      
+      <div style="--bg: #fff3cd; --p: 1.5rem; --br: 8px; --mb: 1.5rem; --border-left: 4px solid #ffc107;">
+        <h4 style="--fs: 1.1rem; --fw: 600; --c: #856404; --mb: 1rem;">The Challenge:</h4>
+        <p style="--c: #856404; --mb: 0;">
+          Show loading states for buttons and content areas while data is being fetched.
+        </p>
+      </div>
+
+      <div class="highlight" style="--mb: 1.5rem;">
+        <pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- Loading Button --&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">style</span><span class="o">=</span><span class="s">"--bg: #6c757d; --c: white; --p: 0.75rem 2rem; --br: 4px; --border: none; --cursor: not-allowed; --opacity: 0.7;"</span> <span class="na">disabled</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">"--d: inline-block; --w: 1rem; --h: 1rem; --border: 2px solid transparent; --border-top: 2px solid white; --br: 50%; --animation: spin 1s linear infinite; --mr: 0.5rem;"</span><span class="p">&gt;</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  Loading...
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+<span class="c">&lt;!-- Skeleton Loading --&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--p: 1.5rem; --bg: white; --br: 8px; --shadow: 0 2px 8px rgba(0,0,0,0.1);"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--h: 1.5rem; --bg: #e9ecef; --br: 4px; --mb: 1rem; --animation: pulse 1.5s ease-in-out infinite;"</span><span class="p">&gt;</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--h: 1rem; --bg: #e9ecef; --br: 4px; --mb: 0.5rem; --w: 80%; --animation: pulse 1.5s ease-in-out infinite;"</span><span class="p">&gt;</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"--h: 1rem; --bg: #e9ecef; --br: 4px; --w: 60%; --animation: pulse 1.5s ease-in-out infinite;"</span><span class="p">&gt;</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
+      </div>
+
+      <div style="--bg: #fff; --p: 2rem; --border: 1px solid #dee2e6; --br: 8px;">
+        <h4 style="--fs: 1.1rem; --fw: 600; --mb: 1rem;">Live Preview:</h4>
+        <div style="--d: flex; --gap: 2rem; --ai: center; --fw: wrap;">
+          <button style="--bg: #6c757d; --c: white; --p: 0.75rem 2rem; --br: 4px; --border: none; --cursor: not-allowed; --opacity: 0.7;" disabled>
+            <span style="--d: inline-block; --w: 1rem; --h: 1rem; --border: 2px solid transparent; --border-top: 2px solid white; --br: 50%; --animation: spin 1s linear infinite; --mr: 0.5rem;"></span>
+            Loading...
+          </button>
+          <div style="--p: 1.5rem; --bg: white; --br: 8px; --border: 1px solid #dee2e6; --flex: 1; --min-w: 200px;">
+            <div style="--h: 1.5rem; --bg: #e9ecef; --br: 4px; --mb: 1rem; --animation: pulse 1.5s ease-in-out infinite;"></div>
+            <div style="--h: 1rem; --bg: #e9ecef; --br: 4px; --mb: 0.5rem; --w: 80%; --animation: pulse 1.5s ease-in-out infinite;"></div>
+            <div style="--h: 1rem; --bg: #e9ecef; --br: 4px; --w: 60%; --animation: pulse 1.5s ease-in-out infinite;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="--bg: #e7f3ff; --p: 2rem; --br: 8px; --ta: center; --mt: 4rem;">
+    <h3 style="--fs: 1.4rem; --fw: 600; --mb: 1rem; --c: #004085;">Want to See More Examples?</h3>
+    <p style="--mb: 1.5rem; --c: #004085;">
+      These use cases show just a fraction of what's possible with Startr.Style utilities.
+    </p>
+    <div style="--d: flex; --gap: 1rem; --jc: center; --fw: wrap;">
+      <a href="/docs/tutorials/" style="--bg: #007bff; --c: white; --p: 1rem 2rem; --br: 4px; --td: none; --d: inline-block;">
+        View Tutorials
+      </a>
+      <a href="/docs/utilities/" style="--bg: transparent; --c: #007bff; --border: 2px solid #007bff; --p: 1rem 2rem; --br: 4px; --td: none; --d: inline-block;">
+        Full Utility Reference
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+</style>
+
+{% endblock %}
