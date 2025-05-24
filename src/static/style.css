@@ -3188,7 +3188,8 @@ h4 {
   width: 8px;
   height: 2px;
   background: currentColor;
-  border-radius: 4px
+  border-radius: 4px;
+ 
 }
 
 .link-mdn::after,
