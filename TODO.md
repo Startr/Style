@@ -5,11 +5,12 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 ## 🚨 Critical Priorities - All Hands on Deck!
 - [x] Fix server error handling #TechnicalFoundation
 - [x] Perfect mobile responsiveness #UserExperience
-- [ ] Optimize loading speed #UserExperience
-- [ ] Test across browsers #QualityAssurance
-- [ ] Audit accessibility #QualityAssurance
-- [ ] Test mobile devices #QualityAssurance
-- [ ] Verify loading speeds #QualityAssurance
+- [x] Optimize loading speed #UserExperience (Note we are using Eleventy for static site generation and should set a medium priority for CDN updates)
+- [x] Test across browsers #QualityAssurance
+- [x] Audit accessibility #QualityAssurance
+  - [x] Setup axe-cli for automated audit
+- [x] Test mobile devices #QualityAssurance
+- [x] Verify loading speeds #QualityAssurance
 
 ## 🔥 High Priorities - Fueling the Rocket!
 - [ ] Write clear examples for each design style #ContentExcellence
@@ -55,3 +56,4 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 - [ ] Create backup strategy #Infrastructure
 - [ ] Plan scaling approach #Infrastructure
 - [ ] Check SEO optimization #QualityAssurance
+- [ ] Integrate Lighthouse for CI (low priority) #QualityAssurance
