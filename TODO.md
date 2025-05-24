@@ -81,7 +81,8 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
     - [x] Input variations [/docs/base-elements/fields.njk]
       - [x] Text inputs with labels and validation states [/docs/base-elements/fields.njk] - Add to gallery
       - [ ] Search inputs with icons
-      - [ ] Number inputs with increment/decrement
+      - [x] Number inputs with increment/decrement [/docs/base-elements/fields.njk] - Add to gallery
+      - [x] Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery
       - [ ] File upload with drag-and-drop styling
       - [x] Multi-line textarea components [/docs/base-elements/fields.njk] - Add to gallery
     - [x] Selection controls [/docs/base-elements/fields.njk]
@@ -202,11 +203,12 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
       - [ ] Vertical tabs
       - [ ] Responsive tabs (convert to accordion on mobile)
       - [ ] Tabs with icons
-    - [ ] Slider/Range components
-      - [ ] Basic range sliders
+    - [x] Slider/Range components [/docs/base-elements/fields.njk]
+      - [x] Basic range sliders [/docs/base-elements/fields.njk] - Add to gallery
+      - [x] Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery
       - [ ] Dual-handle range sliders
       - [ ] Styled slider tracks
-      - [ ] Value display variations
+      - [x] Value display variations [/docs/base-elements/fields.njk] - Add to gallery
   - [ ] **Feedback Components**
     - [ ] Alert/Notification
       - [ ] Success, warning, error, info alerts

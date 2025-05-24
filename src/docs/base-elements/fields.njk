@@ -391,4 +391,194 @@
   {% endhighlight %}
 
 </div>
+
+<h3 id="number-slider">Number Slider</h3>
+<div class="code-block"
+  style="--c: var(--code); --bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
+>
+  <label for="slider-basic">
+    Basic Slider (0-100)
+    <input type="range" id="slider-basic" min="0" max="100" value="50" />
+    <output for="slider-basic">50</output>
+  </label>
+  
+  <label for="slider-step">
+    Slider with Steps (0-10, step 0.5)
+    <input type="range" id="slider-step" min="0" max="10" step="0.5" value="5" />
+    <output for="slider-step">5</output>
+  </label>
+  
+  <label for="slider-custom">
+    Custom Styled Slider with Live Value
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <span style="min-width: 2rem; text-align: right;">0</span>
+      <input type="range" id="slider-custom" min="0" max="200" value="100" style="flex: 1;" />
+      <span style="min-width: 2rem;">200</span>
+    </div>
+    <div style="text-align: center; margin-top: 0.5rem; font-weight: bold; font-size: 1.2rem;">
+      Value: <span id="slider-custom-value">100</span>
+    </div>
+  </label>
+
+  <script>
+    // Update output elements for basic sliders
+    document.getElementById('slider-basic').addEventListener('input', function(e) {
+      document.querySelector('output[for="slider-basic"]').textContent = e.target.value;
+    });
+    
+    document.getElementById('slider-step').addEventListener('input', function(e) {
+      document.querySelector('output[for="slider-step"]').textContent = e.target.value;
+    });
+    
+    // Update custom slider display
+    document.getElementById('slider-custom').addEventListener('input', function(e) {
+      document.getElementById('slider-custom-value').textContent = e.target.value;
+    });
+  </script>
+  
+  {% highlight "html" %}
+  <label for="slider-basic">
+    Basic Slider (0-100)
+    <input type="range" id="slider-basic" min="0" max="100" value="50" />
+    <output for="slider-basic">50</output>
+  </label>
+  
+  <label for="slider-step">
+    Slider with Steps (0-10, step 0.5)
+    <input type="range" id="slider-step" min="0" max="10" step="0.5" value="5" />
+    <output for="slider-step">5</output>
+  </label>
+  
+  <label for="slider-custom">
+    Custom Styled Slider with Live Value
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <span style="min-width: 2rem; text-align: right;">0</span>
+      <input type="range" id="slider-custom" min="0" max="200" value="100" style="flex: 1;" />
+      <span style="min-width: 2rem;">200</span>
+    </div>
+    <div style="text-align: center; margin-top: 0.5rem; font-weight: bold; font-size: 1.2rem;">
+      Value: <span id="slider-custom-value">100</span>
+    </div>
+  </label>
+
+  <script>
+    // Update output elements for basic sliders
+    document.getElementById('slider-basic').addEventListener('input', function(e) {
+      document.querySelector('output[for="slider-basic"]').textContent = e.target.value;
+    });
+    
+    document.getElementById('slider-step').addEventListener('input', function(e) {
+      document.querySelector('output[for="slider-step"]').textContent = e.target.value;
+    });
+    
+    // Update custom slider display
+    document.getElementById('slider-custom').addEventListener('input', function(e) {
+      document.getElementById('slider-custom-value').textContent = e.target.value;
+    });
+  </script>
+  {% endhighlight %}
+
+</div>
+
+<h3 id="number-input">Number Input</h3>
+<div class="code-block"
+  style="--c: var(--code); --bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
+>
+  <label for="input-number-basic"
+    >Basic Number Input
+    <input type="number" value="5" min="0" max="10" step="1" />
+  </label>
+  
+  <label for="input-number-decimal"
+    >Decimal Number Input
+    <input type="number" value="2.5" min="0" max="10" step="0.1" />
+  </label>
+  
+  <label for="input-number-custom"
+    >Number Input with Custom Controls
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <button type="button" onclick="decrementNumber('input-number-custom')" style="min-width: 2rem; padding: 0.25rem 0.5rem;">-</button>
+      <input type="number" id="input-number-custom" value="10" min="1" max="100" step="1" style="text-align: center; flex: 1;" />
+      <button type="button" onclick="incrementNumber('input-number-custom')" style="min-width: 2rem; padding: 0.25rem 0.5rem;">+</button>
+    </div>
+  </label>
+
+  <script>
+    function incrementNumber(inputId) {
+      const input = document.getElementById(inputId);
+      const step = parseFloat(input.step) || 1;
+      const max = parseFloat(input.max);
+      const current = parseFloat(input.value) || 0;
+      const newValue = current + step;
+      
+      if (isNaN(max) || newValue <= max) {
+        input.value = newValue;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+    
+    function decrementNumber(inputId) {
+      const input = document.getElementById(inputId);
+      const step = parseFloat(input.step) || 1;
+      const min = parseFloat(input.min);
+      const current = parseFloat(input.value) || 0;
+      const newValue = current - step;
+      
+      if (isNaN(min) || newValue >= min) {
+        input.value = newValue;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+  </script>
+  
+  {% highlight "html" %}
+  <label for="input-number-basic"
+    >Basic Number Input
+    <input type="number" value="5" min="0" max="10" step="1" />
+  </label>
+  
+  <label for="input-number-decimal"
+    >Decimal Number Input
+    <input type="number" value="2.5" min="0" max="10" step="0.1" />
+  </label>
+  
+  <label for="input-number-custom"
+    >Number Input with Custom Controls
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <button type="button" onclick="decrementNumber('input-number-custom')" style="min-width: 2rem; padding: 0.25rem 0.5rem;">-</button>
+      <input type="number" id="input-number-custom" value="10" min="1" max="100" step="1" style="text-align: center; flex: 1;" />
+      <button type="button" onclick="incrementNumber('input-number-custom')" style="min-width: 2rem; padding: 0.25rem 0.5rem;">+</button>
+    </div>
+  </label>
+
+  <script>
+    function incrementNumber(inputId) {
+      const input = document.getElementById(inputId);
+      const step = parseFloat(input.step) || 1;
+      const max = parseFloat(input.max);
+      const current = parseFloat(input.value) || 0;
+      const newValue = current + step;
+      
+      if (isNaN(max) || newValue <= max) {
+        input.value = newValue;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+    
+    function decrementNumber(inputId) {
+      const input = document.getElementById(inputId);
+      const step = parseFloat(input.step) || 1;
+      const min = parseFloat(input.min);
+      const current = parseFloat(input.value) || 0;
+      const newValue = current - step;
+      
+      if (isNaN(min) || newValue >= min) {
+        input.value = newValue;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+  </script>
+  {% endhighlight %}
+
+</div>
 {% endblock %}
