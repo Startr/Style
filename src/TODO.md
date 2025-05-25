@@ -86,9 +86,10 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
       - [ ] File upload with drag-and-drop styling
       - [x] Multi-line textarea components [/docs/base-elements/fields.njk] - Add to gallery
     - [x] Selection controls [/docs/base-elements/fields.njk]
-      - [ ] Custom checkboxes with various styles
+      - [x] Custom checkboxes with various styles
+        - [ ] Debug checkbox styles !!!
       - [ ] Radio button groups
-      - [ ] Toggle switches
+      - [x] Toggle switches
       - [x] Multi-select dropdowns [/docs/base-elements/fields.njk] - Add to gallery
       - [ ] Autocomplete/typeahead inputs
     - [x] Form layouts [/docs/use-cases/index.njk]
@@ -97,6 +98,9 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
       - [ ] Multi-step/wizard forms
       - [x] Form validation with error states [/docs/base-elements/fields.njk] - Add to gallery
       - [x] Login/registration form templates [/docs/use-cases/index.njk] - Add to gallery
+        - [ ] Add spacing above and below the form in the preview
+        - [ ] Update to the content of https://codepen.io/openco/pen/wBavPYx 
+        
   - [ ] **Button Components**
     - [x] Button variations [/docs/base-elements/buttons.njk]
       - [x] Primary, secondary, tertiary button styles [/docs/base-elements/buttons.njk] - Add to gallery
