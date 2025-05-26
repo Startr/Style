@@ -15,15 +15,15 @@ Button
 </button>
       <button disabled="">Button Disabled</button>
     </p>
-    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-      <pre class="chroma"><code class="language-html" style="--ofx:scroll" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">button</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&#34;add&#34;</span><span class="p"></span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">aria-hidden</span><span class="o">=</span><span class="s">&#34;true&#34;</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;img&#34;</span> <span class="na">xmlns</span><span class="o">=</span><span class="s">&#34;https://www.w3.org/2000/svg&#34;</span> <span class="na">viewBox</span><span class="o">=</span><span class="s">&#34;0 0 448 512&#34;</span><span class="p"></span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">path</span> <span class="na">fill</span><span class="o">=</span><span class="s">&#34;currentColor&#34;</span> <span class="na">d</span><span class="o">=</span><span class="s">&#34;M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">path</span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">svg</span><span class="p">&gt;</span>
+    {% highlight "html" %}
+<button>Button</button>
+<button aria-label="add">
+  <svg aria-hidden="true" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
   Button
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">button</span> <span class="na">disabled</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p"></span><span class="p">&gt;</span>Button Disabled<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span></code></pre>
-    </div>
+</button>
+<button disabled="">Button Disabled</button>
+    {% endhighlight %}
   </div>
 
   <h3 id="button-color-variations">Button Color Variations</h3>
@@ -34,14 +34,14 @@ Button
     <button class="white">White</button>
     <button class="grey">Grey</button>
     <button class="black">Black</button>
-    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;green&#34;</span><span class="p"></span><span class="p">&gt;</span>Green<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;orange&#34;</span><span class="p"></span><span class="p">&gt;</span>Orange<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;red&#34;</span><span class="p"></span><span class="p">&gt;</span>Red<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;white&#34;</span><span class="p"></span><span class="p">&gt;</span>White<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;grey&#34;</span><span class="p"></span><span class="p">&gt;</span>Grey<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;black&#34;</span><span class="p"></span><span class="p">&gt;</span>Black<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span></code></pre>
-    </div>
+    {% highlight "html" %}
+<button class="green">Green</button>
+<button class="orange">Orange</button>
+<button class="red">Red</button>
+<button class="white">White</button>
+<button class="grey">Grey</button>
+<button class="black">Black</button>
+    {% endhighlight %}
   </div>
 
   <h3 id="button-groups-horizontal">Button Groups (Horizontal)</h3>
@@ -51,13 +51,13 @@ Button
       <button>Button</button>
       <button>Button</button>
     </div>
-    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;group&#34;</span><span class="p"></span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
-    </div>
+    {% highlight "html" %}
+<div class="group">
+  <button>Button</button>
+  <button>Button</button>
+  <button>Button</button>
+</div>
+    {% endhighlight %}
   </div>
 
   <div class="code-block" style="--c: var(--code);--bg:#f5f5f5; --radius: 4px; --p:1rem; --mb:3rem; --border-1:var(--br-grey);--fw:bold; --shadow-soft: 4; ">
@@ -66,13 +66,13 @@ Button
       <button>Button</button>
       <button>Button</button>
     </div>
-    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;group&#34;</span><span class="p"></span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;John&#34;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&#34;Name&#34;</span><span class="p"></span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
-    </div>
+    {% highlight "html" %}
+<div class="group">
+  <input type="text" placeholder="John" aria-label="Name">
+  <button>Button</button>
+  <button>Button</button>
+</div>
+    {% endhighlight %}
   </div>
 
   <div class="code-block" style="--c: var(--code);--bg:#f5f5f5; --radius: 4px; --p:1rem; --mb:3rem; --border-1:var(--br-grey);--fw:bold; --shadow-soft: 4; ">
@@ -87,19 +87,19 @@ Button
       </button>
       <input type="text" placeholder="filename.txt" aria-label="Filename">
     </div>
-    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;group&#34;</span><span class="p"></span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&#34;upload&#34;</span><span class="p"></span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">viewBox</span><span class="o">=</span><span class="s">&#34;0 0 24 24&#34;</span> <span class="na">xmlns</span><span class="o">=</span><span class="s">&#34;https://www.w3.org/2000/svg&#34;</span><span class="p"></span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">path</span> <span class="na">d</span><span class="o">=</span><span class="s">&#34;M13 7H7V5H13V7Z&#34;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&#34;currentColor&#34;</span> <span class="p">/</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">path</span> <span class="na">d</span><span class="o">=</span><span class="s">&#34;M13 11H7V9H13V11Z&#34;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&#34;currentColor&#34;</span> <span class="p">/</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">path</span> <span class="na">d</span><span class="o">=</span><span class="s">&#34;M7 15H13V13H7V15Z&#34;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&#34;currentColor&#34;</span> <span class="p">/</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">path</span> <span class="na">fill-rule</span><span class="o">=</span><span class="s">&#34;evenodd&#34;</span> <span class="na">clip-rule</span><span class="o">=</span><span class="s">&#34;evenodd&#34;</span> <span class="na">d</span><span class="o">=</span><span class="s">&#34;M3 19V1H17V5H21V23H7V19H3ZM15 17V3H5V17H15ZM17 7V19H9V21H19V7H17Z&#34;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&#34;currentColor&#34;</span> <span class="p">/</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="p">/</span><span class="nt">svg</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;filename.txt&#34;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&#34;Filename&#34;</span><span class="p"></span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
-    </div>
+    {% highlight "html" %}
+<div class="group">
+  <button aria-label="upload">
+    <svg viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
+      <path d="M13 7H7V5H13V7Z" fill="currentColor" />
+      <path d="M13 11H7V9H13V11Z" fill="currentColor" />
+      <path d="M7 15H13V13H7V15Z" fill="currentColor" />
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M3 19V1H17V5H21V23H7V19H3ZM15 17V3H5V17H15ZM17 7V19H9V21H19V7H17Z" fill="currentColor" />
+    </svg>
+  </button>
+  <input type="text" placeholder="filename.txt" aria-label="Filename">
+</div>
+    {% endhighlight %}
   </div>
 
   <h3 id="button-groups-vertical">Button Groups (Vertical)</h3>
@@ -110,14 +110,14 @@ Button
       <button>Button</button>
       <button>Button</button>
     </div>
-    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;group vertical&#34;</span><span class="p"></span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
-    </div>
+    {% highlight "html" %}
+<div class="group vertical">
+  <button>Button</button>
+  <button>Button</button>
+  <button>Button</button>
+  <button>Button</button>
+</div>
+    {% endhighlight %}
   </div>
 
   <div class="code-block" style="--c: var(--code);--bg:#f5f5f5; --radius: 4px; --p:1rem; --mb:3rem; --border-1:var(--br-grey);--fw:bold; --shadow-soft: 4; ">
