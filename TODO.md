@@ -58,7 +58,18 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 ## 📝 Documentation & Development Guidelines #ContentExcellence
 - [x] **Use Proper Highlight Shortcodes** - Always use `{% highlight "html" %}`, `{% highlight "css" %}`, or `{% highlight "text" %}` with `{% endhighlight %}` instead of hardcoded `<div class="highlight">` with `<pre>` tags
   - [x] Updated installation.njk to use proper shortcodes
-  - [ ] Audit all other documentation files for hardcoded highlight divs
+  - [ ] **URGENT: Audit and fix hardcoded highlight blocks in the following files:**
+    - [ ] `/src/index.njk` - 1 hardcoded highlight div (line 86)
+    - [ ] `/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47)
+    - [ ] `/src/docs/tutorials/index.njk` - 5 hardcoded highlight divs (lines 38, 46, 114, 121, 176) + pre tags (lines 39, 47, 115, 122, 177)
+    - [ ] `/src/docs/base-elements/buttons.njk` - 8 hardcoded highlight divs (lines 18, 37, 54, 69, 90, 113, 129, 143) + pre tags
+    - [ ] `/src/docs/base-elements/everything-else.njk` - Multiple hardcoded pre tags (lines 47, 91, 108, 132)
+    - [ ] `/src/docs/base-elements/typography.njk` - 2 hardcoded pre tags (lines 123, 166)
+    - [ ] `/src/docs/helpers/shadows.njk` - 8 hardcoded highlight divs (lines 20, 45, 70, 95, 121, 147, 174, 201) + pre tags
+    - [ ] `/src/docs/helpers/transform.njk` - 10 hardcoded highlight divs (lines 22, 48, 72, 98, 122, 148, 172, 198, 222, 248)
+    - [ ] `/src/docs/helpers/position.njk` - 7 hardcoded highlight divs + pre tags (lines 22, 44, 66, 88, 110, 132, 154)
+    - [ ] `/src/docs/helpers/background.njk` - 1 hardcoded pre tag (line 23)
+  - [ ] **Total files needing cleanup: 11 files with ~45+ hardcoded blocks**
   - [ ] Create documentation guideline for contributors about highlight usage
 - [ ] **Maintain Consistent Code Examples** - Ensure all code snippets follow the same formatting standards
 - [ ] **Document Utility Patterns** - Create clear examples for common utility combinations
