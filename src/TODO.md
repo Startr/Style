@@ -54,6 +54,15 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 - [x] Document design principles clearly #ContentExcellence
 - [ ] Write compelling copy for landing page #ContentExcellence
 - [ ] Add interactive playground for utilities #ContentExcellence
+
+## 📝 Documentation & Development Guidelines #ContentExcellence
+- [x] **Use Proper Highlight Shortcodes** - Always use `{% highlight "html" %}`, `{% highlight "css" %}`, or `{% highlight "text" %}` with `{% endhighlight %}` instead of hardcoded `<div class="highlight">` with `<pre>` tags
+  - [x] Updated installation.njk to use proper shortcodes
+  - [ ] Audit all other documentation files for hardcoded highlight divs
+  - [ ] Create documentation guideline for contributors about highlight usage
+- [ ] **Maintain Consistent Code Examples** - Ensure all code snippets follow the same formatting standards
+- [ ] **Document Utility Patterns** - Create clear examples for common utility combinations
+
 - [ ] Create component gallery with live examples #ContentExcellence
   - [ ] **Planning & Architecture**
     - [ ] Design component gallery structure and navigation

@@ -1,61 +1,78 @@
 {% extends "layout.njk" %}
 
 {% block article %}
-  <h2 id="installing-startr-style">Installing Startr Style</h2>
-  <p>Startr Style can be added to your project by downloading from the <a href="https://github.com/Startr/Style">Github repo</a>. Extract and include the ./dist/style.min.css into your project, linking in your document head.</p>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-    <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;path/to/css/style.min.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span><span class="p"></span><span class="p">&gt;</span></code></pre>
-  </div>
-  <h3 id="install-via-npm">Install via NPM</h3>
-  <p>Possibly the quickest and easiest way to include Startr/Style in to your project is through NPM or yarn.</p>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-    <pre class="chroma"><code class="language-bash" data-lang="bash">// Using NPM
-npm install Startr/Style</code></pre>
-  </div>
-  <h3 id="install-via-yarn">Install via Yarn</h3>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-    <pre class="chroma"><code class="language-bash" data-lang="bash">// Using NPM
-yarn add Startr/Style</code></pre>
-  </div>
-  <h3 id="import-css-in-react">Import CSS in React</h3>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-    <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="s1">&#39;Startr/Style/dist/style.min.css&#39;</span><span class="p">;</span>
-</code></pre>
-  </div>
-  <h3 id="import-css-in-vuejs">Import CSS in Vue.js</h3>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-    <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span> <span class="na">src</span><span class="o">=</span><span class="s">&#39;Startr/Style/dist/style.min.css&#39;</span> <span class="p">/</span><span class="p">&gt;</span></code></pre>
-  </div>
-  <h3 id="install-via-cdn">Install via CDN</h3>
-  <p>To grab from CDN you can use the following.</p>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-    <pre class="chroma"><code class="language-html" data-lang="html">// Via CDN
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://unpkg.com/Startr/Style@latest/dist/style.min.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span><span class="p"></span><span class="p">&gt;</span></code></pre>
-  </div>
-  <h3 id="modular-installation">Modular Installation</h3>
-  <p>Startr Style can be broken down in to 3 distinct components. In cases where you may not need all three components, each of these components can be included seperately.</p>
-  <h4 id="base-element-styling">Base Element Styling</h4>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-    <pre class="chroma"><code class="language-html" data-lang="html">// Link locally
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;path/to/css/style-base.min.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span><span class="p"></span><span class="p">&gt;</span>
+<h2 id="installing-startr-style">Installing Startr Style</h2>
+<p>Startr Style can be added to your project by downloading from the <a href="https://github.com/Startr/Style">Github
+    repo</a>. Extract and include the ./dist/style.min.css into your project, linking in your document head.</p>
 
-// Via CDN
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://unpkg.com/Startr/Style@latest/dist/style-base.min.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span><span class="p"></span><span class="p">&gt;</span></code></pre>
-  </div>
-  <h4 id="helpers">Helpers</h4>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-    <pre class="chroma"><code class="language-html" data-lang="html">// Link locally
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;path/to/css/style-helpers.min.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span><span class="p"></span><span class="p">&gt;</span>
+{% highlight "html" %}
+<link href="path/to/css/style.min.css" rel="stylesheet">
+{% endhighlight %}
 
-// Via CDN
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://unpkg.com/Startr/Style@latest/dist/style-helpers.min.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span><span class="p"></span><span class="p">&gt;</span></code></pre>
-  </div>
-  <h4 id="utilities">Utilities</h4>
-  <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-    <pre class="chroma"><code class="language-html" data-lang="html">// Link locally
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;path/to/css/style-utlities.min.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span><span class="p"></span><span class="p">&gt;</span>
+<h3 id="install-via-npm">Install via NPM</h3>
+<p>Possibly the quickest and easiest way to include Startr/Style in to your project is through NPM or yarn.</p>
 
-// Via CDN
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://unpkg.com/Startr/Style@latest/dist/style-utilities.min.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span><span class="p"></span><span class="p">&gt;</span></code></pre>
-  </div>
-  {% endblock %}
+{% highlight "text" %}
+npm install Startr/Style
+{% endhighlight %}
+
+<h3 id="install-via-yarn">Install via Yarn</h3>
+
+{% highlight "text" %}
+yarn add Startr/Style
+{% endhighlight %}
+
+<h3 id="import-css-in-react">Import CSS in React</h3>
+
+{% highlight "javascript" %}
+import 'Startr/Style/dist/style.min.css';
+{% endhighlight %}
+
+<h3 id="import-css-in-vuejs">Import CSS in Vue.js</h3>
+
+{% highlight "html" %}
+<style src='Startr/Style/dist/style.min.css' />
+{% endhighlight %}
+
+<h3 id="install-via-cdn">Install via CDN</h3>
+<p>To grab from CDN you can use the following.</p>
+
+{% highlight "html" %}
+<link href="https://unpkg.com/Startr/Style@latest/dist/style.min.css" rel="stylesheet">
+{% endhighlight %}
+
+<h3 id="modular-installation">Modular Installation</h3>
+<p>Startr Style can be broken down in to 3 distinct components. In cases where you may not need all three components,
+  each of these components can be included seperately.</p>
+
+<h4 id="base-element-styling">Base Element Styling</h4>
+
+{% highlight "html" %}
+<!-- Link locally -->
+<link href="path/to/css/style-base.min.css" rel="stylesheet">
+
+<!-- Via CDN -->
+<link href="https://unpkg.com/Startr/Style@latest/dist/style-base.min.css" rel="stylesheet">
+{% endhighlight %}
+
+<h4 id="helpers">Helpers</h4>
+
+{% highlight "html" %}
+<!-- Link locally -->
+<link href="path/to/css/style-helpers.min.css" rel="stylesheet">
+
+<!-- Via CDN -->
+<link href="https://unpkg.com/Startr/Style@latest/dist/style-helpers.min.css" rel="stylesheet">
+{% endhighlight %}
+
+<h4 id="utilities">Utilities</h4>
+
+{% highlight "html" %}
+<!-- Link locally -->
+<link href="path/to/css/style-utilities.min.css" rel="stylesheet">
+
+<!-- Via CDN -->
+<link href="https://unpkg.com/Startr/Style@latest/dist/style-utilities.min.css" rel="stylesheet">
+{% endhighlight %}
+
+{% endblock %}
