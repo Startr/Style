@@ -100,7 +100,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
       - [x] Login/registration form templates [/docs/use-cases/index.njk] - Add to gallery
         - [ ] Add spacing above and below the form in the preview
         - [ ] Update to the content of https://codepen.io/openco/pen/wBavPYx 
-        
+
   - [ ] **Button Components**
     - [x] Button variations [/docs/base-elements/buttons.njk]
       - [x] Primary, secondary, tertiary button styles [/docs/base-elements/buttons.njk] - Add to gallery
@@ -151,7 +151,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
       - [ ] Responsive containers
       - [ ] Full-width vs contained sections
   - [ ] **Modal & Overlay Components**
-    - [ ] Modal dialogs
+    - [ ] Modal dialogs based on https://believemy.com/en/r/creating-a-modal-window-without-using-javascript 
       - [ ] Basic modal with backdrop
       - [ ] Confirmation dialogs
       - [ ] Form modals
