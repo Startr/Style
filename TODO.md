@@ -59,8 +59,8 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 - [x] **Use Proper Highlight Shortcodes** - Always use `{% highlight "html" %}`, `{% highlight "css" %}`, or `{% highlight "text" %}` with `{% endhighlight %}` instead of hardcoded `<div class="highlight">` with `<pre>` tags
   - [x] Updated installation.njk to use proper shortcodes
   - [ ] **URGENT: Audit and fix hardcoded highlight blocks in the following files:**
-    - [ ] `/src/index.njk` - 1 hardcoded highlight div (line 86)
-    - [ ] `/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47)
+    - [x] `/src/index.njk` - 1 hardcoded highlight div (line 86) ✅ COMPLETED
+    - [x] `/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47) ✅ COMPLETED
     - [ ] `/src/docs/tutorials/index.njk` - 5 hardcoded highlight divs (lines 38, 46, 114, 121, 176) + pre tags (lines 39, 47, 115, 122, 177)
     - [ ] `/src/docs/base-elements/buttons.njk` - 8 hardcoded highlight divs (lines 18, 37, 54, 69, 90, 113, 129, 143) + pre tags
     - [ ] `/src/docs/base-elements/everything-else.njk` - Multiple hardcoded pre tags (lines 47, 91, 108, 132)
