@@ -46,7 +46,12 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 - [x] Write clear examples for each design style #ContentExcellence
 - [x] Create step-by-step tutorials #ContentExcellence
 - [x] Add practical use cases for utilities #ContentExcellence
-- [ ] Document design principles clearly #ContentExcellence
+- [x] Keep things DRY (Don't Repeat Yourself) #ContentExcellence
+  - [x] Refactor _includes to avoid duplication
+  - [x] Created shared components: head.njk, theme-toggle.njk, navigation.njk, theme-scripts.njk
+  - [x] Eliminated code duplication between layout.njk and layout_2.njk
+  - [x] Consolidated footer content using footer.njk include
+- [x] Document design principles clearly #ContentExcellence
 - [ ] Write compelling copy for landing page #ContentExcellence
 - [ ] Add interactive playground for utilities #ContentExcellence
 - [ ] Create component gallery with live examples #ContentExcellence
@@ -150,13 +155,13 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
       - [ ] Section containers with background variations
       - [ ] Responsive containers
       - [ ] Full-width vs contained sections
-  - [ ] **Modal & Overlay Components**
-    - [ ] Modal dialogs based on https://believemy.com/en/r/creating-a-modal-window-without-using-javascript 
-      - [ ] Basic modal with backdrop
-      - [ ] Confirmation dialogs
-      - [ ] Form modals
-      - [ ] Image galleries in modals
-      - [ ] Modal sizes (small, medium, large, fullscreen)
+  - [x] **Modal & Overlay Components**
+    - [x] Modal dialogs based on https://believemy.com/en/r/creating-a-modal-window-without-using-javascript 
+      - [x] Basic modal with backdrop
+      - [x] Confirmation dialogs
+      - [x] Form modals
+      - [x] Image galleries in modals
+      - [x] Modal sizes (small, medium, large, fullscreen)
     - [ ] Overlay components
       - [ ] Tooltip components with positioning
       - [ ] Popover menus

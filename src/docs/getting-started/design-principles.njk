@@ -1,0 +1,251 @@
+{% extends "layout.njk" %}
+
+{% block article %}
+<h1 id="design-principles">Design Principles</h1>
+
+<p>
+  Startr.Style is built on a foundation of clear design principles that prioritize simplicity, performance, and developer experience. At its core, Startr.Style embraces the concept of <strong>Locality of Behaviour (LoB)</strong> – keeping styling decisions close to the HTML elements they affect.
+</p>
+
+<div style="--bg: #e8f4fd; --p: 2rem; --br: 8px; --mb: 2rem; --border-left: 4px solid #2196f3;">
+  <h3 style="--fs: 1.2rem; --fw: 600; --c: #1565c0; --mb: 1rem;">Core Philosophy</h3>
+  <blockquote style="--fs: 1.1rem; --c: #1976d2; --fst: italic; --mb: 0; --border-left: none; --pl: 0;">
+    "Style should be immediate, obvious, and maintainable. When you see an element, you should understand its styling without hunting through separate CSS files."
+  </blockquote>
+</div>
+
+<h2 id="locality-of-behaviour">Locality of Behaviour (LoB)</h2>
+
+<p>
+  The central principle behind Startr.Style is <strong>Locality of Behaviour</strong>. This means that the styling of an HTML element should be immediately visible and understandable when looking at that element's markup.
+</p>
+
+<h3 id="traditional-approach-problems">Problems with Traditional CSS Approaches</h3>
+
+<div style="--bg: #fff3e0; --p: 1.5rem; --br: 6px; --mb: 2rem; --border-left: 3px solid #ff9800;">
+  <h4 style="--c: #e65100; --mb: 1rem;">Separation of Concerns Gone Wrong</h4>
+  <ul style="--c: #bf360c;">
+    <li><strong>Hunting for styles:</strong> Developers spend time searching through multiple CSS files to understand element styling</li>
+    <li><strong>Complex toolchains:</strong> Build processes, bundlers, and CSS-in-JS solutions add unnecessary complexity</li>
+    <li><strong>Large file sizes:</strong> Traditional utility frameworks generate massive CSS files with unused code</li>
+    <li><strong>Maintenance overhead:</strong> Changes require touching multiple files and understanding complex cascading rules</li>
+  </ul>
+</div>
+
+<h3 id="startr-style-solution">The Startr.Style Solution</h3>
+
+<p>Instead of classes, Startr.Style uses CSS custom properties (variables) directly in the <code>style</code> attribute:</p>
+
+{% highlight "html" %}
+<!-- Traditional CSS approach -->
+<div class="bg-blue-500 text-white p-4 rounded-lg shadow-md">
+  Content
+</div>
+
+<!-- Startr.Style approach -->
+<div style="--bg: #2196f3; --c: white; --p: 1rem; --br: 8px; --shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  Content
+</div>
+{% endhighlight %}
+
+<h2 id="key-principles">Key Design Principles</h2>
+
+<h3 id="principle-1-inline-first">1. Inline-First Styling</h3>
+
+<p>
+  Startr.Style encourages styling directly in HTML using CSS custom properties. This approach provides immediate feedback and eliminates the disconnect between HTML structure and visual presentation.
+</p>
+
+<div style="--d: grid; --grid-template-columns: 1fr 1fr; --gap: 2rem; --mb: 2rem;">
+  <div style="--bg: #f8f9fa; --p: 1.5rem; --br: 6px;">
+    <h4 style="--c: #28a745; --mb: 1rem;">✅ Benefits</h4>
+    <ul style="--fs: 0.9rem;">
+      <li>Visual styling visible at element level</li>
+      <li>No CSS file hunting</li>
+      <li>Immediate preview in browser dev tools</li>
+      <li>Self-documenting code</li>
+      <li>Easy debugging and modification</li>
+    </ul>
+  </div>
+  <div style="--bg: #f8f9fa; --p: 1.5rem; --br: 6px;">
+    <h4 style="--c: #6c757d; --mb: 1rem;">🎯 Example</h4>
+    {% highlight "html" %}
+<button style="--bg: var(--primary); --c: white; --p: 0.75rem 1.5rem; --br: 4px; --cursor: pointer;">
+  Click me
+</button>
+    {% endhighlight %}
+  </div>
+</div>
+
+<h3 id="principle-2-css-variable-power">2. Unleash CSS Variable Power</h3>
+
+<p>
+  Unlike traditional utility frameworks that limit you to predefined values, Startr.Style gives you access to the full CSS specification through custom properties.
+</p>
+
+{% highlight "html" %}
+<!-- Any valid CSS value works -->
+<div style="--bg: linear-gradient(45deg, #ff6b6b, #4ecdc4);">Gradient background</div>
+<div style="--bg: url('pattern.svg');">Image background</div>
+<div style="--bg: rgba(255, 0, 0, 0.1);">Transparent background</div>
+<div style="--bg: hsl(200, 50%, 50%);">HSL color</div>
+{% endhighlight %}
+
+<h3 id="principle-3-responsive-by-default">3. Responsive Design Without Media Queries</h3>
+
+<p>
+  Startr.Style supports responsive design directly in the style attribute using viewport-specific custom properties.
+</p>
+
+{% highlight "html" %}
+<!-- Responsive padding: small on mobile, large on desktop -->
+<div style="--p: 1rem; --p-lg: 2rem; --p-xl: 3rem;">
+  Responsive content
+</div>
+
+<!-- Different layouts for different screen sizes -->
+<div style="--d: block; --d-md: flex; --fd-md: row; --jc-md: space-between;">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+{% endhighlight %}
+
+<h3 id="principle-4-minimal-css-footprint">4. Minimal CSS Footprint</h3>
+
+<p>
+  Traditional utility frameworks can be massive. Tailwind CSS, for example, can exceed 3MB in development. Startr.Style achieves the same functionality with a fraction of the size.
+</p>
+
+<div style="--bg: #e8f5e8; --p: 1.5rem; --br: 6px; --mb: 2rem;">
+  <h4 style="--c: #2e7d32; --mb: 1rem;">Size Comparison</h4>
+  <ul style="--c: #388e3c;">
+    <li><strong>Tailwind CSS (dev):</strong> ~3.2MB</li>
+    <li><strong>Bootstrap:</strong> ~187KB</li>
+    <li><strong>Startr.Style:</strong> ~45KB</li>
+  </ul>
+  <p style="--fs: 0.9rem; --c: #4caf50; --mb: 0;">
+    <strong>Result:</strong> Faster loading, better performance, smaller bundle sizes
+  </p>
+</div>
+
+<h3 id="principle-5-no-build-step-required">5. No Build Step Required</h3>
+
+<p>
+  Startr.Style works immediately without any build process, compilation, or tooling. Just include the CSS file and start styling.
+</p>
+
+{% highlight "html" %}
+<!-- Single line to get started -->
+<link rel="stylesheet" href="https://startr.style/style.css">
+{% endhighlight %}
+
+<h2 id="web-components-future">Future: Web Components Integration</h2>
+
+<p>
+  While Startr.Style minimizes the need for CSS classes, we recognize that complex interactive components benefit from encapsulation. Our roadmap includes embracing Web Components for advanced elements, taking inspiration from libraries like <a href="https://shoelace.style/" target="_blank">Shoelace</a>.
+</p>
+
+<div style="--bg: #f3e5f5; --p: 1.5rem; --br: 6px; --mb: 2rem; --border-left: 3px solid #9c27b0;">
+  <h4 style="--c: #7b1fa2; --mb: 1rem;">Web Components Strategy</h4>
+  <ul style="--c: #8e24aa;">
+    <li><strong>Simple styling:</strong> Use Startr.Style inline variables</li>
+    <li><strong>Complex components:</strong> Build custom Web Components</li>
+    <li><strong>Best of both worlds:</strong> Immediate styling + powerful encapsulation</li>
+    <li><strong>Future-ready:</strong> Native browser support, no framework lock-in</li>
+  </ul>
+</div>
+
+<h2 id="philosophical-alignment">Philosophical Alignment</h2>
+
+<p>
+  Startr.Style aligns with several design philosophies from our framework:
+</p>
+
+<h3 id="brutalist-influence">Brutalist Influence</h3>
+<p>
+  Like <a href="/brutalism/">Brutalist Web Design</a>, Startr.Style exposes the raw structure. You see exactly what styling is applied to each element without layers of abstraction.
+</p>
+
+<h3 id="modernist-principles">Modernist Principles</h3>
+<p>
+  Following <a href="/modernism/">Modernist design</a>, form follows function. Every utility serves a clear purpose, and there's intentional restraint in what we include.
+</p>
+
+<h3 id="experimental-innovation">Experimental Innovation</h3>
+<p>
+  Like our <a href="/experimentalisim/">Experimental approach</a>, Startr.Style pushes boundaries by reimagining how we think about CSS utility frameworks.
+</p>
+
+<h2 id="practical-benefits">Practical Benefits</h2>
+
+<div style="--d: grid; --grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); --gap: 1.5rem; --mb: 2rem;">
+  <div style="--bg: #fff; --p: 1.5rem; --br: 6px; --shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h4 style="--c: #1976d2; --mb: 1rem;">🚀 Developer Experience</h4>
+    <ul style="--fs: 0.9rem;">
+      <li>No context switching between files</li>
+      <li>Instant visual feedback</li>
+      <li>Easy debugging in dev tools</li>
+      <li>Self-documenting components</li>
+    </ul>
+  </div>
+  
+  <div style="--bg: #fff; --p: 1.5rem; --br: 6px; --shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h4 style="--c: #388e3c; --mb: 1rem;">⚡ Performance</h4>
+    <ul style="--fs: 0.9rem;">
+      <li>Smaller CSS file sizes</li>
+      <li>No unused CSS code</li>
+      <li>Faster page loads</li>
+      <li>Better runtime performance</li>
+    </ul>
+  </div>
+  
+  <div style="--bg: #fff; --p: 1.5rem; --br: 6px; --shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h4 style="--c: #f57c00; --mb: 1rem;">🔧 Maintainability</h4>
+    <ul style="--fs: 0.9rem;">
+      <li>No CSS cascade issues</li>
+      <li>Easy to modify styles</li>
+      <li>Clear component boundaries</li>
+      <li>Reduced technical debt</li>
+    </ul>
+  </div>
+  
+  <div style="--bg: #fff; --p: 1.5rem; --br: 6px; --shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h4 style="--c: #7b1fa2; --mb: 1rem;">🎨 Design Freedom</h4>
+    <ul style="--fs: 0.9rem;">
+      <li>Any CSS value supported</li>
+      <li>No design system constraints</li>
+      <li>Flexible responsive design</li>
+      <li>Easy prototyping</li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="getting-started">Getting Started with These Principles</h2>
+
+<p>
+  Ready to embrace Locality of Behaviour and inline-first styling? Here's how to get started:
+</p>
+
+<ol style="--mb: 2rem;">
+  <li><strong>Include Startr.Style:</strong> Add the single CSS file to your project</li>
+  <li><strong>Start small:</strong> Begin with simple utilities like <code>--p</code> (padding) and <code>--m</code> (margin)</li>
+  <li><strong>Think inline:</strong> When you need to style an element, add it directly to the <code>style</code> attribute</li>
+  <li><strong>Use responsive modifiers:</strong> Add <code>-sm</code>, <code>-md</code>, <code>-lg</code> suffixes for responsive design</li>
+  <li><strong>Embrace the freedom:</strong> Use any CSS value, not just predefined options</li>
+</ol>
+
+<div style="--bg: #e3f2fd; --p: 2rem; --br: 8px; --mb: 2rem;">
+  <h3 style="--c: #1565c0; --mb: 1rem;">Next Steps</h3>
+  <ul style="--c: #1976d2;">
+    <li><a href="/docs/getting-started/installation/">Install Startr.Style</a> and start building</li>
+    <li>Explore our <a href="/docs/tutorials/">step-by-step tutorials</a></li>
+    <li>See <a href="/docs/use-cases/">real-world examples</a> in action</li>
+    <li>Browse the complete <a href="/docs/utilities/">utilities reference</a></li>
+  </ul>
+</div>
+
+<p>
+  These design principles guide every decision in Startr.Style, from API design to feature selection. By embracing Locality of Behaviour and inline-first styling, we create more maintainable, performant, and enjoyable web development experiences.
+</p>
+
+{% endblock %}
