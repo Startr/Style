@@ -126,13 +126,13 @@ Button
       <button class="grey">Button</button>
       <button class="green">Button</button>
     </div>
-    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;group vertical&#34;</span><span class="p"></span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;white&#34;</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;grey&#34;</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;green&#34;</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
-    </div>
+    {% highlight "html" %}
+<div class="group vertical">
+  <button class="white">Button</button>
+  <button class="grey">Button</button>
+  <button class="green">Button</button>
+</div>
+    {% endhighlight %}
   </div>
 
   <div class="code-block" style="--c: var(--code);--bg:#f5f5f5; --radius: 4px; --p:1rem; --mb:3rem; --border-1:var(--br-grey);--fw:bold; --shadow-soft: 4; ">
@@ -140,11 +140,11 @@ Button
       <input type="text" placeholder="Name" aria-label="Name">
       <button>Button</button>
     </div>
-    <div class="highlight" style="--shadow-soft: 4; --levitate-hvr:4; --br:0.4rem;">
-      <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;group vertical&#34;</span><span class="p"></span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;Name&#34;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&#34;Name&#34;</span><span class="p"></span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">button</span><span class="p"></span><span class="p">&gt;</span>Button<span class="p">&lt;</span><span class="p">/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="p">/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre>
-    </div>
+    {% highlight "html" %}
+<div class="group vertical">
+  <input type="text" placeholder="Name" aria-label="Name">
+  <button>Button</button>
+</div>
+    {% endhighlight %}
   </div>
 {% endblock %}
