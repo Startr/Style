@@ -52,9 +52,7 @@
         <label for="br">Border Radius</label>
         <input class="slider" id="br" max="80" min="0" name="br" type="range" value="5" />
       </div>
-      <div
-        class="markdown"
-        style="
+      <div class="markdown" style="
           --maxw: 100%;
           --maxw-lg: 800px;
           --w: 100%;
@@ -99,11 +97,8 @@
             });
           })();
         </script>
-        <div
-          class="highlight"
-          style="--shadow-soft: 4; --levitate-hvr: 16; --br: 0.4rem; --m: 2em; --d: none; --d-sm: block"
-        >
-          <pre class="chroma" style="--m: 0">{% include "example.njk" %}</pre>
+        <div class="highlight" style="--br: 0.4rem; --m: 2em; --d: none; --d-sm: block">
+          <pre class="chroma" style="--m: 0; --levitate-hvr:6">{% include "example.njk" %}</pre>
         </div>
       </div>
     </div>
@@ -139,7 +134,7 @@
 
 {% endblock %} {% block page %}
 
-<article class="markdown">
+<article>
   <div id="learn">
     <h3 id="Easy-Styling-Without-Classes">Easy Styling Without Classes</h3>
     <p>
@@ -150,7 +145,7 @@
     <p>Here's how you can do it in your HTML:</p>
 
 
-  {% highlight "plaintext" %}
+  {% highlight "html" %}
   {% raw %}
 <html>
   <head>
@@ -174,7 +169,7 @@
     </p>
     <p>
       Just ad one line of code and you are good to go.<br />
-      {% highlight "plaintext" %}
+      {% highlight "html" %}
       <link rel="stylesheet" href="https://startr.style/style.css">
       {% endhighlight %}<br>
       It is all you need to get started. No need to compile anything, just add and start building. When you want to take

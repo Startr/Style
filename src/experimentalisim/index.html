@@ -50,6 +50,80 @@
       intuitive interface that requires no manual to explore.
     </p>
 
+    <!-- Clear Examples Section -->
+    <section style="--mt: 3rem; --mb: 3rem; --p: 2rem; --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%); --c: #fff; --br: 12px;">
+      <h2 style="--fs: 2rem; --fw: 500; --c: #fff; --mb: 2rem; --lh: 1.2; --text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Experimental Design with Startr.Style</h2>
+      
+      <h3 style="--fs: 1.4rem; --fw: 400; --mb: 1.5rem; --c: #f0f0f0;">Creative Animations & Transforms</h3>
+      <div style="--bg: rgba(255,255,255,0.1); --p: 2rem; --br: 8px; --mb: 2rem; --backdrop-filter: blur(10px);">
+        <div style="--d: flex; --gap: 2rem; --fw: wrap; --ai: center;">
+          <div style="--w: 100px; --h: 100px; --bg: #ff6b6b; --br: 50%; --transform: rotate(45deg); --transition: all 0.3s ease; --cursor: pointer;" 
+               onmouseover="this.style.setProperty('--transform', 'rotate(0deg) scale(1.2)')" 
+               onmouseout="this.style.setProperty('--transform', 'rotate(45deg) scale(1)')">
+          </div>
+          <div style="--flex: 1;">
+            <h4 style="--fs: 1.2rem; --fw: 400; --c: #fff; --mb: 0.5rem;">Hover Transform</h4>
+            <p style="--fs: 0.95rem; --c: #e0e0e0; --lh: 1.5;">Interactive elements that respond with smooth transforms</p>
+            <code style="--bg: rgba(0,0,0,0.3); --c: #fff; --p: 0.5rem; --d: block; --br: 4px; --fs: 0.85rem; --mt: 0.5rem;">
+              --transform: rotate(45deg); --transition: all 0.3s ease;
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="--fs: 1.4rem; --fw: 400; --mb: 1.5rem; --c: #f0f0f0;">Experimental Layouts</h3>
+      <div style="--d: grid; --grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); --gap: 1rem; --mb: 2rem;">
+        <div style="--bg: rgba(255,255,255,0.15); --p: 1.5rem; --br: 8px; --transform: skew(-2deg); --transition: transform 0.3s ease;"
+             onmouseover="this.style.setProperty('--transform', 'skew(0deg)')"
+             onmouseout="this.style.setProperty('--transform', 'skew(-2deg)')">
+          <h4 style="--fs: 1.1rem; --fw: 400; --c: #fff; --mb: 1rem;">Skewed Card</h4>
+          <p style="--fs: 0.9rem; --c: #e0e0e0;">Experimental skew transform</p>
+        </div>
+        <div style="--bg: rgba(255,255,255,0.15); --p: 1.5rem; --br: 50px 10px; --transition: all 0.3s ease;"
+             onmouseover="this.style.setProperty('--br', '10px 50px')"
+             onmouseout="this.style.setProperty('--br', '50px 10px')">
+          <h4 style="--fs: 1.1rem; --fw: 400; --c: #fff; --mb: 1rem;">Organic Borders</h4>
+          <p style="--fs: 0.9rem; --c: #e0e0e0;">Asymmetric border radius</p>
+        </div>
+        <div style="--bg: rgba(255,255,255,0.15); --p: 1.5rem; --br: 8px; --filter: hue-rotate(90deg); --transition: filter 0.5s ease;"
+             onmouseover="this.style.setProperty('--filter', 'hue-rotate(180deg)')"
+             onmouseout="this.style.setProperty('--filter', 'hue-rotate(90deg)')">
+          <h4 style="--fs: 1.1rem; --fw: 400; --c: #fff; --mb: 1rem;">Color Shifting</h4>
+          <p style="--fs: 0.9rem; --c: #e0e0e0;">CSS filter experiments</p>
+        </div>
+      </div>
+
+      <h3 style="--fs: 1.4rem; --fw: 400; --mb: 1.5rem; --c: #f0f0f0;">Advanced CSS Effects</h3>
+      <div style="--bg: rgba(255,255,255,0.1); --p: 2rem; --br: 8px; --mb: 2rem;">
+        <div style="--d: flex; --gap: 2rem; --ai: center; --fw: wrap;">
+          <div style="--w: 150px; --h: 80px; --bg: linear-gradient(45deg, #ff9a56, #ff6b6b); --br: 8px; --shadow: 0 10px 30px rgba(255,107,107,0.4); --animation: pulse 2s infinite;">
+            <div style="--d: flex; --ai: center; --jc: center; --h: 100%; --c: #fff; --fw: 600;">Glowing Box</div>
+          </div>
+          <div style="--flex: 1;">
+            <h4 style="--fs: 1.2rem; --fw: 400; --c: #fff; --mb: 0.5rem;">Gradient Shadows & Animation</h4>
+            <p style="--fs: 0.95rem; --c: #e0e0e0; --lh: 1.5;">Combining gradients with colored shadows for depth</p>
+            <code style="--bg: rgba(0,0,0,0.3); --c: #fff; --p: 0.5rem; --d: block; --br: 4px; --fs: 0.85rem; --mt: 0.5rem;">
+              --bg: linear-gradient(45deg, #ff9a56, #ff6b6b); --shadow: 0 10px 30px rgba(255,107,107,0.4);
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="--fs: 1.4rem; --fw: 400; --mb: 1.5rem; --c: #f0f0f0;">Creative Typography Experiments</h3>
+      <div style="--bg: rgba(255,255,255,0.1); --p: 2rem; --br: 8px;">
+        <h4 style="--fs: 2.5rem; --fw: 900; --c: transparent; --background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1); --background-clip: text; --text-fill-color: transparent; --mb: 1rem;">
+          GRADIENT TEXT
+        </h4>
+        <p style="--fs: 1.2rem; --c: #fff; --letter-spacing: 0.2rem; --text-transform: uppercase; --mb: 1rem;">S P A C E D   T E X T</p>
+        <div style="--fs: 1.5rem; --fw: 700; --c: #fff; --text-shadow: 2px 2px 0 #ff6b6b, 4px 4px 0 #4ecdc4; --mb: 1.5rem;">
+          Layered Shadow Text
+        </div>
+        <code style="--bg: rgba(0,0,0,0.3); --c: #fff; --p: 0.5rem; --d: block; --br: 4px; --fs: 0.85rem;">
+          --background: linear-gradient(90deg, #ff6b6b, #4ecdc4); --background-clip: text; --text-fill-color: transparent;
+        </code>
+      </div>
+    </section>
+
     <p>
       Modernism expresses the real structure that is there in elegant ways. Modernism avoids veneers of unnecessary
       styling, instead focusing on the function of elements. This is similar to brutalism, but with a more refined

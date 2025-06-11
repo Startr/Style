@@ -141,4 +141,362 @@
 <span class="p">&lt;</span><span class="p">/</span><span class="nt">dl</span><span class="p">&gt;</span></code></pre>
     </div>
   </div>
+</div>
+
+  <h3 id="modals">Modal Dialogs (CSS-Only)</h3>
+  <div class="code-block" style="--c: var(--code);--bg:#f5f5f5; --radius: 4px; --p:1rem; --mb:3rem; --border-1:var(--br-grey);--fw:bold; --shadow-soft: 4;">
+    
+    <!-- Basic Modal with :target method -->
+    <h4>Basic Modal Dialog</h4>
+    <p>
+      <a href="#modal-basic" class="button">Open Basic Modal</a>
+    </p>
+    
+    <!-- Modal markup -->
+    <div id="modal-basic" class="modal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Basic Modal</h3>
+          <a href="#" class="modal-close">&times;</a>
+        </div>
+        <div class="modal-body">
+          <p>This is a CSS-only modal dialog using the <code>:target</code> pseudo-selector. No JavaScript required!</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="button">Close</a>
+          <button class="button" style="--element-bg: var(--primary);">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Dialog -->
+    <h4 style="margin-top: 2rem;">Confirmation Dialog</h4>
+    <p>
+      <a href="#modal-confirm" class="button" style="--element-bg: var(--red);">Delete Item</a>
+    </p>
+    
+    <div id="modal-confirm" class="modal modal-small">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>⚠️ Confirm Delete</h3>
+          <a href="#" class="modal-close">&times;</a>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="button">Cancel</a>
+          <button class="button" style="--element-bg: var(--red);">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Modal -->
+    <h4 style="margin-top: 2rem;">Form Modal</h4>
+    <p>
+      <a href="#modal-form" class="button" style="--element-bg: var(--green);">Add New User</a>
+    </p>
+    
+    <div id="modal-form" class="modal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>👤 Add New User</h3>
+          <a href="#" class="modal-close">&times;</a>
+        </div>
+        <div class="modal-body">
+          <form>
+            <p>
+              <label>First Name
+                <input type="text" placeholder="John" required />
+              </label>
+            </p>
+            <p>
+              <label>Last Name
+                <input type="text" placeholder="Doe" required />
+              </label>
+            </p>
+            <p>
+              <label>Email
+                <input type="email" placeholder="john@example.com" required />
+              </label>
+            </p>
+            <p>
+              <label>Role
+                <select>
+                  <option>User</option>
+                  <option>Admin</option>
+                  <option>Moderator</option>
+                </select>
+              </label>
+            </p>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="button">Cancel</a>
+          <button type="submit" class="button" style="--element-bg: var(--green);">Add User</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Gallery Modal -->
+    <h4 style="margin-top: 2rem;">Image Gallery Modal</h4>
+    <p>
+      <a href="#modal-gallery" class="button" style="--element-bg: var(--blue);">View Gallery</a>
+    </p>
+    
+    <div id="modal-gallery" class="modal modal-large">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>🖼️ Image Gallery</h3>
+          <a href="#" class="modal-close">&times;</a>
+        </div>
+        <div class="modal-body">
+          <div class="gallery-grid">
+            <img src="/static/favicon/logo.png" alt="Logo" style="width: 100px; height: 100px; object-fit: contain; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin: 0.5rem;">
+            <img src="/static/favicon/logo.png" alt="Logo" style="width: 100px; height: 100px; object-fit: contain; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin: 0.5rem;">
+            <img src="/static/favicon/logo.png" alt="Logo" style="width: 100px; height: 100px; object-fit: contain; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin: 0.5rem;">
+            <img src="/static/favicon/logo.png" alt="Logo" style="width: 100px; height: 100px; object-fit: contain; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin: 0.5rem;">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="button">Close Gallery</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fullscreen Modal -->
+    <h4 style="margin-top: 2rem;">Fullscreen Modal</h4>
+    <p>
+      <a href="#modal-fullscreen" class="button" style="--element-bg: var(--purple);">Open Fullscreen</a>
+    </p>
+    
+    <div id="modal-fullscreen" class="modal modal-fullscreen">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>📱 Fullscreen Experience</h3>
+          <a href="#" class="modal-close">&times;</a>
+        </div>
+        <div class="modal-body">
+          <h4>Welcome to the Fullscreen Modal</h4>
+          <p>This modal takes up the entire viewport, perfect for immersive experiences or mobile-first designs.</p>
+          <p>You can include any content here - forms, images, videos, or entire application interfaces.</p>
+          <div style="background: linear-gradient(45deg, var(--primary), var(--secondary)); padding: 2rem; border-radius: 8px; color: white; text-align: center; margin: 2rem 0;">
+            <h4>Feature Highlight</h4>
+            <p>This section could showcase important information or call-to-action items.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="button">Got it!</a>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      /* Modal Base Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+      }
+
+      .modal:target {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: modalFadeIn 0.3s ease-out;
+      }
+
+      .modal-backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(2px);
+      }
+
+      .modal-content {
+        position: relative;
+        background: var(--background);
+        border-radius: 8px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow: hidden;
+        animation: modalSlideIn 0.3s ease-out;
+      }
+
+      /* Modal Sizes */
+      .modal-small .modal-content {
+        max-width: 400px;
+      }
+
+      .modal-large .modal-content {
+        max-width: 800px;
+      }
+
+      .modal-fullscreen .modal-content {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+      }
+
+      /* Modal Header */
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--background-alt);
+      }
+
+      .modal-header h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      .modal-close {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--text-muted);
+        text-decoration: none;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .modal-close:hover {
+        background: var(--border);
+        color: var(--text-main);
+      }
+
+      /* Modal Body */
+      .modal-body {
+        padding: 1.5rem;
+        overflow-y: auto;
+        max-height: 60vh;
+      }
+
+      .modal-fullscreen .modal-body {
+        max-height: calc(100vh - 140px);
+      }
+
+      /* Modal Footer */
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        padding: 1.5rem;
+        border-top: 1px solid var(--border);
+        background: var(--background-alt);
+      }
+
+      /* Gallery Grid */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+        justify-items: center;
+      }
+
+      /* Animations */
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .modal-content {
+          width: 95%;
+          margin: 1rem;
+        }
+        
+        .modal-header,
+        .modal-body,
+        .modal-footer {
+          padding: 1rem;
+        }
+        
+        .modal-footer {
+          flex-direction: column;
+        }
+        
+        .modal-footer .button {
+          width: 100%;
+          margin: 0;
+        }
+      }
+
+      /* Focus Management */
+      .modal:target .modal-content {
+        outline: none;
+      }
+
+      /* Ensure modals work with existing button styles */
+      .modal .button {
+        margin: 0;
+      }
+    </style>
+
+    {% highlight "html"%}
+    <!-- Basic Modal Trigger -->
+    <a href="#modal-basic" class="button">Open Basic Modal</a>
+    
+    <!-- Modal Structure -->
+    <div id="modal-basic" class="modal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Modal Title</h3>
+          <a href="#" class="modal-close">&times;</a>
+        </div>
+        <div class="modal-body">
+          <p>Modal content goes here...</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="button">Close</a>
+          <button class="button">Action</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Different Sizes -->
+    <div class="modal modal-small">...</div>    <!-- Small -->
+    <div class="modal modal-large">...</div>    <!-- Large -->
+    <div class="modal modal-fullscreen">...</div> <!-- Fullscreen -->
+    {% endhighlight %}
+  </div>
+
 {% endblock %}

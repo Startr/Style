@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd src && npx @11ty/eleventy --serve --output=../dist",
-    "build": "cd src && npx @11ty/eleventy --output=../dist"
+    "build": "cd src && npx @11ty/eleventy --output=../dist",
+    "audit:accessibility": "CHROME_BIN=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" axe src/**/*.html",
+    "audit:accessibility:built": "npm run build && CHROME_BIN=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" axe dist/**/*.html",
+    "audit:accessibility:live": "CHROME_BIN=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" axe http://localhost:8080"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +22,8 @@
     "postcss-inline-svg": "^6.0.0",
     "postcss-mixins": "^10.0.1",
     "postcss-nested": "^6.0.1"
+  },
+  "devDependencies": {
+    "axe-cli": "^3.2.1"
   }
 }

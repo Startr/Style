@@ -391,4 +391,574 @@
   {% endhighlight %}
 
 </div>
+
+<h3 id="number-slider">Number Slider</h3>
+<div class="code-block"
+  style="--c: var(--code); --bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
+>
+  <label for="slider-basic">
+    Basic Slider (0-100)
+    <input type="range" id="slider-basic" min="0" max="100" value="50" />
+    <output for="slider-basic">50</output>
+  </label>
+  
+  <label for="slider-step">
+    Slider with Steps (0-10, step 0.5)
+    <input type="range" id="slider-step" min="0" max="10" step="0.5" value="5" />
+    <output for="slider-step">5</output>
+  </label>
+  
+  <label for="slider-custom">
+    Custom Styled Slider with Live Value
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <span style="min-width: 2rem; text-align: right;">0</span>
+      <input type="range" id="slider-custom" min="0" max="200" value="100" style="flex: 1;" />
+      <span style="min-width: 2rem;">200</span>
+    </div>
+    <div style="text-align: center; margin-top: 0.5rem; font-weight: bold; font-size: 1.2rem;">
+      Value: <span id="slider-custom-value">100</span>
+    </div>
+  </label>
+
+  <script>
+    // Update output elements for basic sliders
+    document.getElementById('slider-basic').addEventListener('input', function(e) {
+      document.querySelector('output[for="slider-basic"]').textContent = e.target.value;
+    });
+    
+    document.getElementById('slider-step').addEventListener('input', function(e) {
+      document.querySelector('output[for="slider-step"]').textContent = e.target.value;
+    });
+    
+    // Update custom slider display
+    document.getElementById('slider-custom').addEventListener('input', function(e) {
+      document.getElementById('slider-custom-value').textContent = e.target.value;
+    });
+  </script>
+  
+  {% highlight "html" %}
+  <label for="slider-basic">
+    Basic Slider (0-100)
+    <input type="range" id="slider-basic" min="0" max="100" value="50" />
+    <output for="slider-basic">50</output>
+  </label>
+  
+  <label for="slider-step">
+    Slider with Steps (0-10, step 0.5)
+    <input type="range" id="slider-step" min="0" max="10" step="0.5" value="5" />
+    <output for="slider-step">5</output>
+  </label>
+  
+  <label for="slider-custom">
+    Custom Styled Slider with Live Value
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <span style="min-width: 2rem; text-align: right;">0</span>
+      <input type="range" id="slider-custom" min="0" max="200" value="100" style="flex: 1;" />
+      <span style="min-width: 2rem;">200</span>
+    </div>
+    <div style="text-align: center; margin-top: 0.5rem; font-weight: bold; font-size: 1.2rem;">
+      Value: <span id="slider-custom-value">100</span>
+    </div>
+  </label>
+
+  <script>
+    // Update output elements for basic sliders
+    document.getElementById('slider-basic').addEventListener('input', function(e) {
+      document.querySelector('output[for="slider-basic"]').textContent = e.target.value;
+    });
+    
+    document.getElementById('slider-step').addEventListener('input', function(e) {
+      document.querySelector('output[for="slider-step"]').textContent = e.target.value;
+    });
+    
+    // Update custom slider display
+    document.getElementById('slider-custom').addEventListener('input', function(e) {
+      document.getElementById('slider-custom-value').textContent = e.target.value;
+    });
+  </script>
+  {% endhighlight %}
+
+</div>
+
+<h3 id="number-input">Number Input</h3>
+<div class="code-block"
+  style="--c: var(--code); --bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
+>
+  <label for="input-number-basic"
+    >Basic Number Input
+    <input type="number" value="5" min="0" max="10" step="1" />
+  </label>
+  
+  <label for="input-number-decimal"
+    >Decimal Number Input
+    <input type="number" value="2.5" min="0" max="10" step="0.1" />
+  </label>
+  
+  <label for="input-number-custom"
+    >Number Input with Custom Controls
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <button type="button" onclick="decrementNumber('input-number-custom')" style="min-width: 2rem; padding: 0.25rem 0.5rem;">-</button>
+      <input type="number" id="input-number-custom" value="10" min="1" max="100" step="1" style="text-align: center; flex: 1;" />
+      <button type="button" onclick="incrementNumber('input-number-custom')" style="min-width: 2rem; padding: 0.25rem 0.5rem;">+</button>
+    </div>
+  </label>
+
+  <script>
+    function incrementNumber(inputId) {
+      const input = document.getElementById(inputId);
+      const step = parseFloat(input.step) || 1;
+      const max = parseFloat(input.max);
+      const current = parseFloat(input.value) || 0;
+      const newValue = current + step;
+      
+      if (isNaN(max) || newValue <= max) {
+        input.value = newValue;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+    
+    function decrementNumber(inputId) {
+      const input = document.getElementById(inputId);
+      const step = parseFloat(input.step) || 1;
+      const min = parseFloat(input.min);
+      const current = parseFloat(input.value) || 0;
+      const newValue = current - step;
+      
+      if (isNaN(min) || newValue >= min) {
+        input.value = newValue;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+  </script>
+  
+  {% highlight "html" %}
+  <label for="input-number-basic"
+    >Basic Number Input
+    <input type="number" value="5" min="0" max="10" step="1" />
+  </label>
+  
+  <label for="input-number-decimal"
+    >Decimal Number Input
+    <input type="number" value="2.5" min="0" max="10" step="0.1" />
+  </label>
+  
+  <label for="input-number-custom"
+    >Number Input with Custom Controls
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <button type="button" onclick="decrementNumber('input-number-custom')" style="min-width: 2rem; padding: 0.25rem 0.5rem;">-</button>
+      <input type="number" id="input-number-custom" value="10" min="1" max="100" step="1" style="text-align: center; flex: 1;" />
+      <button type="button" onclick="incrementNumber('input-number-custom')" style="min-width: 2rem; padding: 0.25rem 0.5rem;">+</button>
+    </div>
+  </label>
+
+  <script>
+    function incrementNumber(inputId) {
+      const input = document.getElementById(inputId);
+      const step = parseFloat(input.step) || 1;
+      const max = parseFloat(input.max);
+      const current = parseFloat(input.value) || 0;
+      const newValue = current + step;
+      
+      if (isNaN(max) || newValue <= max) {
+        input.value = newValue;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+    
+    function decrementNumber(inputId) {
+      const input = document.getElementById(inputId);
+      const step = parseFloat(input.step) || 1;
+      const min = parseFloat(input.min);
+      const current = parseFloat(input.value) || 0;
+      const newValue = current - step;
+      
+      if (isNaN(min) || newValue >= min) {
+        input.value = newValue;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+  </script>
+  {% endhighlight %}
+
+</div>
+
+<h3 id="custom-checkboxes">Custom Checkboxes with Fun Styles</h3>
+<div
+  class="code-block"
+  style="--c: var(--code); --bg: #f5f5f5; --radius: 4px; --p: 1rem; --mb: 3rem; --border-1: var(--br-grey); --fw: bold; --shadow-soft: 4"
+>
+  <!-- Heart checkbox -->
+  <div class="custom-checkbox-container" style="margin-bottom: 1rem;">
+    <input type="checkbox" id="heart-checkbox" class="custom-checkbox heart-checkbox" />
+    <label for="heart-checkbox" class="custom-label">Love this feature ❤️</label>
+  </div>
+
+  <!-- Star checkbox -->
+  <div class="custom-checkbox-container" style="margin-bottom: 1rem;">
+    <input type="checkbox" id="star-checkbox" class="custom-checkbox star-checkbox" />
+    <label for="star-checkbox" class="custom-label">Rate with stars ⭐</label>
+  </div>
+
+  <!-- Emoji checkbox -->
+  <div class="custom-checkbox-container" style="margin-bottom: 1rem;">
+    <input type="checkbox" id="emoji-checkbox" class="custom-checkbox emoji-checkbox" />
+    <label for="emoji-checkbox" class="custom-label">Fun with emojis 😄</label>
+  </div>
+
+  <!-- Logo checkbox -->
+  <div class="custom-checkbox-container" style="margin-bottom: 1rem;">
+    <input type="checkbox" id="logo-checkbox" class="custom-checkbox logo-checkbox" />
+    <label for="logo-checkbox" class="custom-label">Brand logo checkbox</label>
+  </div>
+
+  <!-- Toggle switch style -->
+  <div class="custom-checkbox-container" style="margin-bottom: 1rem;">
+    <input type="checkbox" id="toggle-checkbox" class="custom-checkbox toggle-checkbox" />
+    <label for="toggle-checkbox" class="custom-label toggle-label">Toggle switch style</label>
+  </div>
+
+  <!-- Geometric checkbox -->
+  <div class="custom-checkbox-container" style="margin-bottom: 1rem;">
+    <input type="checkbox" id="geometric-checkbox" class="custom-checkbox geometric-checkbox" />
+    <label for="geometric-checkbox" class="custom-label">Geometric style ◆</label>
+  </div>
+
+  <!-- Music note checkbox -->
+  <div class="custom-checkbox-container" style="margin-bottom: 1rem;">
+    <input type="checkbox" id="music-checkbox" class="custom-checkbox music-checkbox" />
+    <label for="music-checkbox" class="custom-label">Music lover ♪</label>
+  </div>
+
+  <!-- Gradient checkbox -->
+  <div class="custom-checkbox-container" style="margin-bottom: 1rem;">
+    <input type="checkbox" id="gradient-checkbox" class="custom-checkbox gradient-checkbox" />
+    <label for="gradient-checkbox" class="custom-label">Gradient vibes 🌈</label>
+  </div>
+
+  <style>
+    /* Custom checkbox base styles */
+    .custom-checkbox {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      margin-right: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .custom-checkbox:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .custom-label {
+      cursor: pointer;
+      user-select: none;
+      font-size: 1rem;
+      vertical-align: middle;
+    }
+
+    .custom-checkbox-container {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Heart checkbox */
+    .heart-checkbox:checked {
+      background: linear-gradient(45deg, #ff6b9d, #ff1744);
+      border-color: #ff1744;
+    }
+
+    .heart-checkbox:checked::before {
+      content: "💖";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Star checkbox */
+    .star-checkbox:checked {
+      background: linear-gradient(45deg, #ffd700, #ffb300);
+      border-color: #ffb300;
+    }
+
+    .star-checkbox:checked::before {
+      content: "⭐";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Emoji checkbox */
+    .emoji-checkbox:checked {
+      background: linear-gradient(45deg, #4fc3f7, #29b6f6);
+      border-color: #29b6f6;
+    }
+
+    .emoji-checkbox:checked::before {
+      content: "😊";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Logo checkbox */
+    .logo-checkbox:checked {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .logo-checkbox:checked::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 18px;
+      height: 18px;
+      background-image: url('/static/favicon/logo.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      display: block;
+    }
+
+    /* Toggle switch style - Much wider and more switch-like */
+    .toggle-checkbox {
+      width: 60px;
+      height: 30px;
+      border-radius: 15px;
+      background: #ccc;
+      border: 2px solid #999;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-checkbox:checked {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .toggle-checkbox::before {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: white;
+      top: 1px;
+      left: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .toggle-checkbox:checked::before {
+      transform: translateX(30px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    /* Add ON/OFF text */
+    .toggle-checkbox::after {
+      content: "OFF";
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      font-weight: bold;
+      color: #666;
+      transition: opacity 0.3s ease;
+    }
+
+    .toggle-checkbox:checked::after {
+      content: "ON";
+      left: 8px;
+      right: auto;
+      color: white;
+    }
+
+    .toggle-label {
+      margin-left: 8px;
+    }
+
+    /* Geometric checkbox */
+    .geometric-checkbox {
+      border-radius: 2px;
+      transform: rotate(45deg);
+    }
+
+    .geometric-checkbox:checked {
+      background: linear-gradient(45deg, #9c27b0, #673ab7);
+      border-color: #9c27b0;
+    }
+
+    .geometric-checkbox:checked::before {
+      content: "◆";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      color: white;
+      font-size: 14px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Music note checkbox */
+    .music-checkbox:checked {
+      background: linear-gradient(45deg, #7b1fa2, #4a148c);
+      border-color: #7b1fa2;
+    }
+
+    .music-checkbox:checked::before {
+      content: "♪";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 18px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Gradient checkbox */
+    .gradient-checkbox:checked {
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+      background-size: 300% 300%;
+      animation: gradientShift 2s ease infinite;
+      border-color: transparent;
+    }
+
+    .gradient-checkbox:checked::before {
+      content: "✨";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Hover effects */
+    .custom-checkbox:hover:not(.toggle-checkbox) {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .toggle-checkbox:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .geometric-checkbox:hover {
+      transform: rotate(45deg) scale(1.05);
+    }
+
+    /* Better focus states */
+    .custom-checkbox:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+  </style>
+
+  {% highlight "html"%}
+  <!-- Heart checkbox -->
+  <div class="custom-checkbox-container">
+    <input type="checkbox" id="heart-checkbox" class="custom-checkbox heart-checkbox" />
+    <label for="heart-checkbox" class="custom-label">Love this feature ❤️</label>
+  </div>
+
+  <!-- Star checkbox -->
+  <div class="custom-checkbox-container">
+    <input type="checkbox" id="star-checkbox" class="custom-checkbox star-checkbox" />
+    <label for="star-checkbox" class="custom-label">Rate with stars ⭐</label>
+  </div>
+
+  <!-- Emoji checkbox -->
+  <div class="custom-checkbox-container">
+    <input type="checkbox" id="emoji-checkbox" class="custom-checkbox emoji-checkbox" />
+    <label for="emoji-checkbox" class="custom-label">Fun with emojis 😄</label>
+  </div>
+
+  <!-- Logo checkbox -->
+  <div class="custom-checkbox-container">
+    <input type="checkbox" id="logo-checkbox" class="custom-checkbox logo-checkbox" />
+    <label for="logo-checkbox" class="custom-label">Brand logo checkbox</label>
+  </div>
+
+  <!-- Toggle switch style -->
+  <div class="custom-checkbox-container">
+    <input type="checkbox" id="toggle-checkbox" class="custom-checkbox toggle-checkbox" />
+    <label for="toggle-checkbox" class="custom-label toggle-label">Toggle switch style</label>
+  </div>
+
+  <!-- Geometric checkbox -->
+  <div class="custom-checkbox-container">
+    <input type="checkbox" id="geometric-checkbox" class="custom-checkbox geometric-checkbox" />
+    <label for="geometric-checkbox" class="custom-label">Geometric style ◆</label>
+  </div>
+
+  <!-- Music note checkbox -->
+  <div class="custom-checkbox-container">
+    <input type="checkbox" id="music-checkbox" class="custom-checkbox music-checkbox" />
+    <label for="music-checkbox" class="custom-label">Music lover ♪</label>
+  </div>
+
+  <!-- Gradient checkbox -->
+  <div class="custom-checkbox-container">
+    <input type="checkbox" id="gradient-checkbox" class="custom-checkbox gradient-checkbox" />
+    <label for="gradient-checkbox" class="custom-label">Gradient vibes 🌈</label>
+  </div>
+  {% endhighlight %}
+</div>
 {% endblock %}

@@ -1,0 +1,332 @@
+# Startr Style Project TODO: The Quest for Awesome!
+
+Welcome, brave developer, to the Startr Style Project TODO list! This isn't just a list; it's a treasure map leading to a land of sleek design, stellar performance, and happy users. Let's get these gems polished!
+
+## 🎉 Recent Accomplishments
+- ✅ **Enhanced Design Philosophy Pages** - Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages
+- ✅ **Created Tutorial System** - Built step-by-step tutorials covering basic utilities, responsive layouts, and interactive components
+- ✅ **Added Use Cases Documentation** - Created practical real-world examples including login forms, navigation, galleries, and pricing cards
+- ✅ **Updated Navigation** - Added Learning section with links to Tutorials and Use Cases, plus Design Styles section
+- ✅ **Component Inventory Complete** - Scanned existing components and updated TODO with 15+ existing components ready for gallery inclusion
+
+## 📋 Existing Components Found (Ready for Gallery)
+- **Navigation**: Header navigation (layout.njk), footer with social icons (footer.njk)
+- **Forms**: Text inputs, textareas, selects, validation states (fields.njk), login forms (use-cases)
+- **Buttons**: All variations including colors, sizes, groups, icons, disabled states (buttons.njk)
+- **Cards**: Pricing cards, product showcases (use-cases/index.njk)
+- **Layout**: Grid systems, responsive layouts (tutorials/index.njk)
+- **Tables**: Basic data tables (everything-else.njk)
+- **Interactive**: Details/summary accordions (everything-else.njk)
+- **Social**: Social media buttons and icons (footer components)
+- **Typography**: Headings, paragraphs, blockquotes, lists, text formatting (typography.njk)
+- **Media**: Responsive images, image galleries, avatars, icons (multiple files)
+- **Loading**: Spinners, skeleton states, pulse animations (use-cases, working.html)
+
+**Total: 25+ existing components identified across 12+ major categories**
+
+## 🎯 Next Steps for Component Gallery
+1. **Create Gallery Landing Page** - Build main navigation for component categories
+2. **Extract Components** - Move existing components into dedicated gallery sections
+3. **Add Live Examples** - Enable copy-paste functionality and live preview
+4. **Organize by Category** - Group components logically (Forms, Buttons, Layout, etc.)
+5. **Add Documentation** - Include usage instructions and accessibility notes
+6. **Interactive Features** - Add search, filters, and component playground
+
+## 🚨 Critical Priorities - All Hands on Deck!
+- [x] Fix server error handling #TechnicalFoundation
+- [x] Perfect mobile responsiveness #UserExperience
+- [x] Optimize loading speed #UserExperience (Note we are using Eleventy for static site generation and should set a medium priority for CDN updates)
+- [x] Test across browsers #QualityAssurance
+- [x] Audit accessibility #QualityAssurance
+  - [x] Setup axe-cli for automated audit
+- [x] Test mobile devices #QualityAssurance
+- [x] Verify loading speeds #QualityAssurance
+
+## 🔥 High Priorities - Fueling the Rocket!
+- [x] Write clear examples for each design style #ContentExcellence
+- [x] Create step-by-step tutorials #ContentExcellence
+- [x] Add practical use cases for utilities #ContentExcellence
+- [x] Keep things DRY (Don't Repeat Yourself) #ContentExcellence
+  - [x] Refactor _includes to avoid duplication
+  - [x] Created shared components: head.njk, theme-toggle.njk, navigation.njk, theme-scripts.njk
+  - [x] Eliminated code duplication between layout.njk and layout_2.njk
+  - [x] Consolidated footer content using footer.njk include
+- [x] Document design principles clearly #ContentExcellence
+- [ ] Write compelling copy for landing page #ContentExcellence
+- [ ] Add interactive playground for utilities #ContentExcellence (note working system on pages: )
+
+## 📝 Documentation & Development Guidelines #ContentExcellence
+- [x] **Use Proper Highlight Shortcodes** - Always use `{% highlight "html" %}`, `{% highlight "css" %}`, or `{% highlight "text" %}` with `{% endhighlight %}` instead of hardcoded `<div class="highlight">` with `<pre>` tags
+  - [x] Updated installation.njk to use proper shortcodes
+  - [ ] **URGENT: Audit and fix hardcoded highlight blocks in the following files:**
+    - [x] `/src/index.njk` - 1 hardcoded highlight div (line 86) ✅ COMPLETED
+    - [x] `/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47) ✅ COMPLETED
+    - [x] `/src/docs/tutorials/index.njk` - 5 hardcoded highlight divs (lines 38, 46, 114, 121, 176) + pre tags (lines 39, 47, 115, 122, 177) ✅ COMPLETED
+    - [x] `/src/docs/base-elements/buttons.njk` - 8 hardcoded highlight divs (lines 18, 37, 54, 69, 90, 113, 129, 143) + pre tags ✅ COMPLETED
+    - [ ] `/src/docs/base-elements/everything-else.njk` - Multiple hardcoded pre tags (lines 47, 91, 108, 132)
+    - [ ] `/src/docs/base-elements/typography.njk` - 2 hardcoded pre tags (lines 123, 166)
+    - [ ] `/src/docs/helpers/shadows.njk` - 8 hardcoded highlight divs (lines 20, 45, 70, 95, 121, 147, 174, 201) + pre tags
+    - [ ] `/src/docs/helpers/transform.njk` - 10 hardcoded highlight divs (lines 22, 48, 72, 98, 122, 148, 172, 198, 222, 248)
+    - [ ] `/src/docs/helpers/position.njk` - 7 hardcoded highlight divs + pre tags (lines 22, 44, 66, 88, 110, 132, 154)
+    - [ ] `/src/docs/helpers/background.njk` - 1 hardcoded pre tag (line 23)
+  - [ ] **Total files needing cleanup: 11 files with ~45+ hardcoded blocks**
+  - [ ] Create documentation guideline for contributors about highlight usage
+- [ ] **Maintain Consistent Code Examples** - Ensure all code snippets follow the same formatting standards
+- [ ] **Document Utility Patterns** - Create clear examples for common utility combinations
+
+- [ ] Create component gallery with live examples #ContentExcellence
+  - [ ] **Planning & Architecture**
+    - [ ] Design component gallery structure and navigation
+    - [ ] Create component categorization system (UI Elements, Layout, Forms, Navigation, etc.)
+    - [ ] Plan interactive playground integration
+    - [ ] Define component documentation template format
+    - [ ] Plan responsive showcase for each component
+  - [ ] **Navigation Components**
+    - [x] Header/Navigation bars [/docs/] (layout.njk contains main navigation)
+      - [x] Horizontal navigation with dropdown menus [/_includes/layout.njk] - Add to gallery
+      - [ ] Mobile hamburger menu with slide-out drawer
+      - [ ] Breadcrumb navigation
+      - [ ] Tab navigation with active states
+      - [ ] Sidebar navigation with nested items
+    - [x] Footer components [/docs/]
+      - [x] Simple footer with links [/_includes/footer.njk] - Add to gallery
+      - [x] Multi-column footer with social icons [/_includes/footer.njk, /static/footer.html] - Add to gallery
+      - [ ] Sticky footer layouts
+    - [ ] Pagination components
+      - [ ] Number-based pagination
+      - [ ] Previous/Next pagination
+      - [ ] Load more button
+  - [x] **Typography Components** [/docs/base-elements/typography.njk]
+    - [x] Headings (H1-H6) [/docs/base-elements/typography.njk] - Add to gallery
+    - [x] Paragraphs with inline elements [/docs/base-elements/typography.njk] - Add to gallery
+    - [x] Blockquotes with citations [/docs/base-elements/typography.njk] - Add to gallery
+    - [x] Text formatting (bold, italic, code, mark, small) [/docs/base-elements/typography.njk] - Add to gallery
+    - [x] Links and link states [/docs/base-elements/typography.njk] - Add to gallery
+  - [ ] **Form Components**
+    - [x] Input variations [/docs/base-elements/fields.njk]
+      - [x] Text inputs with labels and validation states [/docs/base-elements/fields.njk] - Add to gallery
+      - [ ] Search inputs with icons
+      - [x] Number inputs with increment/decrement [/docs/base-elements/fields.njk] - Add to gallery
+      - [x] Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery
+      - [ ] File upload with drag-and-drop styling
+      - [x] Multi-line textarea components [/docs/base-elements/fields.njk] - Add to gallery
+    - [x] Selection controls [/docs/base-elements/fields.njk]
+      - [x] Custom checkboxes with various styles
+        - [ ] Debug checkbox styles !!!
+      - [ ] Radio button groups
+      - [x] Toggle switches
+      - [x] Multi-select dropdowns [/docs/base-elements/fields.njk] - Add to gallery
+      - [ ] Autocomplete/typeahead inputs
+    - [x] Form layouts [/docs/use-cases/index.njk]
+      - [ ] Inline forms
+      - [ ] Stacked forms with proper spacing
+      - [ ] Multi-step/wizard forms
+      - [x] Form validation with error states [/docs/base-elements/fields.njk] - Add to gallery
+      - [x] Login/registration form templates [/docs/use-cases/index.njk] - Add to gallery
+        - [ ] Add spacing above and below the form in the preview
+        - [ ] Update to the content of https://codepen.io/openco/pen/wBavPYx 
+
+  - [ ] **Button Components**
+    - [x] Button variations [/docs/base-elements/buttons.njk]
+      - [x] Primary, secondary, tertiary button styles [/docs/base-elements/buttons.njk] - Add to gallery
+      - [x] Icon buttons and icon + text combinations [/docs/base-elements/buttons.njk] - Add to gallery
+      - [ ] Loading/spinner states
+      - [x] Disabled states showcase [/docs/base-elements/buttons.njk] - Add to gallery
+      - [x] Button sizes (small, medium, large, extra large) [/docs/base-elements/buttons.njk] - Add to gallery
+    - [x] Button groups [/docs/base-elements/buttons.njk]
+      - [x] Horizontal button groups [/docs/base-elements/buttons.njk] - Add to gallery
+      - [ ] Vertical button groups
+      - [ ] Segmented controls
+      - [ ] Floating action buttons
+    - [ ] Call-to-action components
+      - [ ] Hero section CTAs
+      - [ ] Newsletter signup buttons
+      - [x] Social media share buttons [/_includes/footer.njk] - Add to gallery
+  - [ ] **Card Components**
+    - [x] Basic cards [/docs/use-cases/index.njk, /docs/tutorials/index.njk]
+      - [ ] Simple content cards with image, title, description
+      - [x] Product cards with pricing [/docs/use-cases/index.njk] - Add to gallery
+      - [ ] User profile cards
+      - [ ] Testimonial cards
+      - [ ] Blog post preview cards
+    - [ ] Interactive cards
+      - [ ] Hover effects and transitions
+      - [ ] Expandable/collapsible cards
+      - [ ] Flip cards with front/back content
+      - [ ] Card overlays with action buttons
+    - [x] Card layouts [/docs/use-cases/index.njk]
+      - [x] Card grids (responsive) [/docs/use-cases/index.njk] - Add to gallery
+      - [ ] Card carousels/sliders
+      - [ ] Masonry-style card layouts
+      - [ ] Card lists with alternating layouts
+  - [ ] **Layout Components**
+    - [x] Grid systems [/docs/tutorials/index.njk, /docs/use-cases/index.njk]
+      - [x] Basic grid layouts (2-column, 3-column, 4-column) [/docs/tutorials/index.njk] - Add to gallery
+      - [x] Responsive grid breakpoints demonstration [/docs/tutorials/index.njk] - Add to gallery
+      - [ ] Complex grid layouts (sidebar + main + aside)
+      - [ ] CSS Grid showcase with named grid areas
+    - [ ] Flexbox layouts
+      - [ ] Flexible container examples
+      - [ ] Centered content layouts
+      - [ ] Space distribution examples
+      - [ ] Flex direction and wrap demonstrations
+    - [ ] Container components
+      - [ ] Page containers with max-width
+      - [ ] Section containers with background variations
+      - [ ] Responsive containers
+      - [ ] Full-width vs contained sections
+  - [x] **Modal & Overlay Components**
+    - [x] Modal dialogs based on https://believemy.com/en/r/creating-a-modal-window-without-using-javascript 
+      - [x] Basic modal with backdrop
+      - [x] Confirmation dialogs
+      - [x] Form modals
+      - [x] Image galleries in modals
+      - [x] Modal sizes (small, medium, large, fullscreen)
+    - [ ] Overlay components
+      - [ ] Tooltip components with positioning
+      - [ ] Popover menus
+      - [ ] Dropdown menus
+      - [ ] Toast notifications
+      - [ ] Alert banners
+  - [ ] **Media Components**
+    - [x] Image components [Multiple files]
+      - [x] Responsive images with aspect ratios [/docs/helpers/position.njk, /index.njk] - Add to gallery
+      - [x] Image galleries with lightbox [/docs/use-cases/index.njk] - Add to gallery
+      - [x] Avatar components (round, square, with badges) [/index.njk] - Add to gallery
+      - [ ] Image carousels/sliders
+      - [ ] Before/after image comparisons
+    - [ ] Video components
+      - [ ] Video players with custom controls
+      - [ ] Video backgrounds
+      - [ ] Video thumbnails with play buttons
+    - [x] Icon systems [/_includes/footer.njk, /docs/base-elements/buttons.njk]
+      - [x] Icon libraries integration [/_includes/footer.njk] - Add to gallery
+      - [x] Icon sizes and variations [/docs/base-elements/buttons.njk] - Add to gallery
+      - [x] Icon + text combinations [/docs/base-elements/buttons.njk] - Add to gallery
+  - [ ] **Data Display Components**
+    - [x] Table components [/docs/base-elements/everything-else.njk]
+      - [x] Basic data tables with sorting [/docs/base-elements/everything-else.njk] - Add to gallery
+      - [ ] Responsive tables with horizontal scroll
+      - [ ] Tables with row selection
+      - [ ] Tables with pagination
+      - [ ] Pricing tables
+    - [x] List components [/docs/base-elements/typography.njk]
+      - [x] Simple lists with custom bullets [/docs/base-elements/typography.njk] - Add to gallery
+      - [x] Numbered lists with custom styling [/docs/base-elements/typography.njk] - Add to gallery
+      - [ ] Definition lists
+      - [ ] Interactive lists with actions
+    - [x] Progress indicators [/docs/use-cases/index.njk, /working.html, /prompting.html]
+      - [ ] Progress bars with animations
+      - [ ] Step indicators/progress steps
+      - [x] Loading spinners [/working.html, /prompting.html, /worlds.html] - Add to gallery
+      - [x] Skeleton loading states [/docs/use-cases/index.njk] - Add to gallery
+  - [ ] **Interactive Components**
+    - [x] Accordion/Collapsible [/docs/base-elements/everything-else.njk]
+      - [ ] Single-item accordion
+      - [ ] Multi-item accordion with smooth animations
+      - [ ] FAQ-style accordions
+      - [ ] Nested accordions
+      - [x] Details/Summary elements [/docs/base-elements/everything-else.njk] - Add to gallery
+    - [ ] Tabs
+      - [ ] Horizontal tabs
+      - [ ] Vertical tabs
+      - [ ] Responsive tabs (convert to accordion on mobile)
+      - [ ] Tabs with icons
+    - [x] Slider/Range components [/docs/base-elements/fields.njk]
+      - [x] Basic range sliders [/docs/base-elements/fields.njk] - Add to gallery
+      - [x] Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery
+      - [ ] Dual-handle range sliders
+      - [ ] Styled slider tracks
+      - [x] Value display variations [/docs/base-elements/fields.njk] - Add to gallery
+  - [ ] **Feedback Components**
+    - [ ] Alert/Notification
+      - [ ] Success, warning, error, info alerts
+      - [ ] Dismissible alerts
+      - [ ] Toast notifications with auto-dismiss
+      - [ ] Notification center/inbox
+    - [ ] Badge/Chip components
+      - [ ] Status badges
+      - [ ] Count badges on buttons/icons
+      - [ ] Tag/chip components with removal
+      - [ ] Category badges
+  - [ ] **E-commerce Components**
+    - [ ] Product showcases
+      - [ ] Product detail layouts
+      - [ ] Product comparison tables
+      - [ ] Shopping cart components
+      - [ ] Wishlist components
+    - [ ] Pricing displays
+      - [ ] Pricing cards/tables
+      - [ ] Subscription plan comparisons
+      - [ ] Price formatting examples
+      - [ ] Discount/sale price displays
+  - [ ] **Documentation & Implementation**
+    - [ ] Component documentation
+      - [ ] Write clear usage instructions for each component
+      - [ ] Document all utility classes used
+      - [ ] Provide copy-paste HTML examples
+      - [ ] Include accessibility notes for each component
+      - [ ] Add responsive behavior explanations
+    - [ ] Interactive features
+      - [ ] Add "View Code" toggle for each example
+      - [ ] Implement live preview with editable code
+      - [ ] Add copy-to-clipboard functionality
+      - [ ] Create component search/filter system
+    - [ ] Quality assurance
+      - [ ] Test all components across different browsers
+      - [ ] Verify mobile responsiveness of all examples
+      - [ ] Validate HTML markup for accessibility
+      - [ ] Ensure consistent styling across components
+    - [ ] Gallery structure
+      - [ ] Create main component gallery landing page
+      - [ ] Build category navigation system
+      - [ ] Implement component preview thumbnails
+      - [ ] Add related components suggestions
+      - [ ] Create component favorites/bookmarking system
+- [ ] Add search functionality to documentation #UserExperience
+- [ ] Add request logging #TechnicalFoundation
+- [x] Optimize CSS delivery #TechnicalFoundation (using Eleventy and PostCSS)
+- [x] Implement code splitting #TechnicalFoundation
+  - [x] Use Eleventy for static site generation
+  - [ ] Use PostCSS for CSS optimization when in Eleventy not just seperate repo
+- [ ] Use service workers for caching #TechnicalFoundation
+- [x] Implement HTTP/2 for faster loading #TechnicalFoundation
+- [ ] Use a CDN for static assets #TechnicalFoundation
+- [ ] Optimize font loading #TechnicalFoundation
+- [ ] Compress images automatically #TechnicalFoundation
+- [ ] Enable lazy loading for performance #TechnicalFoundation
+- [x] Add touch-friendly interactions #UserExperience
+- [ ] Improve navigation flow #UserExperience
+- [ ] Add keyboard accessibility #UserExperience
+- [ ] Test screen reader compatibility #UserExperience
+- [ ] Write comprehensive style guide #DeveloperExperience
+- [ ] Create component documentation #DeveloperExperience
+- [ ] Add automated testing suite #DeveloperExperience
+- [ ] Set up development workflow #DeveloperExperience
+- [ ] Build utility reference #DeveloperExperience
+- [ ] Set up CI/CD pipeline #Infrastructure
+- [ ] Add deployment automation #Infrastructure
+- [ ] Configure monitoring #Infrastructure
+- [ ] Set up error tracking #Infrastructure
+- [ ] Validate HTML semantics #QualityAssurance
+- [ ] Check CSS performance #QualityAssurance
+- [ ] Review code quality #QualityAssurance
+
+## ✨ Medium Priorities - Adding Extra Sparkle!
+- [ ] Expand modernism examples with real projects #ContentExcellence
+- [ ] Enhance brutalism showcase with interactive demos #ContentExcellence
+- [ ] Complete experimentalism section with cutting-edge techniques #ContentExcellence
+- [ ] Add build process monitoring #TechnicalFoundation
+- [ ] Update Eleventy to latest version #TechnicalFoundation
+- [ ] Implement PostCSS optimizations #TechnicalFoundation
+- [ ] Create smooth transitions #UserExperience
+- [ ] Add progressive enhancement #UserExperience
+- [ ] Create contribution guidelines #DeveloperExperience
+- [ ] Add code examples library #DeveloperExperience
+- [ ] Document best practices #DeveloperExperience
+- [ ] Containerize with Docker #Infrastructure
+- [ ] Add performance metrics #Infrastructure
+- [ ] Create backup strategy #Infrastructure
+- [ ] Plan scaling approach #Infrastructure
+- [ ] Check SEO optimization #QualityAssurance
+- [ ] Integrate Lighthouse for CI (low priority) #QualityAssurance
