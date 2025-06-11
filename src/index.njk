@@ -1,37 +1,46 @@
 {% extends "layout.njk" %} {% block header %}
-<header style="
+<header
+  style="
     --pos: relative;
     --z: 1;
     --w-xl: calc(100vw + 1rem);
     --t-xl: translate(calc(((100vw - var(--maxw-md)) / -2) - 0rem));
-  ">
+  "
+>
   <div style="--d: flex; --jc: space-between; --ai: center; --mb: 2rem; --mt: 1rem; --pr-xl: 1rem">
     <img alt="Startr/Style" src="logo.png" style="--w: 6rem; --p: 0.8rem" />
-    <nav aria-label="Navigation" style="--ta: right; --size: 1.6em; --x: 60; gap:0.6em; --pr:0.6em">
-      <a href="#learn" class="button" style="--c:white">Get Started with Startr</button>
+    <nav aria-label="Navigation" style="--ta: right; --size: 1.6em; --x: 60">
+      <a href="#learn">
+        <button class="white">Get Started with Startr</button>
       </a>
-      <a href="#components" class="button" style="--c:white">Amazing Components
+      <a href="#components">
+        <button class="white">Amazing Components</button>
       </a>
-      <a href="/docs/utilities/index.html" class="button" style="--c: white">Utilities
+      <a href="/docs/utilities/index.html">
+        <button class="white">Utilities</button>
       </a>
     </nav>
   </div>
 
   <div style="--ta: center; --mb: 2rem; --d: grid; --d-sm: flex">
-    <div style="--d: grid; --w: 100%; --w-md: 50%; --fd: column; --ai: center; --jc: center; --m: auto">
-      <h1>Startr.Style</h1>
-      <h4 style="--ta: center; --mw: 450px; --px: 1rem">
-        A Utility Complete CSS Framework for less than 50kb, <em style="--fw: light">8kb&nbsp;Zipped</em>
+    <div style="--d: grid; --w: 100%; --w-md: 50%; --fd: column; --ai: center; --jc: center; --mb: 2rem">
+      <h1>Startr/Style</h1>
+      <h4 style="--ta: center; --mw: 450px; --m: auto auto 0.5rem; --px: 1rem">
+        A Utility Complete CSS Framework for less than 50k (<strong>8kb Gzipped</strong>)
       </h4>
       <div style="--p: 0.5rem; --ta: center">
-        <a href="#learn" class="button" style="--c:white">Getting Startrd</a>
-        <a href="/#learn-more" class="button blue" style="--c: white ">Learn Startr Styling
+        <a href="#learn">
+          <button class="white">Getting Startrd</button>
         </a>
-        <a href="https://github.com/Startr/Style" target="_blank" class="button" style="--bg: #282c34; --c:white">Github
+        <a href="index.html#learn-more">
+          <button>Learn Startr Styling</button>
+        </a>
+        <a href="https://github.com/Startr/Style" target="_blank">
+          <button style="--bg: #282c34">Github</button>
         </a>
       </div>
-      <h6 style="--ta: center; --mt: 0.2rem">
-        - Style by <a href="https://github.com/Startr" target="_blank" style="--c:grey; --fw:bold; --td:underline">Startr</a> -
+      <h6 style="--ta: center; --mt: 2rem">
+        - Style by <a href="https://github.com/Startr" target="_blank">Startr</a> -
       </h6>
     </div>
     <div style="--w: 100%; --w-md: 50%; --d: flex; --fd: column; --fd-lg: row; --jc: center; --ai: center">
@@ -43,7 +52,9 @@
         <label for="br">Border Radius</label>
         <input class="slider" id="br" max="80" min="0" name="br" type="range" value="5" />
       </div>
-      <div class="markdown" style="
+      <div
+        class="markdown"
+        style="
           --maxw: 100%;
           --maxw-lg: 800px;
           --w: 100%;
@@ -52,8 +63,10 @@
           --p: 0 1rem;
           --d: flex;
           --fd: column-reverse;
-        ">
-        <div style="
+        "
+      >
+        <div
+          style="
             --m: 1rem auto;
             --m-md: 4rem;
             --pos-md: absolute;
@@ -63,11 +76,14 @@
             --z: 1;
             --d: flex;
             --jc: center;
-          ">
-          <figure id="demo"
-            style="--mb: 1.5rem; --maxw: 450px; --levitate: 16; --br: 5px; --px: 0; --bg: var(--background-alt)" ;>
-            <img alt="sample" src="https://image.startr.cloud/110x110"
-              style="--mt: 2rem; --mr: auto; --ml: auto; --br: 50%" />
+          "
+        >
+          <figure id="demo" style="--mb: 1.5rem; --maxw: 450px; --levitate: 16; --br: 5px; --px: 0; --bg: #eee">
+            <img
+              alt="sample"
+              src="https://image.startr.cloud/110x110"
+              style="--mt: 2rem; --mr: auto; --ml: auto; --br: 50%"
+            />
             <figcaption style="--ta: center">
               <h4>Plante</h4>
               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.</p>
@@ -83,23 +99,28 @@
             });
           })();
         </script>
-        <div class="highlight" style="--br: 0.4rem; --m: 2em; --d: none; --d-sm: block">
-          <pre class="chroma" style="--m: 0; --levitate-hvr:6">{% include "example.njk" %}</pre>
+        <div
+          class="highlight"
+          style="--shadow-soft: 4; --levitate-hvr: 16; --br: 0.4rem; --m: 2em; --d: none; --d-sm: block"
+        >
+          <pre class="chroma" style="--m: 0">{% include "example.njk" %}</pre>
         </div>
       </div>
     </div>
   </div>
-  <div id="about" style="
+  <div
+    id="about"
+    style="
       --pos: relative;
       --z: -1;
       --grad: 150deg;
       --grad-color: var(--purple);
       --bg: var(--purple);
       --p: 3rem;
-      --mt: 4rem;
+      --mt: 5rem;
       --c: white;
-    ">
-    <section style="--maxw:100rem; --m:auto">
+    "
+  >
     <h3 id="why-build-with-startr">Why build with Startr Style</h3>
     <p>
       Startr.Style accelerates and standardizes web design through custom property helpers and utilities, all seamlessly
@@ -113,7 +134,6 @@
       <li>Takes up only <strong>8 kilobytes</strong> of space when <em>compressed</em></li>
       <li class="green">Easy to use – just add and start building, no need to compile anything</li>
     </ul>
-    </section>
   </div>
 </header>
 
