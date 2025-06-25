@@ -76,6 +76,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
   - [x] Eliminated code duplication between layout.njk and layout_2.njk
   - [x] Consolidated footer content using footer.njk include
 - [x] Document design principles clearly #ContentExcellence
+- [ ] Max height for the aside on small screens should be 100vh or less, and the overflow should scroll vertically
 - [ ] Write compelling copy for landing page #ContentExcellence
 - [ ] Add interactive playground for utilities #ContentExcellence (note working system on pages: )
 
