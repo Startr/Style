@@ -97,6 +97,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
   - [ ] Create documentation guideline for contributors about highlight usage
 - [ ] **Maintain Consistent Code Examples** - Ensure all code snippets follow the same formatting standards
 - [ ] **Document Utility Patterns** - Create clear examples for common utility combinations
+- [x] **[Infrastructure] Add bun run command for cloudflared tunneling** - Create a script to start the app and expose it via cloudflared. ✅
 
 - [ ] Create component gallery with live examples #ContentExcellence
   - [ ] **Planning & Architecture**
