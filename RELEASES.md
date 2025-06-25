@@ -1,5 +1,11 @@
 # Release Notes
 
+## Version 1.2.1 - 2025-06-25
+
+### 🐛 Bug Fixes & Dependency Updates
+
+*   **Switched to Bun**: Migrated the project from Yarn to Bun for package management to improve performance and development speed. This includes replacing `yarn.lock` with `bun.lockb`.
+
 ## Version 1.2.0 - 2025-06-25
 
 ### ✨ New Features & Enhancements
