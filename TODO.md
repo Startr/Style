@@ -18,6 +18,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
   - [ ] Create documentation for Makefile standardization guidelines
   - [ ] Test standardized Makefile in this repository first
   - [ ] Roll out to other Startr repositories
+  - [ ] Step away from Netlify to Cloudflare or Self-host
   - [ ] Update CONVENTION.instructions.md with Makefile standards
 
 **Why This is a Blocker**: Standardizing our build and deployment infrastructure across all repositories is critical for:
