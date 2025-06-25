@@ -1,0 +1,11 @@
+# Release Notes
+
+## Version 1.2.0 - 2025-06-25
+
+### ✨ New Features & Enhancements
+
+*   **Enhanced Design Philosophy Pages**: Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages to better showcase the design principles in action.
+*   **New Tutorial System**: Introduced a step-by-step tutorial system covering basic utilities, responsive layouts, and interactive components, making it easier for users to learn and adopt the styles.
+*   **Expanded Use Cases Documentation**: Added a new section with practical, real-world examples, including login forms, navigation bars, image galleries, and pricing cards.
+*   **Improved Navigation**: The main navigation has been updated to include a "Learning" section with quick links to the new Tutorials and Use Cases. A "Design Styles" section has also been added for easier exploration.
+*   **Completed Component Inventory**: A comprehensive scan of existing components was completed, identifying over 25 components ready for inclusion in the upcoming component gallery. This sets the foundation for a robust component library.

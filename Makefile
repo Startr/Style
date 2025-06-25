@@ -1,6 +1,6 @@
 help: 
 	@echo "================================================"
-	@echo "       Startr/WEB-Startr.Style by Startr.Cloud"
+	@echo "       $(OWNER)/$(PROJECT_NAME) by Startr.Cloud"
 	@echo "================================================"
 	@echo "This is the default make command."
 	@echo "This command lists available make commands."
@@ -23,6 +23,11 @@ PROJECT := $(shell echo $$(basename $(PROJECTPATH)) | tr '[:upper:]' '[:lower:]'
 FULL_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 BRANCH := $(shell echo $(FULL_BRANCH) | sed 's/.*\///' | tr '[:upper:]' '[:lower:]')
 TAG := $(shell git describe --always --tag)
+
+# Extract owner and project from git remote URL
+REMOTE_URL := $(shell git config --get remote.origin.url 2>/dev/null || echo "unknown/unknown")
+OWNER := $(shell echo $(REMOTE_URL) | sed -E 's|.*[:/]([^/]+)/[^/]+(.git)?$$|\1|')
+PROJECT_NAME := $(shell echo $(REMOTE_URL) | sed -E 's|.*[:/][^/]+/([^/]+)(.git)?$$|\1|' | sed 's/\.git$$//')
 
 # Docker container name (dynamic based on project and branch)
 CONTAINER := $(PROJECT)-$(BRANCH)
@@ -48,10 +53,13 @@ show_vars:
 	@echo "=== Dynamic Variables ==="
 	@echo "PROJECTPATH=$(PROJECTPATH)"
 	@echo "PROJECT=$(PROJECT)"
+	@echo "OWNER=$(OWNER)"
+	@echo "PROJECT_NAME=$(PROJECT_NAME)"
 	@echo "FULL_BRANCH=$(FULL_BRANCH)"
 	@echo "BRANCH=$(BRANCH)"
 	@echo "TAG=$(TAG)"
 	@echo "CONTAINER=$(CONTAINER)"
+	@echo "REMOTE_URL=$(REMOTE_URL)"
 	@echo ""
 
 

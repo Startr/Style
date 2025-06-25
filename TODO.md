@@ -2,6 +2,30 @@
 
 Welcome, brave developer, to the Startr Style Project TODO list! This isn't just a list; it's a treasure map leading to a land of sleek design, stellar performance, and happy users. Let's get these gems polished!
 
+## 🚧 BLOCKERS - Must Complete Before Other Work!
+
+### **Makefile Standardization Initiative**
+- [x] **[Infrastructure] Standardize Makefile Across All Git Repositories**: Create a universal Makefile template that dynamically extracts project title from repository structure
+  - [x] Research current Makefile patterns across Startr repositories
+  - [x] Design universal template with dynamic project title extraction supporting both:
+    - `THE_OWNER/PROJECT` format (e.g., "Startr/Style") ✅ 
+    - `project_owner/folder` format (e.g., "somma/my-project") ✅
+  - [x] Test dynamic variable extraction: `git config --get remote.origin.url` parsing ✅
+  - [x] Create standardized help command format showing "{OWNER}/{PROJECT} by Startr.Cloud" ✅
+  - [x] Handle edge cases: SSH vs HTTPS URLs, GitLab/GitHub differences, local repos ✅
+  - [x] Implement consistent command naming conventions (it_run, it_build, deploy, etc.) ✅
+  - [x] Add standard variables for PROJECTPATH, PROJECT, OWNER, BRANCH, TAG, CONTAINER ✅
+  - [ ] Create documentation for Makefile standardization guidelines
+  - [ ] Test standardized Makefile in this repository first
+  - [ ] Roll out to other Startr repositories
+  - [ ] Update CONVENTION.instructions.md with Makefile standards
+
+**Why This is a Blocker**: Standardizing our build and deployment infrastructure across all repositories is critical for:
+- Consistent developer experience across projects
+- Automated CI/CD pipeline compatibility  
+- Reduced onboarding time for new projects
+- Easier maintenance and updates across the entire Startr ecosystem
+
 ## 🎉 Recent Accomplishments
 - ✅ **Enhanced Design Philosophy Pages** - Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages
 - ✅ **Created Tutorial System** - Built step-by-step tutorials covering basic utilities, responsive layouts, and interactive components
