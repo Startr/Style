@@ -1,5 +1,11 @@
 # Release Notes
 
+## Version 1.2.2.1 - 2025-06-25
+
+### 🐛 Bug Fixes
+
+*   **Dependency Management**: Removed `package-lock.json` in favor of `bun.lockb` to streamline dependency management with Bun.
+
 ## Version 1.2.2 - 2025-06-25
 
 ### ✨ New Features & Enhancements
