@@ -1,5 +1,11 @@
 # Release Notes
 
+## Version 1.2.2.2 - 2025-06-25
+
+### 🐛 Bug Fixes
+
+*   **Dependency**: Added `bunx` to the dependencies in `package.json` to ensure scripts that rely on it run correctly.
+
 ## Version 1.2.2.1 - 2025-06-25
 
 ### 🐛 Bug Fixes
