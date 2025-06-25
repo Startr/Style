@@ -76,6 +76,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
   - [x] Eliminated code duplication between layout.njk and layout_2.njk
   - [x] Consolidated footer content using footer.njk include
 - [x] Document design principles clearly #ContentExcellence
+- [ ] Max height for the aside on small screens should be 100vh or less, and the overflow should scroll vertically
 - [ ] Write compelling copy for landing page #ContentExcellence
 - [ ] Add interactive playground for utilities #ContentExcellence (note working system on pages: )
 
@@ -97,6 +98,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
   - [ ] Create documentation guideline for contributors about highlight usage
 - [ ] **Maintain Consistent Code Examples** - Ensure all code snippets follow the same formatting standards
 - [ ] **Document Utility Patterns** - Create clear examples for common utility combinations
+- [x] **[Infrastructure] Add bun run command for cloudflared tunneling** - Create a script to start the app and expose it via cloudflared. ✅
 
 - [ ] Create component gallery with live examples #ContentExcellence
   - [ ] **Planning & Architecture**

@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd src && npx @11ty/eleventy --serve --output=../dist",
-    "build": "cd src && npx @11ty/eleventy --output=../dist",
+    "start": "cd src && bunx @11ty/eleventy --serve --output=../dist",
+    "build": "cd src && bunx @11ty/eleventy --output=../dist",
+    "online": "bun run start & cloudflared tunnel --url http://localhost:8080",
     "audit:accessibility": "CHROME_BIN=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" axe src/**/*.html",
-    "audit:accessibility:built": "npm run build && CHROME_BIN=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" axe dist/**/*.html",
+    "audit:accessibility:built": "bun run build && CHROME_BIN=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" axe dist/**/*.html",
     "audit:accessibility:live": "CHROME_BIN=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" axe http://localhost:8080"
   },
   "keywords": [],
