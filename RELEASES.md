@@ -1,5 +1,12 @@
 # Release Notes
 
+## Version 1.2.2 - 2025-06-25
+
+### ✨ New Features & Enhancements
+
+*   **Cloudflared Integration**: Added a new `online` script to `package.json` to easily start the application and expose it to the internet using a `cloudflared` tunnel. This simplifies sharing and testing the development server.
+*   **Improved Layout**: Made adjustments to the layout for better responsive behavior, add TODO for the aside (sidebar) has a max-height of 100vh and scrolls on smaller screens.
+
 ## Version 1.2.1 - 2025-06-25
 
 ### 🐛 Bug Fixes & Dependency Updates
