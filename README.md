@@ -1,6 +1,6 @@
 # Startr Style–less
 
-**1.3.0**
+**1.3.1**
 
 Now with Print only `-pt` responsive utility shorthand!!!
 
