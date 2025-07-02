@@ -1,6 +1,8 @@
 # Startr Style–less
 
-**1.2.2.2**
+**1.3.0**
+
+Now with Print only `-pt` responsive utility shorthand!!!
 
 ## Why start with Startr Style – Simplifying CSS Frameworks is hard
 
