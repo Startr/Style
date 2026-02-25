@@ -122,6 +122,31 @@ release_finish:
 hotfix_finish:
 	git flow hotfix finish "$$(git branch --show-current | sed 's/hotfix\///')" && git push origin develop && git push origin master && git push --tags && git checkout master
 
+# ── Startr.Style Core (git subtree) ──────────────────────────────────
+# The CSS framework lives in its own repo and is embedded here as a
+# subtree under src/style-core/. Pre-built dist files are mapped to
+# /style.css by Eleventy passthrough copy.
+#
+# Remote: git@github.com:Startr/WEB-startr.style.core.git
+# Branch: master
+# Prefix: src/style-core
+
+STYLE_CORE_REMOTE := git@github.com:Startr/WEB-startr.style.core.git
+STYLE_CORE_PREFIX := src/style-core
+STYLE_CORE_BRANCH := master
+
+style_core_add:
+	# First-time import: adds the core repo as a subtree
+	git subtree add --prefix=$(STYLE_CORE_PREFIX) $(STYLE_CORE_REMOTE) $(STYLE_CORE_BRANCH) --squash
+
+style_core_update:
+	# Pull latest changes from the core repo into the subtree
+	git subtree pull --prefix=$(STYLE_CORE_PREFIX) $(STYLE_CORE_REMOTE) $(STYLE_CORE_BRANCH) --squash
+
+style_core_push:
+	# Push subtree changes back to the core repo
+	git subtree push --prefix=$(STYLE_CORE_PREFIX) $(STYLE_CORE_REMOTE) $(STYLE_CORE_BRANCH)
+
 things_clean:
 	git clean --exclude=!.env -Xdf
 
