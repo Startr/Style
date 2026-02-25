@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 
-Copyright © 2020 ciar4n
+Copyright © 2020 Startr LLC
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
