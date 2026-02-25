@@ -1,0 +1,262 @@
+button,
+.button,
+input,
+textarea {
+  transition: background-color var(--animation-duration) linear,
+    border-color var(--animation-duration) linear,
+    color var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
+}
+
+button,
+.button,
+select,
+input[type="submit"],
+input[type="button"],
+input[type="checkbox"],
+input[type="range"],
+input[type="radio"] {
+  line-height: 1em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select {
+  display: block;
+}
+
+input:not([type="image"]),
+input::file-selector-button,
+button,
+textarea,
+select,
+details > summary,
+.button,
+.tag {
+  color: var(--form-text);
+  background-color: var(--background);
+
+  font-family: inherit;
+  font-size: calc(var(--x, 100) * 1%);
+
+  position: relative;
+  margin: .5rem .5rem .5rem 0;
+  padding: calc(var(--x, 100) * .08px) calc(var(--x, 100) * .12px);
+  width: 100%;
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  outline: none;
+
+  appearance: none;
+}
+
+.outline {
+  background: transparent;
+  box-shadow: none;
+  color: var(--element-bg);
+  border: 2px solid var(--element-bg);
+}
+
+.outline:hover, .outline:focus, .outline:active {
+  box-shadow: none;
+  color: var(--btn-c, var(--white));
+  background-color: var(--element-bg, var(--primary));
+}
+
+details {
+  margin: 0.5rem 0;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+details > summary {
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+details > *:last-child {
+  padding-bottom: 10px;
+}
+
+textarea {
+  margin-right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+select {
+  background: var(--background) var(--select-arrow) calc(100% - 12px) 50% / 12px no-repeat;
+  padding-right: 35px;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select[multiple] {
+  padding-right: 10px;
+  background-image: none;
+  overflow-y: auto;
+}
+
+button,
+.button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  display: inline-block;
+  padding-right: calc(var(--x, 100) * .28px);
+  padding-left: calc(var(--x, 100) * .28px);
+  width: auto;
+
+  background-color: var(--element-bg, var(--primary));
+  line-height: inherit;
+  color: var(--btn-c, var(--white));
+  box-shadow: var(--button-shadow);
+}
+
+button:hover,
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  box-shadow: inset 0 0 2rem rgba(0, 0, 0, .25);
+}
+
+input:not([readonly]):hover,
+select:not([readonly]):hover,
+textarea:not([readonly]):hover {
+  border-color: rgba(100, 100, 100, .75);
+}
+
+input[type='checkbox']:active,
+input[type='radio']:active,
+input[type='submit']:active,
+input[type='button']:active,
+input[type='range']:active,
+button:active {
+  background-image: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .1));
+}
+
+input:focus,
+select:focus,
+button:focus,
+.button:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--focus);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  position: relative;
+  width: 20px;
+  min-width: auto;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 1px;
+  margin: 0;
+  margin-right: 2px;
+}
+
+input[type="radio"] {
+  border-radius: 50%;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, .4), inset 0 0 0 4px #fff;
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+  background: var(--primary);
+
+}
+
+input[type="checkbox"]:checked::before {
+  display: flex;
+  justify-content: center;
+
+  content: "✔";
+
+  color: white;
+  font-size: .8rem;
+}
+
+input[type="range"] {
+  padding: 0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: var(--primary);
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+}
+
+input[type=range]::-moz-range-thumb {
+  background: var(--primary);
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+}
+
+input[type="color"] {
+  padding: 2px;
+  width: 5rem;
+  height: 2.5rem;
+}
+
+input:disabled,
+select:disabled,
+button:disabled,
+.button.disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+::placeholder {
+  color: var(--form-placeholder);
+}
+
+legend {
+  font-size: .9em;
+  font-weight: 600;
+}
+
+fieldset {
+  border: 1px var(--border) solid;
+  border-radius: var(--border-radius);
+  margin: 0;
+  margin-block-end: .5rem;
+  padding: .75rem 1.5rem;
+}
+
+fieldset > legend:first-of-type {
+  padding: 0 .5rem;
+  font-size: 1.1rem;
+  font-weight: normal;
+}
+
+.tag {
+  align-items: center;
+  display: inline-flex;
+
+  font-size: calc(var(--x, 100) * .008rem);
+  color: var(--tag-c, var(--white));
+  background-color: var(--element-bg, var(--primary));
+
+  width: auto;
+  justify-content: center;
+  padding: calc(var(--x, 100) * .02px) calc(var(--x, 100) * .0075em);
+
+  border: 0;
+  box-shadow: none;
+}

@@ -1,0 +1,40 @@
+img {
+  max-width: 100%;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+::-moz-selection {
+  background-color: var(--selection);
+}
+
+::selection {
+  background-color: var(--selection);
+}
+
+footer {
+  font-size: .8em;
+  color: var(--text-muted);
+}
+
+svg {
+  display: inline-block;
+  font-size: inherit;
+  height: 1.2em;
+  vertical-align: -.2em;
+  overflow: visible;
+}
+
+figure {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 0;
+
+  figcaption {
+    padding: .75rem 1.5rem;
+    margin: 0;
+  }
+}

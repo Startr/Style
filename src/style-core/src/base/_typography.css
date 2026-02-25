@@ -1,0 +1,97 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  line-height: 1.3em;
+  margin: var(--heading-margin);
+  color: var(--text-c, inherit);
+}
+
+h1 {
+  font-size: var(--typo-size-1);
+}
+
+h2 {
+  font-size: var(--typo-size-2);
+}
+
+h3 {
+  font-size: var(--typo-size-3);
+}
+
+h4 {
+  font-size: var(--typo-size-4);
+}
+
+h5 {
+  font-size: var(--typo-size-5);
+}
+
+h6 {
+  font-size: var(--typo-size-6);
+  line-height: 1.6em;
+}
+
+p,
+table {
+  margin: 0 0 1rem
+}
+
+a {
+  color: var(--links);
+  text-decoration: none;
+}
+
+b,
+strong,
+th {
+  font-weight: bold;
+}
+
+blockquote {
+  border-left: calc(var(--x, 100) * .04px) solid var(--color, var(--primary));
+  background: var(--blockquote-bg, #fff);
+  margin: 1.5rem 0;
+  padding: calc(var(--x, 100) * .0075rem) calc(var(--x, 100) * .015rem);
+  font-style: italic;
+}
+
+blockquote footer {
+  font-style: normal;
+  border: 0;
+}
+
+blockquote cite {
+  font-style: normal;
+}
+
+ul,
+ol {
+  padding: 0;
+  padding-inline-start: 2rem;
+}
+
+ul {
+  list-style: disc;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin: 0 1rem;
+}
+
+address {
+  font-style: normal;
+}
+
+mark {
+  background-color: var(--highlight);
+  border-radius: 2px;
+  padding: 0 2px 0 2px;
+}
