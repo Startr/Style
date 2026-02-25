@@ -1,8 +1,11 @@
 # Startr.Style Core
 
-**256-color palette CSS framework — 53 KB (8 KB gzipped)**
+**A complete Utility First CSS Framework for less than 53 KB (8 KB Gzipped)**
 
-A utility-first, largely classless CSS framework with a 3-layer color
+Startr.Style CSS is a super lightweight, fully responsive, utility first 
+framework. All you need to build beautifully crafted web interfaces with ease.
+
+Utility-first, largely classless CSS framework with a 3-layer color
 architecture: 16 base colors cascade through 216 `color-mix()` shades
 and 24 grayscale steps into named colors and framework tokens. Change
 16 values, get 256 colors.
@@ -30,7 +33,7 @@ values auto-update.
 ## Subtree integration
 
 This repo is embedded into
-[WEB-Startr.Style](https://github.com/Startr/WEB-Startr.Style) as a
+[Startr.Style](https://github.com/Startr/Style/) as a
 git subtree at `src/style-core/`. From that repo:
 
 ```bash
