@@ -169,3 +169,9 @@ setup:
 		echo "You can customize the .env file later."; \
 	fi
 	@echo "Setup complete! Local development environment is ready."
+
+# ---------------------------------------------------------------------------
+# Interactive release (full flow via ~/bin/git-release)
+# ---------------------------------------------------------------------------
+release:
+	@scripts/release.sh
