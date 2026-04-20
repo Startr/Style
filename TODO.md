@@ -5,7 +5,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 ## 🚧 High Priority — Blockers (Must Complete Before Other Work!)
 
 ### **Makefile Standardization Initiative**
-- [x] **[Infrastructure] Standardize Makefile Across All Git Repositories** 
+- [ ] **[Infrastructure] Standardize Makefile Across All Git Repositories** 
   - [x] Research current Makefile patterns across Startr repositories
   - [x] Design universal template with dynamic project title extraction supporting both:
     - `THE_OWNER/PROJECT` format (e.g., "Startr/Style") ✅ 
@@ -90,20 +90,16 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 	- [ ] **Add Documentation** - Include usage instructions and accessibility notes
 	- [ ] **Interactive Features** - Add search, filters, and component playground
 
-## 🐛 Bugs — Known Issues
 
-- [ ] **Inset shadows don't play well with other shadows** — When combining `--shadow-inset` with `--shadow` or `--shadow-hvr`, the rendering breaks or produces unexpected results. Discovered while building the sage.is/hardware configurator page. Needs investigation into how the CSS custom property shadow system composes inset and standard box-shadows together.
-
-## 🚨 Done — Critical Priorities (All Hands on Deck!)
-
-- [x] Fix server error handling #TechnicalFoundation
-- [x] Perfect mobile responsiveness #UserExperience
-- [x] Optimize loading speed #UserExperience (Note we are using Eleventy for static site generation and should set a medium priority for CDN updates)
-- [x] Test across browsers #QualityAssurance
-- [x] Audit accessibility #QualityAssurance
-  - [x] Setup axe-cli for automated audit
-- [x] Test mobile devices #QualityAssurance
-- [x] Verify loading speeds #QualityAssurance
+ - [x] 🚨 Done — Critical Priorities (All Hands on Deck!)
+	- [x] Fix server error handling #TechnicalFoundation
+	- [x] Perfect mobile responsiveness #UserExperience
+	- [x] Optimize loading speed #UserExperience (Note we are using Eleventy for static site generation and should set a medium priority for CDN updates)
+	- [x] Test across browsers #QualityAssurance
+	- [x] Audit accessibility #QualityAssurance
+	  - [x] Setup axe-cli for automated audit
+	- [x] Test mobile devices #QualityAssurance
+	- [x] Verify loading speeds #QualityAssurance
 
 ## High Priority
 - [ ] 🔥 High Priorities - Fueling the Rocket!
@@ -121,14 +117,16 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 	- [ ] Add interactive playground for utilities #ContentExcellence 
 
 ## 📝 TODO — Documentation & Development Guidelines #ContentExcellence
-- [x] **Use Proper Highlight Shortcodes** - Always use `{% highlight "html" %}`, `{% highlight "css" %}`, or `{% highlight "text" %}` with `{% endhighlight %}` instead of hardcoded `<div class="highlight">` with `<pre>` tags
+- [ ] **Use Proper Highlight Shortcodes** - 
+	- [ ] Always use `{% highlight "html" %}`, `{% highlight "css" %}`, or `{% highlight "text" %}` with `{% endhighlight %}` 
+	- [ ] instead of hardcoded `<div class="highlight">` with `<pre>` tags
   - [x] Updated installation.njk to use proper shortcodes
 
 - [ ] 🔥fix hardcoded highlight blocks in the following files:**
-	- [x] `/src/index.njk` - 1 hardcoded highlight div (line 86) ✅ COMPLETED
-	- [x] `/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47) ✅ COMPLETED
-	- [x] `/src/docs/tutorials/index.njk` - 5 hardcoded highlight divs (lines 38, 46, 114, 121, 176) + pre tags (lines 39, 47, 115, 122, 177) ✅ COMPLETED
-	- [x] `/src/docs/base-elements/buttons.njk` - 8 hardcoded highlight divs (lines 18, 37, 54, 69, 90, 113, 129, 143) + pre tags ✅ COMPLETED
+	- [x] `/src/index.njk` - 1 hardcoded highlight div (line 86)
+	- [x] `/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47) 
+	- [x] `/src/docs/tutorials/index.njk` - 5 hardcoded highlight divs (lines 38, 46, 114, 121, 176) + pre tags (lines 39, 47, 115, 122, 177) 
+	- [x] `/src/docs/base-elements/buttons.njk` - 8 hardcoded highlight divs (lines 18, 37, 54, 69, 90, 113, 129, 143) + pre tags
 	- [ ] `/src/docs/base-elements/everything-else.njk` - Multiple hardcoded pre tags (lines 47, 91, 108, 132)
 	- [ ] `/src/docs/base-elements/typography.njk` - 2 hardcoded pre tags (lines 123, 166)
 	- [ ] `/src/docs/helpers/shadows.njk` - 8 hardcoded highlight divs (lines 20, 45, 70, 95, 121, 147, 174, 201) + pre tags
@@ -383,9 +381,16 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 	- [ ] Check SEO optimization #QualityAssurance
 	- [ ] Integrate Lighthouse for CI (low priority) #QualityAssurance
 
-## 🧰 Backlog — TodoScope Alignment
+##  Bugs — Known Issues
 
-- [ ] **Review `.todoscope-exclude.csv` paths**: Seeded with `node_modules`, `dist`, `.git`, `src/style-core` (vendored subtree), `bun.lockb`, `chat.json`, `.DS_Store`. Confirm nothing load-bearing got excluded; add `static/` or other generated trees if needed.
-- [ ] **Migrate inline source comments to `TODO:` / `FIXME:` / `BUG:` tags**: Today, many source files use `// TODO`, `// FIXME`, or prose like "needs investigation" without the canonical prefix. Sweep `src/` and normalize so TodoScope picks them up as cards. `NOTE:` is documentation, not a work item — leave those alone.
-- [ ] **Verify column mapping after first scan**: Run TodoScope against this repo and confirm items land in expected columns (In Progress, TODO, Backlog, Bugs, Done). If a topic H3 under `## 📋 Backlog` accidentally spawns its own column, adjust the skill's convention doc or flatten the H3s.
-- [ ] **Add `*.sync-conflict-*` to `.gitignore`**: Paired with the Repo Hygiene item above — prevent Syncthing conflict copies from ever being committed again. *(Cross-referenced from panel-review 2026-04-20.)*
+- [ ] **🐛 Inset shadows don't play well with other shadows** 
+	- [ ] rendering breaks or produces unexpected results. 
+	- [ ] See sage.is/hardware configurator page. 
+	- [ ] Investigat shadow system inset and standard
+	- [ ] fix `--shadow-inset` with `--shadow` or `--shadow-hvr`, 
+
+##  Backlog 
+
+- [ ] 🧰 TodoScope Alignment
+	- [ ] **Review `.todoscope-exclude.csv` paths**: Seeded with `node_modules`, `dist`, `.git`, `src/style-core` (vendored subtree), `bun.lockb`, `chat.json`, `.DS_Store`. Confirm nothing load-bearing got excluded; add `static/` or other generated trees if needed.
+	- [ ] **Add `*.sync-conflict-*` to `.gitignore`**: Paired with the Repo Hygiene item above — prevent Syncthing conflict copies from ever being committed again. *(Cross-referenced from panel-review 2026-04-20.)*

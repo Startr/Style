@@ -11,17 +11,14 @@
             "id": "48ee9c0abcc596df",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "KANBAN.canvas",
-                "viewState": {
-                  "x": 850,
-                  "y": 1025,
-                  "zoom": -1.3709707178238812
-                }
+                "file": "TODO.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "KANBAN"
+              "icon": "lucide-file",
+              "title": "TODO"
             }
           }
         ]
@@ -97,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "KANBAN.canvas",
+                "file": "TODO.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -107,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for KANBAN"
+              "title": "Backlinks for TODO"
             }
           },
           {
@@ -116,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "KANBAN.canvas",
+                "file": "TODO.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from KANBAN"
+              "title": "Outgoing links from TODO"
             }
           },
           {
@@ -159,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "KANBAN.canvas",
+                "file": "TODO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of KANBAN"
+              "title": "Outline of TODO"
             }
           }
         ]
@@ -188,7 +185,33 @@
   },
   "active": "48ee9c0abcc596df",
   "lastOpenFiles": [
-    "TODO.md",
-    "KANBAN.canvas"
+    "src/worlds.html",
+    "src/working.html",
+    "src/tests",
+    "src/style-core/src/utilities/_typography.css",
+    "src/style-core/src/utilities/_transition.css",
+    "src/style-core/src/utilities/_transform.css",
+    "src/style-core/src/utilities/_spacing.css",
+    "src/style-core/src/utilities/_sizing.css",
+    "src/style-core/src/utilities/_overflow.css",
+    "src/style-core/src/utilities/_misc.css",
+    "src/style-core/src/utilities/_layout.css",
+    "src/style-core/src/assets/select-arrow.svg",
+    "src/style-core/icons/ms-icon-70x70.png",
+    "src/style-core/icons/ms-icon-310x310.png",
+    "src/style-core/icons/ms-icon-150x150.png",
+    "src/style-core/icons/ms-icon-144x144.png",
+    "src/style-core/icons/favicon.png",
+    "src/style-core/icons/favicon-96x96.png",
+    "src/style-core/icons/favicon-32x32.png",
+    "src/style-core/icons/favicon-16x16.png",
+    "src/style-core/icons/apple-icon.png",
+    "src/style-core/README.md",
+    "src/style-core/LICENSE.md",
+    "src/docs/helpers/flex.md",
+    "RELEASES.md",
+    "CONVENTION.instructions.md",
+    "KANBAN.canvas",
+    "TODO.md"
   ]
 }
