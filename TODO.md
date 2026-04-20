@@ -27,6 +27,36 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 - Reduced onboarding time for new projects
 - Easier maintenance and updates across the entire Startr ecosystem
 
+## 📦 Versioning & Rollback
+
+- [ ] **Ship pinned and rolling CDN versions**: Currently unversioned — any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path. Publish `/v1/`, `/v2/`, and a rolling `/latest/`. Implementation approach: submodule structure where `v1/` is a submodule pointing to the project at the v1 tag, `v2/` at v2, etc. — versioned URLs serve from the pinned submodule, `latest/` serves from `master`. Consumers pin to a version in prod; `latest` is for the Startr studio itself. Migration plan needed for existing Sage.is / Sage.Education `<link>` tags currently pointing at the unversioned URL. *(Surfaced by Zach Leatherman in a panel review of Sage.is, 2026-04-18.)*
+- [ ] **Cache headers — versioned vs rolling**: `/v1/style.css`, `/v2/style.css`, etc. → `Cache-Control: public, max-age=31536000, immutable` (one year, immutable; the URL's contents never change by design). `/latest/style.css` → `Cache-Control: public, max-age=60, must-revalidate` (short TTL + revalidate so studio pushes propagate quickly and stale copies don't linger). *(Surfaced by Zach Leatherman, 2026-04-18.)*
+- [ ] **Emit SRI integrity hashes for each pinned release**: Generate `sha384` integrity hashes at release time and publish them alongside the versioned URL so consumers can use `<link rel="stylesheet" href="/v1/style.css" integrity="sha384-..." crossorigin="anonymous">`. Gives consumers an integrity guarantee even though Startr.Style is on a separate origin. *(Surfaced by Zach Leatherman, 2026-04-18.)*
+- [ ] **Resolve version drift between README and package.json**: `README.md` opens with `1.3.1`; `package.json` declares `1.2.2.2`. Pick one source of truth (conventionally `package.json`) and make the README read from it, or bump them in lockstep via `scripts/release.sh`. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+
+## ♿ Accessibility
+
+- [ ] **Audit `-hvr` coverage for `:focus` and `:focus-visible`**: Every `[style*="--X-hvr:"]:hover` rule should be paired with `:focus, :focus-visible` so keyboard users get the same affordance as mouse users. `--shadow-hvr` covers `:focus` today; audit and enumerate the rest (`--hvr-bgc`, `--hvr-c`, `--hvr-bdc`, etc.). Land coverage systematically, not ad-hoc. *(Surfaced by Adam Wathan in a panel review of Sage.is, 2026-04-18.)*
+- [ ] **Reconcile `:focus-visible` audit status with spoken claims**: The `-hvr` coverage audit above has been open since 2026-04-18, yet a verbal claim of "keyboard accessibility tested, no issues" was made during the 2026-04-20 panel. Either close the audit with a landed commit, or retract the claim. Both states cannot be true at once. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*
+
+## 🎨 Colour System Invariants
+
+- [ ] **Audit every colour leaf for IACVT-safe fallbacks**: The 216-cell `color-mix(in oklch, …)` cascade in `src/style-core/src/variables.css` invalidates whole declarations when any component is unparseable. Every consumer leaf (e.g. `background: var(--primary)`) must resolve to `var(--primary, <literal-fallback>)`, not `inherit`/`initial`. Audit the whole leaf surface, not one line — otherwise the DSL has accents. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+- [ ] **Register critical custom properties with `@property`**: Without registration, the browser treats colour and layout variables as untyped strings. Downstream `color-mix()` and `calc()` can silently IACVT when consumers pass malformed values. Register `--primary`, `--background`, `--text-main`, and the 216-cell cube entries so the browser can validate inputs and animate between them. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+
+## 🏛️ Design System Governance
+
+- [ ] **Write the Startr.Style axioms file**: Ship a contributor-facing `docs/axioms.md` stating, in short sentences, what the framework does and — crucially — what it refuses to do. Rule out patterns explicitly: "no utility token should require `!important` on the consumer side"; "every `[style*=\"--X-hvr:\"]:hover` rule must pair `:focus, :focus-visible`"; "every colour leaf must declare a non-mix fallback"; "token naming follows the `--{abbrev}{-breakpoint}` shape, no exceptions." Without axioms, every contributor (human or AI) invents their own convention and the framework drifts. *(Surfaced by Andy Bell in a panel review of Startr.Style, 2026-04-20.)*
+
+## 📊 Performance Methodology
+
+- [ ] **Replace the "17% faster than Tailwind" eye-balling with a real harness**: Pick three comparable pages per site (landing, docs, gallery/component showcase). Throttle to Slow 4G, mid-tier Android, cold cache, five runs, publish median. Publish the harness and raw numbers in `docs/benchmarks/`. Until then, the 17% claim is a vibe, not a metric — use it at parties, not in the README. *(Surfaced by Jeremy Keith in a panel review of Startr.Style, 2026-04-20.)*
+- [ ] **Re-run LCP on a page that exercises the colour cube**: Current LCP of 0.55s has `<p>` as the LCP element, meaning the 216-cell `color-mix()` cascade is not in the critical render path of the tested page. Re-measure on `theme-creator.html` and the component gallery once it exists — pages that actually resolve the cube. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+
+## 🧹 Repo Hygiene
+
+- [ ] **Remove Syncthing conflict file from `src/_includes/`**: `src/_includes/layout.sync-conflict-20251127-153148-EJ43XZB.njk` is a Syncthing merge-conflict leftover in the source tree. Decide whether canonical `layout.njk` or the conflict copy is the intended version, merge the divergence, delete the conflict file. Add `*.sync-conflict-*` to `.gitignore` to prevent recurrence. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*
+
 ## 🎉 Recent Accomplishments
 - ✅ **Enhanced Design Philosophy Pages** - Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages
 - ✅ **Created Tutorial System** - Built step-by-step tutorials covering basic utilities, responsive layouts, and interactive components
@@ -56,6 +86,9 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 4. **Organize by Category** - Group components logically (Forms, Buttons, Layout, etc.)
 5. **Add Documentation** - Include usage instructions and accessibility notes
 6. **Interactive Features** - Add search, filters, and component playground
+
+## 🐛 Known Issues
+- [ ] **Inset shadows don't play well with other shadows** — When combining `--shadow-inset` with `--shadow` or `--shadow-hvr`, the rendering breaks or produces unexpected results. Discovered while building the sage.is/hardware configurator page. Needs investigation into how the CSS custom property shadow system composes inset and standard box-shadows together.
 
 ## 🚨 Critical Priorities - All Hands on Deck!
 - [x] Fix server error handling #TechnicalFoundation
