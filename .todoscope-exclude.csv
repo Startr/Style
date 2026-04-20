@@ -1,0 +1,8 @@
+path,reason
+node_modules,dependency cache
+dist,generated build output
+.git,git metadata
+src/style-core,vendored subtree (separate repo: WEB-startr.style.core)
+bun.lockb,lockfile
+chat.json,large data export, not source
+.DS_Store,macOS metadata
