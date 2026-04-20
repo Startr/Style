@@ -59,25 +59,25 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 	- [ ] **Remove Syncthing conflict file from `src/_includes/`**: `src/_includes/layout.sync-conflict-20251127-153148-EJ43XZB.njk` is a Syncthing merge-conflict leftover in the source tree. 
 	- [ ] Decide whether canonical `layout.njk` or the conflict copy is the intended version, merge the divergence, delete the conflict file. Add `*.sync-conflict-*` to `.gitignore` to prevent recurrence. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*
 
-## 🎉 Done — Recent Accomplishments
-- [x] **Enhanced Design Philosophy Pages** - Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages
-- [x] **Created Tutorial System** - Built step-by-step tutorials covering basic utilities, responsive layouts, and interactive components
-- [x] **Added Use Cases Documentation** - Created practical real-world examples including login forms, navigation, galleries, and pricing cards
-- [x] **Updated Navigation** - Added Learning section with links to Tutorials and Use Cases, plus Design Styles section
-- [x] **Component Inventory Complete** - Scanned existing components and updated TODO with 15+ existing components ready for gallery inclusion
+- [X] 🎉 **Done — Recent Accomplishments**
+	- [x] **Enhanced Design Philosophy Pages** - Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages
+	- [x] **Created Tutorial System** - Built step-by-step tutorials covering basic utilities, responsive layouts, and interactive components
+	- [x] **Added Use Cases Documentation** - Created practical real-world examples including login forms, navigation, galleries, and pricing cards
+	- [x] **Updated Navigation** - Added Learning section with links to Tutorials and Use Cases, plus Design Styles section
+	- [x] **Component Inventory Complete** - Scanned existing components and updated TODO with 15+ existing components ready for gallery inclusion
 
-## 📋 Existing Components Found (Ready for Gallery)
-- **Navigation**: Header navigation (layout.njk), footer with social icons (footer.njk)
-- **Forms**: Text inputs, textareas, selects, validation states (fields.njk), login forms (use-cases)
-- **Buttons**: All variations including colors, sizes, groups, icons, disabled states (buttons.njk)
-- **Cards**: Pricing cards, product showcases (use-cases/index.njk)
-- **Layout**: Grid systems, responsive layouts (tutorials/index.njk)
-- **Tables**: Basic data tables (everything-else.njk)
-- **Interactive**: Details/summary accordions (everything-else.njk)
-- **Social**: Social media buttons and icons (footer components)
-- **Typography**: Headings, paragraphs, blockquotes, lists, text formatting (typography.njk)
-- **Media**: Responsive images, image galleries, avatars, icons (multiple files)
-- **Loading**: Spinners, skeleton states, pulse animations (use-cases, working.html)
+- [x] 📋 Existing Components Found (Ready for Gallery)
+	- [x] **Navigation**: Header navigation (layout.njk), footer with social icons (footer.njk)
+	- [x] **Forms**: Text inputs, textareas, selects, validation states (fields.njk), login forms (use-cases)
+	- [x] **Buttons**: All variations including colors, sizes, groups, icons, disabled states (buttons.njk)
+	- [x] **Cards**: Pricing cards, product showcases (use-cases/index.njk)
+	- [x] **Layout**: Grid systems, responsive layouts (tutorials/index.njk)
+	- [x] **Tables**: Basic data tables (everything-else.njk)
+	- [x] **Interactive**: Details/summary accordions (everything-else.njk)
+	- [x] **Social**: Social media buttons and icons (footer components)
+	- [x] **Typography**: Headings, paragraphs, blockquotes, lists, text formatting (typography.njk)
+	- [x] **Media**: Responsive images, image galleries, avatars, icons (multiple files)
+	- [x] **Loading**: Spinners, skeleton states, pulse animations (use-cases, working.html)
 
 **Total: 25+ existing components identified across 12+ major categories**
 
@@ -105,40 +105,38 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 - [x] Test mobile devices #QualityAssurance
 - [x] Verify loading speeds #QualityAssurance
 
-## 🔥 High Priorities - Fueling the Rocket!
-
-- [x] Write clear examples for each design style #ContentExcellence
-- [x] Create step-by-step tutorials #ContentExcellence
-- [x] Add practical use cases for utilities #ContentExcellence
-- [x] Keep things DRY (Don't Repeat Yourself) #ContentExcellence
-  - [x] Refactor _includes to avoid duplication
-  - [x] Created shared components: head.njk, theme-toggle.njk, navigation.njk, theme-scripts.njk
-  - [x] Eliminated code duplication between layout.njk and layout_2.njk
-  - [x] Consolidated footer content using footer.njk include
-- [x] Document design principles clearly #ContentExcellence
-- [ ] Max height for the aside on small screens should be 100vh or less, and the overflow should scroll vertically
-- [ ] Write compelling copy for landing page #ContentExcellence
-- [ ] Add interactive playground for utilities #ContentExcellence (note working system on pages: )
+## High Priority
+- [ ] 🔥 High Priorities - Fueling the Rocket!
+	- [x] Write clear examples for each design style #ContentExcellence
+	- [x] Create step-by-step tutorials #ContentExcellence
+	- [x] Add practical use cases for utilities #ContentExcellence
+	- [x] Keep things DRY (Don't Repeat Yourself) #ContentExcellence
+	- [x] Refactor _includes to avoid duplication
+	- [x] Created shared components: head.njk, theme-toggle.njk, navigation.njk, theme-scripts.njk
+	- [x] Eliminated code duplication between layout.njk and layout_2.njk
+	- [x] Consolidated footer content using footer.njk include
+	- [x] Document design principles clearly #ContentExcellence
+	- [ ] Max height for the aside on small screens should be 100vh or less, and the overflow should scroll vertically
+	- [ ] Write compelling copy for landing page #ContentExcellence
+	- [ ] Add interactive playground for utilities #ContentExcellence 
 
 ## 📝 TODO — Documentation & Development Guidelines #ContentExcellence
 - [x] **Use Proper Highlight Shortcodes** - Always use `{% highlight "html" %}`, `{% highlight "css" %}`, or `{% highlight "text" %}` with `{% endhighlight %}` instead of hardcoded `<div class="highlight">` with `<pre>` tags
   - [x] Updated installation.njk to use proper shortcodes
-  - [ ] **URGENT: Audit and fix hardcoded highlight blocks in the following files:**
-    - [x] `/src/index.njk` - 1 hardcoded highlight div (line 86) ✅ COMPLETED
-    - [x] `/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47) ✅ COMPLETED
-    - [x] `/src/docs/tutorials/index.njk` - 5 hardcoded highlight divs (lines 38, 46, 114, 121, 176) + pre tags (lines 39, 47, 115, 122, 177) ✅ COMPLETED
-    - [x] `/src/docs/base-elements/buttons.njk` - 8 hardcoded highlight divs (lines 18, 37, 54, 69, 90, 113, 129, 143) + pre tags ✅ COMPLETED
-    - [ ] `/src/docs/base-elements/everything-else.njk` - Multiple hardcoded pre tags (lines 47, 91, 108, 132)
-    - [ ] `/src/docs/base-elements/typography.njk` - 2 hardcoded pre tags (lines 123, 166)
-    - [ ] `/src/docs/helpers/shadows.njk` - 8 hardcoded highlight divs (lines 20, 45, 70, 95, 121, 147, 174, 201) + pre tags
-    - [ ] `/src/docs/helpers/transform.njk` - 10 hardcoded highlight divs (lines 22, 48, 72, 98, 122, 148, 172, 198, 222, 248)
-    - [ ] `/src/docs/helpers/position.njk` - 7 hardcoded highlight divs + pre tags (lines 22, 44, 66, 88, 110, 132, 154)
-    - [ ] `/src/docs/helpers/background.njk` - 1 hardcoded pre tag (line 23)
-  - [ ] **Total files needing cleanup: 11 files with ~45+ hardcoded blocks**
-  - [ ] Create documentation guideline for contributors about highlight usage
-- [ ] **Maintain Consistent Code Examples** - Ensure all code snippets follow the same formatting standards
-- [ ] **Document Utility Patterns** - Create clear examples for common utility combinations
-- [x] **[Infrastructure] Add bun run command for cloudflared tunneling** - Create a script to start the app and expose it via cloudflared. ✅
+
+- [ ] 🔥fix hardcoded highlight blocks in the following files:**
+	- [x] `/src/index.njk` - 1 hardcoded highlight div (line 86) ✅ COMPLETED
+	- [x] `/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47) ✅ COMPLETED
+	- [x] `/src/docs/tutorials/index.njk` - 5 hardcoded highlight divs (lines 38, 46, 114, 121, 176) + pre tags (lines 39, 47, 115, 122, 177) ✅ COMPLETED
+	- [x] `/src/docs/base-elements/buttons.njk` - 8 hardcoded highlight divs (lines 18, 37, 54, 69, 90, 113, 129, 143) + pre tags ✅ COMPLETED
+	- [ ] `/src/docs/base-elements/everything-else.njk` - Multiple hardcoded pre tags (lines 47, 91, 108, 132)
+	- [ ] `/src/docs/base-elements/typography.njk` - 2 hardcoded pre tags (lines 123, 166)
+	- [ ] `/src/docs/helpers/shadows.njk` - 8 hardcoded highlight divs (lines 20, 45, 70, 95, 121, 147, 174, 201) + pre tags
+	- [ ] `/src/docs/helpers/transform.njk` - 10 hardcoded highlight divs (lines 22, 48, 72, 98, 122, 148, 172, 198, 222, 248)
+	- [ ] `/src/docs/helpers/position.njk` - 7 hardcoded highlight divs + pre tags (lines 22, 44, 66, 88, 110, 132, 154)
+	- [ ] `/src/docs/helpers/background.njk` - 1 hardcoded pre tag (line 23)
+	- [ ] **Total files needing cleanup: 11 files with ~45+ hardcoded blocks**
+	- [ ] **Document Utility Patterns** - Create clear examples for common utility combinations
 
 - [ ] Create component gallery with live examples #ContentExcellence
   - [ ] **Planning & Architecture**
@@ -185,7 +183,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 
   - [x] Multi-select dropdowns [/docs/base-elements/fields.njk] - Add to gallery
   - [ ] Autocomplete/typeahead inputs
-- [x] Form layouts [/docs/use-cases/index.njk]
+- [ ] Form layouts [/docs/use-cases/index.njk]
   - [ ] Inline forms
   - [ ] Stacked forms with proper spacing
   - [ ] Multi-step/wizard forms
@@ -318,86 +316,72 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
       - [ ] Tag/chip components with removal
       - [ ] Category badges
   - [ ] **E-commerce Components**
-    - [ ] Product showcases
-      - [ ] Product detail layouts
-      - [ ] Product comparison tables
-      - [ ] Shopping cart components
-      - [ ] Wishlist components
-    - [ ] Pricing displays
-      - [ ] Pricing cards/tables
-      - [ ] Subscription plan comparisons
-      - [ ] Price formatting examples
-      - [ ] Discount/sale price displays
-  - [ ] **Documentation & Implementation**
-    - [ ] Component documentation
-      - [ ] Write clear usage instructions for each component
-      - [ ] Document all utility classes used
-      - [ ] Provide copy-paste HTML examples
-      - [ ] Include accessibility notes for each component
-      - [ ] Add responsive behavior explanations
-    - [ ] Interactive features
-      - [ ] Add "View Code" toggle for each example
-      - [ ] Implement live preview with editable code
-      - [ ] Add copy-to-clipboard functionality
-      - [ ] Create component search/filter system
-    - [ ] Quality assurance
-      - [ ] Test all components across different browsers
-      - [ ] Verify mobile responsiveness of all examples
-      - [ ] Validate HTML markup for accessibility
-      - [ ] Ensure consistent styling across components
-    - [ ] Gallery structure
-      - [ ] Create main component gallery landing page
-      - [ ] Build category navigation system
-      - [ ] Implement component preview thumbnails
-      - [ ] Add related components suggestions
-      - [ ] Create component favorites/bookmarking system
-- [ ] Add search functionality to documentation #UserExperience
-- [ ] Add request logging #TechnicalFoundation
-- [x] Optimize CSS delivery #TechnicalFoundation (using Eleventy and PostCSS)
-- [x] Implement code splitting #TechnicalFoundation
-  - [x] Use Eleventy for static site generation
-  - [ ] Use PostCSS for CSS optimization when in Eleventy not just seperate repo
-- [ ] Use service workers for caching #TechnicalFoundation
-- [x] Implement HTTP/2 for faster loading #TechnicalFoundation
-- [ ] Use a CDN for static assets #TechnicalFoundation
-- [ ] Optimize font loading #TechnicalFoundation
-- [ ] Compress images automatically #TechnicalFoundation
-- [ ] Enable lazy loading for performance #TechnicalFoundation
-- [x] Add touch-friendly interactions #UserExperience
+	- [ ] Product showcases
+	- [ ] Product detail layouts
+	- [ ] Product comparison tables
+	- [ ] Shopping cart components
+	- [ ] Wishlist components
+	- [ ] Pricing displays
+	- [ ] Pricing cards/tables
+	- [ ] Subscription plan comparisons
+	- [ ] Price formatting examples
+	- [ ] Discount/sale price displays
+- [ ] **Documentation & Implementation**
+	- [ ] Component documentation
+	- [ ] Write clear usage instructions for each component
+	- [ ] Provide copy-paste HTML examples
+	- [ ] Include accessibility notes for each component
+	- [ ] Add responsive behavior explanations
+	- [ ] Implement live preview with editable code
+	- [ ] Add copy-to-clipboard functionality
+	- [ ] Create component search/filter system
+	- [ ] Test all components across different browsers
+	- [ ] Verify mobile responsiveness of all examples
+	- [ ] Ensure consistent styling across components
+- [ ] Gallery structure
+	- [ ] Create main component gallery landing page
+	- [ ] Build category navigation system
+	- [ ] Implement component preview thumbnails
+	- [ ] Add related components suggestions
+	- [ ] Create component favorites/bookmarking system
+	- [ ] Add search functionality to documentation #UserExperience
+- [ ] Optimize delivery #TechnicalFoundation (using Eleventy and PostCSS)
+	- [x] Implement code splitting #TechnicalFoundation
+	- [x] Use Eleventy for static site generation
+	- [x] Implement HTTP/2 for faster loading #TechnicalFoundation
+	- [x] Use a CDN for static assets #TechnicalFoundation
+	- [ ] Optimize font loading #TechnicalFoundation
+	- [ ] Compress images automatically #TechnicalFoundation
+	- [ ] Enable lazy loading for performance #TechnicalFoundation
 - [ ] Improve navigation flow #UserExperience
-- [ ] Add keyboard accessibility #UserExperience
-- [ ] Test screen reader compatibility #UserExperience
+	- [ ] Add keyboard accessibility #UserExperience
+	- [ ] Test screen reader compatibility #UserExperience
 - [ ] Write comprehensive style guide #DeveloperExperience
-- [ ] Create component documentation #DeveloperExperience
-- [ ] Add automated testing suite #DeveloperExperience
-- [ ] Set up development workflow #DeveloperExperience
-- [ ] Build utility reference #DeveloperExperience
+	- [ ] Create component documentation #DeveloperExperience
 - [ ] Set up CI/CD pipeline #Infrastructure
-- [ ] Add deployment automation #Infrastructure
-- [ ] Configure monitoring #Infrastructure
-- [ ] Set up error tracking #Infrastructure
-- [ ] Validate HTML semantics #QualityAssurance
-- [ ] Check CSS performance #QualityAssurance
-- [ ] Review code quality #QualityAssurance
+	- [ ] Add automated testing suite #DeveloperExperience
+	- [ ] Add deployment automation #Infrastructure
+	- [ ] Configure monitoring #Infrastructure
+	- [ ] Set up error tracking #Infrastructure
 
-## ✨ Medium Priorities - Adding Extra Sparkle!
-- [ ] Expand modernism examples with real projects #ContentExcellence
-- [ ] Enhance brutalism showcase with interactive demos #ContentExcellence
-- [ ] Complete experimentalism section with cutting-edge techniques #ContentExcellence
-- [ ] Add build process monitoring #TechnicalFoundation
-- [ ] Update Eleventy to latest version #TechnicalFoundation
-- [ ] Implement PostCSS optimizations #TechnicalFoundation
-- [ ] Create smooth transitions #UserExperience
-- [ ] Add progressive enhancement #UserExperience
-- [ ] Create contribution guidelines #DeveloperExperience
-- [ ] Add code examples library #DeveloperExperience
-- [ ] Document best practices #DeveloperExperience
-- [ ] Containerize with Docker #Infrastructure
-- [ ] Add performance metrics #Infrastructure
-- [ ] Create backup strategy #Infrastructure
-- [ ] Plan scaling approach #Infrastructure
-- [ ] Check SEO optimization #QualityAssurance
-- [ ] Integrate Lighthouse for CI (low priority) #QualityAssurance
+- [ ] ✨ Medium Priorities - Adding Extra Sparkle!
+	- [ ] Expand modernism examples with real projects #ContentExcellence
+	- [ ] Enhance brutalism showcase with interactive demos #ContentExcellence
+	- [ ] Complete experimentalism section with cutting-edge techniques #ContentExcellence
+	- [ ] Add build process monitoring #TechnicalFoundation
+	- [ ] Update Eleventy to latest version #TechnicalFoundation
+	- [ ] Implement PostCSS optimizations #TechnicalFoundation
+	- [ ] Create smooth transitions #UserExperience
+	- [ ] Add progressive enhancement #UserExperience
+	- [ ] Create contribution guidelines #DeveloperExperience
+	- [ ] Add code examples library #DeveloperExperience
+	- [ ] Document best practices #DeveloperExperience
+	- [ ] Containerize with Docker #Infrastructure
+	- [ ] Add performance metrics #Infrastructure
+	- [ ] Create backup strategy #Infrastructure
+	- [ ] Plan scaling approach #Infrastructure
+	- [ ] Check SEO optimization #QualityAssurance
+	- [ ] Integrate Lighthouse for CI (low priority) #QualityAssurance
 
 ## 🧰 Backlog — TodoScope Alignment
 

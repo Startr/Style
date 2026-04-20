@@ -11,14 +11,17 @@
             "id": "48ee9c0abcc596df",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "TODO.md",
-                "mode": "source",
-                "source": false
+                "file": "KANBAN.canvas",
+                "viewState": {
+                  "x": 850,
+                  "y": 1025,
+                  "zoom": -1.3709707178238812
+                }
               },
-              "icon": "lucide-file",
-              "title": "TODO"
+              "icon": "lucide-layout-dashboard",
+              "title": "KANBAN"
             }
           }
         ]
@@ -94,7 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "TODO.md",
+                "file": "KANBAN.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +107,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for TODO"
+              "title": "Backlinks for KANBAN"
             }
           },
           {
@@ -113,12 +116,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "TODO.md",
+                "file": "KANBAN.canvas",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from TODO"
+              "title": "Outgoing links from KANBAN"
             }
           },
           {
@@ -156,13 +159,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TODO.md",
+                "file": "KANBAN.canvas",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TODO"
+              "title": "Outline of KANBAN"
             }
           }
         ]
@@ -184,5 +187,8 @@
     }
   },
   "active": "48ee9c0abcc596df",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "TODO.md",
+    "KANBAN.canvas"
+  ]
 }
