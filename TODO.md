@@ -29,12 +29,12 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 
 ## 📋 Backlog
 
-### 📦 Versioning & Rollback
+- [ ]  📦 Versioning & Rollback
 
-- [ ] **Ship pinned and rolling CDN versions**: Currently unversioned — any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path. Publish `/v1/`, `/v2/`, and a rolling `/latest/`. Implementation approach: submodule structure where `v1/` is a submodule pointing to the project at the v1 tag, `v2/` at v2, etc. — versioned URLs serve from the pinned submodule, `latest/` serves from `master`. Consumers pin to a version in prod; `latest` is for the Startr studio itself. Migration plan needed for existing Sage.is / Sage.Education `<link>` tags currently pointing at the unversioned URL. *(Surfaced by Zach Leatherman in a panel review of Sage.is, 2026-04-18.)*
-- [ ] **Cache headers — versioned vs rolling**: `/v1/style.css`, `/v2/style.css`, etc. → `Cache-Control: public, max-age=31536000, immutable` (one year, immutable; the URL's contents never change by design). `/latest/style.css` → `Cache-Control: public, max-age=60, must-revalidate` (short TTL + revalidate so studio pushes propagate quickly and stale copies don't linger). *(Surfaced by Zach Leatherman, 2026-04-18.)*
-- [ ] **Emit SRI integrity hashes for each pinned release**: Generate `sha384` integrity hashes at release time and publish them alongside the versioned URL so consumers can use `<link rel="stylesheet" href="/v1/style.css" integrity="sha384-..." crossorigin="anonymous">`. Gives consumers an integrity guarantee even though Startr.Style is on a separate origin. *(Surfaced by Zach Leatherman, 2026-04-18.)*
-- [ ] **Resolve version drift between README and package.json**: `README.md` opens with `1.3.1`; `package.json` declares `1.2.2.2`. Pick one source of truth (conventionally `package.json`) and make the README read from it, or bump them in lockstep via `scripts/release.sh`. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+	- [ ] **Ship pinned and rolling CDN versions**: Currently unversioned — any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path. Publish `/v1/`, `/v2/`, and a rolling `/latest/`. Implementation approach: submodule structure where `v1/` is a submodule pointing to the project at the v1 tag, `v2/` at v2, etc. — versioned URLs serve from the pinned submodule, `latest/` serves from `master`. Consumers pin to a version in prod; `latest` is for the Startr studio itself. Migration plan needed for existing Sage.is / Sage.Education `<link>` tags currently pointing at the unversioned URL. *(Surfaced by Zach Leatherman in a panel review of Sage.is, 2026-04-18.)*
+	- [ ] **Cache headers — versioned vs rolling**: `/v1/style.css`, `/v2/style.css`, etc. → `Cache-Control: public, max-age=31536000, immutable` (one year, immutable; the URL's contents never change by design). `/latest/style.css` → `Cache-Control: public, max-age=60, must-revalidate` (short TTL + revalidate so studio pushes propagate quickly and stale copies don't linger). *(Surfaced by Zach Leatherman, 2026-04-18.)*
+	- [ ] **Emit SRI integrity hashes for each pinned release**: Generate `sha384` integrity hashes at release time and publish them alongside the versioned URL so consumers can use `<link rel="stylesheet" href="/v1/style.css" integrity="sha384-..." crossorigin="anonymous">`. Gives consumers an integrity guarantee even though Startr.Style is on a separate origin. *(Surfaced by Zach Leatherman, 2026-04-18.)*
+	- [ ] **Resolve version drift between README and package.json**: `README.md` opens with `1.3.1`; `package.json` declares `1.2.2.2`. Pick one source of truth (conventionally `package.json`) and make the README read from it, or bump them in lockstep via `scripts/release.sh`. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
 
 ### ♿ Accessibility
 
@@ -143,6 +143,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
     - [ ] Plan interactive playground integration
     - [ ] Define component documentation template format
     - [ ] Plan responsive showcase for each component
+    
   - [ ] **Navigation Components**
     - [x] Header/Navigation bars [/docs/] (layout.njk contains main navigation)
       - [x] Horizontal navigation with dropdown menus [/_includes/layout.njk] - Add to gallery
@@ -158,35 +159,35 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
       - [ ] Number-based pagination
       - [ ] Previous/Next pagination
       - [ ] Load more button
-  - [x] **Typography Components** [/docs/base-elements/typography.njk]
-    - [x] Headings (H1-H6) [/docs/base-elements/typography.njk] - Add to gallery
-    - [x] Paragraphs with inline elements [/docs/base-elements/typography.njk] - Add to gallery
-    - [x] Blockquotes with citations [/docs/base-elements/typography.njk] - Add to gallery
-    - [x] Text formatting (bold, italic, code, mark, small) [/docs/base-elements/typography.njk] - Add to gallery
-    - [x] Links and link states [/docs/base-elements/typography.njk] - Add to gallery
-  - [ ] **Form Components**
-    - [x] Input variations [/docs/base-elements/fields.njk]
-      - [x] Text inputs with labels and validation states [/docs/base-elements/fields.njk] - Add to gallery
-      - [ ] Search inputs with icons
-      - [x] Number inputs with increment/decrement [/docs/base-elements/fields.njk] - Add to gallery
-      - [x] Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery
-      - [ ] File upload with drag-and-drop styling
-      - [x] Multi-line textarea components [/docs/base-elements/fields.njk] - Add to gallery
-    - [x] Selection controls [/docs/base-elements/fields.njk]
-      - [x] Custom checkboxes with various styles
-        - [ ] Debug checkbox styles !!!
-      - [ ] Radio button groups
-      - [x] Toggle switches
-      - [x] Multi-select dropdowns [/docs/base-elements/fields.njk] - Add to gallery
-      - [ ] Autocomplete/typeahead inputs
-    - [x] Form layouts [/docs/use-cases/index.njk]
-      - [ ] Inline forms
-      - [ ] Stacked forms with proper spacing
-      - [ ] Multi-step/wizard forms
-      - [x] Form validation with error states [/docs/base-elements/fields.njk] - Add to gallery
-      - [x] Login/registration form templates [/docs/use-cases/index.njk] - Add to gallery
-        - [ ] Add spacing above and below the form in the preview
-        - [ ] Update to the content of https://codepen.io/openco/pen/wBavPYx 
+- [x] **Typography Components** [/docs/base-elements/typography.njk]
+	- [x] Headings (H1-H6) [/docs/base-elements/typography.njk] - Add to gallery
+	- [x] Paragraphs with inline elements [/docs/base-elements/typography.njk] - Add to gallery
+	- [x] Blockquotes with citations [/docs/base-elements/typography.njk] - Add to gallery
+	- [x] Text formatting (bold, italic, code, mark, small) [/docs/base-elements/typography.njk] - Add to gallery
+	- [x] Links and link states [/docs/base-elements/typography.njk] - Add to gallery
+- [ ] **Form Components**
+	- [x] Input variations [/docs/base-elements/fields.njk]
+	- [x] Text inputs with labels and validation states [/docs/base-elements/fields.njk] - Add to gallery
+	- [ ] Search inputs with icons
+	- [x] Number inputs with increment/decrement [/docs/base-elements/fields.njk] - Add to gallery
+	- [x] Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery
+	- [ ] File upload with drag-and-drop styling
+	- [x] Multi-line textarea components [/docs/base-elements/fields.njk] - Add to gallery
+	- [x] Selection controls [/docs/base-elements/fields.njk]
+  - [x] Custom checkboxes with various styles
+	- [ ] Debug checkbox styles !!!
+  - [ ] Radio button groups
+  - [x] Toggle switches
+  - [x] Multi-select dropdowns [/docs/base-elements/fields.njk] - Add to gallery
+  - [ ] Autocomplete/typeahead inputs
+- [x] Form layouts [/docs/use-cases/index.njk]
+  - [ ] Inline forms
+  - [ ] Stacked forms with proper spacing
+  - [ ] Multi-step/wizard forms
+  - [x] Form validation with error states [/docs/base-elements/fields.njk] - Add to gallery
+  - [x] Login/registration form templates [/docs/use-cases/index.njk] - Add to gallery
+	- [ ] Add spacing above and below the form in the preview
+	- [ ] Update to the content of https://codepen.io/openco/pen/wBavPYx 
 
   - [ ] **Button Components**
     - [x] Button variations [/docs/base-elements/buttons.njk]
