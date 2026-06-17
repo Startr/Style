@@ -1,0 +1,105 @@
+# Framework-canonical signup-gate.yaml — REFERENCE TEMPLATE.
+#
+# Consumer sites COPY this file into their own `_data/signup-gate.yaml` (or
+# `signup_gate.yaml` — depends on whether their Eleventy convention prefers
+# hyphens or underscores in data filenames; both map to a camelCased
+# variable, but Eleventy 3 is finicky about hyphens) and override the
+# fields that need brand-specific values.
+#
+# All required overrides are marked REQUIRED below. Everything else is a
+# sensible default the consumer can keep or change.
+#
+# See ../../docs/signup-gate.md for the full integration guide.
+
+# REQUIRED: brand name as it appears in copy. Used as `{{ signup_gate.brand }}`.
+brand: "Your brand"
+
+# REQUIRED: PocketBase endpoint that mints the membership cookie.
+# Format: https://pb.<your-domain>/api/sage/gate-unlock
+# The hook is at WEB-DB-sage-pb/pb_hooks/gate_unlock.pb.js — vendor or fork.
+unlockEndpoint: "https://pb.example.com/api/sage/gate-unlock"
+
+# Cookie names. The HttpOnly JWT and a JS-readable sentinel. Both scoped
+# to the registrable domain (e.g. `.example.com`) by the PocketBase hook.
+cookieName: sage_gate
+presenceCookie: sage_gate_present
+
+# --- Gating cascade ---
+# Resolution order (longest match wins):
+#   1. front-matter `gateAfterDays:` per-article override
+#   2. thresholdsBySection (URL-prefix match)
+#   3. thresholdsByContentType (front-matter `contentType:`, default "blog")
+#   4. defaultThresholdDays
+defaultThresholdDays: 60
+
+thresholdsByContentType:
+  blog: 60
+  case-study: 90
+  pdf: 0           # gate from publication day
+  newsletter: never
+  curriculum: never
+  framework-docs: never
+
+# REQUIRED if you want section-level overrides. Empty {} is fine — the
+# content-type and default fall through.
+thresholdsBySection:
+  /resources/: 60
+  /case-studies/: 90
+  /hardware/: never
+  /newsletter/: never
+  /books/: never
+  /privacy: never
+  /pricing: never
+
+# --- Copy ---
+copy:
+  heading: "Keep reading — free with a {{ brand }} membership"
+  body: "Our content is always free. A free membership unlocks the full library and keeps you in the loop on new pieces."
+  submitLabel: "Unlock this article"
+  fineprint: "Free membership. We use your email only to send updates. Unsubscribe any time."
+  emailLabel: "Email address"
+  emailPlaceholder: "you@domain.com"
+  existingMemberPrompt: "Already a member?"
+  existingMemberLinkLabel: "Sign in"
+  errorGeneric: "Something went wrong. Please try again in a moment."
+  errorBadEmail: "Please enter a valid email address."
+
+# --- Social proof ---
+# audienceLabel: REQUIRED — sites without testimonials should still set
+#                an honest member-count line ("Join 1,000+ readers...")
+# rating: optional; entire block hides if .stars is unset
+# testimonial: optional; entire block hides if .quote is unset
+socialProof:
+  audienceLabel: "Join 1,000+ readers shaping AI on their own terms"
+  rating:
+    stars: 5
+    label: "from members building with {{ brand }}"
+  testimonial:
+    quote: "Replace with a real customer quote."
+    author: "Jane Doe, Their Company"
+
+# Where else our content lives — channel-logo row in the gate. Each item:
+# `{ name, logo, href }`. Hidden if empty. Logos should be square SVG or PNG
+# served from the consumer site.
+availableOn: []
+
+# What's-included panel rendered as a sibling below the gate. Hidden if
+# `items` is empty.
+whatsIncluded:
+  heading: "What's included in a {{ brand }} membership?"
+  items:
+    - title: "Full library access"
+      body: "Read every published piece, in full, the moment it ships — not after a delay."
+    - title: "Member-only updates"
+      body: "Short, infrequent emails when new resources ship. No volume, no churn."
+    - title: "Early access to tools"
+      body: "First access to product drops, member-only presets, and beta features."
+
+# Phase 1 = email-only. Reserved schema for OAuth in Phase 2.
+# Each provider: `{ id, label, initUrl }` — initUrl is the PocketBase OAuth
+# init endpoint (e.g. /api/oauth/github/init).
+providers: []
+
+# Phase 2+ surface for existing members to sign in. Hidden if `href` empty.
+existingMemberLink:
+  href: ""

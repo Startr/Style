@@ -1,0 +1,104 @@
+{# ─── whats-included.njk ────────────────────────────────────────────────────
+  Framework-canonical: sibling include that renders the "What's included"
+  value-prop panel below the signup-gate (separated by a dotted divider).
+
+  Different content, different reuse pattern — kept distinct from the gate
+  so a consumer page can render either independently.
+
+  Hides cleanly when `signup_gate.whatsIncluded.items` is empty.
+  Hidden by default (`--d:none`); revealed by the signup-gate's JS at the
+  same time as the gate (so members never see the upsell panel).
+
+  Mobile-first. See ../docs/signup-gate.md for the integration guide.
+
+  Canonical startr.style props — use `--size` for font-size (NOT `--fs`,
+  which is font-style); `--weight` for font-weight (NOT `--fw`, which is
+  flex-wrap).
+#}
+{%- set wi = signup_gate.whatsIncluded %}
+{%- if wi and wi.items and wi.items.length %}
+<section class="whats-included"
+         style="
+           --d: none;
+           --maxw: 36rem;
+           --mx: auto;
+           --my: 1.5rem;
+           --p: 1.5rem;
+           --p-md: 2rem;
+           --ta: center;
+           /* --- palette tokens (whats-included is a sibling of signup-gate
+                  so it can't inherit from there; duplicate here so the panel
+                  is themeable standalone). --- */
+           --c-ink: #1a1714;
+           --c-text: #2a2520;
+           --c-body: #4a4239;
+           --c-cream: #fdfaf3;
+           --c-border-light: #e8e1d3;
+           --c-border-medium: #d4ccba;
+           --c: var(--c-text);
+         ">
+  {%- if wi.heading %}
+  <h3 class="whats-included__heading" style="--size: 1.25rem; --size-md: 1.5rem; --c: var(--c-ink);">{{ wi.heading }}</h3>
+  {%- endif %}
+  <ul class="whats-included__list"
+      style="
+        --d: grid;
+        --gtc: 1fr;
+        --gtc-md: 1fr 1fr 1fr;
+        --ta: left;
+        --ta-md: center;
+        --m: 0;
+        --p: 0;
+        gap: 1rem;
+      ">
+    {%- for item in wi.items %}
+    <li class="whats-included__item" style="--bg: var(--c-cream); --b: 1px solid var(--c-border-light);">
+      <strong class="whats-included__title" style="--c: var(--c-ink);">{{ item.title }}</strong>
+      {%- if item.body %}
+      <span class="whats-included__body" style="--c: var(--c-body);">{{ item.body }}</span>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<style>
+  /* Colors all live on inline --c, --bg, --b (framework binds). The dotted
+     divider color references the palette via var() inheritance. */
+  .whats-included {
+    border-top: 1px dotted var(--c-border-medium);
+  }
+  .whats-included__heading {
+    font-family: "Source Serif 4", "Playfair Display", Georgia, serif;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 1rem;
+  }
+  .whats-included__list {
+    list-style: none;
+  }
+  .whats-included__item {
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
+  }
+  .whats-included__title {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+  }
+  .whats-included__body {
+    display: block;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  /* Opt out of the host-site gradient-text effect (e.g. style.css:6160 in
+     Sage.is) — applies to h3/strong site-wide, would render our heading and
+     titles invisible against the cream item bg. */
+  .whats-included__heading,
+  .whats-included__title {
+    background-image: none;
+    background-clip: border-box;
+    -webkit-text-fill-color: currentColor;
+  }
+</style>
+{%- endif %}

@@ -1,0 +1,462 @@
+{# ─── signup-gate.njk ───────────────────────────────────────────────────────
+  Framework-canonical: Medium-style time-delayed membership gate.
+
+  Consumers vendor or include this file and override the per-site config in
+  their own `_data/signup-gate.yaml`. See `docs/signup-gate.md` for the
+  integration guide.
+
+  Crawlers + JS-off readers see the full article — the gate is hidden by
+  default (`--d:none`) and revealed by the inline script only when:
+    1. the presence cookie (configurable, default `sage_gate_present`) is absent, AND
+    2. `data-gate-eligible="true"` is set on the wrapper (computed at build).
+
+  On reveal: paragraphs past the first N stay, the section containing the
+  last kept paragraph gets a mask-image fade + `--mb:-50%` overlap so the
+  gate visually steps INTO the fading text.
+
+  Email submit posts to `signup_gate.unlockEndpoint`. 200 → reload.
+  Anything else → inline error.
+
+  P1 = email-only. OAuth providers in `signup_gate.providers` are rendered
+  if present (Phase 2+) but the array is empty in P1.
+
+  Authoring rules:
+    - Mobile-first: base props at smallest viewport; `-md` / `-lg` overrides
+      upward only. Don't repeat the base in a suffix.
+    - Canonical startr.style props (per the framework source at
+      src/style-core/src/utilities/):
+        font-size      = --size  (NOT --fs — that's font-style)
+        font-weight    = --weight (NOT --fw — that's flex-wrap)
+        font-family    = --ff
+        line-height    = --lh
+        letter-spacing = --ls
+        text-align     = --ta
+        text-decoration= --td
+        gap            = --g
+        display        = --d
+        flex-dir       = --fd
+        flex-wrap      = --fw
+        align-items    = --ai
+        justify-cont   = --jc
+        padding        = --p / --pt / --pr / --pb / --pl
+        margin         = --m / --mt / --mr / --mb / --ml
+        sizing         = --w / --h / --maxw / --minh ...
+        color          = --c
+        background     = --bg / --bgc
+        border         = --b / --bc / --bs / --bw
+        border-radius  = --br  (also binds border-right — disambiguate by value)
+        cursor         = --cur
+        object-fit     = --objf
+        position       = --pos
+        z-index        = --z
+
+  Palette defaults (cream/ink) override-friendly via the inline tokens on
+  the outer <aside>. Themers edit one set of values, every child element
+  updates via CSS custom-prop inheritance.
+#}
+{%- set g = signup_gate %}
+<aside class="signup-gate"
+       data-gate-eligible="{% if gateEligible %}true{% else %}false{% endif %}"
+       data-endpoint="{{ g.unlockEndpoint }}"
+       data-cookie-present="{{ g.presenceCookie }}"
+       style="
+         zoom: 1.12;  /* finger-friendly scaling without per-element retuning; override if undesired */
+         --d: none;
+         --br: 12px;
+         --p: 1.5rem;
+         --p-md: 2.5rem;
+         --my: 3rem;
+         --maxw: 36rem;
+         --mx: auto;
+         --ta: center;
+         /* --- palette tokens, inherit to every child via CSS var cascade --- */
+         --c-ink: #1a1714;
+         --c-text: #2a2520;
+         --c-body: #4a4239;
+         --c-muted: #6b6256;
+         --c-fade: #8a8175;
+         --c-cream: #fdfaf3;
+         --c-cream-hover: #f7f2e6;
+         --c-white: #fff;
+         --c-border-light: #e8e1d3;
+         --c-border-medium: #d4ccba;
+         --c-gold: #d4a017;
+         --c-error: #b91c1c;
+         /* --- framework primitives drawing from the palette --- */
+         --bg: var(--c-cream);
+         --b: 1px solid var(--c-border-light);
+         --c: var(--c-text);
+       ">
+
+  <div class="signup-gate__lock-header"
+       style="
+         --d: flex;
+         --ai: center;
+         --jc: center;
+         --g: 0.4rem;
+         --size: 0.8rem;
+         --bb: 1px dotted var(--c-border-medium);
+         --c: var(--c-muted);
+       ">
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+      <path fill="currentColor" d="M8 1a3 3 0 0 0-3 3v3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-1V4a3 3 0 0 0-3-3zm-2 6V4a2 2 0 1 1 4 0v3H6z"/>
+    </svg>
+    <span>Create a free account to keep reading</span>
+  </div>
+
+  <h2 class="signup-gate__heading"
+      style="
+        --size: 1.5rem; --size-md: 1.875rem;
+        --weight: 600;
+        --lh: 1.2;
+        --ff: 'Playfair Display', 'Source Serif 4', Georgia, serif;
+        --c: var(--c-ink);
+        --p: 0;
+      ">{{ g.copy.heading }}</h2>
+
+  <p style="
+       --size: 0.95rem;
+       --lh: 1.5;
+       --c: var(--c-body);
+       --mb: 0;
+     ">{{ g.copy.body }}</p>
+
+  {%- if g.socialProof.rating %}
+  <div aria-label="{{ g.socialProof.rating.stars }} out of 5 stars"
+       style="
+         --d: flex;
+         --fd: column;
+         --ai: center;
+         --g: 0.25rem;
+         --m: 0 0 1rem;
+       ">
+    <span aria-hidden="true"
+          style="--size: 1.8rem; --ls: 0.1rem; --c: var(--c-gold);">
+      {%- for i in range(0, g.socialProof.rating.stars) %}★{%- endfor %}
+    </span>
+    {%- if g.socialProof.rating.label %}
+    <span style="--size: 0.75rem; --c: var(--c-muted);">{{ g.socialProof.rating.label }}</span>
+    {%- endif %}
+  </div>
+  {%- endif %}
+
+  {%- if g.socialProof.testimonial and g.socialProof.testimonial.quote %}
+  <blockquote style="--p: 1rem;">
+    <p style="
+         --size: 1rem; --size-md: 1.1rem;
+         --fs: italic;
+         --ff: 'Playfair Display', 'Source Serif 4', Georgia, serif;
+         --lh: 1.5;
+         --m: 0 0 0.5rem;
+         --c: var(--c-text);
+       ">&ldquo;{{ g.socialProof.testimonial.quote }}&rdquo;</p>
+    {%- if g.socialProof.testimonial.author %}
+    <cite style="--size: 0.8rem; --fs: normal; --c: var(--c-muted);">— {{ g.socialProof.testimonial.author }}</cite>
+    {%- endif %}
+  </blockquote>
+  {%- endif %}
+
+  {%- if g.availableOn and g.availableOn.length %}
+  <div aria-label="Also available on"
+       style="
+         --d: flex;
+         --fw: wrap;
+         --ai: center;
+         --jc: center;
+         --g: 0.75rem;
+         --m: 1rem 0;
+         --p: 0.75rem;
+         --br: 12px;
+         --bg: var(--c-white);
+         --b: 1px solid var(--c-border-light);
+       ">
+    {%- for ch in g.availableOn %}
+    <a href="{{ ch.href }}" target="_blank" rel="noopener" aria-label="{{ ch.name }}"
+       style="--d: inline-flex;">
+      <img src="{{ ch.logo }}" alt="{{ ch.name }}" loading="lazy"
+           style="--w: 40px; --h: 40px; --br: 8px; --objf: contain;">
+    </a>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {%- if g.socialProof.audienceLabel %}
+  <p style="--size: 0.85rem; --m: 1rem 0; --c: var(--c-body);">{{ g.socialProof.audienceLabel }}</p>
+  {%- endif %}
+
+  {%- if g.providers and g.providers.length %}
+  <div style="--d: grid; --g: 0.5rem; --m: 1rem 0;">
+    {%- for p in g.providers %}
+    <a href="{{ p.initUrl }}" class="signup-gate__provider"
+       style="
+         --d: block;
+         --p: 0.75rem 1rem;
+         --br: 8px;
+         --td: none;
+         --size: 0.95rem;
+         --c: var(--c-ink);
+         --bg: var(--c-white);
+         --b: 1px solid var(--c-border-medium);
+       ">{{ p.label }}</a>
+    {%- endfor %}
+  </div>
+  <div class="signup-gate__divider"
+       style="
+         --d: flex;
+         --ai: center;
+         --g: 0.75rem;
+         --m: 1rem 0;
+         --size: 0.8rem;
+         --c: var(--c-muted);
+       "><span>or</span></div>
+  {%- endif %}
+
+  <form class="signup-gate__form" novalidate
+        style="
+          --d: grid;
+          --g: 0.5rem;
+          --ta: center;
+        ">
+    <label for="signup-gate-email"
+           style="--size: 0.85rem; --c: var(--c-body); --ta: center;">{{ g.copy.emailLabel }}</label>
+    <input type="email"
+           id="signup-gate-email"
+           name="email"
+           class="signup-gate__input"
+           placeholder="{{ g.copy.emailPlaceholder }}"
+           autocomplete="email"
+           required
+           style="
+             --ta: center;
+             --p: 0.75rem 0.9rem;
+             --size: 1rem;
+             --ff: inherit;
+             --br: 8px;
+             --w: 100%;
+             --bxs: border-box;
+             --c: var(--c-ink);
+             --bg: var(--c-white);
+             --b: 1px solid var(--c-border-medium);
+           ">
+    <button type="submit"
+            class="signup-gate__submit"
+            style="
+              --d: inline-flex;
+              --ai: center;
+              --jc: center;
+              --g: 0.5rem;
+              --p: 0.85rem 1.5rem;
+              --size: 1rem;
+              --weight: 600;
+              --ff: inherit;
+              --b: none;
+              --br: 999px;
+              --cur: pointer;
+              --mt: 0.25rem;
+              --bg: var(--c-ink);
+              --c: var(--c-cream);
+            ">
+      <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+        <path fill="currentColor" d="M8 1a3 3 0 0 0-3 3v3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-1V4a3 3 0 0 0-3-3zm-2 6V4a2 2 0 1 1 4 0v3H6z"/>
+      </svg>
+      <span>{{ g.copy.submitLabel }}</span>
+    </button>
+    <p class="signup-gate__error" role="alert" hidden
+       style="--size: 0.85rem; --m: 0.5rem 0 0; --ta: center; --c: var(--c-error);"></p>
+  </form>
+
+  {%- if g.existingMemberLink and g.existingMemberLink.href %}
+  <p style="--size: 0.85rem; --m: 0.75rem 0 0; --c: var(--c-muted);">
+    {{ g.copy.existingMemberPrompt }}
+    <a href="{{ g.existingMemberLink.href }}"
+       style="--c: var(--c-ink); --td: underline;">{{ g.copy.existingMemberLinkLabel }}</a>
+  </p>
+  {%- endif %}
+
+  <p style="--size: 0.75rem; --lh: 1.4; --m: 1.25rem 0 0; --c: var(--c-fade);">{{ g.copy.fineprint }}</p>
+</aside>
+
+<style>
+  /* Most styling is inline via startr.style custom props (see canonical
+     list in the file header). This block holds ONLY what custom-props
+     can't express:
+       1. Pseudo-states (:hover, :focus, :disabled) and pseudo-elements (::before/::after)
+       2. The fade mask-image (no framework prop)
+       3. The brand "gradient-text" opt-out (consumer sites may apply
+          background-clip:text + -webkit-text-fill-color:transparent to
+          h1-h5/button/strong site-wide — see WEB-Startr.Style TODO entry
+          on shipping a .text-flat utility class)
+       4. Form-control color/bg/b !important workaround (UA defaults for
+          <input>/<button> use system color keywords that beat the
+          framework's --c attribute binding) */
+
+  /* (1+3) Opt out of the consumer site's brand "gradient text" effect.
+     Sage.is's src/assets/css/style.css:6160 applies this to ALL h2/button/strong
+     site-wide. Any consumer with a similar rule benefits from this reset. */
+  .signup-gate__heading,
+  .signup-gate__submit {
+    background-image: none;
+    background-clip: border-box;
+    -webkit-text-fill-color: currentColor;
+  }
+
+  /* (2) Teasing mode — JS-applied: fade-mask + z-index layering. The --mb:-50%
+     overlap is set by JS on the section containing the last kept paragraph. */
+  .gated-content__teaser {
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+  }
+  .signup-gate--teasing {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* (1) Pseudo-state for divider — startr.style has no inline equivalent. */
+  .signup-gate__divider::before,
+  .signup-gate__divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--c-border-medium);
+  }
+
+  /* (1) Pseudo-states for interactive controls. */
+  .signup-gate__provider:hover { background: var(--c-cream-hover); }
+  .signup-gate__input:focus {
+    outline: none;
+    border-color: var(--c-ink);
+    box-shadow: 0 0 0 3px rgba(26, 23, 20, 0.1);
+  }
+  .signup-gate__submit:disabled { opacity: 0.6; cursor: progress; }
+
+  /* (4) Form-control color/bg/b — !important defeats browser UA system
+     colors AND host-site rules like `button, input { color: ... }`.
+     The framework's --c attribute binding alone doesn't win on form controls.
+     Fallback chain via palette tokens → literal guarantees resolution. */
+  .signup-gate__input {
+    color: var(--c, var(--c-ink, #1a1714)) !important;
+    background: var(--bg, var(--c-white, #fff)) !important;
+    border: var(--b, 1px solid var(--c-border-medium, #d4ccba)) !important;
+  }
+  .signup-gate__submit {
+    color: var(--c, var(--c-cream, #fdfaf3)) !important;
+    background: var(--bg, var(--c-ink, #1a1714)) !important;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var gate = document.querySelector('.signup-gate');
+    if (!gate) return;
+
+    var endpoint = gate.dataset.endpoint;
+    var presenceCookie = gate.dataset.cookiePresent || 'sage_gate_present';
+    var eligible = gate.dataset.gateEligible === 'true';
+    var content = document.querySelector('.gated-content');
+
+    // Member? Cookie present — show full article, never reveal gate.
+    if (document.cookie.split('; ').some(function (c) { return c.indexOf(presenceCookie + '=') === 0; })) {
+      return;
+    }
+
+    // Article too recent? Not gate-eligible — keep gate hidden.
+    if (!eligible || !content) return;
+
+    // Keep the first N paragraphs (in document order — sectionize plugins
+    // wrap content in <section>s, so paragraphs may be nested), then
+    // fade-out the section containing the last kept paragraph and overlap
+    // the gate over the fade so the reader feels they're "stepping past"
+    // content that continues behind the gate.
+    var PARAGRAPHS_TO_TEASE = 3;
+    var allParagraphs = content.querySelectorAll('p');
+    var keepCount = Math.min(PARAGRAPHS_TO_TEASE, allParagraphs.length);
+    var lastKept = keepCount > 0 ? allParagraphs[keepCount - 1] : null;
+
+    // Walk forward in document order from lastKept, removing every node
+    // until we hit the gate (or anything containing it). Walks up through
+    // ancestor boundaries so it handles <section> wrappers from sectionize
+    // plugins.
+    if (lastKept) {
+      var cursor = lastKept;
+      outer: while (cursor) {
+        while (cursor.nextSibling) {
+          var s = cursor.nextSibling;
+          if (s === gate || (s.nodeType === 1 && s.contains && s.contains(gate))) {
+            break outer;
+          }
+          s.parentNode.removeChild(s);
+        }
+        cursor = cursor.parentNode;
+        if (!cursor || cursor === content) break;
+      }
+      // Fade + overlap live on the SECTION that contains the last kept
+      // paragraph. Masking the section fades all kept content together,
+      // and the --mb pull happens at the same boundary.
+      var section = lastKept.closest('section');
+      if (section) {
+        section.classList.add('gated-content__teaser');
+        // startr.style binds --mb -> margin-bottom; -50% is relative to
+        // the section's containing-block width, pulling the gate up.
+        section.style.setProperty('--mb', '-50%');
+      } else {
+        // No section ancestor — fall back to fading the paragraph itself.
+        lastKept.classList.add('gated-content__teaser');
+      }
+    }
+
+    // Teasing classes — fade-mask + z-index layering.
+    content.classList.add('is-teasing');
+    gate.classList.add('signup-gate--teasing');
+
+    // Reveal gate + its sibling whats-included panel via startr.style --d.
+    gate.style.setProperty('--d', 'block');
+    var whatsIncluded = document.querySelector('.whats-included');
+    if (whatsIncluded) whatsIncluded.style.setProperty('--d', 'block');
+
+    // Wire up form.
+    var form = gate.querySelector('.signup-gate__form');
+    var input = gate.querySelector('.signup-gate__input');
+    var button = gate.querySelector('.signup-gate__submit');
+    var errorEl = gate.querySelector('.signup-gate__error');
+
+    function showError(msg) {
+      errorEl.textContent = msg;
+      errorEl.hidden = false;
+    }
+    function clearError() {
+      errorEl.textContent = '';
+      errorEl.hidden = true;
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearError();
+      var email = (input.value || '').trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError({{ g.copy.errorBadEmail | dump | safe }});
+        return;
+      }
+      button.disabled = true;
+      fetch(endpoint, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, source: location.hostname })
+      })
+        .then(function (r) {
+          if (r.ok) { location.reload(); return; }
+          return r.json().then(function (body) {
+            showError((body && body.message) || {{ g.copy.errorGeneric | dump | safe }});
+            button.disabled = false;
+          }).catch(function () {
+            showError({{ g.copy.errorGeneric | dump | safe }});
+            button.disabled = false;
+          });
+        })
+        .catch(function () {
+          showError({{ g.copy.errorGeneric | dump | safe }});
+          button.disabled = false;
+        });
+    });
+  });
+</script>
