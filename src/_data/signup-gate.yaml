@@ -14,15 +14,18 @@
 # REQUIRED: brand name as it appears in copy. Used as `{{ signup_gate.brand }}`.
 brand: "Your brand"
 
-# REQUIRED: PocketBase endpoint that mints the membership cookie.
+# REQUIRED: PocketBase endpoint that mints the membership token.
 # Format: https://pb.<your-domain>/api/sage/gate-unlock
 # The hook is at WEB-DB-sage-pb/pb_hooks/gate_unlock.pb.js — vendor or fork.
+# Must return JSON: { ok: true, token: <jwt>, email: <string> }
 unlockEndpoint: "https://pb.example.com/api/sage/gate-unlock"
 
-# Cookie names. The HttpOnly JWT and a JS-readable sentinel. Both scoped
-# to the registrable domain (e.g. `.example.com`) by the PocketBase hook.
-cookieName: sage_gate
-presenceCookie: sage_gate_present
+# localStorage key holding the membership blob: { token, email, unlocked_at }.
+# Presence (not contents) is what the gate's reveal check tests.
+# Trade-off: XSS-readable. Use this design when the gate guards content,
+# not payment / session state. For sensitive surfaces, run the endpoint
+# behind a same-origin proxy and use HttpOnly cookies instead.
+storageKey: sage_gate_member
 
 # --- Gating cascade ---
 # Resolution order (longest match wins):

@@ -7,15 +7,26 @@
 
   Crawlers + JS-off readers see the full article — the gate is hidden by
   default (`--d:none`) and revealed by the inline script only when:
-    1. the presence cookie (configurable, default `sage_gate_present`) is absent, AND
+    1. localStorage[storageKey] is absent (no prior unlock on this device), AND
     2. `data-gate-eligible="true"` is set on the wrapper (computed at build).
 
   On reveal: paragraphs past the first N stay, the section containing the
   last kept paragraph gets a mask-image fade + `--mb:-50%` overlap so the
   gate visually steps INTO the fading text.
 
-  Email submit posts to `signup_gate.unlockEndpoint`. 200 → reload.
-  Anything else → inline error.
+  Email submit posts to `signup_gate.unlockEndpoint`. The endpoint must
+  return a JSON body with at least `{ ok: true, token: <jwt> }`. The token
+  is stored in localStorage[storageKey] then the page reloads. Anything
+  else → inline error.
+
+  Why localStorage and not an HttpOnly cookie: the gate typically runs on a
+  different origin than the membership backend, so a cookie flow requires
+  per-origin CORS + Allow-Credentials + a same-registrable-domain backend.
+  localStorage works under any vendor (Cloudflare, Netlify, self-host,
+  anything) with plain `*` CORS. Cost: the token is XSS-readable. Use this
+  design when the gate guards CONTENT, not payment or session state. For
+  payments / sensitive actions, run the endpoint behind a same-origin proxy
+  and set HttpOnly cookies instead.
 
   P1 = email-only. OAuth providers in `signup_gate.providers` are rendered
   if present (Phase 2+) but the array is empty in P1.
@@ -58,7 +69,7 @@
 <aside class="signup-gate"
        data-gate-eligible="{% if gateEligible %}true{% else %}false{% endif %}"
        data-endpoint="{{ g.unlockEndpoint }}"
-       data-cookie-present="{{ g.presenceCookie }}"
+       data-storage-key="{{ g.storageKey }}"
        style="
          zoom: 1.12;  /* finger-friendly scaling without per-element retuning; override if undesired */
          --d: none;
@@ -350,13 +361,19 @@
     if (!gate) return;
 
     var endpoint = gate.dataset.endpoint;
-    var presenceCookie = gate.dataset.cookiePresent || 'sage_gate_present';
+    var storageKey = gate.dataset.storageKey || 'sage_gate_member';
     var eligible = gate.dataset.gateEligible === 'true';
     var content = document.querySelector('.gated-content');
 
-    // Member? Cookie present — show full article, never reveal gate.
-    if (document.cookie.split('; ').some(function (c) { return c.indexOf(presenceCookie + '=') === 0; })) {
-      return;
+    // Member? localStorage entry present — show full article, never reveal
+    // the gate. The entry is JSON: { token, email, unlocked_at }. We don't
+    // inspect it here; presence is enough.
+    try {
+      if (localStorage.getItem(storageKey)) return;
+    } catch (storageErr) {
+      // localStorage disabled (Safari private mode, strict cookies) —
+      // fall through and let the user unlock again. No worse than not
+      // remembering them, which is what private mode signals anyway.
     }
 
     // Article too recent? Not gate-eligible — keep gate hidden.
@@ -439,13 +456,28 @@
       button.disabled = true;
       fetch(endpoint, {
         method: 'POST',
-        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email, source: location.hostname })
       })
         .then(function (r) {
-          if (r.ok) { location.reload(); return; }
           return r.json().then(function (body) {
+            if (r.ok && body && body.token) {
+              // Persist before reload. The top-of-script check reads this
+              // key next page-load and keeps the gate hidden.
+              try {
+                localStorage.setItem(storageKey, JSON.stringify({
+                  token: body.token,
+                  email: body.email || email,
+                  unlocked_at: new Date().toISOString()
+                }));
+              } catch (storageErr) {
+                // localStorage write failed — still reload; if it works on
+                // reload too, the gate will reappear and the user can retry.
+                // Better than swallowing a successful signup silently.
+              }
+              location.reload();
+              return;
+            }
             showError((body && body.message) || {{ g.copy.errorGeneric | dump | safe }});
             button.disabled = false;
           }).catch(function () {

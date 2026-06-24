@@ -31,22 +31,42 @@ past" content that visibly continues behind it.
               └───────────────────┬─────────────────────┘
                                   │ JS reveals gate on
                                   │ data-gate-eligible="true"
-                                  │ AND no `sage_gate_present` cookie
+                                  │ AND no localStorage[storageKey] entry
                                   │
-                                  ▼ POST {email, source}
+                                  ▼ POST {email, source}  (no credentials)
               ┌─────────────────────────────────────────┐
               │  PocketBase: pb_hooks/gate_unlock.pb.js │
               │                                         │
               │  upserts subscribers record,            │
               │  mints PocketBase-native JWT,           │
-              │  sets HttpOnly cookie on registrable    │
-              │  domain (.consumer-site)                │
+              │  returns { ok, token, email } in body   │
+              │  (no Set-Cookie, no per-origin CORS)    │
               └─────────────────────────────────────────┘
+                                  │
+                                  ▼ on 200
+                          JS writes localStorage[storageKey] =
+                            { token, email, unlocked_at }
+                          then location.reload()
 ```
 
-The read path is **cookie-only** — the consumer site never calls PocketBase
-on page load. A PocketBase outage at read time never blocks existing
-members. An outage at signup-write time returns 503 "try again in a moment".
+The read path is **localStorage-only** — the consumer site never calls
+PocketBase on page load. A PocketBase outage at read time never blocks
+existing members. An outage at signup-write time returns 503 "try again in
+a moment".
+
+**Why localStorage instead of an HttpOnly cookie:** the gate runs on the
+consumer-site origin while the membership backend runs on a different
+origin (e.g. `sage.is` and `pb.sage.is`). A cookie flow needs per-origin
+`Access-Control-Allow-Origin` + `Access-Control-Allow-Credentials: true`
++ `Domain=` on a registrable parent — that's a lot of edge-layer config to
+get right under any host (Cloudflare, Netlify, self-host) and it forces
+the backend onto the same registrable domain as every consumer. The
+token-in-body flow works under any vendor with plain `*` CORS, scales to
+unrelated consumer domains, and survives moving the backend. The cost is
+that the token is XSS-readable. That's fine when the gate guards CONTENT —
+an attacker with XSS already has page-content access. It's not fine for
+payments or sensitive account actions; for those, run the unlock endpoint
+behind a same-origin proxy and switch to HttpOnly cookies.
 
 ## Integration steps (Eleventy consumer)
 
@@ -184,20 +204,20 @@ part is gated, so they don't penalize you.
 
 ### 7. Backend: PocketBase
 
-The endpoint that mints the cookie is a custom hook. See
+The endpoint that mints the membership token is a custom hook. See
 `WEB-DB-sage-pb/pb_hooks/gate_unlock.pb.js` and
-`WEB-DB-sage-pb/pb_migrations/003_subscribers.js`. Dual-host the
-PocketBase instance if you serve multiple brand domains (each domain needs
-its own cookie scope).
+`WEB-DB-sage-pb/pb_migrations/003_subscribers.js`. The hook returns the
+token in the JSON body — no `Set-Cookie`, no per-origin CORS — so a single
+PocketBase instance can serve any number of consumer domains.
 
-Set CORS via the `--origins` flag on the `serve` command:
+CORS: PocketBase's default `Access-Control-Allow-Origin: *` is sufficient
+because the gate's fetch does NOT use `credentials: 'include'`. You can
+optionally narrow it with the `--origins` flag for defense-in-depth, but
+the token flow does not depend on it:
 
 ```
 pocketbase serve --origins=https://your-brand.com,https://www.your-brand.com
 ```
-
-PB v0.36 doesn't expose CORS via `app.settings()` — the flag is the
-canonical home.
 
 ## Customizing the gate
 
@@ -271,7 +291,7 @@ A `.text-flat` utility class is queued in this framework's TODO.
 
 ## Phase trajectory
 
-- **Phase 1 (current):** email-only signup. PocketBase + cookie + reload.
+- **Phase 1 (current):** email-only signup. PocketBase mints a JWT in the response body; the gate writes it to localStorage and reloads.
 - **Phase 2:** OAuth providers (Google, GitHub, Apple, Facebook) via
   PocketBase's native OAuth2. Mautic mailing-list sync inside the hook.
   Existing-member sign-in surface.
