@@ -154,12 +154,27 @@ module.exports = {
     // ... your existing computed fields ...
     contentType: (data) => data.contentType || "blog",
     gateEligible: (data) => {
+      // Per-article boolean veto wins over the entire threshold cascade.
+      // `gated: false` → never gate this article. `gated: true` → gate
+      // from day one. Use to retroactively ungate older pieces or to
+      // force-gate a specific piece regardless of age.
+      if (data.gated === false) return false;
+      if (data.gated === true) return true;
       const threshold = resolveThreshold(data, data.signup_gate);
       return isGateEligible(threshold, data.date, data.buildDate);
     }
   }
 };
 ```
+
+**Per-article overrides:**
+
+| Front-matter key | Effect |
+|---|---|
+| `gated: false` | Never gate this article. Use to retroactively ungate older pieces that crossed the threshold but you want to keep open. |
+| `gated: true` | Gate from day one, regardless of age. Use for a piece you want behind the gate immediately. |
+| `gateAfterDays: <n>` | Per-article threshold in days. Overrides section + content-type defaults but not the `gated:` boolean. |
+| `gateAfterDays: never` | Same as `gated: false`. (Pre-existing; kept for backward compat.) |
 
 ### 5. Wrap article body + include the gate
 
