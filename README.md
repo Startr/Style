@@ -1,6 +1,8 @@
 # Startr Style–less
 
-**1.3.1**
+**1.3.2**
+
+Temporary patch release for dealing with presentation issues.
 
 Now with Print only `-pt` responsive utility shorthand!!!
 
@@ -12,6 +14,26 @@ Now with Print only `-pt` responsive utility shorthand!!!
 - Embrace the elegance of simplicity by creating CSS frameworks that prioritize the basics.
 - Allow for customization without the need for hyper-overriding styles.
 - A framework that hinders creativity and innovation is not useful.
+
+## Style Core (Subtree)
+
+The CSS framework source lives in its own repo
+([WEB-startr.style.core](https://github.com/Startr/WEB-startr.style.core))
+and is embedded here as a **git subtree** under `src/style-core/`.
+
+Unlike submodules, **subtree requires no extra steps after cloning** —
+the `src/style-core/` directory is regular committed files.
+
+```bash
+# Pull latest from the core repo (maintainers only)
+make style_core_update
+
+# Push local subtree edits back to the core repo
+make style_core_push
+```
+
+> `make style_core_add` was already run once to set up the subtree.
+> New clones get the files automatically — no init required.
 
 ## Available Scripts
 

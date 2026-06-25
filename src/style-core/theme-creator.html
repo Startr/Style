@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startr.Style Theme Creator</title>
+    <meta name="description" content="Create custom Startr.Style themes by editing the base 16 colors. All 256 palette colors cascade automatically.">
+    <link rel="stylesheet" href="dist/startr.min.css">
+    <link rel="shortcut icon" href="icons/favicon.ico">
+    <style>
+      .main-layout {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+        gap: 2rem;
+      }
+      @media (max-width: 768px) {
+        .main-layout { grid-template-columns: 1fr; }
+      }
+      .sidebar {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+        background: var(--background);
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border);
+        box-shadow: var(--button-shadow);
+      }
+      .panel {
+        background: var(--background);
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border);
+        box-shadow: var(--button-shadow);
+      }
+      .controls-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+      .control-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .control-item label {
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: var(--text-muted);
+        text-transform: uppercase;
+      }
+      .control-item input[type="color"] {
+        width: 100%;
+        height: 40px;
+        border: 1px solid var(--border);
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        padding: 2px;
+      }
+      .color-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+        gap: 6px;
+      }
+      .swatch {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 0.6rem;
+        color: var(--text-muted);
+      }
+      .swatch-box {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border);
+        margin-bottom: 2px;
+      }
+      .cube-slice {
+        margin-bottom: 1.5rem;
+      }
+      .cube-slice h4 {
+        margin: 0 0 0.5rem 0;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+      #export-area {
+        width: 100%;
+        height: 200px;
+        font-family: ui-monospace, monospace;
+        font-size: 0.8rem;
+        margin-top: 0.75rem;
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: var(--border-radius);
+        background: var(--background-alt);
+        color: var(--text-main);
+        resize: vertical;
+      }
+      .named-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .named-swatch {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.7rem;
+        color: var(--text-muted);
+      }
+      .named-swatch-box {
+        width: 3rem;
+        height: 2rem;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border);
+      }
+      .theme-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 100;
+        background: var(--primary);
+        color: var(--white);
+        border: none;
+        border-radius: var(--border-radius);
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-size: 0.85em;
+      }
+    </style>
+    <style id="dynamic-palette-css"></style>
+</head>
+<body style="--mv:20px; --p:0; --bg:var(--background-alt); --c:var(--text-main)">
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+
+    <div style="--wrapper:1200px; --gutter:2vw;">
+      <h1 style="--ta:center">Startr.Style Theme Creator</h1>
+      <p style="--ta:center; --maxw:600px; --m:0 auto 2rem">
+        Edit the base 16 colors to generate a full 256-color palette.
+        Named colors, framework tokens, and the entire UI cascade automatically.
+        <br><a href="index.html">Back to Startr.Style</a>
+      </p>
+
+      <div class="main-layout">
+        <aside class="sidebar">
+          <h3>Base 16 Colors</h3>
+          <p style="--mb:1rem"><small>Modify these to generate your theme.</small></p>
+          <div class="controls-grid" id="controls"></div>
+
+          <section style="--mt:1.5rem; --pt:1.5rem; border-top:1px solid var(--border)">
+            <h3>Presets</h3>
+            <div class="flex" style="flex-wrap:wrap; gap:0.4rem;">
+              <button onclick="loadPreset('startr')">Startr.Style</button>
+              <button onclick="loadPreset('ansi')">ANSI Standard</button>
+              <button onclick="loadPreset('solarized_dark')">Solarized Dark</button>
+              <button onclick="loadPreset('solarized_light')">Solarized Light</button>
+              <button onclick="loadPreset('nord')">Nord</button>
+              <button onclick="loadPreset('dracula')">Dracula</button>
+              <button onclick="loadPreset('gruvbox_dark')">Gruvbox Dark</button>
+              <button onclick="loadPreset('gruvbox_light')">Gruvbox Light</button>
+              <button onclick="loadPreset('catppuccin_mocha')">Catppuccin Mocha</button>
+              <button onclick="loadPreset('catppuccin_latte')">Catppuccin Latte</button>
+              <button onclick="loadPreset('tokyonight')">Tokyo Night</button>
+              <button onclick="loadPreset('monokai')">Monokai</button>
+              <button onclick="loadPreset('everforest_dark')">Everforest Dark</button>
+              <button onclick="loadPreset('everforest_light')">Everforest Light</button>
+            </div>
+          </section>
+
+          <section style="--mt:1.5rem">
+            <h3>Export CSS</h3>
+            <p><small>Paste into your project's <code>:root</code> to override the palette.</small></p>
+            <textarea id="export-area" readonly></textarea>
+            <div style="--mt:0.5rem; display:flex; gap:0.5rem;">
+              <button onclick="copyCSS()" class="green">Copy CSS</button>
+              <button onclick="downloadCSS()">Download .css</button>
+            </div>
+          </section>
+        </aside>
+
+        <main style="display:flex; flex-direction:column; gap:2rem;">
+          <div class="panel">
+            <h2>Base 16 Preview</h2>
+            <div class="color-grid" id="base-grid"></div>
+          </div>
+
+          <div class="panel">
+            <h2>Named Colors</h2>
+            <p><small>These map to the base palette: <code>--black: var(--color-0)</code>, <code>--red: var(--color-1)</code>, etc.</small></p>
+            <div class="named-row" id="named-preview"></div>
+          </div>
+
+          <div class="panel">
+            <h2>Framework Token Preview</h2>
+            <div style="--mb:1rem">
+              <button>Primary</button>
+              <button class="green">Green</button>
+              <button class="red">Red</button>
+              <button class="orange outline">Outline</button>
+              <button class="black">Black</button>
+              <button class="grey">Grey</button>
+            </div>
+            <div style="--mb:1rem">
+              <input type="text" placeholder="Form input preview" style="--maxw:300px">
+            </div>
+            <p>Regular text with a <a href="#">link</a>, <code>code element</code>, and <mark>highlighted text</mark>.</p>
+            <blockquote><p>A blockquote to test background-alt and border colors.</p></blockquote>
+          </div>
+
+          <div class="panel">
+            <h2>216-Color Cube</h2>
+            <p><small>Trilinear interpolation via <code>color-mix(in oklch, ...)</code> from the 8 standard colors.</small></p>
+            <div id="cube-container"></div>
+          </div>
+
+          <div class="panel">
+            <h2>Grayscale Ramp</h2>
+            <p><small>24 steps from <code>--color-0</code> (black) to <code>--color-7</code> (white).</small></p>
+            <div class="color-grid" id="ramp-grid"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      // Startr.Style named color mapping
+      const names = [
+        "black", "red", "green", "yellow", "blue", "purple", "cyan", "white",
+        "dark-grey", "bright red", "bright green", "bright yellow",
+        "bright blue", "bright purple", "bright cyan", "grey"
+      ];
+
+      // Named colors that map to the base palette
+      const NAMED_COLORS = [
+        { name: 'black',     src: '--color-0' },
+        { name: 'red',       src: '--color-1' },
+        { name: 'green',     src: '--color-2' },
+        { name: 'yellow',    src: '--color-3' },
+        { name: 'blue',      src: '--color-4' },
+        { name: 'purple',    src: '--color-5' },
+        { name: 'cyan',      src: '--color-6' },
+        { name: 'white',     src: '--color-7' },
+        { name: 'dark-grey', src: '--color-8' },
+        { name: 'grey',      src: '--color-15' },
+        { name: 'orange',    src: 'hsl(34, 100%, 50%)' },
+        { name: 'pink',      src: 'hsl(330, 100%, 69%)' },
+      ];
+
+      const presets = {
+        startr:           ["#262626","#f14668","#06847d","#ffd966","#4361ee","#3b0086","#33b3b3","#ffffff","#4a4a4a","#f77b93","#1aa59e","#ffe599","#6d83f2","#5b1aad","#5cc4c4","#cccccc"],
+        ansi:             ["#000000","#aa0000","#00aa00","#aa5500","#0000aa","#aa00aa","#00aaaa","#ffffff","#555555","#ff5555","#55ff55","#ffff55","#5555ff","#ff55ff","#55ffff","#aaaaaa"],
+        solarized_dark:   ["#073642","#dc322f","#859900","#b58900","#268bd2","#d33682","#2aa198","#eee8d5","#002b36","#cb4b16","#586e75","#657b83","#839496","#6c71c4","#93a1a1","#fdf6e3"],
+        solarized_light:  ["#fdf6e3","#dc322f","#859900","#b58900","#268bd2","#d33682","#2aa198","#073642","#eee8d5","#cb4b16","#586e75","#657b83","#839496","#6c71c4","#93a1a1","#002b36"],
+        nord:             ["#2e3440","#bf616a","#a3be8c","#ebcb8b","#81a1c1","#b48ead","#88c0d0","#e5e9f0","#4c566a","#bf616a","#a3be8c","#ebcb8b","#81a1c1","#b48ead","#8fbcbb","#eceff4"],
+        dracula:          ["#282a36","#ff5555","#50fa7b","#f1fa8c","#bd93f9","#ff79c6","#8be9fd","#f8f8f2","#44475a","#ff6e6e","#69ff94","#ffffa5","#d6acff","#ff92df","#a4ffff","#ffffff"],
+        gruvbox_dark:     ["#282828","#cc241d","#98971a","#d79921","#458588","#b16286","#689d6a","#a89984","#928374","#fb4934","#b8bb26","#fabd2f","#83a598","#d3869b","#8ec07c","#ebdbb2"],
+        gruvbox_light:    ["#fbf1c7","#cc241d","#98971a","#d79921","#458588","#b16286","#689d6a","#282828","#928374","#fb4934","#b8bb26","#fabd2f","#83a598","#d3869b","#8ec07c","#3c3836"],
+        catppuccin_mocha: ["#1e1e2e","#f38ba8","#a6e3a1","#f9e2af","#89b4fa","#f5c2e7","#94e2d5","#cdd6f4","#585b70","#f38ba8","#a6e3a1","#f9e2af","#89b4fa","#f5c2e7","#94e2d5","#a6adc8"],
+        catppuccin_latte: ["#eff1f5","#d20f39","#40a02b","#df8e1d","#1e66f5","#ea76cb","#179287","#4c4f69","#9ca0b0","#d20f39","#40a02b","#df8e1d","#1e66f5","#ea76cb","#179287","#dce0e8"],
+        tokyonight:       ["#1a1b26","#f7768e","#9ece6a","#e0af68","#7aa2f7","#bb9af7","#7dcfff","#a9b1d6","#414868","#f7768e","#9ece6a","#e0af68","#7aa2f7","#bb9af7","#7dcfff","#c0caf5"],
+        monokai:          ["#272822","#f92672","#a6e22e","#f4bf75","#66d9ef","#ae81ff","#a1efe4","#f8f8f2","#75715e","#f92672","#a6e22e","#f4bf75","#66d9ef","#ae81ff","#a1efe4","#f9f8f5"],
+        everforest_dark:  ["#2d353b","#e67e80","#a7c080","#dbbc7f","#7fbbb3","#d699b6","#83c092","#d3c6aa","#475258","#e67e80","#a7c080","#dbbc7f","#7fbbb3","#d699b6","#83c092","#eee8d5"],
+        everforest_light: ["#fdf6e3","#e67e80","#a7c080","#dbbc7f","#7fbbb3","#d699b6","#83c092","#5c6a72","#eee8d5","#e67e80","#a7c080","#dbbc7f","#7fbbb3","#d699b6","#83c092","#2d353b"]
+      };
+
+      function init() {
+        const controls = document.getElementById('controls');
+        const baseGrid = document.getElementById('base-grid');
+        const rampGrid = document.getElementById('ramp-grid');
+        const cubeContainer = document.getElementById('cube-container');
+
+        // Create controls and base grid
+        for (let i = 0; i < 16; i++) {
+          const ctrl = document.createElement('div');
+          ctrl.className = 'control-item';
+          ctrl.innerHTML = `<label>${names[i]}</label><input type="color" id="input-${i}" oninput="updateColor(${i}, this.value)">`;
+          controls.appendChild(ctrl);
+          baseGrid.appendChild(createSwatch(i, names[i]));
+        }
+
+        // Named color preview
+        const namedRow = document.getElementById('named-preview');
+        NAMED_COLORS.forEach(c => {
+          const div = document.createElement('div');
+          div.className = 'named-swatch';
+          div.innerHTML = `<div class="named-swatch-box" style="background:var(--${c.name})"></div><span>--${c.name}</span>`;
+          namedRow.appendChild(div);
+        });
+
+        // Create cube slices
+        for (let r = 0; r < 6; r++) {
+          const slice = document.createElement('div');
+          slice.className = 'cube-slice';
+          slice.innerHTML = `<h4>Red Level ${r}</h4>`;
+          const grid = document.createElement('div');
+          grid.className = 'color-grid';
+          for (let g = 0; g < 6; g++) {
+            for (let b = 0; b < 6; b++) {
+              grid.appendChild(createSwatch(16 + (r * 36) + (g * 6) + b));
+            }
+          }
+          slice.appendChild(grid);
+          cubeContainer.appendChild(slice);
+        }
+
+        // Create ramp
+        for (let i = 232; i < 256; i++) {
+          rampGrid.appendChild(createSwatch(i, `gray-${i - 231}`));
+        }
+
+        loadPreset('startr');
+      }
+
+      function createSwatch(index, label) {
+        const div = document.createElement('div');
+        div.className = 'swatch';
+        div.innerHTML = `<div class="swatch-box" style="background-color:var(--color-${index})"></div><span>${label || index}</span>`;
+        return div;
+      }
+
+      function updateColor(index, value) {
+        document.documentElement.style.setProperty(`--color-${index}`, value);
+        document.getElementById(`input-${index}`).value = value;
+        generatePaletteCSS();
+      }
+
+      function loadPreset(name) {
+        const colors = presets[name];
+        colors.forEach((color, i) => updateColor(i, color));
+      }
+
+      function generatePaletteCSS() {
+        let css = ":root {\n  /* Base 16 */\n";
+        for (let i = 0; i < 16; i++) {
+          const val = getComputedStyle(document.documentElement).getPropertyValue(`--color-${i}`).trim();
+          css += `  --color-${i}: ${val};  /* ${names[i]} */\n`;
+        }
+
+        css += "\n  /* Named Colors */\n";
+        css += "  --black: var(--color-0);\n";
+        css += "  --red: var(--color-1);\n";
+        css += "  --green: var(--color-2);\n";
+        css += "  --yellow: var(--color-3);\n";
+        css += "  --blue: var(--color-4);\n";
+        css += "  --purple: var(--color-5);\n";
+        css += "  --cyan: var(--color-6);\n";
+        css += "  --white: var(--color-7);\n";
+        css += "  --dark-grey: var(--color-8);\n";
+        css += "  --grey: var(--color-15);\n";
+
+        css += "\n  /* 216 Cube (--mix-RGB via trilinear interpolation) */\n";
+
+        function mix(c1, c2, p) {
+          if (p === 0) return c1;
+          if (p === 100) return c2;
+          return `color-mix(in oklch, ${c1}, ${c2} ${p}%)`;
+        }
+
+        for (let r = 0; r < 6; r++) {
+          let pr = r * 20;
+          let c0 = mix("var(--color-0)", "var(--color-1)", pr);
+          let c1 = mix("var(--color-2)", "var(--color-3)", pr);
+          let c2 = mix("var(--color-4)", "var(--color-5)", pr);
+          let c3 = mix("var(--color-6)", "var(--color-7)", pr);
+          for (let g = 0; g < 6; g++) {
+            let pg = g * 20;
+            let c4 = mix(c0, c1, pg);
+            let c5 = mix(c2, c3, pg);
+            for (let b = 0; b < 6; b++) {
+              let pb = b * 20;
+              let c6 = mix(c4, c5, pb);
+              let idx = 16 + (36 * r) + (6 * g) + b;
+              css += `  --mix-${r}${g}${b}: ${c6};\n`;
+            }
+          }
+        }
+
+        css += "\n  /* Grayscale Ramp */\n";
+        for (let i = 0; i < 24; i++) {
+          let p = Math.round(((i + 1) / 25) * 100);
+          css += `  --gray-${i + 1}: ${mix('var(--color-0)', 'var(--color-7)', p)};\n`;
+        }
+        css += "}\n";
+
+        document.getElementById('dynamic-palette-css').textContent = generateLivePaletteCSS();
+        document.getElementById('export-area').value = css;
+      }
+
+      // Generate CSS that the browser can actually render for live preview
+      function generateLivePaletteCSS() {
+        let css = ":root {\n";
+        for (let i = 0; i < 16; i++) {
+          const val = getComputedStyle(document.documentElement).getPropertyValue(`--color-${i}`).trim();
+          css += `  --color-${i}: ${val};\n`;
+        }
+
+        function mix(c1, c2, p) {
+          if (p === 0) return c1;
+          if (p === 100) return c2;
+          return `color-mix(in oklch, ${c1}, ${c2} ${p}%)`;
+        }
+
+        for (let r = 0; r < 6; r++) {
+          let pr = r * 20;
+          let c0 = mix("var(--color-0)", "var(--color-1)", pr);
+          let c1 = mix("var(--color-2)", "var(--color-3)", pr);
+          let c2 = mix("var(--color-4)", "var(--color-5)", pr);
+          let c3 = mix("var(--color-6)", "var(--color-7)", pr);
+          for (let g = 0; g < 6; g++) {
+            let pg = g * 20;
+            let c4 = mix(c0, c1, pg);
+            let c5 = mix(c2, c3, pg);
+            for (let b = 0; b < 6; b++) {
+              let pb = b * 20;
+              let c6 = mix(c4, c5, pb);
+              let idx = 16 + (36 * r) + (6 * g) + b;
+              css += `  --color-${idx}: ${c6};\n`;
+            }
+          }
+        }
+
+        for (let i = 0; i < 24; i++) {
+          let p = Math.round(((i + 1) / 25) * 100);
+          css += `  --color-${232 + i}: ${mix('var(--color-0)', 'var(--color-7)', p)};\n`;
+        }
+        css += "}";
+        return css;
+      }
+
+      function copyCSS() {
+        const area = document.getElementById('export-area');
+        navigator.clipboard.writeText(area.value).then(() => {
+          const btn = event.target;
+          btn.textContent = 'Copied!';
+          setTimeout(() => btn.textContent = 'Copy CSS', 1500);
+        });
+      }
+
+      function downloadCSS() {
+        const css = document.getElementById('export-area').value;
+        const blob = new Blob([css], { type: 'text/css' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'startr-theme.css';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function toggleTheme() {
+        const html = document.documentElement;
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        html.setAttribute('data-theme', isDark ? '' : 'dark');
+      }
+
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+
+      init();
+    </script>
+</body>
+</html>

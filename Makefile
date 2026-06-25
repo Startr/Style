@@ -100,27 +100,58 @@ deploy:
 		npx caprover deploy; \
 	fi
 
-minor_release:
+require_gitflow_next:
+	@if ! git flow version 2>/dev/null | grep -q 'git-flow-next'; then \
+		echo "Error: git-flow-next required (Go rewrite). Install: brew install git-flow-next"; \
+		exit 1; \
+	fi
+
+minor_release: require_gitflow_next
 	# Start a minor release with incremented minor version
 	git flow release start $$(git tag --sort=-v:refname | sed 's/^v//' | head -n 1 | awk -F'.' '{print $$1"."$$2+1".0"}') && echo "or use 'make release_finish' to finish the release"
 
-patch_release:
+patch_release: require_gitflow_next
 	# Start a patch release with incremented patch version
 	git flow release start $$(git tag --sort=-v:refname | sed 's/^v//' | head -n 1 | awk -F'.' '{print $$1"."$$2"."$$3+1}') && echo "or use 'make release_finish' to finish the release"
 
-major_release:
+major_release: require_gitflow_next
 	# Start a major release with incremented major version
 	git flow release start $$(git tag --sort=-v:refname | sed 's/^v//' | head -n 1 | awk -F'.' '{print $$1+1".0.0"}') && echo "or use 'make release_finish' to finish the release"
 
-hotfix:
+hotfix: require_gitflow_next
 	# Start a hotfix with incremented n.n.n.n version (incrementing the fourth number)
 	git flow hotfix start $$(git tag --sort=-v:refname | sed 's/^v//' | head -n 1 | awk -F'.' '{print $$1"."$$2"."$$3"."$$4+1}') && echo "or use 'make hotfix_finish' to finish the hotfix"
 
-release_finish:
-	git flow release finish "$$(git branch --show-current | sed 's/release\///')" && git push origin develop && git push origin master && git push --tags && git checkout develop
+release_finish: require_gitflow_next
+	git flow release finish && git push origin develop && git push origin master && git push --tags && git checkout develop
 
-hotfix_finish:
-	git flow hotfix finish "$$(git branch --show-current | sed 's/hotfix\///')" && git push origin develop && git push origin master && git push --tags && git checkout master
+hotfix_finish: require_gitflow_next
+	git flow hotfix finish && git push origin develop && git push origin master && git push --tags && git checkout master
+
+# ── Startr.Style Core (git subtree) ──────────────────────────────────
+# The CSS framework lives in its own repo and is embedded here as a
+# subtree under src/style-core/. Pre-built dist files are mapped to
+# /style.css by Eleventy passthrough copy.
+#
+# Remote: git@github.com:Startr/WEB-startr.style.core.git
+# Branch: master
+# Prefix: src/style-core
+
+STYLE_CORE_REMOTE := git@github.com:Startr/WEB-startr.style.core.git
+STYLE_CORE_PREFIX := src/style-core
+STYLE_CORE_BRANCH := master
+
+style_core_add:
+	# First-time import: adds the core repo as a subtree
+	git subtree add --prefix=$(STYLE_CORE_PREFIX) $(STYLE_CORE_REMOTE) $(STYLE_CORE_BRANCH) --squash
+
+style_core_update:
+	# Pull latest changes from the core repo into the subtree
+	git subtree pull --prefix=$(STYLE_CORE_PREFIX) $(STYLE_CORE_REMOTE) $(STYLE_CORE_BRANCH) --squash
+
+style_core_push:
+	# Push subtree changes back to the core repo
+	git subtree push --prefix=$(STYLE_CORE_PREFIX) $(STYLE_CORE_REMOTE) $(STYLE_CORE_BRANCH)
 
 things_clean:
 	git clean --exclude=!.env -Xdf
@@ -138,3 +169,9 @@ setup:
 		echo "You can customize the .env file later."; \
 	fi
 	@echo "Setup complete! Local development environment is ready."
+
+# ---------------------------------------------------------------------------
+# Interactive release (full flow via ~/bin/git-release)
+# ---------------------------------------------------------------------------
+release:
+	@scripts/release.sh

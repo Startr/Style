@@ -1,0 +1,2555 @@
+{
+  "edges": [],
+  "nodes": [
+    {
+      "color": "4",
+      "height": 610,
+      "id": "col-backlog",
+      "label": "Backlog",
+      "type": "group",
+      "width": 300,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 35,
+          "tags": [],
+          "text": "**Ship pinned and rolling CDN versions**: Currently unversioned \u2014 any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path. Publish `/v1/`, `/v2/`, and a rolling `/latest/`. Implementation approach: submodule structure where `v1/` is a submodule pointing to the project at the v1 tag, `v2/` at v2, etc. \u2014 versioned URLs serve from the pinned submodule, `latest/` serves from `master`."
+        },
+        {
+          "checked": false,
+          "line_num": 36,
+          "tags": [],
+          "text": "Consumers pin to a version in prod; `latest` is for the Startr studio itself. Migration plan needed for existing Sage.is / Sage.Education `<link>` tags currently pointing at the unversioned URL. *(Surfaced by Zach Leatherman in a panel review of Sage.is, 2026-04-18.)*"
+        },
+        {
+          "checked": false,
+          "line_num": 37,
+          "tags": [],
+          "text": "**Cache headers \u2014 versioned vs rolling**: `/v1/style.css`, `/v2/style.css`, etc. \u2192 `Cache-Control: public, max-age=31536000, immutable` (one year, immutable; the URL's contents never change by design). `/latest/style.css` \u2192 `Cache-Control: public, max-age=60, must-revalidate` (short TTL + revalidate so studio pushes propagate quickly and stale copies don't linger). *(Surfaced by Zach Leatherman, 2026-04-18.)*"
+        },
+        {
+          "checked": false,
+          "line_num": 38,
+          "tags": [],
+          "text": "**Emit SRI integrity hashes for each pinned release**: Generate `sha384` integrity hashes at release time and publish them alongside the versioned URL so consumers can use `<link rel=\"stylesheet\" href=\"/v1/style.css\" integrity=\"sha384-...\" crossorigin=\"anonymous\">`. Gives consumers an integrity guarantee even though Startr.Style is on a separate origin. *(Surfaced by Zach Leatherman, 2026-04-18.)*"
+        },
+        {
+          "checked": false,
+          "line_num": 39,
+          "tags": [],
+          "text": "**Resolve version drift between README and package.json**: `README.md` opens with `1.3.1`; `package.json` declares `1.2.2.2`. Pick one source of truth (conventionally `package.json`) and make the README read from it, or bump them in lockstep via `scripts/release.sh`. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "f2433e437da4676f",
+      "line_num": 34,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\ud83d\udce6 Versioning & Rollback**\n- [ ] **Ship pinned and rolling CDN versions**: Currently unversioned \u2014 any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path. Publish `/v1/`, `/v2/`, and a rolling `/latest/`. Implementation approach: submodule structure where `v1/` is a submodule pointing to the project at the v1 tag, `v2/` at v2, etc. \u2014 versioned URLs serve from the pinned submodule, `latest/` serves from `master`.\n- [ ] Consumers pin to a version in prod; `latest` is for the Startr studio itself. Migration plan needed for existing Sage.is / Sage.Education `<link>` tags currently pointing at the unversioned URL. *(Surfaced by Zach Leatherman in a panel review of Sage.is, 2026-04-18.)*\n- [ ] **Cache headers \u2014 versioned vs rolling**: `/v1/style.css`, `/v2/style.css`, etc. \u2192 `Cache-Control: public, max-age=31536000, immutable` (one year, immutable; the URL's contents never change by design). `/latest/style.css` \u2192 `Cache-Control: public, max-age=60, must-revalidate` (short TTL + revalidate so studio pushes propagate quickly and stale copies don't linger). *(Surfaced by Zach Leatherman, 2026-04-18.)*\n- [ ] **Emit SRI integrity hashes for each pinned release**: Generate `sha384` integrity hashes at release time and publish them alongside the versioned URL so consumers can use `<link rel=\"stylesheet\" href=\"/v1/style.css\" integrity=\"sha384-...\" crossorigin=\"anonymous\">`. Gives consumers an integrity guarantee even though Startr.Style is on a separate origin. *(Surfaced by Zach Leatherman, 2026-04-18.)*\n- [ ] **Resolve version drift between README and package.json**: `README.md` opens with `1.3.1`; `package.json` declares `1.2.2.2`. Pick one source of truth (conventionally `package.json`) and make the README read from it, or bump them in lockstep via `scripts/release.sh`. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*\n\n`TODO.md:L34`",
+      "type": "text",
+      "width": 280,
+      "x": 10,
+      "y": 60
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 43,
+          "tags": [],
+          "text": "**Audit `-hvr` coverage for `:focus` and `:focus-visible`**: Every `[style*=\"--X-hvr:\"]:hover` rule should be paired with `:focus, :focus-visible` so keyboard users get the same affordance as mouse users. `--shadow-hvr` covers `:focus` today; audit and enumerate the rest (`--hvr-bgc`, `--hvr-c`, `--hvr-bdc`, etc.). Land coverage systematically, not ad-hoc. *(Surfaced by Adam Wathan in a panel review of Sage.is, 2026-04-18.)*"
+        },
+        {
+          "checked": false,
+          "line_num": 44,
+          "tags": [],
+          "text": "**Reconcile `:focus-visible` audit status with spoken claims**: The `-hvr` coverage audit above has been open since 2026-04-18, yet a verbal claim of \"keyboard accessibility tested, no issues\" was made during the 2026-04-20 panel. Either close the audit with a landed commit, or retract the claim. Both states cannot be true at once. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "b863252b2b1179a4",
+      "line_num": 41,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\u267f Accessibility**\n- [ ] **Audit `-hvr` coverage for `:focus` and `:focus-visible`**: Every `[style*=\"--X-hvr:\"]:hover` rule should be paired with `:focus, :focus-visible` so keyboard users get the same affordance as mouse users. `--shadow-hvr` covers `:focus` today; audit and enumerate the rest (`--hvr-bgc`, `--hvr-c`, `--hvr-bdc`, etc.). Land coverage systematically, not ad-hoc. *(Surfaced by Adam Wathan in a panel review of Sage.is, 2026-04-18.)*\n- [ ] **Reconcile `:focus-visible` audit status with spoken claims**: The `-hvr` coverage audit above has been open since 2026-04-18, yet a verbal claim of \"keyboard accessibility tested, no issues\" was made during the 2026-04-20 panel. Either close the audit with a landed commit, or retract the claim. Both states cannot be true at once. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*\n\n`TODO.md:L41`",
+      "type": "text",
+      "width": 280,
+      "x": 10,
+      "y": 150
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 48,
+          "tags": [],
+          "text": "**Audit every colour leaf for IACVT-safe fallbacks**: The 216-cell `color-mix(in oklch, \u2026)` cascade in `src/style-core/src/variables.css` invalidates whole declarations when any component is unparseable. Every consumer leaf (e.g. `background: var(--primary)`) must resolve to `var(--primary, <literal-fallback>)`, not `inherit`/`initial`. Audit the whole leaf surface, not one line \u2014 otherwise the DSL has accents. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*"
+        },
+        {
+          "checked": false,
+          "line_num": 49,
+          "tags": [],
+          "text": "**Register critical custom properties with `@property`**: Without registration, the browser treats colour and layout variables as untyped strings. Downstream `color-mix()` and `calc()` can silently IACVT when consumers pass malformed values. Register `--primary`, `--background`, `--text-main`, and the 216-cell cube entries so the browser can validate inputs and animate between them. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "df7fe119e88ff195",
+      "line_num": 46,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\ud83c\udfa8 Colour System Invariants**\n- [ ] **Audit every colour leaf for IACVT-safe fallbacks**: The 216-cell `color-mix(in oklch, \u2026)` cascade in `src/style-core/src/variables.css` invalidates whole declarations when any component is unparseable. Every consumer leaf (e.g. `background: var(--primary)`) must resolve to `var(--primary, <literal-fallback>)`, not `inherit`/`initial`. Audit the whole leaf surface, not one line \u2014 otherwise the DSL has accents. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*\n- [ ] **Register critical custom properties with `@property`**: Without registration, the browser treats colour and layout variables as untyped strings. Downstream `color-mix()` and `calc()` can silently IACVT when consumers pass malformed values. Register `--primary`, `--background`, `--text-main`, and the 216-cell cube entries so the browser can validate inputs and animate between them. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*\n\n`TODO.md:L46`",
+      "type": "text",
+      "width": 280,
+      "x": 10,
+      "y": 240
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 53,
+          "tags": [],
+          "text": "**Replace the \"17% faster than Tailwind\" eye-balling with a real harness**: Pick three comparable pages per site (landing, docs, gallery/component showcase). Throttle to Slow 4G, mid-tier Android, cold cache, five runs, publish median."
+        },
+        {
+          "checked": false,
+          "line_num": 54,
+          "tags": [],
+          "text": "Publish the harness and raw numbers in `docs/benchmarks/`. Until then, the 17% claim is a vibe, not a metric \u2014 use it at parties, not in the README. *(Surfaced by Jeremy Keith in a panel review of Startr.Style, 2026-04-20.)*"
+        },
+        {
+          "checked": false,
+          "line_num": 55,
+          "tags": [],
+          "text": "**Re-run LCP on a page that exercises the colour cube**: Current LCP of 0.55s has `<p>` as the LCP element, meaning the 216-cell `color-mix()` cascade is not in the critical render path of the tested page."
+        },
+        {
+          "checked": false,
+          "line_num": 56,
+          "tags": [],
+          "text": "Re-measure on `theme-creator.html` and the component gallery once it exists \u2014 pages that actually resolve the cube. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "72ff0aae86795245",
+      "line_num": 51,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\ud83d\udcca Performance Methodology**\n- [ ] **Replace the \"17% faster than Tailwind\" eye-balling with a real harness**: Pick three comparable pages per site (landing, docs, gallery/component showcase). Throttle to Slow 4G, mid-tier Android, cold cache, five runs, publish median.\n- [ ] Publish the harness and raw numbers in `docs/benchmarks/`. Until then, the 17% claim is a vibe, not a metric \u2014 use it at parties, not in the README. *(Surfaced by Jeremy Keith in a panel review of Startr.Style, 2026-04-20.)*\n- [ ] **Re-run LCP on a page that exercises the colour cube**: Current LCP of 0.55s has `<p>` as the LCP element, meaning the 216-cell `color-mix()` cascade is not in the critical render path of the tested page.\n- [ ] Re-measure on `theme-creator.html` and the component gallery once it exists \u2014 pages that actually resolve the cube. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*\n\n`TODO.md:L51`",
+      "type": "text",
+      "width": 280,
+      "x": 10,
+      "y": 330
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 60,
+          "tags": [],
+          "text": "**Remove Syncthing conflict file from `src/_includes/`**: `src/_includes/layout.sync-conflict-20251127-153148-EJ43XZB.njk` is a Syncthing merge-conflict leftover in the source tree."
+        },
+        {
+          "checked": false,
+          "line_num": 61,
+          "tags": [],
+          "text": "Decide whether canonical `layout.njk` or the conflict copy is the intended version, merge the divergence, delete the conflict file. Add `*.sync-conflict-*` to `.gitignore` to prevent recurrence. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*"
+        },
+        {
+          "checked": true,
+          "line_num": 64,
+          "tags": [],
+          "text": "**Enhanced Design Philosophy Pages** - Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages"
+        },
+        {
+          "checked": true,
+          "line_num": 65,
+          "tags": [],
+          "text": "**Created Tutorial System** - Built step-by-step tutorials covering basic utilities, responsive layouts, and interactive components"
+        },
+        {
+          "checked": true,
+          "line_num": 66,
+          "tags": [],
+          "text": "**Added Use Cases Documentation** - Created practical real-world examples including login forms, navigation, galleries, and pricing cards"
+        },
+        {
+          "checked": true,
+          "line_num": 67,
+          "tags": [],
+          "text": "**Updated Navigation** - Added Learning section with links to Tutorials and Use Cases, plus Design Styles section"
+        },
+        {
+          "checked": true,
+          "line_num": 68,
+          "tags": [],
+          "text": "**Component Inventory Complete** - Scanned existing components and updated TODO with 15+ existing components ready for gallery inclusion"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "1cd14ffe5ddf7cb6",
+      "line_num": 58,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\ud83e\uddf9 Repo Hygiene**\n- [ ] **Remove Syncthing conflict file from `src/_includes/`**: `src/_includes/layout.sync-conflict-20251127-153148-EJ43XZB.njk` is a Syncthing merge-conflict leftover in the source tree.\n- [ ] Decide whether canonical `layout.njk` or the conflict copy is the intended version, merge the divergence, delete the conflict file. Add `*.sync-conflict-*` to `.gitignore` to prevent recurrence. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*\n- [x] **Enhanced Design Philosophy Pages** - Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages\n- [x] **Created Tutorial System** - Built step-by-step tutorials covering basic utilities, responsive layouts, and interactive components\n- [x] **Added Use Cases Documentation** - Created practical real-world examples including login forms, navigation, galleries, and pricing cards\n- [x] **Updated Navigation** - Added Learning section with links to Tutorials and Use Cases, plus Design Styles section\n- [x] **Component Inventory Complete** - Scanned existing components and updated TODO with 15+ existing components ready for gallery inclusion\n\n`TODO.md:L58`",
+      "type": "text",
+      "width": 280,
+      "x": 10,
+      "y": 420
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 397,
+          "tags": [],
+          "text": "**Review `.todoscope-exclude.csv` paths**: Seeded with `node_modules`, `dist`, `.git`, `src/style-core` (vendored subtree), `bun.lockb`, `chat.json`, `.DS_Store`. Confirm nothing load-bearing got excluded; add `static/` or other generated trees if needed."
+        },
+        {
+          "checked": false,
+          "line_num": 398,
+          "tags": [],
+          "text": "**Add `*.sync-conflict-*` to `.gitignore`**: Paired with the Repo Hygiene item above \u2014 prevent Syncthing conflict copies from ever being committed again. *(Cross-referenced from panel-review 2026-04-20.)*"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "3ed805e295f8c09e",
+      "line_num": 396,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\ud83e\uddf0 TodoScope Alignment**\n- [ ] **Review `.todoscope-exclude.csv` paths**: Seeded with `node_modules`, `dist`, `.git`, `src/style-core` (vendored subtree), `bun.lockb`, `chat.json`, `.DS_Store`. Confirm nothing load-bearing got excluded; add `static/` or other generated trees if needed.\n- [ ] **Add `*.sync-conflict-*` to `.gitignore`**: Paired with the Repo Hygiene item above \u2014 prevent Syncthing conflict copies from ever being committed again. *(Cross-referenced from panel-review 2026-04-20.)*\n\n`TODO.md:L396`",
+      "type": "text",
+      "width": 280,
+      "x": 10,
+      "y": 510
+    },
+    {
+      "height": 2140,
+      "id": "col-todo",
+      "label": "TODO",
+      "type": "group",
+      "width": 300,
+      "x": 350,
+      "y": 0
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 88,
+          "tags": [],
+          "text": "**Extract Components** - Move existing components into dedicated gallery sections"
+        },
+        {
+          "checked": false,
+          "line_num": 89,
+          "tags": [],
+          "text": "**Add Live Examples** - Enable copy-paste functionality and live preview"
+        },
+        {
+          "checked": false,
+          "line_num": 90,
+          "tags": [],
+          "text": "**Organize by Category** - Group components logically (Forms, Buttons, Layout, etc.)"
+        },
+        {
+          "checked": false,
+          "line_num": 91,
+          "tags": [],
+          "text": "**Add Documentation** - Include usage instructions and accessibility notes"
+        },
+        {
+          "checked": false,
+          "line_num": 92,
+          "tags": [],
+          "text": "**Interactive Features** - Add search, filters, and component playground"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "ea9aecf5ba13b031",
+      "line_num": 87,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**Create Gallery Landing Page - Build main navigation for component categories**\n- [ ] **Extract Components** - Move existing components into dedicated gallery sections\n- [ ] **Add Live Examples** - Enable copy-paste functionality and live preview\n- [ ] **Organize by Category** - Group components logically (Forms, Buttons, Layout, etc.)\n- [ ] **Add Documentation** - Include usage instructions and accessibility notes\n- [ ] **Interactive Features** - Add search, filters, and component playground\n\n`TODO.md:L87`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 60
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 123,
+          "tags": [],
+          "text": "Always use `{% highlight \"html\" %}`, `{% highlight \"css\" %}`, or `{% highlight \"text\" %}` with `{% endhighlight %}`"
+        },
+        {
+          "checked": false,
+          "line_num": 124,
+          "tags": [],
+          "text": "instead of hardcoded `<div class=\"highlight\">` with `<pre>` tags"
+        },
+        {
+          "checked": true,
+          "line_num": 125,
+          "tags": [],
+          "text": "Updated installation.njk to use proper shortcodes"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "e0746f4e0df4a300",
+      "line_num": 122,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**Use Proper Highlight Shortcodes -**\n- [ ] Always use `{% highlight \"html\" %}`, `{% highlight \"css\" %}`, or `{% highlight \"text\" %}` with `{% endhighlight %}`\n- [ ] instead of hardcoded `<div class=\"highlight\">` with `<pre>` tags\n- [x] Updated installation.njk to use proper shortcodes\n\n`TODO.md:L122`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 150
+    },
+    {
+      "children": [
+        {
+          "checked": true,
+          "line_num": 128,
+          "tags": [],
+          "text": "`/src/index.njk` - 1 hardcoded highlight div (line 86)"
+        },
+        {
+          "checked": true,
+          "line_num": 129,
+          "tags": [],
+          "text": "`/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47)"
+        },
+        {
+          "checked": true,
+          "line_num": 130,
+          "tags": [],
+          "text": "`/src/docs/tutorials/index.njk` - 5 hardcoded highlight divs (lines 38, 46, 114, 121, 176) + pre tags (lines 39, 47, 115, 122, 177)"
+        },
+        {
+          "checked": true,
+          "line_num": 131,
+          "tags": [],
+          "text": "`/src/docs/base-elements/buttons.njk` - 8 hardcoded highlight divs (lines 18, 37, 54, 69, 90, 113, 129, 143) + pre tags"
+        },
+        {
+          "checked": false,
+          "line_num": 132,
+          "tags": [],
+          "text": "`/src/docs/base-elements/everything-else.njk` - Multiple hardcoded pre tags (lines 47, 91, 108, 132)"
+        },
+        {
+          "checked": false,
+          "line_num": 133,
+          "tags": [],
+          "text": "`/src/docs/base-elements/typography.njk` - 2 hardcoded pre tags (lines 123, 166)"
+        },
+        {
+          "checked": false,
+          "line_num": 134,
+          "tags": [],
+          "text": "`/src/docs/helpers/shadows.njk` - 8 hardcoded highlight divs (lines 20, 45, 70, 95, 121, 147, 174, 201) + pre tags"
+        },
+        {
+          "checked": false,
+          "line_num": 135,
+          "tags": [],
+          "text": "`/src/docs/helpers/transform.njk` - 10 hardcoded highlight divs (lines 22, 48, 72, 98, 122, 148, 172, 198, 222, 248)"
+        },
+        {
+          "checked": false,
+          "line_num": 136,
+          "tags": [],
+          "text": "`/src/docs/helpers/position.njk` - 7 hardcoded highlight divs + pre tags (lines 22, 44, 66, 88, 110, 132, 154)"
+        },
+        {
+          "checked": false,
+          "line_num": 137,
+          "tags": [],
+          "text": "`/src/docs/helpers/background.njk` - 1 hardcoded pre tag (line 23)"
+        },
+        {
+          "checked": false,
+          "line_num": 138,
+          "tags": [],
+          "text": "**Total files needing cleanup: 11 files with ~45+ hardcoded blocks**"
+        },
+        {
+          "checked": false,
+          "line_num": 139,
+          "tags": [],
+          "text": "**Document Utility Patterns** - Create clear examples for common utility combinations"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "e2f0bed7554dffb6",
+      "line_num": 127,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\ud83d\udd25fix hardcoded highlight blocks in the following files:**\n- [x] `/src/index.njk` - 1 hardcoded highlight div (line 86)\n- [x] `/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47)\n- [x] `/src/docs/tutorials/index.njk` - 5 hardcoded highlight divs (lines 38, 46, 114, 121, 176) + pre tags (lines 39, 47, 115, 122, 177)\n- [x] `/src/docs/base-elements/buttons.njk` - 8 hardcoded highlight divs (lines 18, 37, 54, 69, 90, 113, 129, 143) + pre tags\n- [ ] `/src/docs/base-elements/everything-else.njk` - Multiple hardcoded pre tags (lines 47, 91, 108, 132)\n- [ ] `/src/docs/base-elements/typography.njk` - 2 hardcoded pre tags (lines 123, 166)\n- [ ] `/src/docs/helpers/shadows.njk` - 8 hardcoded highlight divs (lines 20, 45, 70, 95, 121, 147, 174, 201) + pre tags\n- [ ] `/src/docs/helpers/transform.njk` - 10 hardcoded highlight divs (lines 22, 48, 72, 98, 122, 148, 172, 198, 222, 248)\n- [ ] `/src/docs/helpers/position.njk` - 7 hardcoded highlight divs + pre tags (lines 22, 44, 66, 88, 110, 132, 154)\n- [ ] `/src/docs/helpers/background.njk` - 1 hardcoded pre tag (line 23)\n- [ ] **Total files needing cleanup: 11 files with ~45+ hardcoded blocks**\n- [ ] **Document Utility Patterns** - Create clear examples for common utility combinations\n\n`TODO.md:L127`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 240
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 142,
+          "tags": [],
+          "text": "**Planning & Architecture**"
+        },
+        {
+          "checked": false,
+          "line_num": 143,
+          "tags": [],
+          "text": "Design component gallery structure and navigation"
+        },
+        {
+          "checked": false,
+          "line_num": 144,
+          "tags": [],
+          "text": "Create component categorization system (UI Elements, Layout, Forms, Navigation, etc.)"
+        },
+        {
+          "checked": false,
+          "line_num": 145,
+          "tags": [],
+          "text": "Plan interactive playground integration"
+        },
+        {
+          "checked": false,
+          "line_num": 146,
+          "tags": [],
+          "text": "Define component documentation template format"
+        },
+        {
+          "checked": false,
+          "line_num": 147,
+          "tags": [],
+          "text": "Plan responsive showcase for each component"
+        },
+        {
+          "checked": false,
+          "line_num": 149,
+          "tags": [],
+          "text": "**Navigation Components**"
+        },
+        {
+          "checked": true,
+          "line_num": 150,
+          "tags": [],
+          "text": "Header/Navigation bars [/docs/] (layout.njk contains main navigation)"
+        },
+        {
+          "checked": true,
+          "line_num": 151,
+          "tags": [],
+          "text": "Horizontal navigation with dropdown menus [/_includes/layout.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 152,
+          "tags": [],
+          "text": "Mobile hamburger menu with slide-out drawer"
+        },
+        {
+          "checked": false,
+          "line_num": 153,
+          "tags": [],
+          "text": "Breadcrumb navigation"
+        },
+        {
+          "checked": false,
+          "line_num": 154,
+          "tags": [],
+          "text": "Tab navigation with active states"
+        },
+        {
+          "checked": false,
+          "line_num": 155,
+          "tags": [],
+          "text": "Sidebar navigation with nested items"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "3af92f994649ec87",
+      "line_num": 141,
+      "source": "todo_md",
+      "tags": [
+        "#ContentExcellence"
+      ],
+      "text": "**Create component gallery with live examples**\n- [ ] **Planning & Architecture**\n- [ ] Design component gallery structure and navigation\n- [ ] Create component categorization system (UI Elements, Layout, Forms, Navigation, etc.)\n- [ ] Plan interactive playground integration\n- [ ] Define component documentation template format\n- [ ] Plan responsive showcase for each component\n- [ ] **Navigation Components**\n- [x] Header/Navigation bars [/docs/] (layout.njk contains main navigation)\n- [x] Horizontal navigation with dropdown menus [/_includes/layout.njk] - Add to gallery\n- [ ] Mobile hamburger menu with slide-out drawer\n- [ ] Breadcrumb navigation\n- [ ] Tab navigation with active states\n- [ ] Sidebar navigation with nested items\n\n`#ContentExcellence`\n`TODO.md:L141`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 330
+    },
+    {
+      "children": [
+        {
+          "checked": true,
+          "line_num": 157,
+          "tags": [],
+          "text": "Simple footer with links [/_includes/footer.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 158,
+          "tags": [],
+          "text": "Multi-column footer with social icons [/_includes/footer.njk, /static/footer.html] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 159,
+          "tags": [],
+          "text": "Sticky footer layouts"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "8b57f7eb2f28d27f",
+      "line_num": 156,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**Footer components [/docs/]**\n- [x] Simple footer with links [/_includes/footer.njk] - Add to gallery\n- [x] Multi-column footer with social icons [/_includes/footer.njk, /static/footer.html] - Add to gallery\n- [ ] Sticky footer layouts\n\n`TODO.md:L156`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 420
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 161,
+          "tags": [],
+          "text": "Number-based pagination"
+        },
+        {
+          "checked": false,
+          "line_num": 162,
+          "tags": [],
+          "text": "Previous/Next pagination"
+        },
+        {
+          "checked": false,
+          "line_num": 163,
+          "tags": [],
+          "text": "Load more button"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "251025d8ade0baf5",
+      "line_num": 160,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**Pagination components**\n- [ ] Number-based pagination\n- [ ] Previous/Next pagination\n- [ ] Load more button\n\n`TODO.md:L160`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 510
+    },
+    {
+      "children": [
+        {
+          "checked": true,
+          "line_num": 171,
+          "tags": [],
+          "text": "Input variations [/docs/base-elements/fields.njk]"
+        },
+        {
+          "checked": true,
+          "line_num": 172,
+          "tags": [],
+          "text": "Text inputs with labels and validation states [/docs/base-elements/fields.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 173,
+          "tags": [],
+          "text": "Search inputs with icons"
+        },
+        {
+          "checked": true,
+          "line_num": 174,
+          "tags": [],
+          "text": "Number inputs with increment/decrement [/docs/base-elements/fields.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 175,
+          "tags": [],
+          "text": "Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 176,
+          "tags": [],
+          "text": "File upload with drag-and-drop styling"
+        },
+        {
+          "checked": true,
+          "line_num": 177,
+          "tags": [],
+          "text": "Multi-line textarea components [/docs/base-elements/fields.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 178,
+          "tags": [],
+          "text": "Selection controls [/docs/base-elements/fields.njk]"
+        },
+        {
+          "checked": false,
+          "line_num": 179,
+          "tags": [],
+          "text": "Custom checkboxes with various styles"
+        },
+        {
+          "checked": false,
+          "line_num": 180,
+          "tags": [],
+          "text": "Debug checkbox styles !!!"
+        },
+        {
+          "checked": false,
+          "line_num": 181,
+          "tags": [],
+          "text": "Radio button groups"
+        },
+        {
+          "checked": true,
+          "line_num": 182,
+          "tags": [],
+          "text": "Toggle switches"
+        },
+        {
+          "checked": true,
+          "line_num": 184,
+          "tags": [],
+          "text": "Multi-select dropdowns [/docs/base-elements/fields.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 185,
+          "tags": [],
+          "text": "Autocomplete/typeahead inputs"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "a005f84a4ea7baef",
+      "line_num": 170,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**Form Components**\n- [x] Input variations [/docs/base-elements/fields.njk]\n- [x] Text inputs with labels and validation states [/docs/base-elements/fields.njk] - Add to gallery\n- [ ] Search inputs with icons\n- [x] Number inputs with increment/decrement [/docs/base-elements/fields.njk] - Add to gallery\n- [x] Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery\n- [ ] File upload with drag-and-drop styling\n- [x] Multi-line textarea components [/docs/base-elements/fields.njk] - Add to gallery\n- [x] Selection controls [/docs/base-elements/fields.njk]\n- [ ] Custom checkboxes with various styles\n- [ ] Debug checkbox styles !!!\n- [ ] Radio button groups\n- [x] Toggle switches\n- [x] Multi-select dropdowns [/docs/base-elements/fields.njk] - Add to gallery\n- [ ] Autocomplete/typeahead inputs\n\n`TODO.md:L170`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 600
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 187,
+          "tags": [],
+          "text": "Inline forms"
+        },
+        {
+          "checked": false,
+          "line_num": 188,
+          "tags": [],
+          "text": "Stacked forms with proper spacing"
+        },
+        {
+          "checked": false,
+          "line_num": 189,
+          "tags": [],
+          "text": "Multi-step/wizard forms"
+        },
+        {
+          "checked": true,
+          "line_num": 190,
+          "tags": [],
+          "text": "Form validation with error states [/docs/base-elements/fields.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 191,
+          "tags": [],
+          "text": "Login/registration form templates [/docs/use-cases/index.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 192,
+          "tags": [],
+          "text": "Add spacing above and below the form in the preview"
+        },
+        {
+          "checked": false,
+          "line_num": 193,
+          "tags": [],
+          "text": "Update to the content of <https://codepen.io/openco/pen/wBavPYx>"
+        },
+        {
+          "checked": false,
+          "line_num": 195,
+          "tags": [],
+          "text": "**Button Components**"
+        },
+        {
+          "checked": true,
+          "line_num": 196,
+          "tags": [],
+          "text": "Button variations [/docs/base-elements/buttons.njk]"
+        },
+        {
+          "checked": true,
+          "line_num": 197,
+          "tags": [],
+          "text": "Primary, secondary, tertiary button styles [/docs/base-elements/buttons.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 198,
+          "tags": [],
+          "text": "Icon buttons and icon + text combinations [/docs/base-elements/buttons.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 199,
+          "tags": [],
+          "text": "Loading/spinner states"
+        },
+        {
+          "checked": true,
+          "line_num": 200,
+          "tags": [],
+          "text": "Disabled states showcase [/docs/base-elements/buttons.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 201,
+          "tags": [],
+          "text": "Button sizes (small, medium, large, extra large) [/docs/base-elements/buttons.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 202,
+          "tags": [],
+          "text": "Button groups [/docs/base-elements/buttons.njk]"
+        },
+        {
+          "checked": true,
+          "line_num": 203,
+          "tags": [],
+          "text": "Horizontal button groups [/docs/base-elements/buttons.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 204,
+          "tags": [],
+          "text": "Vertical button groups"
+        },
+        {
+          "checked": false,
+          "line_num": 205,
+          "tags": [],
+          "text": "Segmented controls"
+        },
+        {
+          "checked": false,
+          "line_num": 206,
+          "tags": [],
+          "text": "Floating action buttons"
+        },
+        {
+          "checked": false,
+          "line_num": 207,
+          "tags": [],
+          "text": "Call-to-action components"
+        },
+        {
+          "checked": false,
+          "line_num": 208,
+          "tags": [],
+          "text": "Hero section CTAs"
+        },
+        {
+          "checked": false,
+          "line_num": 209,
+          "tags": [],
+          "text": "Newsletter signup buttons"
+        },
+        {
+          "checked": true,
+          "line_num": 210,
+          "tags": [],
+          "text": "Social media share buttons [/_includes/footer.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 211,
+          "tags": [],
+          "text": "**Card Components**"
+        },
+        {
+          "checked": true,
+          "line_num": 212,
+          "tags": [],
+          "text": "Basic cards [/docs/use-cases/index.njk, /docs/tutorials/index.njk]"
+        },
+        {
+          "checked": false,
+          "line_num": 213,
+          "tags": [],
+          "text": "Simple content cards with image, title, description"
+        },
+        {
+          "checked": true,
+          "line_num": 214,
+          "tags": [],
+          "text": "Product cards with pricing [/docs/use-cases/index.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 215,
+          "tags": [],
+          "text": "User profile cards"
+        },
+        {
+          "checked": false,
+          "line_num": 216,
+          "tags": [],
+          "text": "Testimonial cards"
+        },
+        {
+          "checked": false,
+          "line_num": 217,
+          "tags": [],
+          "text": "Blog post preview cards"
+        },
+        {
+          "checked": false,
+          "line_num": 218,
+          "tags": [],
+          "text": "Interactive cards"
+        },
+        {
+          "checked": false,
+          "line_num": 219,
+          "tags": [],
+          "text": "Hover effects and transitions"
+        },
+        {
+          "checked": false,
+          "line_num": 220,
+          "tags": [],
+          "text": "Expandable/collapsible cards"
+        },
+        {
+          "checked": false,
+          "line_num": 221,
+          "tags": [],
+          "text": "Flip cards with front/back content"
+        },
+        {
+          "checked": false,
+          "line_num": 222,
+          "tags": [],
+          "text": "Card overlays with action buttons"
+        },
+        {
+          "checked": true,
+          "line_num": 223,
+          "tags": [],
+          "text": "Card layouts [/docs/use-cases/index.njk]"
+        },
+        {
+          "checked": true,
+          "line_num": 224,
+          "tags": [],
+          "text": "Card grids (responsive) [/docs/use-cases/index.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 225,
+          "tags": [],
+          "text": "Card carousels/sliders"
+        },
+        {
+          "checked": false,
+          "line_num": 226,
+          "tags": [],
+          "text": "Masonry-style card layouts"
+        },
+        {
+          "checked": false,
+          "line_num": 227,
+          "tags": [],
+          "text": "Card lists with alternating layouts"
+        },
+        {
+          "checked": false,
+          "line_num": 228,
+          "tags": [],
+          "text": "**Layout Components**"
+        },
+        {
+          "checked": true,
+          "line_num": 229,
+          "tags": [],
+          "text": "Grid systems [/docs/tutorials/index.njk, /docs/use-cases/index.njk]"
+        },
+        {
+          "checked": true,
+          "line_num": 230,
+          "tags": [],
+          "text": "Basic grid layouts (2-column, 3-column, 4-column) [/docs/tutorials/index.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 231,
+          "tags": [],
+          "text": "Responsive grid breakpoints demonstration [/docs/tutorials/index.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 232,
+          "tags": [],
+          "text": "Complex grid layouts (sidebar + main + aside)"
+        },
+        {
+          "checked": false,
+          "line_num": 233,
+          "tags": [],
+          "text": "CSS Grid showcase with named grid areas"
+        },
+        {
+          "checked": false,
+          "line_num": 234,
+          "tags": [],
+          "text": "Flexbox layouts"
+        },
+        {
+          "checked": false,
+          "line_num": 235,
+          "tags": [],
+          "text": "Flexible container examples"
+        },
+        {
+          "checked": false,
+          "line_num": 236,
+          "tags": [],
+          "text": "Centered content layouts"
+        },
+        {
+          "checked": false,
+          "line_num": 237,
+          "tags": [],
+          "text": "Space distribution examples"
+        },
+        {
+          "checked": false,
+          "line_num": 238,
+          "tags": [],
+          "text": "Flex direction and wrap demonstrations"
+        },
+        {
+          "checked": false,
+          "line_num": 239,
+          "tags": [],
+          "text": "Container components"
+        },
+        {
+          "checked": false,
+          "line_num": 240,
+          "tags": [],
+          "text": "Page containers with max-width"
+        },
+        {
+          "checked": false,
+          "line_num": 241,
+          "tags": [],
+          "text": "Section containers with background variations"
+        },
+        {
+          "checked": false,
+          "line_num": 242,
+          "tags": [],
+          "text": "Responsive containers"
+        },
+        {
+          "checked": false,
+          "line_num": 243,
+          "tags": [],
+          "text": "Full-width vs contained sections"
+        },
+        {
+          "checked": true,
+          "line_num": 244,
+          "tags": [],
+          "text": "**Modal & Overlay Components**"
+        },
+        {
+          "checked": true,
+          "line_num": 245,
+          "tags": [],
+          "text": "Modal dialogs based on <https://believemy.com/en/r/creating-a-modal-window-without-using-javascript>"
+        },
+        {
+          "checked": true,
+          "line_num": 246,
+          "tags": [],
+          "text": "Basic modal with backdrop"
+        },
+        {
+          "checked": true,
+          "line_num": 247,
+          "tags": [],
+          "text": "Confirmation dialogs"
+        },
+        {
+          "checked": true,
+          "line_num": 248,
+          "tags": [],
+          "text": "Form modals"
+        },
+        {
+          "checked": true,
+          "line_num": 249,
+          "tags": [],
+          "text": "Image galleries in modals"
+        },
+        {
+          "checked": true,
+          "line_num": 250,
+          "tags": [],
+          "text": "Modal sizes (small, medium, large, fullscreen)"
+        },
+        {
+          "checked": false,
+          "line_num": 251,
+          "tags": [],
+          "text": "Overlay components"
+        },
+        {
+          "checked": false,
+          "line_num": 252,
+          "tags": [],
+          "text": "Tooltip components with positioning"
+        },
+        {
+          "checked": false,
+          "line_num": 253,
+          "tags": [],
+          "text": "Popover menus"
+        },
+        {
+          "checked": false,
+          "line_num": 254,
+          "tags": [],
+          "text": "Dropdown menus"
+        },
+        {
+          "checked": false,
+          "line_num": 255,
+          "tags": [],
+          "text": "Toast notifications"
+        },
+        {
+          "checked": false,
+          "line_num": 256,
+          "tags": [],
+          "text": "Alert banners"
+        },
+        {
+          "checked": false,
+          "line_num": 257,
+          "tags": [],
+          "text": "**Media Components**"
+        },
+        {
+          "checked": true,
+          "line_num": 258,
+          "tags": [],
+          "text": "Image components [Multiple files]"
+        },
+        {
+          "checked": true,
+          "line_num": 259,
+          "tags": [],
+          "text": "Responsive images with aspect ratios [/docs/helpers/position.njk, /index.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 260,
+          "tags": [],
+          "text": "Image galleries with lightbox [/docs/use-cases/index.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 261,
+          "tags": [],
+          "text": "Avatar components (round, square, with badges) [/index.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 262,
+          "tags": [],
+          "text": "Image carousels/sliders"
+        },
+        {
+          "checked": false,
+          "line_num": 263,
+          "tags": [],
+          "text": "Before/after image comparisons"
+        },
+        {
+          "checked": false,
+          "line_num": 264,
+          "tags": [],
+          "text": "Video components"
+        },
+        {
+          "checked": false,
+          "line_num": 265,
+          "tags": [],
+          "text": "Video players with custom controls"
+        },
+        {
+          "checked": false,
+          "line_num": 266,
+          "tags": [],
+          "text": "Video backgrounds"
+        },
+        {
+          "checked": false,
+          "line_num": 267,
+          "tags": [],
+          "text": "Video thumbnails with play buttons"
+        },
+        {
+          "checked": true,
+          "line_num": 268,
+          "tags": [],
+          "text": "Icon systems [/_includes/footer.njk, /docs/base-elements/buttons.njk]"
+        },
+        {
+          "checked": true,
+          "line_num": 269,
+          "tags": [],
+          "text": "Icon libraries integration [/_includes/footer.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 270,
+          "tags": [],
+          "text": "Icon sizes and variations [/docs/base-elements/buttons.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 271,
+          "tags": [],
+          "text": "Icon + text combinations [/docs/base-elements/buttons.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 272,
+          "tags": [],
+          "text": "**Data Display Components**"
+        },
+        {
+          "checked": true,
+          "line_num": 273,
+          "tags": [],
+          "text": "Table components [/docs/base-elements/everything-else.njk]"
+        },
+        {
+          "checked": true,
+          "line_num": 274,
+          "tags": [],
+          "text": "Basic data tables with sorting [/docs/base-elements/everything-else.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 275,
+          "tags": [],
+          "text": "Responsive tables with horizontal scroll"
+        },
+        {
+          "checked": false,
+          "line_num": 276,
+          "tags": [],
+          "text": "Tables with row selection"
+        },
+        {
+          "checked": false,
+          "line_num": 277,
+          "tags": [],
+          "text": "Tables with pagination"
+        },
+        {
+          "checked": false,
+          "line_num": 278,
+          "tags": [],
+          "text": "Pricing tables"
+        },
+        {
+          "checked": true,
+          "line_num": 279,
+          "tags": [],
+          "text": "List components [/docs/base-elements/typography.njk]"
+        },
+        {
+          "checked": true,
+          "line_num": 280,
+          "tags": [],
+          "text": "Simple lists with custom bullets [/docs/base-elements/typography.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 281,
+          "tags": [],
+          "text": "Numbered lists with custom styling [/docs/base-elements/typography.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 282,
+          "tags": [],
+          "text": "Definition lists"
+        },
+        {
+          "checked": false,
+          "line_num": 283,
+          "tags": [],
+          "text": "Interactive lists with actions"
+        },
+        {
+          "checked": true,
+          "line_num": 284,
+          "tags": [],
+          "text": "Progress indicators [/docs/use-cases/index.njk, /working.html, /prompting.html]"
+        },
+        {
+          "checked": false,
+          "line_num": 285,
+          "tags": [],
+          "text": "Progress bars with animations"
+        },
+        {
+          "checked": false,
+          "line_num": 286,
+          "tags": [],
+          "text": "Step indicators/progress steps"
+        },
+        {
+          "checked": true,
+          "line_num": 287,
+          "tags": [],
+          "text": "Loading spinners [/working.html, /prompting.html, /worlds.html] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 288,
+          "tags": [],
+          "text": "Skeleton loading states [/docs/use-cases/index.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 289,
+          "tags": [],
+          "text": "**Interactive Components**"
+        },
+        {
+          "checked": true,
+          "line_num": 290,
+          "tags": [],
+          "text": "Accordion/Collapsible [/docs/base-elements/everything-else.njk]"
+        },
+        {
+          "checked": false,
+          "line_num": 291,
+          "tags": [],
+          "text": "Single-item accordion"
+        },
+        {
+          "checked": false,
+          "line_num": 292,
+          "tags": [],
+          "text": "Multi-item accordion with smooth animations"
+        },
+        {
+          "checked": false,
+          "line_num": 293,
+          "tags": [],
+          "text": "FAQ-style accordions"
+        },
+        {
+          "checked": false,
+          "line_num": 294,
+          "tags": [],
+          "text": "Nested accordions"
+        },
+        {
+          "checked": true,
+          "line_num": 295,
+          "tags": [],
+          "text": "Details/Summary elements [/docs/base-elements/everything-else.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 296,
+          "tags": [],
+          "text": "Tabs"
+        },
+        {
+          "checked": false,
+          "line_num": 297,
+          "tags": [],
+          "text": "Horizontal tabs"
+        },
+        {
+          "checked": false,
+          "line_num": 298,
+          "tags": [],
+          "text": "Vertical tabs"
+        },
+        {
+          "checked": false,
+          "line_num": 299,
+          "tags": [],
+          "text": "Responsive tabs (convert to accordion on mobile)"
+        },
+        {
+          "checked": false,
+          "line_num": 300,
+          "tags": [],
+          "text": "Tabs with icons"
+        },
+        {
+          "checked": true,
+          "line_num": 301,
+          "tags": [],
+          "text": "Slider/Range components [/docs/base-elements/fields.njk]"
+        },
+        {
+          "checked": true,
+          "line_num": 302,
+          "tags": [],
+          "text": "Basic range sliders [/docs/base-elements/fields.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 303,
+          "tags": [],
+          "text": "Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 304,
+          "tags": [],
+          "text": "Dual-handle range sliders"
+        },
+        {
+          "checked": false,
+          "line_num": 305,
+          "tags": [],
+          "text": "Styled slider tracks"
+        },
+        {
+          "checked": true,
+          "line_num": 306,
+          "tags": [],
+          "text": "Value display variations [/docs/base-elements/fields.njk] - Add to gallery"
+        },
+        {
+          "checked": false,
+          "line_num": 307,
+          "tags": [],
+          "text": "**Feedback Components**"
+        },
+        {
+          "checked": false,
+          "line_num": 308,
+          "tags": [],
+          "text": "Alert/Notification"
+        },
+        {
+          "checked": false,
+          "line_num": 309,
+          "tags": [],
+          "text": "Success, warning, error, info alerts"
+        },
+        {
+          "checked": false,
+          "line_num": 310,
+          "tags": [],
+          "text": "Dismissible alerts"
+        },
+        {
+          "checked": false,
+          "line_num": 311,
+          "tags": [],
+          "text": "Toast notifications with auto-dismiss"
+        },
+        {
+          "checked": false,
+          "line_num": 312,
+          "tags": [],
+          "text": "Notification center/inbox"
+        },
+        {
+          "checked": false,
+          "line_num": 313,
+          "tags": [],
+          "text": "Badge/Chip components"
+        },
+        {
+          "checked": false,
+          "line_num": 314,
+          "tags": [],
+          "text": "Status badges"
+        },
+        {
+          "checked": false,
+          "line_num": 315,
+          "tags": [],
+          "text": "Count badges on buttons/icons"
+        },
+        {
+          "checked": false,
+          "line_num": 316,
+          "tags": [],
+          "text": "Tag/chip components with removal"
+        },
+        {
+          "checked": false,
+          "line_num": 317,
+          "tags": [],
+          "text": "Category badges"
+        },
+        {
+          "checked": false,
+          "line_num": 318,
+          "tags": [],
+          "text": "**E-commerce Components**"
+        },
+        {
+          "checked": false,
+          "line_num": 319,
+          "tags": [],
+          "text": "Product showcases"
+        },
+        {
+          "checked": false,
+          "line_num": 320,
+          "tags": [],
+          "text": "Product detail layouts"
+        },
+        {
+          "checked": false,
+          "line_num": 321,
+          "tags": [],
+          "text": "Product comparison tables"
+        },
+        {
+          "checked": false,
+          "line_num": 322,
+          "tags": [],
+          "text": "Shopping cart components"
+        },
+        {
+          "checked": false,
+          "line_num": 323,
+          "tags": [],
+          "text": "Wishlist components"
+        },
+        {
+          "checked": false,
+          "line_num": 324,
+          "tags": [],
+          "text": "Pricing displays"
+        },
+        {
+          "checked": false,
+          "line_num": 325,
+          "tags": [],
+          "text": "Pricing cards/tables"
+        },
+        {
+          "checked": false,
+          "line_num": 326,
+          "tags": [],
+          "text": "Subscription plan comparisons"
+        },
+        {
+          "checked": false,
+          "line_num": 327,
+          "tags": [],
+          "text": "Price formatting examples"
+        },
+        {
+          "checked": false,
+          "line_num": 328,
+          "tags": [],
+          "text": "Discount/sale price displays"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "af52838a9dddeb89",
+      "line_num": 186,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**Form layouts [/docs/use-cases/index.njk]**\n- [ ] Inline forms\n- [ ] Stacked forms with proper spacing\n- [ ] Multi-step/wizard forms\n- [x] Form validation with error states [/docs/base-elements/fields.njk] - Add to gallery\n- [x] Login/registration form templates [/docs/use-cases/index.njk] - Add to gallery\n- [ ] Add spacing above and below the form in the preview\n- [ ] Update to the content of <https://codepen.io/openco/pen/wBavPYx>\n- [ ] **Button Components**\n- [x] Button variations [/docs/base-elements/buttons.njk]\n- [x] Primary, secondary, tertiary button styles [/docs/base-elements/buttons.njk] - Add to gallery\n- [x] Icon buttons and icon + text combinations [/docs/base-elements/buttons.njk] - Add to gallery\n- [ ] Loading/spinner states\n- [x] Disabled states showcase [/docs/base-elements/buttons.njk] - Add to gallery\n- [x] Button sizes (small, medium, large, extra large) [/docs/base-elements/buttons.njk] - Add to gallery\n- [x] Button groups [/docs/base-elements/buttons.njk]\n- [x] Horizontal button groups [/docs/base-elements/buttons.njk] - Add to gallery\n- [ ] Vertical button groups\n- [ ] Segmented controls\n- [ ] Floating action buttons\n- [ ] Call-to-action components\n- [ ] Hero section CTAs\n- [ ] Newsletter signup buttons\n- [x] Social media share buttons [/_includes/footer.njk] - Add to gallery\n- [ ] **Card Components**\n- [x] Basic cards [/docs/use-cases/index.njk, /docs/tutorials/index.njk]\n- [ ] Simple content cards with image, title, description\n- [x] Product cards with pricing [/docs/use-cases/index.njk] - Add to gallery\n- [ ] User profile cards\n- [ ] Testimonial cards\n- [ ] Blog post preview cards\n- [ ] Interactive cards\n- [ ] Hover effects and transitions\n- [ ] Expandable/collapsible cards\n- [ ] Flip cards with front/back content\n- [ ] Card overlays with action buttons\n- [x] Card layouts [/docs/use-cases/index.njk]\n- [x] Card grids (responsive) [/docs/use-cases/index.njk] - Add to gallery\n- [ ] Card carousels/sliders\n- [ ] Masonry-style card layouts\n- [ ] Card lists with alternating layouts\n- [ ] **Layout Components**\n- [x] Grid systems [/docs/tutorials/index.njk, /docs/use-cases/index.njk]\n- [x] Basic grid layouts (2-column, 3-column, 4-column) [/docs/tutorials/index.njk] - Add to gallery\n- [x] Responsive grid breakpoints demonstration [/docs/tutorials/index.njk] - Add to gallery\n- [ ] Complex grid layouts (sidebar + main + aside)\n- [ ] CSS Grid showcase with named grid areas\n- [ ] Flexbox layouts\n- [ ] Flexible container examples\n- [ ] Centered content layouts\n- [ ] Space distribution examples\n- [ ] Flex direction and wrap demonstrations\n- [ ] Container components\n- [ ] Page containers with max-width\n- [ ] Section containers with background variations\n- [ ] Responsive containers\n- [ ] Full-width vs contained sections\n- [x] **Modal & Overlay Components**\n- [x] Modal dialogs based on <https://believemy.com/en/r/creating-a-modal-window-without-using-javascript>\n- [x] Basic modal with backdrop\n- [x] Confirmation dialogs\n- [x] Form modals\n- [x] Image galleries in modals\n- [x] Modal sizes (small, medium, large, fullscreen)\n- [ ] Overlay components\n- [ ] Tooltip components with positioning\n- [ ] Popover menus\n- [ ] Dropdown menus\n- [ ] Toast notifications\n- [ ] Alert banners\n- [ ] **Media Components**\n- [x] Image components [Multiple files]\n- [x] Responsive images with aspect ratios [/docs/helpers/position.njk, /index.njk] - Add to gallery\n- [x] Image galleries with lightbox [/docs/use-cases/index.njk] - Add to gallery\n- [x] Avatar components (round, square, with badges) [/index.njk] - Add to gallery\n- [ ] Image carousels/sliders\n- [ ] Before/after image comparisons\n- [ ] Video components\n- [ ] Video players with custom controls\n- [ ] Video backgrounds\n- [ ] Video thumbnails with play buttons\n- [x] Icon systems [/_includes/footer.njk, /docs/base-elements/buttons.njk]\n- [x] Icon libraries integration [/_includes/footer.njk] - Add to gallery\n- [x] Icon sizes and variations [/docs/base-elements/buttons.njk] - Add to gallery\n- [x] Icon + text combinations [/docs/base-elements/buttons.njk] - Add to gallery\n- [ ] **Data Display Components**\n- [x] Table components [/docs/base-elements/everything-else.njk]\n- [x] Basic data tables with sorting [/docs/base-elements/everything-else.njk] - Add to gallery\n- [ ] Responsive tables with horizontal scroll\n- [ ] Tables with row selection\n- [ ] Tables with pagination\n- [ ] Pricing tables\n- [x] List components [/docs/base-elements/typography.njk]\n- [x] Simple lists with custom bullets [/docs/base-elements/typography.njk] - Add to gallery\n- [x] Numbered lists with custom styling [/docs/base-elements/typography.njk] - Add to gallery\n- [ ] Definition lists\n- [ ] Interactive lists with actions\n- [x] Progress indicators [/docs/use-cases/index.njk, /working.html, /prompting.html]\n- [ ] Progress bars with animations\n- [ ] Step indicators/progress steps\n- [x] Loading spinners [/working.html, /prompting.html, /worlds.html] - Add to gallery\n- [x] Skeleton loading states [/docs/use-cases/index.njk] - Add to gallery\n- [ ] **Interactive Components**\n- [x] Accordion/Collapsible [/docs/base-elements/everything-else.njk]\n- [ ] Single-item accordion\n- [ ] Multi-item accordion with smooth animations\n- [ ] FAQ-style accordions\n- [ ] Nested accordions\n- [x] Details/Summary elements [/docs/base-elements/everything-else.njk] - Add to gallery\n- [ ] Tabs\n- [ ] Horizontal tabs\n- [ ] Vertical tabs\n- [ ] Responsive tabs (convert to accordion on mobile)\n- [ ] Tabs with icons\n- [x] Slider/Range components [/docs/base-elements/fields.njk]\n- [x] Basic range sliders [/docs/base-elements/fields.njk] - Add to gallery\n- [x] Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery\n- [ ] Dual-handle range sliders\n- [ ] Styled slider tracks\n- [x] Value display variations [/docs/base-elements/fields.njk] - Add to gallery\n- [ ] **Feedback Components**\n- [ ] Alert/Notification\n- [ ] Success, warning, error, info alerts\n- [ ] Dismissible alerts\n- [ ] Toast notifications with auto-dismiss\n- [ ] Notification center/inbox\n- [ ] Badge/Chip components\n- [ ] Status badges\n- [ ] Count badges on buttons/icons\n- [ ] Tag/chip components with removal\n- [ ] Category badges\n- [ ] **E-commerce Components**\n- [ ] Product showcases\n- [ ] Product detail layouts\n- [ ] Product comparison tables\n- [ ] Shopping cart components\n- [ ] Wishlist components\n- [ ] Pricing displays\n- [ ] Pricing cards/tables\n- [ ] Subscription plan comparisons\n- [ ] Price formatting examples\n- [ ] Discount/sale price displays\n\n`TODO.md:L186`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 690
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 330,
+          "tags": [],
+          "text": "Component documentation"
+        },
+        {
+          "checked": false,
+          "line_num": 331,
+          "tags": [],
+          "text": "Write clear usage instructions for each component"
+        },
+        {
+          "checked": false,
+          "line_num": 332,
+          "tags": [],
+          "text": "Provide copy-paste HTML examples"
+        },
+        {
+          "checked": false,
+          "line_num": 333,
+          "tags": [],
+          "text": "Include accessibility notes for each component"
+        },
+        {
+          "checked": false,
+          "line_num": 334,
+          "tags": [],
+          "text": "Add responsive behavior explanations"
+        },
+        {
+          "checked": false,
+          "line_num": 335,
+          "tags": [],
+          "text": "Implement live preview with editable code"
+        },
+        {
+          "checked": false,
+          "line_num": 336,
+          "tags": [],
+          "text": "Add copy-to-clipboard functionality"
+        },
+        {
+          "checked": false,
+          "line_num": 337,
+          "tags": [],
+          "text": "Create component search/filter system"
+        },
+        {
+          "checked": false,
+          "line_num": 338,
+          "tags": [],
+          "text": "Test all components across different browsers"
+        },
+        {
+          "checked": false,
+          "line_num": 339,
+          "tags": [],
+          "text": "Verify mobile responsiveness of all examples"
+        },
+        {
+          "checked": false,
+          "line_num": 340,
+          "tags": [],
+          "text": "Ensure consistent styling across components"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "a21b35dcaa2d81d0",
+      "line_num": 329,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**Documentation & Implementation**\n- [ ] Component documentation\n- [ ] Write clear usage instructions for each component\n- [ ] Provide copy-paste HTML examples\n- [ ] Include accessibility notes for each component\n- [ ] Add responsive behavior explanations\n- [ ] Implement live preview with editable code\n- [ ] Add copy-to-clipboard functionality\n- [ ] Create component search/filter system\n- [ ] Test all components across different browsers\n- [ ] Verify mobile responsiveness of all examples\n- [ ] Ensure consistent styling across components\n\n`TODO.md:L329`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 780
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 342,
+          "tags": [],
+          "text": "Create main component gallery landing page"
+        },
+        {
+          "checked": false,
+          "line_num": 343,
+          "tags": [],
+          "text": "Build category navigation system"
+        },
+        {
+          "checked": false,
+          "line_num": 344,
+          "tags": [],
+          "text": "Implement component preview thumbnails"
+        },
+        {
+          "checked": false,
+          "line_num": 345,
+          "tags": [],
+          "text": "Add related components suggestions"
+        },
+        {
+          "checked": false,
+          "line_num": 346,
+          "tags": [],
+          "text": "Create component favorites/bookmarking system"
+        },
+        {
+          "checked": false,
+          "line_num": 347,
+          "tags": [
+            "#UserExperience"
+          ],
+          "text": "Add search functionality to documentation"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "9fbd56623ac2c111",
+      "line_num": 341,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**Gallery structure**\n- [ ] Create main component gallery landing page\n- [ ] Build category navigation system\n- [ ] Implement component preview thumbnails\n- [ ] Add related components suggestions\n- [ ] Create component favorites/bookmarking system\n- [ ] Add search functionality to documentation #UserExperience\n\n`TODO.md:L341`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 870
+    },
+    {
+      "children": [
+        {
+          "checked": true,
+          "line_num": 349,
+          "tags": [
+            "#TechnicalFoundation"
+          ],
+          "text": "Implement code splitting"
+        },
+        {
+          "checked": true,
+          "line_num": 350,
+          "tags": [],
+          "text": "Use Eleventy for static site generation"
+        },
+        {
+          "checked": true,
+          "line_num": 351,
+          "tags": [
+            "#TechnicalFoundation"
+          ],
+          "text": "Implement HTTP/2 for faster loading"
+        },
+        {
+          "checked": true,
+          "line_num": 352,
+          "tags": [
+            "#TechnicalFoundation"
+          ],
+          "text": "Use a CDN for static assets"
+        },
+        {
+          "checked": false,
+          "line_num": 353,
+          "tags": [
+            "#TechnicalFoundation"
+          ],
+          "text": "Optimize font loading"
+        },
+        {
+          "checked": false,
+          "line_num": 354,
+          "tags": [
+            "#TechnicalFoundation"
+          ],
+          "text": "Compress images automatically"
+        },
+        {
+          "checked": false,
+          "line_num": 355,
+          "tags": [
+            "#TechnicalFoundation"
+          ],
+          "text": "Enable lazy loading for performance"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "e4fc646243b2e67a",
+      "line_num": 348,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**Optimize delivery #TechnicalFoundation (using Eleventy and PostCSS)**\n- [x] Implement code splitting #TechnicalFoundation\n- [x] Use Eleventy for static site generation\n- [x] Implement HTTP/2 for faster loading #TechnicalFoundation\n- [x] Use a CDN for static assets #TechnicalFoundation\n- [ ] Optimize font loading #TechnicalFoundation\n- [ ] Compress images automatically #TechnicalFoundation\n- [ ] Enable lazy loading for performance #TechnicalFoundation\n\n`TODO.md:L348`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 960
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 357,
+          "tags": [
+            "#UserExperience"
+          ],
+          "text": "Add keyboard accessibility"
+        },
+        {
+          "checked": false,
+          "line_num": 358,
+          "tags": [
+            "#UserExperience"
+          ],
+          "text": "Test screen reader compatibility"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "56e4150fac62182f",
+      "line_num": 356,
+      "source": "todo_md",
+      "tags": [
+        "#UserExperience"
+      ],
+      "text": "**Improve navigation flow**\n- [ ] Add keyboard accessibility #UserExperience\n- [ ] Test screen reader compatibility #UserExperience\n\n`#UserExperience`\n`TODO.md:L356`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 1050
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 360,
+          "tags": [
+            "#DeveloperExperience"
+          ],
+          "text": "Create component documentation"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "77be0822cd57e439",
+      "line_num": 359,
+      "source": "todo_md",
+      "tags": [
+        "#DeveloperExperience"
+      ],
+      "text": "**Write comprehensive style guide**\n- [ ] Create component documentation #DeveloperExperience\n\n`#DeveloperExperience`\n`TODO.md:L359`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 1140
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 362,
+          "tags": [
+            "#DeveloperExperience"
+          ],
+          "text": "Add automated testing suite"
+        },
+        {
+          "checked": false,
+          "line_num": 363,
+          "tags": [
+            "#Infrastructure"
+          ],
+          "text": "Add deployment automation"
+        },
+        {
+          "checked": false,
+          "line_num": 364,
+          "tags": [
+            "#Infrastructure"
+          ],
+          "text": "Configure monitoring"
+        },
+        {
+          "checked": false,
+          "line_num": 365,
+          "tags": [
+            "#Infrastructure"
+          ],
+          "text": "Set up error tracking"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "1243aae87d4d16b0",
+      "line_num": 361,
+      "source": "todo_md",
+      "tags": [
+        "#Infrastructure"
+      ],
+      "text": "**Set up CI/CD pipeline**\n- [ ] Add automated testing suite #DeveloperExperience\n- [ ] Add deployment automation #Infrastructure\n- [ ] Configure monitoring #Infrastructure\n- [ ] Set up error tracking #Infrastructure\n\n`#Infrastructure`\n`TODO.md:L361`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 1230
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 368,
+          "tags": [
+            "#ContentExcellence"
+          ],
+          "text": "Expand modernism examples with real projects"
+        },
+        {
+          "checked": false,
+          "line_num": 369,
+          "tags": [
+            "#ContentExcellence"
+          ],
+          "text": "Enhance brutalism showcase with interactive demos"
+        },
+        {
+          "checked": false,
+          "line_num": 370,
+          "tags": [
+            "#ContentExcellence"
+          ],
+          "text": "Complete experimentalism section with cutting-edge techniques"
+        },
+        {
+          "checked": false,
+          "line_num": 371,
+          "tags": [
+            "#TechnicalFoundation"
+          ],
+          "text": "Add build process monitoring"
+        },
+        {
+          "checked": false,
+          "line_num": 372,
+          "tags": [
+            "#TechnicalFoundation"
+          ],
+          "text": "Update Eleventy to latest version"
+        },
+        {
+          "checked": false,
+          "line_num": 373,
+          "tags": [
+            "#TechnicalFoundation"
+          ],
+          "text": "Implement PostCSS optimizations"
+        },
+        {
+          "checked": false,
+          "line_num": 374,
+          "tags": [
+            "#UserExperience"
+          ],
+          "text": "Create smooth transitions"
+        },
+        {
+          "checked": false,
+          "line_num": 375,
+          "tags": [
+            "#UserExperience"
+          ],
+          "text": "Add progressive enhancement"
+        },
+        {
+          "checked": false,
+          "line_num": 376,
+          "tags": [
+            "#DeveloperExperience"
+          ],
+          "text": "Create contribution guidelines"
+        },
+        {
+          "checked": false,
+          "line_num": 377,
+          "tags": [
+            "#DeveloperExperience"
+          ],
+          "text": "Add code examples library"
+        },
+        {
+          "checked": false,
+          "line_num": 378,
+          "tags": [
+            "#DeveloperExperience"
+          ],
+          "text": "Document best practices"
+        },
+        {
+          "checked": false,
+          "line_num": 379,
+          "tags": [
+            "#Infrastructure"
+          ],
+          "text": "Containerize with Docker"
+        },
+        {
+          "checked": false,
+          "line_num": 380,
+          "tags": [
+            "#Infrastructure"
+          ],
+          "text": "Add performance metrics"
+        },
+        {
+          "checked": false,
+          "line_num": 381,
+          "tags": [
+            "#Infrastructure"
+          ],
+          "text": "Create backup strategy"
+        },
+        {
+          "checked": false,
+          "line_num": 382,
+          "tags": [
+            "#Infrastructure"
+          ],
+          "text": "Plan scaling approach"
+        },
+        {
+          "checked": false,
+          "line_num": 383,
+          "tags": [
+            "#QualityAssurance"
+          ],
+          "text": "Check SEO optimization"
+        },
+        {
+          "checked": false,
+          "line_num": 384,
+          "tags": [
+            "#QualityAssurance"
+          ],
+          "text": "Integrate Lighthouse for CI (low priority)"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "d4fd6ed4f1c24705",
+      "line_num": 367,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\u2728 Medium Priorities - Adding Extra Sparkle!**\n- [ ] Expand modernism examples with real projects #ContentExcellence\n- [ ] Enhance brutalism showcase with interactive demos #ContentExcellence\n- [ ] Complete experimentalism section with cutting-edge techniques #ContentExcellence\n- [ ] Add build process monitoring #TechnicalFoundation\n- [ ] Update Eleventy to latest version #TechnicalFoundation\n- [ ] Implement PostCSS optimizations #TechnicalFoundation\n- [ ] Create smooth transitions #UserExperience\n- [ ] Add progressive enhancement #UserExperience\n- [ ] Create contribution guidelines #DeveloperExperience\n- [ ] Add code examples library #DeveloperExperience\n- [ ] Document best practices #DeveloperExperience\n- [ ] Containerize with Docker #Infrastructure\n- [ ] Add performance metrics #Infrastructure\n- [ ] Create backup strategy #Infrastructure\n- [ ] Plan scaling approach #Infrastructure\n- [ ] Check SEO optimization #QualityAssurance\n- [ ] Integrate Lighthouse for CI (low priority) #QualityAssurance\n\n`TODO.md:L367`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 1320
+    },
+    {
+      "file_path": "docs/panel-reviews/2026-04-20-startr-style.md",
+      "height": 80,
+      "id": "1a5417d260e9403c",
+      "line_num": 204,
+      "source": "inline",
+      "tags": [],
+      "text": "### TODO items appended to `TODO.md`\n`docs/panel-reviews/2026-04-20-startr-style.md:204`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 1410
+    },
+    {
+      "file_path": "src/experimentalisim/index.html",
+      "height": 80,
+      "id": "10d431fd8ff582b8",
+      "line_num": 268,
+      "source": "inline",
+      "tags": [],
+      "text": "/* TODO move these */\n`src/experimentalisim/index.html:268`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 1500
+    },
+    {
+      "file_path": "src/experimentalisim/index.html",
+      "height": 80,
+      "id": "24105b54edf56cbe",
+      "line_num": 517,
+      "source": "inline",
+      "tags": [],
+      "text": "/* TODO ...figure out how to have imgs show thier src ;) */\n`src/experimentalisim/index.html:517`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 1590
+    },
+    {
+      "file_path": "src/modernism/index.html",
+      "height": 80,
+      "id": "2c2f93155f3284f0",
+      "line_num": 242,
+      "source": "inline",
+      "tags": [],
+      "text": "/* TODO move these */\n`src/modernism/index.html:242`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 1680
+    },
+    {
+      "file_path": "src/modernism/index.html",
+      "height": 80,
+      "id": "c1d03fee1e570e00",
+      "line_num": 540,
+      "source": "inline",
+      "tags": [],
+      "text": "/* TODO ...figure out how to have imgs show thier src ;) */\n`src/modernism/index.html:540`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 1770
+    },
+    {
+      "file_path": "src/static/style.css",
+      "height": 80,
+      "id": "60132ca938364dd8",
+      "line_num": 97,
+      "source": "inline",
+      "tags": [],
+      "text": "/* TODO: Remove this SAGE PATCH */\n`src/static/style.css:97`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 1860
+    },
+    {
+      "file_path": "src/brutalism/index.html",
+      "height": 80,
+      "id": "87c0f5398a142f36",
+      "line_num": 149,
+      "source": "inline",
+      "tags": [],
+      "text": "/* TODO move these */\n`src/brutalism/index.html:149`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 1950
+    },
+    {
+      "file_path": "src/brutalism/index.html",
+      "height": 80,
+      "id": "8a1f76e8610d21d7",
+      "line_num": 388,
+      "source": "inline",
+      "tags": [],
+      "text": "/* TODO ...figure out how to have imgs show thier src ;) */\n`src/brutalism/index.html:388`",
+      "type": "text",
+      "width": 280,
+      "x": 360,
+      "y": 2040
+    },
+    {
+      "color": "5",
+      "height": 250,
+      "id": "col-in_progress",
+      "label": "In Progress",
+      "type": "group",
+      "width": 300,
+      "x": 700,
+      "y": 0
+    },
+    {
+      "children": [
+        {
+          "checked": true,
+          "line_num": 10,
+          "tags": [],
+          "text": "Research current Makefile patterns across Startr repositories"
+        },
+        {
+          "checked": true,
+          "line_num": 11,
+          "tags": [],
+          "text": "Design universal template with dynamic project title extraction supporting both:"
+        },
+        {
+          "checked": true,
+          "line_num": 14,
+          "tags": [],
+          "text": "Test dynamic variable extraction: `git config --get remote.origin.url` parsing \u2705"
+        },
+        {
+          "checked": true,
+          "line_num": 15,
+          "tags": [],
+          "text": "Create standardized help command format showing \"{OWNER}/{PROJECT} by Startr.Cloud\" \u2705"
+        },
+        {
+          "checked": true,
+          "line_num": 16,
+          "tags": [],
+          "text": "Handle edge cases: SSH vs HTTPS URLs, GitLab/GitHub differences, local repos \u2705"
+        },
+        {
+          "checked": true,
+          "line_num": 17,
+          "tags": [],
+          "text": "Implement consistent command naming conventions (it_run, it_build, deploy, etc.) \u2705"
+        },
+        {
+          "checked": true,
+          "line_num": 18,
+          "tags": [],
+          "text": "Add standard variables for PROJECTPATH, PROJECT, OWNER, BRANCH, TAG, CONTAINER \u2705"
+        },
+        {
+          "checked": false,
+          "line_num": 19,
+          "tags": [],
+          "text": "Create documentation for Makefile standardization guidelines"
+        },
+        {
+          "checked": false,
+          "line_num": 20,
+          "tags": [],
+          "text": "Test standardized Makefile in this repository first"
+        },
+        {
+          "checked": false,
+          "line_num": 21,
+          "tags": [],
+          "text": "Roll out to other Startr repositories"
+        },
+        {
+          "checked": false,
+          "line_num": 22,
+          "tags": [],
+          "text": "Step away from Netlify to Cloudflare or Self-host"
+        },
+        {
+          "checked": false,
+          "line_num": 23,
+          "tags": [],
+          "text": "Update CONVENTION.instructions.md with Makefile standards"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "be284aa3c990afcb",
+      "line_num": 9,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**[Infrastructure] Standardize Makefile Across All Git Repositories**\n- [x] Research current Makefile patterns across Startr repositories\n- [x] Design universal template with dynamic project title extraction supporting both:\n- [x] Test dynamic variable extraction: `git config --get remote.origin.url` parsing \u2705\n- [x] Create standardized help command format showing \"{OWNER}/{PROJECT} by Startr.Cloud\" \u2705\n- [x] Handle edge cases: SSH vs HTTPS URLs, GitLab/GitHub differences, local repos \u2705\n- [x] Implement consistent command naming conventions (it_run, it_build, deploy, etc.) \u2705\n- [x] Add standard variables for PROJECTPATH, PROJECT, OWNER, BRANCH, TAG, CONTAINER \u2705\n- [ ] Create documentation for Makefile standardization guidelines\n- [ ] Test standardized Makefile in this repository first\n- [ ] Roll out to other Startr repositories\n- [ ] Step away from Netlify to Cloudflare or Self-host\n- [ ] Update CONVENTION.instructions.md with Makefile standards\n\n`TODO.md:L9`",
+      "type": "text",
+      "width": 280,
+      "x": 710,
+      "y": 60
+    },
+    {
+      "children": [
+        {
+          "checked": true,
+          "line_num": 107,
+          "tags": [
+            "#ContentExcellence"
+          ],
+          "text": "Write clear examples for each design style"
+        },
+        {
+          "checked": true,
+          "line_num": 108,
+          "tags": [
+            "#ContentExcellence"
+          ],
+          "text": "Create step-by-step tutorials"
+        },
+        {
+          "checked": true,
+          "line_num": 109,
+          "tags": [
+            "#ContentExcellence"
+          ],
+          "text": "Add practical use cases for utilities"
+        },
+        {
+          "checked": true,
+          "line_num": 110,
+          "tags": [
+            "#ContentExcellence"
+          ],
+          "text": "Keep things DRY (Don't Repeat Yourself)"
+        },
+        {
+          "checked": true,
+          "line_num": 111,
+          "tags": [],
+          "text": "Refactor _includes to avoid duplication"
+        },
+        {
+          "checked": true,
+          "line_num": 112,
+          "tags": [],
+          "text": "Created shared components: head.njk, theme-toggle.njk, navigation.njk, theme-scripts.njk"
+        },
+        {
+          "checked": true,
+          "line_num": 113,
+          "tags": [],
+          "text": "Eliminated code duplication between layout.njk and layout_2.njk"
+        },
+        {
+          "checked": true,
+          "line_num": 114,
+          "tags": [],
+          "text": "Consolidated footer content using footer.njk include"
+        },
+        {
+          "checked": true,
+          "line_num": 115,
+          "tags": [
+            "#ContentExcellence"
+          ],
+          "text": "Document design principles clearly"
+        },
+        {
+          "checked": false,
+          "line_num": 116,
+          "tags": [],
+          "text": "Max height for the aside on small screens should be 100vh or less, and the overflow should scroll vertically"
+        },
+        {
+          "checked": false,
+          "line_num": 117,
+          "tags": [
+            "#ContentExcellence"
+          ],
+          "text": "Write compelling copy for landing page"
+        },
+        {
+          "checked": false,
+          "line_num": 118,
+          "tags": [
+            "#ContentExcellence"
+          ],
+          "text": "Add interactive playground for utilities"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "15730aff91fc5667",
+      "line_num": 106,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\ud83d\udd25 High Priorities - Fueling the Rocket!**\n- [x] Write clear examples for each design style #ContentExcellence\n- [x] Create step-by-step tutorials #ContentExcellence\n- [x] Add practical use cases for utilities #ContentExcellence\n- [x] Keep things DRY (Don't Repeat Yourself) #ContentExcellence\n- [x] Refactor _includes to avoid duplication\n- [x] Created shared components: head.njk, theme-toggle.njk, navigation.njk, theme-scripts.njk\n- [x] Eliminated code duplication between layout.njk and layout_2.njk\n- [x] Consolidated footer content using footer.njk include\n- [x] Document design principles clearly #ContentExcellence\n- [ ] Max height for the aside on small screens should be 100vh or less, and the overflow should scroll vertically\n- [ ] Write compelling copy for landing page #ContentExcellence\n- [ ] Add interactive playground for utilities #ContentExcellence\n\n`TODO.md:L106`",
+      "type": "text",
+      "width": 280,
+      "x": 710,
+      "y": 150
+    },
+    {
+      "color": "1",
+      "height": 200,
+      "id": "col-bugs",
+      "label": "Bugs",
+      "type": "group",
+      "width": 300,
+      "x": 1050,
+      "y": 0
+    },
+    {
+      "children": [
+        {
+          "checked": false,
+          "line_num": 389,
+          "tags": [],
+          "text": "rendering breaks or produces unexpected results."
+        },
+        {
+          "checked": false,
+          "line_num": 390,
+          "tags": [],
+          "text": "See sage.is/hardware configurator page."
+        },
+        {
+          "checked": false,
+          "line_num": 391,
+          "tags": [],
+          "text": "Investigat shadow system inset and standard"
+        },
+        {
+          "checked": false,
+          "line_num": 392,
+          "tags": [],
+          "text": "fix `--shadow-inset` with `--shadow` or `--shadow-hvr`,"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "9dcd60b7d4bdbdc6",
+      "line_num": 388,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\ud83d\udc1b Inset shadows don't play well with other shadows**\n- [ ] rendering breaks or produces unexpected results.\n- [ ] See sage.is/hardware configurator page.\n- [ ] Investigat shadow system inset and standard\n- [ ] fix `--shadow-inset` with `--shadow` or `--shadow-hvr`,\n\n`TODO.md:L388`",
+      "type": "text",
+      "width": 280,
+      "x": 1060,
+      "y": 60
+    },
+    {
+      "color": "6",
+      "height": 340,
+      "id": "col-done",
+      "label": "Done",
+      "type": "group",
+      "width": 300,
+      "x": 1400,
+      "y": 0
+    },
+    {
+      "children": [
+        {
+          "checked": true,
+          "line_num": 71,
+          "tags": [],
+          "text": "**Navigation**: Header navigation (layout.njk), footer with social icons (footer.njk)"
+        },
+        {
+          "checked": true,
+          "line_num": 72,
+          "tags": [],
+          "text": "**Forms**: Text inputs, textareas, selects, validation states (fields.njk), login forms (use-cases)"
+        },
+        {
+          "checked": true,
+          "line_num": 73,
+          "tags": [],
+          "text": "**Buttons**: All variations including colors, sizes, groups, icons, disabled states (buttons.njk)"
+        },
+        {
+          "checked": true,
+          "line_num": 74,
+          "tags": [],
+          "text": "**Cards**: Pricing cards, product showcases (use-cases/index.njk)"
+        },
+        {
+          "checked": true,
+          "line_num": 75,
+          "tags": [],
+          "text": "**Layout**: Grid systems, responsive layouts (tutorials/index.njk)"
+        },
+        {
+          "checked": true,
+          "line_num": 76,
+          "tags": [],
+          "text": "**Tables**: Basic data tables (everything-else.njk)"
+        },
+        {
+          "checked": true,
+          "line_num": 77,
+          "tags": [],
+          "text": "**Interactive**: Details/summary accordions (everything-else.njk)"
+        },
+        {
+          "checked": true,
+          "line_num": 78,
+          "tags": [],
+          "text": "**Social**: Social media buttons and icons (footer components)"
+        },
+        {
+          "checked": true,
+          "line_num": 79,
+          "tags": [],
+          "text": "**Typography**: Headings, paragraphs, blockquotes, lists, text formatting (typography.njk)"
+        },
+        {
+          "checked": true,
+          "line_num": 80,
+          "tags": [],
+          "text": "**Media**: Responsive images, image galleries, avatars, icons (multiple files)"
+        },
+        {
+          "checked": true,
+          "line_num": 81,
+          "tags": [],
+          "text": "**Loading**: Spinners, skeleton states, pulse animations (use-cases, working.html)"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "ef8d22aa867ba7dc",
+      "line_num": 70,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\ud83d\udccb Existing Components Found (Ready for Gallery)**\n- [x] **Navigation**: Header navigation (layout.njk), footer with social icons (footer.njk)\n- [x] **Forms**: Text inputs, textareas, selects, validation states (fields.njk), login forms (use-cases)\n- [x] **Buttons**: All variations including colors, sizes, groups, icons, disabled states (buttons.njk)\n- [x] **Cards**: Pricing cards, product showcases (use-cases/index.njk)\n- [x] **Layout**: Grid systems, responsive layouts (tutorials/index.njk)\n- [x] **Tables**: Basic data tables (everything-else.njk)\n- [x] **Interactive**: Details/summary accordions (everything-else.njk)\n- [x] **Social**: Social media buttons and icons (footer components)\n- [x] **Typography**: Headings, paragraphs, blockquotes, lists, text formatting (typography.njk)\n- [x] **Media**: Responsive images, image galleries, avatars, icons (multiple files)\n- [x] **Loading**: Spinners, skeleton states, pulse animations (use-cases, working.html)\n\n`TODO.md:L70`",
+      "type": "text",
+      "width": 280,
+      "x": 1410,
+      "y": 60
+    },
+    {
+      "children": [
+        {
+          "checked": true,
+          "line_num": 95,
+          "tags": [
+            "#TechnicalFoundation"
+          ],
+          "text": "Fix server error handling"
+        },
+        {
+          "checked": true,
+          "line_num": 96,
+          "tags": [
+            "#UserExperience"
+          ],
+          "text": "Perfect mobile responsiveness"
+        },
+        {
+          "checked": true,
+          "line_num": 97,
+          "tags": [],
+          "text": "Optimize loading speed #UserExperience (Note we are using Eleventy for static site generation and should set a medium priority for CDN updates)"
+        },
+        {
+          "checked": true,
+          "line_num": 98,
+          "tags": [
+            "#QualityAssurance"
+          ],
+          "text": "Test across browsers"
+        },
+        {
+          "checked": true,
+          "line_num": 99,
+          "tags": [
+            "#QualityAssurance"
+          ],
+          "text": "Audit accessibility"
+        },
+        {
+          "checked": true,
+          "line_num": 100,
+          "tags": [],
+          "text": "Setup axe-cli for automated audit"
+        },
+        {
+          "checked": true,
+          "line_num": 101,
+          "tags": [
+            "#QualityAssurance"
+          ],
+          "text": "Test mobile devices"
+        },
+        {
+          "checked": true,
+          "line_num": 102,
+          "tags": [
+            "#QualityAssurance"
+          ],
+          "text": "Verify loading speeds"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "e8280aad1d6bcd8f",
+      "line_num": 94,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**\ud83d\udea8 Done \u2014 Critical Priorities (All Hands on Deck!)**\n- [x] Fix server error handling #TechnicalFoundation\n- [x] Perfect mobile responsiveness #UserExperience\n- [x] Optimize loading speed #UserExperience (Note we are using Eleventy for static site generation and should set a medium priority for CDN updates)\n- [x] Test across browsers #QualityAssurance\n- [x] Audit accessibility #QualityAssurance\n- [x] Setup axe-cli for automated audit\n- [x] Test mobile devices #QualityAssurance\n- [x] Verify loading speeds #QualityAssurance\n\n`TODO.md:L94`",
+      "type": "text",
+      "width": 280,
+      "x": 1410,
+      "y": 150
+    },
+    {
+      "children": [
+        {
+          "checked": true,
+          "line_num": 165,
+          "tags": [],
+          "text": "Headings (H1-H6) [/docs/base-elements/typography.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 166,
+          "tags": [],
+          "text": "Paragraphs with inline elements [/docs/base-elements/typography.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 167,
+          "tags": [],
+          "text": "Blockquotes with citations [/docs/base-elements/typography.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 168,
+          "tags": [],
+          "text": "Text formatting (bold, italic, code, mark, small) [/docs/base-elements/typography.njk] - Add to gallery"
+        },
+        {
+          "checked": true,
+          "line_num": 169,
+          "tags": [],
+          "text": "Links and link states [/docs/base-elements/typography.njk] - Add to gallery"
+        }
+      ],
+      "file_path": "TODO.md",
+      "height": 80,
+      "id": "5845e47cc231eb82",
+      "line_num": 164,
+      "source": "todo_md",
+      "tags": [],
+      "text": "**Typography Components [/docs/base-elements/typography.njk]**\n- [x] Headings (H1-H6) [/docs/base-elements/typography.njk] - Add to gallery\n- [x] Paragraphs with inline elements [/docs/base-elements/typography.njk] - Add to gallery\n- [x] Blockquotes with citations [/docs/base-elements/typography.njk] - Add to gallery\n- [x] Text formatting (bold, italic, code, mark, small) [/docs/base-elements/typography.njk] - Add to gallery\n- [x] Links and link states [/docs/base-elements/typography.njk] - Add to gallery\n\n`TODO.md:L164`",
+      "type": "text",
+      "width": 280,
+      "x": 1410,
+      "y": 240
+    }
+  ]
+}

@@ -1,14 +1,25 @@
-# Startr Style Project TODO: The Quest for Awesome!
+# Startr Style Project TODO: The Quest for Awesome
 
 Welcome, brave developer, to the Startr Style Project TODO list! This isn't just a list; it's a treasure map leading to a land of sleek design, stellar performance, and happy users. Let's get these gems polished!
 
-## 🚧 BLOCKERS - Must Complete Before Other Work!
+## ⚠️ Revert — Temporary Hack (Bialik presentation)
+
+- [ ] **🔥 Re-enable the `--maxw-sm` responsive max-width rule** (`src/static/style.css`, ~line 2528): it is currently commented out with the note *"Dissabled temporarily for the Bialik presentation"* (2026-06-25). **This kills the `--maxw-sm` utility framework-wide for every consumer (Sage.is, Sage.Education, etc.).** Restore the block inside the `-sm` media query:
+  ```css
+  [style*="--maxw-sm:"] {
+    max-width: var(--maxw-sm) !important;
+  }
+  ```
+  Revert as soon as the Bialik presentation is done. Mirrored in `WEB-Sage.Education-curriculum/TODO.md`. #revert #regression #critical
+
+## 🚧 High Priority — Blockers (Must Complete Before Other Work!)
 
 ### **Makefile Standardization Initiative**
-- [x] **[Infrastructure] Standardize Makefile Across All Git Repositories**: Create a universal Makefile template that dynamically extracts project title from repository structure
+
+- [ ] **[Infrastructure] Standardize Makefile Across All Git Repositories**
   - [x] Research current Makefile patterns across Startr repositories
   - [x] Design universal template with dynamic project title extraction supporting both:
-    - `THE_OWNER/PROJECT` format (e.g., "Startr/Style") ✅ 
+    - `THE_OWNER/PROJECT` format (e.g., "Startr/Style") ✅
     - `project_owner/folder` format (e.g., "somma/my-project") ✅
   - [x] Test dynamic variable extraction: `git config --get remote.origin.url` parsing ✅
   - [x] Create standardized help command format showing "{OWNER}/{PROJECT} by Startr.Cloud" ✅
@@ -22,84 +33,120 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
   - [ ] Update CONVENTION.instructions.md with Makefile standards
 
 **Why This is a Blocker**: Standardizing our build and deployment infrastructure across all repositories is critical for:
+
 - Consistent developer experience across projects
 - Automated CI/CD pipeline compatibility  
 - Reduced onboarding time for new projects
 - Easier maintenance and updates across the entire Startr ecosystem
 
-## 🎉 Recent Accomplishments
-- ✅ **Enhanced Design Philosophy Pages** - Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages
-- ✅ **Created Tutorial System** - Built step-by-step tutorials covering basic utilities, responsive layouts, and interactive components
-- ✅ **Added Use Cases Documentation** - Created practical real-world examples including login forms, navigation, galleries, and pricing cards
-- ✅ **Updated Navigation** - Added Learning section with links to Tutorials and Use Cases, plus Design Styles section
-- ✅ **Component Inventory Complete** - Scanned existing components and updated TODO with 15+ existing components ready for gallery inclusion
+## 📋 Backlog
 
-## 📋 Existing Components Found (Ready for Gallery)
-- **Navigation**: Header navigation (layout.njk), footer with social icons (footer.njk)
-- **Forms**: Text inputs, textareas, selects, validation states (fields.njk), login forms (use-cases)
-- **Buttons**: All variations including colors, sizes, groups, icons, disabled states (buttons.njk)
-- **Cards**: Pricing cards, product showcases (use-cases/index.njk)
-- **Layout**: Grid systems, responsive layouts (tutorials/index.njk)
-- **Tables**: Basic data tables (everything-else.njk)
-- **Interactive**: Details/summary accordions (everything-else.njk)
-- **Social**: Social media buttons and icons (footer components)
-- **Typography**: Headings, paragraphs, blockquotes, lists, text formatting (typography.njk)
-- **Media**: Responsive images, image galleries, avatars, icons (multiple files)
-- **Loading**: Spinners, skeleton states, pulse animations (use-cases, working.html)
+- [ ]  📦 Versioning & Rollback
+  - [ ] **Ship pinned and rolling CDN versions**: Currently unversioned — any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path. Publish `/v1/`, `/v2/`, and a rolling `/latest/`. Implementation approach: submodule structure where `v1/` is a submodule pointing to the project at the v1 tag, `v2/` at v2, etc. — versioned URLs serve from the pinned submodule, `latest/` serves from `master`.
+  - [ ] Consumers pin to a version in prod; `latest` is for the Startr studio itself. Migration plan needed for existing Sage.is / Sage.Education `<link>` tags currently pointing at the unversioned URL. *(Surfaced by Zach Leatherman in a panel review of Sage.is, 2026-04-18.)*
+  - [ ] **Cache headers — versioned vs rolling**: `/v1/style.css`, `/v2/style.css`, etc. → `Cache-Control: public, max-age=31536000, immutable` (one year, immutable; the URL's contents never change by design). `/latest/style.css` → `Cache-Control: public, max-age=60, must-revalidate` (short TTL + revalidate so studio pushes propagate quickly and stale copies don't linger). *(Surfaced by Zach Leatherman, 2026-04-18.)*
+  - [ ] **Emit SRI integrity hashes for each pinned release**: Generate `sha384` integrity hashes at release time and publish them alongside the versioned URL so consumers can use `<link rel="stylesheet" href="/v1/style.css" integrity="sha384-..." crossorigin="anonymous">`. Gives consumers an integrity guarantee even though Startr.Style is on a separate origin. *(Surfaced by Zach Leatherman, 2026-04-18.)*
+  - [ ] **Resolve version drift between README and package.json**: `README.md` opens with `1.3.1`; `package.json` declares `1.2.2.2`. Pick one source of truth (conventionally `package.json`) and make the README read from it, or bump them in lockstep via `scripts/release.sh`. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
 
-**Total: 25+ existing components identified across 12+ major categories**
+- [ ] ♿ Accessibility
 
-## 🎯 Next Steps for Component Gallery
-1. **Create Gallery Landing Page** - Build main navigation for component categories
-2. **Extract Components** - Move existing components into dedicated gallery sections
-3. **Add Live Examples** - Enable copy-paste functionality and live preview
-4. **Organize by Category** - Group components logically (Forms, Buttons, Layout, etc.)
-5. **Add Documentation** - Include usage instructions and accessibility notes
-6. **Interactive Features** - Add search, filters, and component playground
+  - [ ] **Audit `-hvr` coverage for `:focus` and `:focus-visible`**: Every `[style*="--X-hvr:"]:hover` rule should be paired with `:focus, :focus-visible` so keyboard users get the same affordance as mouse users. `--shadow-hvr` covers `:focus` today; audit and enumerate the rest (`--hvr-bgc`, `--hvr-c`, `--hvr-bdc`, etc.). Land coverage systematically, not ad-hoc. *(Surfaced by Adam Wathan in a panel review of Sage.is, 2026-04-18.)*
+  - [ ] **Reconcile `:focus-visible` audit status with spoken claims**: The `-hvr` coverage audit above has been open since 2026-04-18, yet a verbal claim of "keyboard accessibility tested, no issues" was made during the 2026-04-20 panel. Either close the audit with a landed commit, or retract the claim. Both states cannot be true at once. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*
 
-## 🚨 Critical Priorities - All Hands on Deck!
-- [x] Fix server error handling #TechnicalFoundation
-- [x] Perfect mobile responsiveness #UserExperience
-- [x] Optimize loading speed #UserExperience (Note we are using Eleventy for static site generation and should set a medium priority for CDN updates)
-- [x] Test across browsers #QualityAssurance
-- [x] Audit accessibility #QualityAssurance
-  - [x] Setup axe-cli for automated audit
-- [x] Test mobile devices #QualityAssurance
-- [x] Verify loading speeds #QualityAssurance
+- [ ] 🎨 Colour System Invariants
 
-## 🔥 High Priorities - Fueling the Rocket!
-- [x] Write clear examples for each design style #ContentExcellence
-- [x] Create step-by-step tutorials #ContentExcellence
-- [x] Add practical use cases for utilities #ContentExcellence
-- [x] Keep things DRY (Don't Repeat Yourself) #ContentExcellence
+  - [ ] **Audit every colour leaf for IACVT-safe fallbacks**: The 216-cell `color-mix(in oklch, …)` cascade in `src/style-core/src/variables.css` invalidates whole declarations when any component is unparseable. Every consumer leaf (e.g. `background: var(--primary)`) must resolve to `var(--primary, <literal-fallback>)`, not `inherit`/`initial`. Audit the whole leaf surface, not one line — otherwise the DSL has accents. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+  - [ ] **Register critical custom properties with `@property`**: Without registration, the browser treats colour and layout variables as untyped strings. Downstream `color-mix()` and `calc()` can silently IACVT when consumers pass malformed values. Register `--primary`, `--background`, `--text-main`, and the 216-cell cube entries so the browser can validate inputs and animate between them. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+
+- [ ] 📊 Performance Methodology
+
+  - [ ] **Replace the "17% faster than Tailwind" eye-balling with a real harness**: Pick three comparable pages per site (landing, docs, gallery/component showcase). Throttle to Slow 4G, mid-tier Android, cold cache, five runs, publish median.
+  - [ ] Publish the harness and raw numbers in `docs/benchmarks/`. Until then, the 17% claim is a vibe, not a metric — use it at parties, not in the README. *(Surfaced by Jeremy Keith in a panel review of Startr.Style, 2026-04-20.)*
+  - [ ] **Re-run LCP on a page that exercises the colour cube**: Current LCP of 0.55s has `<p>` as the LCP element, meaning the 216-cell `color-mix()` cascade is not in the critical render path of the tested page.
+  - [ ] Re-measure on `theme-creator.html` and the component gallery once it exists — pages that actually resolve the cube. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+
+- [ ] 🧹 Repo Hygiene
+
+  - [ ] **Remove Syncthing conflict file from `src/_includes/`**: `src/_includes/layout.sync-conflict-20251127-153148-EJ43XZB.njk` is a Syncthing merge-conflict leftover in the source tree.
+  - [ ] Decide whether canonical `layout.njk` or the conflict copy is the intended version, merge the divergence, delete the conflict file. Add `*.sync-conflict-*` to `.gitignore` to prevent recurrence. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*
+
+- [X] 🎉 **Done — Recent Accomplishments**
+  - [x] **Enhanced Design Philosophy Pages** - Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages
+  - [x] **Created Tutorial System** - Built step-by-step tutorials covering basic utilities, responsive layouts, and interactive components
+  - [x] **Added Use Cases Documentation** - Created practical real-world examples including login forms, navigation, galleries, and pricing cards
+  - [x] **Updated Navigation** - Added Learning section with links to Tutorials and Use Cases, plus Design Styles section
+  - [x] **Component Inventory Complete** - Scanned existing components and updated TODO with 15+ existing components ready for gallery inclusion
+
+- [x] 📋 Existing Components Found (Ready for Gallery)
+  - [x] **Navigation**: Header navigation (layout.njk), footer with social icons (footer.njk)
+  - [x] **Forms**: Text inputs, textareas, selects, validation states (fields.njk), login forms (use-cases)
+  - [x] **Buttons**: All variations including colors, sizes, groups, icons, disabled states (buttons.njk)
+  - [x] **Cards**: Pricing cards, product showcases (use-cases/index.njk)
+  - [x] **Layout**: Grid systems, responsive layouts (tutorials/index.njk)
+  - [x] **Tables**: Basic data tables (everything-else.njk)
+  - [x] **Interactive**: Details/summary accordions (everything-else.njk)
+  - [x] **Social**: Social media buttons and icons (footer components)
+  - [x] **Typography**: Headings, paragraphs, blockquotes, lists, text formatting (typography.njk)
+  - [x] **Media**: Responsive images, image galleries, avatars, icons (multiple files)
+  - [x] **Loading**: Spinners, skeleton states, pulse animations (use-cases, working.html)
+
+We have **Total: 25+ existing components identified across 12+ major categories**
+
+## 🎯 TODO — Next Steps for Component Gallery
+
+- [ ] **Create Gallery Landing Page** - Build main navigation for component categories
+  - [ ] **Extract Components** - Move existing components into dedicated gallery sections
+  - [ ] **Add Live Examples** - Enable copy-paste functionality and live preview
+  - [ ] **Organize by Category** - Group components logically (Forms, Buttons, Layout, etc.)
+  - [ ] **Add Documentation** - Include usage instructions and accessibility notes
+  - [ ] **Interactive Features** - Add search, filters, and component playground
+
+- [x] 🚨 Done — Critical Priorities (All Hands on Deck!)
+  - [x] Fix server error handling #TechnicalFoundation
+  - [x] Perfect mobile responsiveness #UserExperience
+  - [x] Optimize loading speed #UserExperience (Note we are using Eleventy for static site generation and should set a medium priority for CDN updates)
+  - [x] Test across browsers #QualityAssurance
+  - [x] Audit accessibility #QualityAssurance
+    - [x] Setup axe-cli for automated audit
+  - [x] Test mobile devices #QualityAssurance
+  - [x] Verify loading speeds #QualityAssurance
+
+## High Priority
+
+- [ ] 🔥 High Priorities - Fueling the Rocket!
+  - [x] Write clear examples for each design style #ContentExcellence
+  - [x] Create step-by-step tutorials #ContentExcellence
+  - [x] Add practical use cases for utilities #ContentExcellence
+  - [x] Keep things DRY (Don't Repeat Yourself) #ContentExcellence
   - [x] Refactor _includes to avoid duplication
   - [x] Created shared components: head.njk, theme-toggle.njk, navigation.njk, theme-scripts.njk
   - [x] Eliminated code duplication between layout.njk and layout_2.njk
   - [x] Consolidated footer content using footer.njk include
-- [x] Document design principles clearly #ContentExcellence
-- [ ] Max height for the aside on small screens should be 100vh or less, and the overflow should scroll vertically
-- [ ] Write compelling copy for landing page #ContentExcellence
-- [ ] Add interactive playground for utilities #ContentExcellence (note working system on pages: )
+  - [x] Document design principles clearly #ContentExcellence
+  - [ ] Max height for the aside on small screens should be 100vh or less, and the overflow should scroll vertically
+  - [ ] Write compelling copy for landing page #ContentExcellence
+  - [ ] Add interactive playground for utilities #ContentExcellence
 
-## 📝 Documentation & Development Guidelines #ContentExcellence
-- [x] **Use Proper Highlight Shortcodes** - Always use `{% highlight "html" %}`, `{% highlight "css" %}`, or `{% highlight "text" %}` with `{% endhighlight %}` instead of hardcoded `<div class="highlight">` with `<pre>` tags
+## 📝 TODO — Documentation & Development Guidelines #ContentExcellence
+
+- [ ] **Use Proper Highlight Shortcodes** -
+  - [ ] Always use `{% highlight "html" %}`, `{% highlight "css" %}`, or `{% highlight "text" %}` with `{% endhighlight %}`
+  - [ ] instead of hardcoded `<div class="highlight">` with `<pre>` tags
   - [x] Updated installation.njk to use proper shortcodes
-  - [ ] **URGENT: Audit and fix hardcoded highlight blocks in the following files:**
-    - [x] `/src/index.njk` - 1 hardcoded highlight div (line 86) ✅ COMPLETED
-    - [x] `/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47) ✅ COMPLETED
-    - [x] `/src/docs/tutorials/index.njk` - 5 hardcoded highlight divs (lines 38, 46, 114, 121, 176) + pre tags (lines 39, 47, 115, 122, 177) ✅ COMPLETED
-    - [x] `/src/docs/base-elements/buttons.njk` - 8 hardcoded highlight divs (lines 18, 37, 54, 69, 90, 113, 129, 143) + pre tags ✅ COMPLETED
-    - [ ] `/src/docs/base-elements/everything-else.njk` - Multiple hardcoded pre tags (lines 47, 91, 108, 132)
-    - [ ] `/src/docs/base-elements/typography.njk` - 2 hardcoded pre tags (lines 123, 166)
-    - [ ] `/src/docs/helpers/shadows.njk` - 8 hardcoded highlight divs (lines 20, 45, 70, 95, 121, 147, 174, 201) + pre tags
-    - [ ] `/src/docs/helpers/transform.njk` - 10 hardcoded highlight divs (lines 22, 48, 72, 98, 122, 148, 172, 198, 222, 248)
-    - [ ] `/src/docs/helpers/position.njk` - 7 hardcoded highlight divs + pre tags (lines 22, 44, 66, 88, 110, 132, 154)
-    - [ ] `/src/docs/helpers/background.njk` - 1 hardcoded pre tag (line 23)
+
+- [ ] 🔥fix hardcoded highlight blocks in the following files:**
+  - [x] `/src/index.njk` - 1 hardcoded highlight div (line 86)
+  - [x] `/src/docs/utilities.njk` - 1 hardcoded highlight div + pre tag (lines 45-47)
+  - [x] `/src/docs/tutorials/index.njk` - 5 hardcoded highlight divs (lines 38, 46, 114, 121, 176) + pre tags (lines 39, 47, 115, 122, 177)
+  - [x] `/src/docs/base-elements/buttons.njk` - 8 hardcoded highlight divs (lines 18, 37, 54, 69, 90, 113, 129, 143) + pre tags
+  - [ ] `/src/docs/base-elements/everything-else.njk` - Multiple hardcoded pre tags (lines 47, 91, 108, 132)
+  - [ ] `/src/docs/base-elements/typography.njk` - 2 hardcoded pre tags (lines 123, 166)
+  - [ ] `/src/docs/helpers/shadows.njk` - 8 hardcoded highlight divs (lines 20, 45, 70, 95, 121, 147, 174, 201) + pre tags
+  - [ ] `/src/docs/helpers/transform.njk` - 10 hardcoded highlight divs (lines 22, 48, 72, 98, 122, 148, 172, 198, 222, 248)
+  - [ ] `/src/docs/helpers/position.njk` - 7 hardcoded highlight divs + pre tags (lines 22, 44, 66, 88, 110, 132, 154)
+  - [ ] `/src/docs/helpers/background.njk` - 1 hardcoded pre tag (line 23)
   - [ ] **Total files needing cleanup: 11 files with ~45+ hardcoded blocks**
-  - [ ] Create documentation guideline for contributors about highlight usage
-- [ ] **Maintain Consistent Code Examples** - Ensure all code snippets follow the same formatting standards
-- [ ] **Document Utility Patterns** - Create clear examples for common utility combinations
-- [x] **[Infrastructure] Add bun run command for cloudflared tunneling** - Create a script to start the app and expose it via cloudflared. ✅
+  - [ ] **Document Utility Patterns** - Create clear examples for common utility combinations
 
 - [ ] Create component gallery with live examples #ContentExcellence
   - [ ] **Planning & Architecture**
@@ -108,6 +155,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
     - [ ] Plan interactive playground integration
     - [ ] Define component documentation template format
     - [ ] Plan responsive showcase for each component
+
   - [ ] **Navigation Components**
     - [x] Header/Navigation bars [/docs/] (layout.njk contains main navigation)
       - [x] Horizontal navigation with dropdown menus [/_includes/layout.njk] - Add to gallery
@@ -115,43 +163,44 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
       - [ ] Breadcrumb navigation
       - [ ] Tab navigation with active states
       - [ ] Sidebar navigation with nested items
-    - [x] Footer components [/docs/]
-      - [x] Simple footer with links [/_includes/footer.njk] - Add to gallery
-      - [x] Multi-column footer with social icons [/_includes/footer.njk, /static/footer.html] - Add to gallery
-      - [ ] Sticky footer layouts
-    - [ ] Pagination components
+- [ ] Footer components [/docs/]
+  - [x] Simple footer with links [/_includes/footer.njk] - Add to gallery
+  - [x] Multi-column footer with social icons [/_includes/footer.njk, /static/footer.html] - Add to gallery
+  - [ ] Sticky footer layouts
+- [ ] Pagination components
       - [ ] Number-based pagination
       - [ ] Previous/Next pagination
       - [ ] Load more button
-  - [x] **Typography Components** [/docs/base-elements/typography.njk]
-    - [x] Headings (H1-H6) [/docs/base-elements/typography.njk] - Add to gallery
-    - [x] Paragraphs with inline elements [/docs/base-elements/typography.njk] - Add to gallery
-    - [x] Blockquotes with citations [/docs/base-elements/typography.njk] - Add to gallery
-    - [x] Text formatting (bold, italic, code, mark, small) [/docs/base-elements/typography.njk] - Add to gallery
-    - [x] Links and link states [/docs/base-elements/typography.njk] - Add to gallery
-  - [ ] **Form Components**
-    - [x] Input variations [/docs/base-elements/fields.njk]
-      - [x] Text inputs with labels and validation states [/docs/base-elements/fields.njk] - Add to gallery
-      - [ ] Search inputs with icons
-      - [x] Number inputs with increment/decrement [/docs/base-elements/fields.njk] - Add to gallery
-      - [x] Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery
-      - [ ] File upload with drag-and-drop styling
-      - [x] Multi-line textarea components [/docs/base-elements/fields.njk] - Add to gallery
-    - [x] Selection controls [/docs/base-elements/fields.njk]
-      - [x] Custom checkboxes with various styles
-        - [ ] Debug checkbox styles !!!
-      - [ ] Radio button groups
-      - [x] Toggle switches
-      - [x] Multi-select dropdowns [/docs/base-elements/fields.njk] - Add to gallery
-      - [ ] Autocomplete/typeahead inputs
-    - [x] Form layouts [/docs/use-cases/index.njk]
-      - [ ] Inline forms
-      - [ ] Stacked forms with proper spacing
-      - [ ] Multi-step/wizard forms
-      - [x] Form validation with error states [/docs/base-elements/fields.njk] - Add to gallery
-      - [x] Login/registration form templates [/docs/use-cases/index.njk] - Add to gallery
-        - [ ] Add spacing above and below the form in the preview
-        - [ ] Update to the content of https://codepen.io/openco/pen/wBavPYx 
+- [x] **Typography Components** [/docs/base-elements/typography.njk]
+  - [x] Headings (H1-H6) [/docs/base-elements/typography.njk] - Add to gallery
+  - [x] Paragraphs with inline elements [/docs/base-elements/typography.njk] - Add to gallery
+  - [x] Blockquotes with citations [/docs/base-elements/typography.njk] - Add to gallery
+  - [x] Text formatting (bold, italic, code, mark, small) [/docs/base-elements/typography.njk] - Add to gallery
+  - [x] Links and link states [/docs/base-elements/typography.njk] - Add to gallery
+- [ ] **Form Components**
+  - [x] Input variations [/docs/base-elements/fields.njk]
+  - [x] Text inputs with labels and validation states [/docs/base-elements/fields.njk] - Add to gallery
+  - [ ] Search inputs with icons
+  - [x] Number inputs with increment/decrement [/docs/base-elements/fields.njk] - Add to gallery
+  - [x] Number sliders with live value display [/docs/base-elements/fields.njk] - Add to gallery
+  - [ ] File upload with drag-and-drop styling
+  - [x] Multi-line textarea components [/docs/base-elements/fields.njk] - Add to gallery
+  - [x] Selection controls [/docs/base-elements/fields.njk]
+  - [ ] Custom checkboxes with various styles
+  - [ ] Debug checkbox styles !!!
+  - [ ] Radio button groups
+  - [x] Toggle switches
+
+  - [x] Multi-select dropdowns [/docs/base-elements/fields.njk] - Add to gallery
+  - [ ] Autocomplete/typeahead inputs
+- [ ] Form layouts [/docs/use-cases/index.njk]
+  - [ ] Inline forms
+  - [ ] Stacked forms with proper spacing
+  - [ ] Multi-step/wizard forms
+  - [x] Form validation with error states [/docs/base-elements/fields.njk] - Add to gallery
+  - [x] Login/registration form templates [/docs/use-cases/index.njk] - Add to gallery
+    - [ ] Add spacing above and below the form in the preview
+    - [ ] Update to the content of <https://codepen.io/openco/pen/wBavPYx>
 
   - [ ] **Button Components**
     - [x] Button variations [/docs/base-elements/buttons.njk]
@@ -203,7 +252,7 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
       - [ ] Responsive containers
       - [ ] Full-width vs contained sections
   - [x] **Modal & Overlay Components**
-    - [x] Modal dialogs based on https://believemy.com/en/r/creating-a-modal-window-without-using-javascript 
+    - [x] Modal dialogs based on <https://believemy.com/en/r/creating-a-modal-window-without-using-javascript>
       - [x] Basic modal with backdrop
       - [x] Confirmation dialogs
       - [x] Form modals
@@ -278,82 +327,100 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
       - [ ] Category badges
   - [ ] **E-commerce Components**
     - [ ] Product showcases
-      - [ ] Product detail layouts
-      - [ ] Product comparison tables
-      - [ ] Shopping cart components
-      - [ ] Wishlist components
+    - [ ] Product detail layouts
+    - [ ] Product comparison tables
+    - [ ] Shopping cart components
+    - [ ] Wishlist components
     - [ ] Pricing displays
-      - [ ] Pricing cards/tables
-      - [ ] Subscription plan comparisons
-      - [ ] Price formatting examples
-      - [ ] Discount/sale price displays
-  - [ ] **Documentation & Implementation**
-    - [ ] Component documentation
-      - [ ] Write clear usage instructions for each component
-      - [ ] Document all utility classes used
-      - [ ] Provide copy-paste HTML examples
-      - [ ] Include accessibility notes for each component
-      - [ ] Add responsive behavior explanations
-    - [ ] Interactive features
-      - [ ] Add "View Code" toggle for each example
-      - [ ] Implement live preview with editable code
-      - [ ] Add copy-to-clipboard functionality
-      - [ ] Create component search/filter system
-    - [ ] Quality assurance
-      - [ ] Test all components across different browsers
-      - [ ] Verify mobile responsiveness of all examples
-      - [ ] Validate HTML markup for accessibility
-      - [ ] Ensure consistent styling across components
-    - [ ] Gallery structure
-      - [ ] Create main component gallery landing page
-      - [ ] Build category navigation system
-      - [ ] Implement component preview thumbnails
-      - [ ] Add related components suggestions
-      - [ ] Create component favorites/bookmarking system
-- [ ] Add search functionality to documentation #UserExperience
-- [ ] Add request logging #TechnicalFoundation
-- [x] Optimize CSS delivery #TechnicalFoundation (using Eleventy and PostCSS)
-- [x] Implement code splitting #TechnicalFoundation
+    - [ ] Pricing cards/tables
+    - [ ] Subscription plan comparisons
+    - [ ] Price formatting examples
+    - [ ] Discount/sale price displays
+- [ ] **Documentation & Implementation**
+  - [ ] Component documentation
+  - [ ] Write clear usage instructions for each component
+  - [ ] Provide copy-paste HTML examples
+  - [ ] Include accessibility notes for each component
+  - [ ] Add responsive behavior explanations
+  - [ ] Implement live preview with editable code
+  - [ ] Add copy-to-clipboard functionality
+  - [ ] Create component search/filter system
+  - [ ] Test all components across different browsers
+  - [ ] Verify mobile responsiveness of all examples
+  - [ ] Ensure consistent styling across components
+- [ ] Gallery structure
+  - [ ] Create main component gallery landing page
+  - [ ] Build category navigation system
+  - [ ] Implement component preview thumbnails
+  - [ ] Add related components suggestions
+  - [ ] Create component favorites/bookmarking system
+  - [ ] Add search functionality to documentation #UserExperience
+- [ ] Optimize delivery #TechnicalFoundation (using Eleventy and PostCSS)
+  - [x] Implement code splitting #TechnicalFoundation
   - [x] Use Eleventy for static site generation
-  - [ ] Use PostCSS for CSS optimization when in Eleventy not just seperate repo
-- [ ] Use service workers for caching #TechnicalFoundation
-- [x] Implement HTTP/2 for faster loading #TechnicalFoundation
-- [ ] Use a CDN for static assets #TechnicalFoundation
-- [ ] Optimize font loading #TechnicalFoundation
-- [ ] Compress images automatically #TechnicalFoundation
-- [ ] Enable lazy loading for performance #TechnicalFoundation
-- [x] Add touch-friendly interactions #UserExperience
+  - [x] Implement HTTP/2 for faster loading #TechnicalFoundation
+  - [x] Use a CDN for static assets #TechnicalFoundation
+  - [ ] Optimize font loading #TechnicalFoundation
+  - [ ] Compress images automatically #TechnicalFoundation
+  - [ ] Enable lazy loading for performance #TechnicalFoundation
 - [ ] Improve navigation flow #UserExperience
-- [ ] Add keyboard accessibility #UserExperience
-- [ ] Test screen reader compatibility #UserExperience
+  - [ ] Add keyboard accessibility #UserExperience
+  - [ ] Test screen reader compatibility #UserExperience
 - [ ] Write comprehensive style guide #DeveloperExperience
-- [ ] Create component documentation #DeveloperExperience
-- [ ] Add automated testing suite #DeveloperExperience
-- [ ] Set up development workflow #DeveloperExperience
-- [ ] Build utility reference #DeveloperExperience
+  - [ ] Create component documentation #DeveloperExperience
 - [ ] Set up CI/CD pipeline #Infrastructure
-- [ ] Add deployment automation #Infrastructure
-- [ ] Configure monitoring #Infrastructure
-- [ ] Set up error tracking #Infrastructure
-- [ ] Validate HTML semantics #QualityAssurance
-- [ ] Check CSS performance #QualityAssurance
-- [ ] Review code quality #QualityAssurance
+  - [ ] Add automated testing suite #DeveloperExperience
+  - [ ] Add deployment automation #Infrastructure
+  - [ ] Configure monitoring #Infrastructure
+  - [ ] Set up error tracking #Infrastructure
 
-## ✨ Medium Priorities - Adding Extra Sparkle!
-- [ ] Expand modernism examples with real projects #ContentExcellence
-- [ ] Enhance brutalism showcase with interactive demos #ContentExcellence
-- [ ] Complete experimentalism section with cutting-edge techniques #ContentExcellence
-- [ ] Add build process monitoring #TechnicalFoundation
-- [ ] Update Eleventy to latest version #TechnicalFoundation
-- [ ] Implement PostCSS optimizations #TechnicalFoundation
-- [ ] Create smooth transitions #UserExperience
-- [ ] Add progressive enhancement #UserExperience
-- [ ] Create contribution guidelines #DeveloperExperience
-- [ ] Add code examples library #DeveloperExperience
-- [ ] Document best practices #DeveloperExperience
-- [ ] Containerize with Docker #Infrastructure
-- [ ] Add performance metrics #Infrastructure
-- [ ] Create backup strategy #Infrastructure
-- [ ] Plan scaling approach #Infrastructure
-- [ ] Check SEO optimization #QualityAssurance
-- [ ] Integrate Lighthouse for CI (low priority) #QualityAssurance
+- [ ] ✨ Medium Priorities - Adding Extra Sparkle!
+  - [ ] Expand modernism examples with real projects #ContentExcellence
+  - [ ] Enhance brutalism showcase with interactive demos #ContentExcellence
+  - [ ] Complete experimentalism section with cutting-edge techniques #ContentExcellence
+  - [ ] Add build process monitoring #TechnicalFoundation
+  - [ ] Update Eleventy to latest version #TechnicalFoundation
+  - [ ] Implement PostCSS optimizations #TechnicalFoundation
+  - [ ] Create smooth transitions #UserExperience
+  - [ ] Add progressive enhancement #UserExperience
+  - [ ] Create contribution guidelines #DeveloperExperience
+  - [ ] Add code examples library #DeveloperExperience
+  - [ ] Document best practices #DeveloperExperience
+  - [ ] Containerize with Docker #Infrastructure
+  - [ ] Add performance metrics #Infrastructure
+  - [ ] Create backup strategy #Infrastructure
+  - [ ] Plan scaling approach #Infrastructure
+  - [ ] Check SEO optimization #QualityAssurance
+  - [ ] Integrate Lighthouse for CI (low priority) #QualityAssurance
+
+## Bugs — Known Issues
+
+- [ ] **🐛 Inset shadows don't play well with other shadows**
+  - [ ] rendering breaks or produces unexpected results.
+  - [ ] See sage.is/hardware configurator page.
+  - [ ] Investigat shadow system inset and standard
+  - [ ] fix `--shadow-inset` with `--shadow` or `--shadow-hvr`,
+
+## Backlog
+
+- [ ] **Framework `--c` / `--bg` / `--b` bindings should cover form controls + links**: `[style*="--c"] { color: var(--c) }` loses to UA defaults on `<input>`, `<button>`, `<select>`, `<textarea>`, `<a>` (system color keywords `ButtonText`/`FieldText` and `-webkit-link` win). Consumers have to pull `color: var(--c)` explicitly in component CSS, defeating the inline-primitive promise. Either (a) extend the framework's bindings with the form-control selector list, or (b) document the gotcha prominently. Surfaced 2026-06-08 during Sage.is signup-gate refactor — the unlock button rendered text in browser's default ButtonText (black) on a `--bg: var(--c-ink)` (black) pill despite inline `--c: var(--c-cream)`. Workaround applied at `WEB-Sage.is/src/_includes/signup-gate.njk` (CSS rule explicitly pulls `color: var(--c)` into `.signup-gate__submit` / `.signup-gate__input` / `.signup-gate__provider`).
+
+- [ ] **Document the brand "gradient text" default + ship `.text-flat` opt-out utility**: The site-wide rule `h1, h2, h3, h4, h5, button, .button, strong { background-image: linear-gradient(...); background-clip: text; -webkit-text-fill-color: transparent; }` is a deliberate brand default (Sage.is keeps strong defaults to stay simple). It bites consumers who build custom components with solid backgrounds — the text fill is transparent and the gradient is hidden behind the solid bg, leaving invisible text. The three-property opt-out incantation (`background-image: none; background-clip: border-box; -webkit-text-fill-color: currentColor;`) is non-obvious. Action: (a) document the default behavior + the opt-out in startr.style docs alongside the framework primitives, and (b) ship a utility class — e.g. `.text-flat` or `.no-gradient-text` — that bundles the three-property opt-out so consumers can write `<button class="text-flat">` instead of remembering the recipe. **Smarter-defaults option to weigh:** drop `button, .button` from the selector list entirely — interactive controls almost always have a solid background that hides the gradient anyway, so the default does nothing useful there and only causes the invisible-text trap. Keep the gradient on `h1-h5, strong` where it actually reads. Surfaced 2026-06-08 during Sage.is signup-gate work — the submit button, h2 heading, and `<strong>` titles all needed the same three-line reset. Workaround currently lives in `WEB-Sage.is/src/_includes/signup-gate.njk` and `whats-included.njk`.
+
+- [ ] **Typography prop names silently collide with non-typography intents** #critical — Three pairs of identical custom-prop names mean reasonable-looking inline styles silently render as invalid declarations the browser drops without warning:
+  - `--fs` is bound TWICE: `font-style` (typography) AND `flex-shrink` (flex). A consumer writing `style="--fs: 1.5rem"` expecting font-size gets *neither* font-size nor a meaningful warning — both bindings receive `1.5rem` and both are invalid for what the author intended. Font-size's actual canonical prop is `--size`.
+  - `--fw` is `flex-wrap` only. A consumer writing `style="--fw: 600"` expecting font-weight sets `flex-wrap: 600`, invalid, silently dropped. Font-weight's actual canonical prop is `--weight`.
+  - `--br` is bound TWICE: `border-radius` AND `border-right`. Disambiguates by value type at runtime, which works but is fragile.
+
+  **Why this matters:** the convention "shorter custom-prop name" naturally pulls authors toward `--fs` and `--fw` (Tailwind muscle memory: `fs` ≈ font-size, `fw` ≈ font-weight). Both are footguns that produce no visible breakage at build time — the layout just looks "almost right" because UA defaults take over. Found 2026-06-08 during Sage.is signup-gate work: every `--fs: 1.5rem` on headings was being dropped, breakpoint typography wasn't firing, and the bug was only caught when the author read the framework source.
+
+  **Three remediation options to weigh:**
+    1. **Add `@property` registration** for the constrained-value props so the browser rejects invalid values loudly. e.g., `@property --size { syntax: "<length-percentage>"; inherits: false; initial-value: 1rem; }`. Doesn't fix the name collision but turns the silent failure into a clear devtools warning.
+    2. **Alias the intended names**: bind `--font-size` → font-size, `--font-weight` → font-weight, `--text-decoration` → text-decoration (alongside the short canonical names). Author can pick the verbose-and-unambiguous form when they want safety.
+    3. **Document the trap** in the framework README and the `/startr-style` skill: a "Naming gotchas" section listing every double-bind and the canonical name to reach for. Cheap, immediate, doesn't change framework behavior.
+
+  Surfaced via the Sage.is signup-gate refactor — workaround was reading the framework source (`src/style-core/src/utilities/_typography.css`) to find the canonical names. The fact that the workaround required reading framework source IS the problem.
+
+- [ ] 🧰 TodoScope Alignment
+  - [ ] **Review `.todoscope-exclude.csv` paths**: Seeded with `node_modules`, `dist`, `.git`, `src/style-core` (vendored subtree), `bun.lockb`, `chat.json`, `.DS_Store`. Confirm nothing load-bearing got excluded; add `static/` or other generated trees if needed.
+  - [ ] **Add `*.sync-conflict-*` to `.gitignore`**: Paired with the Repo Hygiene item above — prevent Syncthing conflict copies from ever being committed again. *(Cross-referenced from panel-review 2026-04-20.)*

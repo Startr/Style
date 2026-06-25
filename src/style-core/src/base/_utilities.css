@@ -1,0 +1,89 @@
+.primary {
+  --text-c: var(--primary);
+  --element-bg: var(--primary);
+}
+
+.secondary {
+  --text-c: var(--secondary);
+  --element-bg: var(--secondary);
+}
+
+.green {
+  --text-c: var(--green);
+  --element-bg: var(--green);
+}
+
+.blue {
+  --text-c: var(--blue);
+  --element-bg: var(--blue);
+}
+
+.orange {
+  --text-c: var(--orange);
+  --element-bg: var(--orange);
+}
+
+.red {
+  --text-c: var(--red);
+  --element-bg: var(--red);
+}
+
+.white {
+  --text-c: var(--white);
+  --element-bg: var(--white);
+  --btn-c: var(--text-main);
+  --tag-c: var(--text-main);
+}
+
+.grey {
+  --text-c: var(--grey);
+  --element-bg: var(--grey);
+  --btn-c: var(--text-main);
+  --tag-c: var(--text-main);
+}
+
+.black {
+  --text-c: var(--black);
+  --element-bg: var(--black);
+}
+
+.transparent {
+  --text-c: transparent;
+  --element-bg: transparent;
+  --btn-c: var(--text-main);
+  --tag-c: var(--text-main);
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+.transparent:hover {
+  border: 1px solid var(--border);
+}
+
+.accent {
+  color: var(--accent-c, var(--text-main));
+  background-color: var(--element-bg, var(--white));
+  border: var(--accent-border, 0);
+  border-radius: var(--border-radius, 0);
+  box-shadow: var(--accent-shadow, none);
+
+  &.primary,
+  &.secondary,
+  &.green,
+  &.blue,
+  &.red,
+  &.orange,
+  &.black {
+    --accent-c: var(--white);
+    --text-c: var(--white);
+  }
+}
+
+.sr-only {
+  position: absolute !important;
+  left: -100000px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
