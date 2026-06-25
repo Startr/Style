@@ -2525,9 +2525,10 @@ img.logo.clickable {
     [style*="--minh-sm:"] {
       min-height: var(--minh-sm) !important;
     }
-    [style*="--maxw-sm:"] {
-      max-width: var(--maxw-sm) !important;
-    }
+    /*[style*="--maxw-sm:"] {
+    // NOTE:Dissabled temporarily for the Bialik presentation
+    // max-width: var(--maxw-sm) !important;
+    }*/
     [style*="--maxh-sm:"] {
       max-height: var(--maxh-sm) !important;
     }
