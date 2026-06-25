@@ -2,6 +2,16 @@
 
 Welcome, brave developer, to the Startr Style Project TODO list! This isn't just a list; it's a treasure map leading to a land of sleek design, stellar performance, and happy users. Let's get these gems polished!
 
+## ⚠️ Revert — Temporary Hack (Bialik presentation)
+
+- [ ] **🔥 Re-enable the `--maxw-sm` responsive max-width rule** (`src/static/style.css`, ~line 2528): it is currently commented out with the note *"Dissabled temporarily for the Bialik presentation"* (2026-06-25). **This kills the `--maxw-sm` utility framework-wide for every consumer (Sage.is, Sage.Education, etc.).** Restore the block inside the `-sm` media query:
+  ```css
+  [style*="--maxw-sm:"] {
+    max-width: var(--maxw-sm) !important;
+  }
+  ```
+  Revert as soon as the Bialik presentation is done. Mirrored in `WEB-Sage.Education-curriculum/TODO.md`. #revert #regression #critical
+
 ## 🚧 High Priority — Blockers (Must Complete Before Other Work!)
 
 ### **Makefile Standardization Initiative**
