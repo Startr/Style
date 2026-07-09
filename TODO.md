@@ -70,6 +70,11 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
   - [ ] **Remove Syncthing conflict file from `src/_includes/`**: `src/_includes/layout.sync-conflict-20251127-153148-EJ43XZB.njk` is a Syncthing merge-conflict leftover in the source tree.
   - [ ] Decide whether canonical `layout.njk` or the conflict copy is the intended version, merge the divergence, delete the conflict file. Add `*.sync-conflict-*` to `.gitignore` to prevent recurrence. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*
 
+- [ ] 🖼️ Element Resets
+
+  - [ ] **Reset replaced elements to `display: block`**: Startr.Style ships `img { max-width: 100% }` but never resets `display` or `vertical-align`, so every `<img>` stays `display: inline` and sits on the text baseline. The line box reserves descender space *below* the baseline, which surfaces as a ~2–4px phantom gap under any image that's the tallest item in a flex/grid cell. Every consumer rediscovers this and patches it locally (Startr.ca card sections needed a per-image `--d: block`; a `--mb: -2px` magic-number was the tempting wrong fix). The conventional reset — shared by Tailwind Preflight, `sanitize.css`, `normalize.css` — is `img, svg, video, canvas, audio, iframe, embed, object { display: block; vertical-align: middle; }`. Decide whether to fold this into the framework's base reset. *(Surfaced while debugging the Startr.ca card layout, 2026-07-01.)*
+  - [ ] **Gauge blast radius before landing**: a global `img { display: block }` shifts any consumer that *intends* inline images flowed with text (icons mid-sentence, inline logos/badges, emoji-style glyphs). Before committing, `grep` the known consumers (`WEB-Sage.is`, `WEB-Sage.Education`, `WEB-startr`, `WEB-AI--Sage-is-AI-UI`) for inline-image usage; if the fallout is real, prefer `vertical-align: middle` alone (kills the descender gap while keeping images inline) over forcing `display: block`.
+
 - [X] 🎉 **Done — Recent Accomplishments**
   - [x] **Enhanced Design Philosophy Pages** - Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages
   - [x] **Created Tutorial System** - Built step-by-step tutorials covering basic utilities, responsive layouts, and interactive components

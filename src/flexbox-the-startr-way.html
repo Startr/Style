@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flexbox, the Startr Way — a complete guide in inline custom props</title>
+
+<!-- Startr Style: the utilities documented below. NOTE: unversioned CDN — pin /v1/ + SRI when available. -->
+<link rel="stylesheet" href="https://startr.style/style.css">
+
+<style>
+  /* ------------------------------------------------------------------
+     Almost nothing here — the framework's defaults carry the page.
+     No fonts, no palette, no tokens of our own. This block covers only
+     what inline props can't reach: syntax tint, button state,
+     :focus-visible, reduced motion.
+  ------------------------------------------------------------------ */
+  html{ scroll-behavior:smooth; }
+
+  /* Syntax tint on the framework's black code blocks — ANSI palette */
+  pre{ font-size:.82rem; line-height:1.65; }
+  pre .p{ color:var(--color-14); }   /* prop    · bright cyan   */
+  pre .v{ color:var(--color-11); }   /* value   · bright yellow */
+  pre .t{ color:var(--color-10); }   /* tag     · bright green  */
+  pre .c{ color:var(--color-15); }   /* comment · grey          */
+
+  /* Toggle buttons ride the framework's own hooks; every hover
+     gets a matching :focus-visible */
+  button[data-set]{ --element-bg:var(--background); --btn-c:var(--text-main); font-family:monospace; }
+  button[data-set].on{ --element-bg:var(--primary); --btn-c:var(--white); }
+  button[data-set]:focus-visible, a:focus-visible{
+    outline:3px solid var(--focus); outline-offset:2px;
+  }
+
+  /* Demo tiles get a soft entrance; respect reduced motion */
+  @media (prefers-reduced-motion: no-preference){
+    .demo > *{ transition: all .25s ease; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .demo > *{ transition:none; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header style="
+  --pos:sticky; --top:0; --z:50;
+  --d:flex; --ai:center; --jc:space-between; --g:1rem;
+  --p:.8rem 1.25rem; --p-md:.9rem 2.5rem;
+  --bgc:var(--background); --bb:1px solid var(--border);
+">
+  <a href="#top" style="--td:none; --c:var(--text-main); --d:flex; --ai:center; --g:.6rem; --weight:700;">
+    <span style="--d:inline-flex; --ai:center; --jc:center; --w:1.9rem; --h:1.9rem;
+                 --bgc:var(--primary); --c:var(--white); --radius:var(--border-radius); --weight:700;">⇄</span>
+    <span>Flexbox<span style="--c:var(--text-muted);">, the Startr way</span></span>
+  </a>
+  <nav style="--d:none; --d-md:flex; --g:1.4rem; --size:.85rem;">
+    <a href="#axes" style="--c:var(--text-muted); --td:none; --hvr-c:var(--primary);">Axes</a>
+    <a href="#container" style="--c:var(--text-muted); --td:none; --hvr-c:var(--primary);">Container</a>
+    <a href="#items" style="--c:var(--text-muted); --td:none; --hvr-c:var(--primary);">Items</a>
+    <a href="#responsive" style="--c:var(--text-muted); --td:none; --hvr-c:var(--primary);">Responsive</a>
+    <a href="#recipes" style="--c:var(--text-muted); --td:none; --hvr-c:var(--primary);">Recipes</a>
+    <a href="#cheatsheet" style="--c:var(--text-muted); --td:none; --hvr-c:var(--primary);">Cheatsheet</a>
+    <a href="#footguns" style="--c:var(--text-muted); --td:none; --hvr-c:var(--primary);">Footguns</a>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<main id="top" style="--maxw:1080px; --m:0 auto; --p:1.25rem; --p-md:2.5rem;">
+
+<section style="--d:flex; --fd:column; --g:1.25rem; --pt:2rem; --pt-md:4rem; --pb:2rem;">
+  <p style="--ff:monospace; --size:.78rem; --tt:uppercase; --ls:.12em; --c:var(--primary); --m:0;">
+    A complete guide · the page is the demo is the page
+  </p>
+  <h1 style="--size:2.3rem; --size-md:3.4rem; --weight:700; --lh:1.05; --m:0; --maxw:20ch;">
+    Every flexbox property.<br>No classes. No stylesheet.
+  </h1>
+  <p style="--size:1.05rem; --lh:1.7; --c:var(--text-muted); --maxw:62ch; --m:0;">
+    Here's the whole trick: startr.style turns every CSS property into a custom property
+    you write straight into the <code>style</code> attribute. The stylesheet reads your
+    variable and applies the real thing. Any valid CSS value works. And the responsive
+    suffixes (<code>--jc-md</code>, <code>--fd-lg</code>) give you
+    mobile-first breakpoints inline — something class-based utilities can't pull off
+    without a build step. Yes, the style attributes get long. We call that honesty.
+  </p>
+
+  <!-- The whole idea in one line -->
+  <div style="--d:flex; --fd:column; --g:0;
+              --radius:var(--border-radius); --of:hidden; --bs:var(--accent-shadow);">
+    <div style="--d:flex; --ai:center; --g:.5rem; --p:.6rem 1rem; --bgc:var(--black); --c:var(--grey); --size:.75rem; --ff:monospace;">
+      <span style="--w:.6rem; --h:.6rem; --radius:99px; --bgc:var(--red);"></span>
+      <span style="--w:.6rem; --h:.6rem; --radius:99px; --bgc:var(--yellow);"></span>
+      <span style="--w:.6rem; --h:.6rem; --radius:99px; --bgc:var(--green);"></span>
+      <span style="--ml:.5rem;">the-entire-mental-model.html</span>
+    </div>
+    <pre style="--m:0;"><code><span class="c">&lt;!-- a flex container: column on phones, row from 768px up --&gt;</span>
+<span class="t">&lt;div</span> style="<span class="p">--d</span>:<span class="v">flex</span>; <span class="p">--fd</span>:<span class="v">column</span>; <span class="p">--fd-md</span>:<span class="v">row</span>; <span class="p">--g</span>:<span class="v">1rem</span>; <span class="p">--ai-md</span>:<span class="v">center</span>;"<span class="t">&gt;</span></code></pre>
+  </div>
+</section>
+
+<!-- ================= BACKGROUND ================= -->
+<section style="--d:grid; --gtc:1fr; --gtc-md:1fr 1fr; --g:1.5rem; --pt:1.5rem; --pb:1.5rem;">
+  <div style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem;">
+    <h2 style="--size:1.15rem; --mt:0; --mb:.6rem;">Why flexbox</h2>
+    <p style="--lh:1.7; --c:var(--text-muted); --m:0; --size:.94rem;">
+      Flexbox lets a container boss its children around: stretch them, squish them,
+      reorder them, space them out, all without knowing how big any of them are yet.
+      Block flow only goes down. Inline flow only goes across. Flexbox doesn't care,
+      because one property flips a row into a column. Use it for components and anything
+      that runs in a single line, and reach for grid
+      (<code>--d:grid</code>, <code>--gtc</code>) when a layout
+      needs rows <em>and</em> columns at once.
+    </p>
+  </div>
+  <div style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem;">
+    <h2 style="--size:1.15rem; --mt:0; --mb:.6rem;">Why inline custom props</h2>
+    <p style="--lh:1.7; --c:var(--text-muted); --m:0; --size:.94rem;">
+      Two rules run this whole page. First, <strong style="--c:var(--text-main);">inline styles are the API</strong>:
+      there's no cascade to manage and no classes to compose, so reuse lives in your
+      templates and components. Second, <strong style="--c:var(--text-main);">values pass straight through to CSS</strong>,
+      which means anything legal works, even
+      <code>--fb:clamp(12rem,30%,20rem)</code>. It also means a typo like
+      <code>--d:flax</code> fails without a peep. Type carefully, and lint if you can.
+      No compiler, no safety net. It is what it is.
+    </p>
+  </div>
+</section>
+
+<!-- ================= AXES / TERMINOLOGY ================= -->
+<section id="axes" style="--pt:2.5rem;">
+  <h2 style="--size:1.7rem; --mb:.4rem;">1 · The two axes</h2>
+  <p style="--c:var(--text-muted); --lh:1.7; --maxw:68ch;">
+    Every flex layout runs along a <strong style="--c:var(--text-main);">main axis</strong> (the direction items flow,
+    set by <code>--fd</code>) and a perpendicular <strong style="--c:var(--text-main);">cross axis</strong>.
+    That's the whole vocabulary. <code>--jc</code> (justify-content) aligns along
+    the main axis, and <code>--ai</code> (align-items) handles the cross.
+    Go ahead, mash the buttons below. Each one is a single <code>setProperty('--fd', …)</code>
+    call on the demo, because startr props <em>are</em> custom properties. You're not
+    watching a simulation of the layout engine. You're poking the actual one.
+  </p>
+
+  <div style="--d:flex; --fd:column; --fd-lg:row; --g:1.25rem; --ai-lg:stretch;">
+    <!-- interactive compass demo -->
+    <div style="--fx:1; --bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.25rem;
+                --d:flex; --fd:column; --g:1rem;">
+      <div data-group class="group" style="--fw:wrap; --x:80;">
+        <button data-set="axisdemo|fd" data-value="row" class="on">--fd:row</button>
+        <button data-set="axisdemo|fd" data-value="row-reverse">--fd:row-reverse</button>
+        <button data-set="axisdemo|fd" data-value="column">--fd:column</button>
+        <button data-set="axisdemo|fd" data-value="column-reverse">--fd:column-reverse</button>
+      </div>
+
+      <div id="axisdemo" class="demo" style="--d:flex; --fd:row; --g:.6rem; --p:1rem;
+                  --minh:180px; --bgc:var(--background-alt); --radius:var(--border-radius); --b:1px dashed var(--primary);">
+        <div style="--bgc:var(--primary); --c:var(--white); --p:.7rem 1rem; --radius:var(--border-radius); --weight:600;">1</div>
+        <div style="--bgc:var(--primary); --c:var(--white); --p:.7rem 1rem; --radius:var(--border-radius); --weight:600;">2</div>
+        <div style="--bgc:var(--yellow); --c:var(--black); --p:.7rem 1rem; --radius:var(--border-radius); --weight:600;">3</div>
+      </div>
+
+      <pre style="--m:0;"><code><span class="t">&lt;div</span> style="<span class="p">--d</span>:<span class="v">flex</span>; <span class="p">--fd</span>:<span class="v" id="axisdemo-fd-value">row</span>; <span class="p">--g</span>:<span class="v">.6rem</span>;"<span class="t">&gt;</span></code></pre>
+    </div>
+
+    <!-- vocabulary card -->
+    <div style="--w:100%; --w-lg:320px; --bgc:var(--black); --c:var(--white); --radius:var(--border-radius); --p:1.4rem;
+                --d:flex; --fd:column; --g:.9rem;">
+      <h3 style="--m:0; --size:1rem; --c:var(--white);">Vocabulary</h3>
+      <p style="--m:0; --size:.88rem; --lh:1.65; --c:var(--grey);"><strong style="--c:var(--white);">main axis</strong> — the flow direction. <code>row</code> ⇢ horizontal, <code>column</code> ⇣ vertical. <code>*-reverse</code> flips main-start and main-end.</p>
+      <p style="--m:0; --size:.88rem; --lh:1.65; --c:var(--grey);"><strong style="--c:var(--white);">cross axis</strong> — perpendicular to main. Where <code>--ai</code>, <code>--as</code>, and <code>--ac</code> operate.</p>
+      <p style="--m:0; --size:.88rem; --lh:1.65; --c:var(--grey);"><strong style="--c:var(--white);">main / cross size</strong> — an item's width or height, whichever lies along that axis. <code>--fb</code> sets the starting main size.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTAINER PROPS ================= -->
+<section id="container" style="--pt:3rem;">
+  <h2 style="--size:1.7rem; --mb:.4rem;">2 · Container props <span style="--c:var(--text-muted); --weight:400; --size:1rem;">(the flex parent)</span></h2>
+  <p style="--c:var(--text-muted); --lh:1.7; --maxw:68ch; --mb:1.5rem;">
+    These go on the parent, and every one takes responsive suffixes. Nothing below is
+    a screenshot: each box is styled with the exact props in its code block, and the
+    buttons rewrite them live. Poke anything. A refresh puts it all back.
+  </p>
+
+  <!-- --d -->
+  <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem; --mb:1.25rem;">
+    <h3 style="--mt:0; --mb:.35rem; --size:1.1rem;"><code>--d</code> · display</h3>
+    <p style="--c:var(--text-muted); --size:.92rem; --lh:1.65; --mb:.9rem;">
+      The on switch. Set it and every direct child becomes a flex item.
+      <code>flex</code> acts like a block, while <code>inline-flex</code> tucks into a
+      line of text — the go-to for pill buttons and badges.
+    </p>
+    <pre style="--m:0;"><code>style="<span class="p">--d</span>:<span class="v">flex</span>"          <span class="c">&lt;!-- block-level container --&gt;</span>
+style="<span class="p">--d</span>:<span class="v">inline-flex</span>"   <span class="c">&lt;!-- flows inline, e.g. --d:inline-flex; --ai:center; --g:.5rem --&gt;</span></code></pre>
+  </article>
+
+  <!-- --fw -->
+  <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem; --mb:1.25rem;">
+    <h3 style="--mt:0; --mb:.35rem; --size:1.1rem;"><code>--fw</code> · flex-wrap</h3>
+    <p style="--c:var(--text-muted); --size:.92rem; --lh:1.65; --mb:.9rem;">
+      Left alone, flex items will crush themselves onto one line before they ever wrap
+      (<code>nowrap</code>). Give them permission with <code>wrap</code>, or use
+      <code>wrap-reverse</code> if you like your lines filled bottom-up. Heads up: startr
+      has no <code>flex-flow</code> shorthand, so set <code>--fd</code> and
+      <code>--fw</code> separately.
+    </p>
+    <div data-group class="group" style="--fw:wrap; --x:80;">
+      <button data-set="wrapdemo|fw" data-value="nowrap" class="on">nowrap</button>
+      <button data-set="wrapdemo|fw" data-value="wrap">wrap</button>
+      <button data-set="wrapdemo|fw" data-value="wrap-reverse">wrap-reverse</button>
+    </div>
+    <div id="wrapdemo" class="demo" style="--d:flex; --fw:nowrap; --g:.5rem; --p:.8rem; --of:hidden;
+                --bgc:var(--background-alt); --radius:var(--border-radius); --b:1px dashed var(--primary);">
+      <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem 0; --radius:var(--border-radius); --w:120px; --minw:80px; --ta:center; --weight:600;">1</div>
+      <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem 0; --radius:var(--border-radius); --w:120px; --minw:80px; --ta:center; --weight:600;">2</div>
+      <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem 0; --radius:var(--border-radius); --w:120px; --minw:80px; --ta:center; --weight:600;">3</div>
+      <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem 0; --radius:var(--border-radius); --w:120px; --minw:80px; --ta:center; --weight:600;">4</div>
+      <div style="--bgc:var(--yellow); --c:var(--black); --p:.6rem 0; --radius:var(--border-radius); --w:120px; --minw:80px; --ta:center; --weight:600;">5</div>
+      <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem 0; --radius:var(--border-radius); --w:120px; --minw:80px; --ta:center; --weight:600;">6</div>
+    </div>
+  </article>
+
+  <!-- --jc -->
+  <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem; --mb:1.25rem;">
+    <h3 style="--mt:0; --mb:.35rem; --size:1.1rem;"><code>--jc</code> · justify-content <span style="--c:var(--text-muted); --size:.85rem; --weight:400;">(main axis)</span></h3>
+    <p style="--c:var(--text-muted); --size:.92rem; --lh:1.65; --mb:.9rem;">
+      Decides what happens to leftover space on the main axis. <code>space-between</code>
+      pins the first and last items to the edges. <code>space-around</code> gives every item
+      its own equal side-spacing, which is why the middle gaps look doubled. And
+      <code>space-evenly</code> is the perfectionist: every gap, edges included, comes out
+      identical. When browser support matters most, stick to <code>flex-start</code>,
+      <code>flex-end</code>, and <code>center</code>.
+    </p>
+    <div data-group class="group" style="--fw:wrap; --x:80;">
+      <button data-set="jcdemo|jc" data-value="flex-start" class="on">flex-start</button>
+      <button data-set="jcdemo|jc" data-value="center">center</button>
+      <button data-set="jcdemo|jc" data-value="flex-end">flex-end</button>
+      <button data-set="jcdemo|jc" data-value="space-between">space-between</button>
+      <button data-set="jcdemo|jc" data-value="space-around">space-around</button>
+      <button data-set="jcdemo|jc" data-value="space-evenly">space-evenly</button>
+    </div>
+    <div id="jcdemo" class="demo" style="--d:flex; --jc:flex-start; --g:.5rem; --p:.8rem;
+                --bgc:var(--background-alt); --radius:var(--border-radius); --b:1px dashed var(--primary);">
+      <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">1</div>
+      <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">2</div>
+      <div style="--bgc:var(--yellow); --c:var(--black); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">3</div>
+    </div>
+  </article>
+
+  <!-- --ai -->
+  <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem; --mb:1.25rem;">
+    <h3 style="--mt:0; --mb:.35rem; --size:1.1rem;"><code>--ai</code> · align-items <span style="--c:var(--text-muted); --size:.85rem; --weight:400;">(cross axis)</span></h3>
+    <p style="--c:var(--text-muted); --size:.92rem; --lh:1.65; --mb:.9rem;">
+      <code>--jc</code>'s twin, working the cross axis. The default,
+      <code>stretch</code>, pulls items to fill the container (min/max permitting). The
+      sleeper hit is <code>baseline</code>: click it and watch item 3's oversized type
+      snap into line with the others.
+    </p>
+    <div data-group class="group" style="--fw:wrap; --x:80;">
+      <button data-set="aidemo|ai" data-value="stretch" class="on">stretch</button>
+      <button data-set="aidemo|ai" data-value="flex-start">flex-start</button>
+      <button data-set="aidemo|ai" data-value="center">center</button>
+      <button data-set="aidemo|ai" data-value="flex-end">flex-end</button>
+      <button data-set="aidemo|ai" data-value="baseline">baseline</button>
+    </div>
+    <div id="aidemo" class="demo" style="--d:flex; --ai:stretch; --g:.5rem; --p:.8rem; --h:150px;
+                --bgc:var(--background-alt); --radius:var(--border-radius); --b:1px dashed var(--primary);">
+      <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">1</div>
+      <div style="--bgc:var(--primary); --c:var(--white); --p:1.4rem .9rem; --radius:var(--border-radius); --weight:600;">2</div>
+      <div style="--bgc:var(--yellow); --c:var(--black); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600; --size:1.6rem;">3</div>
+    </div>
+  </article>
+
+  <!-- --ac + gap -->
+  <div style="--d:grid; --gtc:1fr; --gtc-md:1fr 1fr; --g:1.25rem; --mb:1.25rem;">
+    <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem;">
+      <h3 style="--mt:0; --mb:.35rem; --size:1.1rem;"><code>--ac</code> · align-content</h3>
+      <p style="--c:var(--text-muted); --size:.92rem; --lh:1.65;">
+        What <code>--jc</code> does for items, this does for whole <em>lines</em>
+        on the cross axis. The catch is that it needs multiple lines to push around, so
+        nothing happens until <code>--fw:wrap</code> (or <code>wrap-reverse</code>)
+        actually produces some. Values mirror <code>--jc</code>, plus
+        <code>stretch</code>.
+      </p>
+      <pre style="--m:0;"><code>style="<span class="p">--d</span>:<span class="v">flex</span>; <span class="p">--fw</span>:<span class="v">wrap</span>;
+       <span class="p">--ac</span>:<span class="v">space-between</span>; <span class="p">--h</span>:<span class="v">300px</span>;"</code></pre>
+    </article>
+    <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem;">
+      <h3 style="--mt:0; --mb:.35rem; --size:1.1rem;"><code>--g</code> / <code>--cg</code> · gap</h3>
+      <p style="--c:var(--text-muted); --size:.92rem; --lh:1.65;">
+        Space <em>between</em> items. The outer edges get nothing, so think of it as a
+        minimum gutter — if <code>space-between</code> spreads things wider, the wider
+        spacing wins. One value covers both directions, two values mean
+        <code>row column</code>, and <code>--cg</code> targets column-gap alone.
+        It even works in grid and multi-column.
+      </p>
+      <pre style="--m:0;"><code>style="<span class="p">--g</span>:<span class="v">1rem</span>"          <span class="c">&lt;!-- rows &amp; columns --&gt;</span>
+style="<span class="p">--g</span>:<span class="v">.5rem 1.5rem</span>"   <span class="c">&lt;!-- row · column --&gt;</span>
+style="<span class="p">--cg</span>:<span class="v">2rem</span>"         <span class="c">&lt;!-- column-gap only --&gt;</span></code></pre>
+    </article>
+  </div>
+</section>
+
+<!-- ================= ITEM PROPS ================= -->
+<section id="items" style="--pt:3rem;">
+  <h2 style="--size:1.7rem; --mb:.4rem;">3 · Item props <span style="--c:var(--text-muted); --weight:400; --size:1rem;">(the flex children)</span></h2>
+  <p style="--c:var(--text-muted); --lh:1.7; --maxw:68ch; --mb:1.5rem;">
+    These go on the children themselves. And a small mercy: <code>float</code>,
+    <code>clear</code>, and <code>vertical-align</code> do nothing to a flex item,
+    so those old fights are simply over.
+  </p>
+
+  <!-- grow/shrink/basis -->
+  <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem; --mb:1.25rem;">
+    <h3 style="--mt:0; --mb:.35rem; --size:1.1rem;">
+      <code>--fg</code> · flex-grow &nbsp;
+      <code>--fs</code> · flex-shrink &nbsp;
+      <code>--fb</code> · flex-basis
+    </h3>
+    <p style="--c:var(--text-muted); --size:.92rem; --lh:1.65; --mb:.9rem;">
+      The big three. <code>--fb</code> is where an item starts:
+      <code>auto</code> means "use my width/height", <code>0</code> means "pretend I have
+      no content". <code>--fg</code> divides leftover space by share, so a
+      <code>--fg:2</code> item tries to grab twice what its <code>--fg:1</code> siblings get.
+      <code>--fs</code> is the same idea in reverse, deciding who shrinks when
+      space runs out (default <code>1</code>; negatives are invalid for both). Watch the
+      amber item below take space at double speed:
+    </p>
+    <div class="demo" style="--d:flex; --g:.5rem; --p:.8rem;
+                --bgc:var(--background-alt); --radius:var(--border-radius); --b:1px dashed var(--primary);">
+      <div style="--fg:1; --bgc:var(--primary); --c:var(--white); --p:.6rem; --radius:var(--border-radius); --ta:center; --weight:600;">--fg:1</div>
+      <div style="--fg:1; --bgc:var(--primary); --c:var(--white); --p:.6rem; --radius:var(--border-radius); --ta:center; --weight:600;">--fg:1</div>
+      <div style="--fg:2; --bgc:var(--yellow); --c:var(--black); --p:.6rem; --radius:var(--border-radius); --ta:center; --weight:600;">--fg:2</div>
+    </div>
+    <p style="--c:var(--text-muted); --size:.85rem; --mt:.7rem; --mb:0;">
+      ⚠ In the live docs table <code>--fs</code> is also listed for
+      <code>font-style</code> — don't set both intents on one element. See <a href="#footguns" style="--c:var(--primary);">footguns</a>.
+    </p>
+  </article>
+
+  <!-- --fx -->
+  <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem; --mb:1.25rem;">
+    <h3 style="--mt:0; --mb:.35rem; --size:1.1rem;"><code>--fx</code> · flex <span style="--c:var(--text-muted); --size:.85rem; --weight:400;">(the recommended shorthand)</span></h3>
+    <p style="--c:var(--text-muted); --size:.92rem; --lh:1.65; --mb:.9rem;">
+      One prop that covers all three, filling in whatever you leave out with sensible
+      answers. Prefer it over the individual props. A lone <code>--fx:1</code> expands to
+      <code>grow:1 · shrink:1 · basis:0%</code> — pure ratio sharing, content size ignored
+      entirely. For the record, the CSS default is <code>0 1 auto</code>.
+    </p>
+    <pre style="--m:0;"><code>style="<span class="p">--fx</span>:<span class="v">1</span>"              <span class="c">&lt;!-- equal columns, content ignored --&gt;</span>
+style="<span class="p">--fx</span>:<span class="v">none</span>"           <span class="c">&lt;!-- rigid: never grow, never shrink --&gt;</span>
+style="<span class="p">--fx</span>:<span class="v">1 1 240px</span>"      <span class="c">&lt;!-- fluid, but start from 240px --&gt;</span>
+style="<span class="p">--fx</span>:<span class="v">0 0 clamp(12rem,25vw,18rem)</span>"  <span class="c">&lt;!-- any CSS value works --&gt;</span></code></pre>
+  </article>
+
+  <!-- order + align-self -->
+  <div style="--d:grid; --gtc:1fr; --gtc-md:1fr 1fr; --g:1.25rem;">
+    <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem;">
+      <h3 style="--mt:0; --mb:.35rem; --size:1.1rem;"><code>--o</code> · order</h3>
+      <p style="--c:var(--text-muted); --size:.92rem; --lh:1.65; --mb:.9rem;">
+        Everything starts at <code>order:0</code> and renders in source order. Lower values
+        jump ahead, and ties fall back to the HTML. The amber tile below is
+        <em>first in the markup</em>, but <code>--o:1</code> sends it to the back
+        of the line. Careful, though: reordering is visual only. Keyboards and screen
+        readers still follow the source.
+      </p>
+      <div class="demo" style="--d:flex; --g:.5rem; --p:.8rem;
+                  --bgc:var(--background-alt); --radius:var(--border-radius); --b:1px dashed var(--primary);">
+        <div style="--o:1; --bgc:var(--yellow); --c:var(--black); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">html #1 · --o:1</div>
+        <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">html #2</div>
+        <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">html #3</div>
+      </div>
+    </article>
+    <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem;">
+      <h3 style="--mt:0; --mb:.35rem; --size:1.1rem;"><code>--as</code> · align-self</h3>
+      <p style="--c:var(--text-muted); --size:.92rem; --lh:1.65; --mb:.9rem;">
+        Lets a single item overrule the container's <code>--ai</code>. Same values
+        as align-items. The container below says <code>flex-start</code>. The amber item
+        has other plans:
+      </p>
+      <div class="demo" style="--d:flex; --ai:flex-start; --g:.5rem; --p:.8rem; --h:120px;
+                  --bgc:var(--background-alt); --radius:var(--border-radius); --b:1px dashed var(--primary);">
+        <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">1</div>
+        <div style="--as:flex-end; --bgc:var(--yellow); --c:var(--black); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">--as:flex-end</div>
+        <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">3</div>
+      </div>
+    </article>
+  </div>
+
+  <!-- auto margins -->
+  <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem; --mt:1.25rem;">
+    <h3 style="--mt:0; --mb:.35rem; --size:1.1rem;"><code>--ml:auto</code> · the honorary flex prop</h3>
+    <p style="--c:var(--text-muted); --size:.92rem; --lh:1.65; --mb:.9rem;">
+      Not officially a flex prop, but it earned the badge. An <code>auto</code> margin
+      inside a flex container soaks up every scrap of free space on its side, which makes
+      it the classic one-liner for shoving a "Sign in" button to the far end of a toolbar
+      while everything else stays put.
+    </p>
+    <div class="demo" style="--d:flex; --ai:center; --g:.5rem; --p:.8rem;
+                --bgc:var(--background-alt); --radius:var(--border-radius); --b:1px dashed var(--primary);">
+      <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">Logo</div>
+      <div style="--bgc:var(--primary); --c:var(--white); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">Docs</div>
+      <div style="--ml:auto; --bgc:var(--yellow); --c:var(--black); --p:.6rem .9rem; --radius:var(--border-radius); --weight:600;">--ml:auto → Sign in</div>
+    </div>
+  </article>
+</section>
+
+<!-- ================= RESPONSIVE ================= -->
+<section id="responsive" style="--pt:3rem;">
+  <div style="--bgc:var(--black); --c:var(--white); --radius:18px; --p:1.5rem; --p-md:2.5rem;">
+    <p style="--ff:monospace; --size:.75rem; --tt:uppercase; --ls:.12em; --c:var(--yellow); --m:0 0 .5rem;">
+      The startr superpower
+    </p>
+    <h2 style="--size:1.7rem; --mt:0; --mb:.6rem; --c:var(--white);">4 · Responsive flexbox with suffixes</h2>
+    <p style="--lh:1.75; --c:var(--grey); --maxw:70ch;">
+      Stick <code>-sm</code> (≥640px), <code>-md</code> (≥768px), <code>-lg</code> (≥1024px), or
+      <code>-xl</code> (≥1280px) on any responsive prop. Suffixes are <strong style="--c:var(--white);">mobile-first</strong>
+      min-width queries: the bare prop is your phone layout, and each suffix kicks in from
+      that width <em>up</em>. So write the phone version first, then add only the props
+      that actually change at each step. Never repeat a base value in a suffix — it's
+      just noise.
+    </p>
+
+    <div style="--d:grid; --gtc:1fr; --gtc-lg:1.1fr .9fr; --g:1.5rem; --ai:start; --mt:1.25rem;">
+      <div>
+        <pre style="--m:0; --b:1px solid var(--dark-grey);"><code><span class="c">&lt;!-- phone: stacked · ≥768px: side-by-side, centered --&gt;</span>
+<span class="t">&lt;section</span> style="
+  <span class="p">--d</span>:<span class="v">flex</span>; <span class="p">--fd</span>:<span class="v">column</span>; <span class="p">--g</span>:<span class="v">1rem</span>;
+  <span class="p">--fd-md</span>:<span class="v">row</span>; <span class="p">--ai-md</span>:<span class="v">center</span>;
+  <span class="p">--jc-md</span>:<span class="v">space-between</span>; <span class="p">--g-md</span>:<span class="v">2rem</span>;
+"<span class="t">&gt;</span>
+
+<span class="c">&lt;!-- sidebar: full-width card on phone, fixed rail ≥1024px --&gt;</span>
+<span class="t">&lt;aside</span> style="<span class="p">--fx</span>:<span class="v">1 1 auto</span>; <span class="p">--fx-lg</span>:<span class="v">0 0 300px</span>; <span class="p">--o</span>:<span class="v">2</span>; <span class="p">--o-lg</span>:<span class="v">0</span>;"<span class="t">&gt;</span>
+
+<span class="c">&lt;!-- wrap on phone, single row from tablet up --&gt;</span>
+<span class="t">&lt;ul</span> style="<span class="p">--d</span>:<span class="v">flex</span>; <span class="p">--fw</span>:<span class="v">wrap</span>; <span class="p">--fw-md</span>:<span class="v">nowrap</span>; <span class="p">--g</span>:<span class="v">.5rem 1rem</span>;"<span class="t">&gt;</span></code></pre>
+      </div>
+      <div style="--d:flex; --fd:column; --g:.9rem;">
+        <p style="--m:0; --size:.9rem; --lh:1.65; --c:var(--grey);">
+          <strong style="--c:var(--white);">This demo is live, so go drag the window edge.</strong>
+          The tiles carry <code>--fd:column; --fd-md:row</code>. Cross 768px and they
+          reflow on their own, no JavaScript involved:
+        </p>
+        <div class="demo" style="--d:flex; --fd:column; --fd-md:row; --g:.5rem; --p:.8rem;
+                    --bgc:var(--black); --radius:var(--border-radius); --b:1px dashed var(--primary);">
+          <div style="--fx-md:1; --bgc:var(--primary); --c:var(--white); --p:.7rem; --radius:var(--border-radius); --ta:center; --weight:600;">column…</div>
+          <div style="--fx-md:1; --bgc:var(--primary); --c:var(--white); --p:.7rem; --radius:var(--border-radius); --ta:center; --weight:600;">…on phones,</div>
+          <div style="--fx-md:1; --bgc:var(--yellow); --c:var(--black); --p:.7rem; --radius:var(--border-radius); --ta:center; --weight:600;">row ≥768px</div>
+        </div>
+        <div style="--d:flex; --fd:column; --g:.4rem; --size:.82rem; --ff:monospace; --c:var(--grey);">
+          <span><span style="--c:var(--yellow);">base</span> &nbsp;0 – 639px · phone-first values</span>
+          <span><span style="--c:var(--yellow);">-sm</span> &nbsp;&nbsp;≥ 640px</span>
+          <span><span style="--c:var(--yellow);">-md</span> &nbsp;&nbsp;≥ 768px</span>
+          <span><span style="--c:var(--yellow);">-lg</span> &nbsp;&nbsp;≥ 1024px</span>
+          <span><span style="--c:var(--yellow);">-xl</span> &nbsp;&nbsp;≥ 1280px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RECIPES ================= -->
+<section id="recipes" style="--pt:3rem;">
+  <h2 style="--size:1.7rem; --mb:.4rem;">5 · Recipes</h2>
+  <p style="--c:var(--text-muted); --lh:1.7; --maxw:68ch; --mb:1.5rem;">
+    The greatest hits, translated to startr props. Every demo here is rendered by the
+    exact code sitting next to it. Steal freely; the working parts are exposed on purpose.
+  </p>
+
+  <!-- perfect centering -->
+  <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem; --mb:1.25rem;">
+    <h3 style="--mt:0; --mb:.7rem; --size:1.1rem;">Perfect centering</h3>
+    <div style="--d:grid; --gtc:1fr; --gtc-md:1fr 1fr; --g:1rem; --ai:stretch;">
+      <pre style="--m:0;"><code><span class="t">&lt;div</span> style="<span class="p">--d</span>:<span class="v">flex</span>;
+            <span class="p">--jc</span>:<span class="v">center</span>;
+            <span class="p">--ai</span>:<span class="v">center</span>;
+            <span class="p">--minh</span>:<span class="v">160px</span>;"<span class="t">&gt;</span></code></pre>
+      <div class="demo" style="--d:flex; --jc:center; --ai:center; --minh:160px;
+                  --bgc:var(--background-alt); --radius:var(--border-radius); --b:1px dashed var(--primary);">
+        <div style="--bgc:var(--yellow); --c:var(--black); --p:.7rem 1.1rem; --radius:var(--border-radius); --weight:600;">dead center</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- navbar -->
+  <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem; --mb:1.25rem;">
+    <h3 style="--mt:0; --mb:.7rem; --size:1.1rem;">Navbar — brand left, actions right</h3>
+    <div class="demo" style="--d:flex; --ai:center; --g:1rem; --p:.7rem 1rem; --mb:.8rem;
+                --bgc:var(--black); --c:var(--white); --radius:var(--border-radius);">
+      <strong>◆ Brand</strong>
+      <a href="#recipes" style="--c:var(--grey); --td:none; --size:.9rem; --d:none; --d-sm:inline; --hvr-c:var(--white);">Docs</a>
+      <a href="#recipes" style="--c:var(--grey); --td:none; --size:.9rem; --d:none; --d-sm:inline; --hvr-c:var(--white);">Pricing</a>
+      <a href="#recipes" style="--ml:auto; --td:none; --d:inline-flex; --ai:center; --g:.4rem;
+                --bgc:var(--primary); --c:var(--white); --p:.45rem .9rem; --radius:99px; --size:.85rem;
+                --hvr-bgc:var(--secondary);">Sign in →</a>
+    </div>
+    <pre style="--m:0;"><code><span class="t">&lt;nav</span> style="<span class="p">--d</span>:<span class="v">flex</span>; <span class="p">--ai</span>:<span class="v">center</span>; <span class="p">--g</span>:<span class="v">1rem</span>;"<span class="t">&gt;</span>
+  <span class="t">&lt;strong&gt;</span>◆ Brand<span class="t">&lt;/strong&gt;</span>
+  <span class="t">&lt;a</span> style="<span class="p">--d</span>:<span class="v">none</span>; <span class="p">--d-sm</span>:<span class="v">inline</span>;"<span class="t">&gt;</span>Docs<span class="t">&lt;/a&gt;</span>   <span class="c">&lt;!-- hidden on phones --&gt;</span>
+  <span class="t">&lt;a</span> style="<span class="p">--ml</span>:<span class="v">auto</span>; <span class="p">--d</span>:<span class="v">inline-flex</span>; <span class="p">--ai</span>:<span class="v">center</span>; <span class="p">--radius</span>:<span class="v">99px</span>;"<span class="t">&gt;</span>Sign in<span class="t">&lt;/a&gt;</span>
+<span class="t">&lt;/nav&gt;</span></code></pre>
+  </article>
+
+  <!-- card row -->
+  <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem; --mb:1.25rem;">
+    <h3 style="--mt:0; --mb:.7rem; --size:1.1rem;">Equal-height wrapping cards</h3>
+    <div class="demo" style="--d:flex; --fw:wrap; --g:.8rem; --mb:.8rem;">
+      <div style="--fx:1 1 220px; --d:flex; --fd:column; --g:.5rem; --p:1rem;
+                  --bgc:var(--background-alt); --b:1px solid var(--border); --radius:var(--border-radius);">
+        <strong>Grow</strong>
+        <p style="--m:0; --size:.85rem; --c:var(--text-muted); --lh:1.6;">Cards flex from a 220px basis.</p>
+        <a href="#recipes" style="--mt:auto; --c:var(--primary); --size:.85rem; --td:none; --hvr-c:var(--secondary);">Read →</a>
+      </div>
+      <div style="--fx:1 1 220px; --d:flex; --fd:column; --g:.5rem; --p:1rem;
+                  --bgc:var(--background-alt); --b:1px solid var(--border); --radius:var(--border-radius);">
+        <strong>Wrap</strong>
+        <p style="--m:0; --size:.85rem; --c:var(--text-muted); --lh:1.6;">Too narrow? They wrap to a new line automatically. No breakpoints needed.</p>
+        <a href="#recipes" style="--mt:auto; --c:var(--primary); --size:.85rem; --td:none; --hvr-c:var(--secondary);">Read →</a>
+      </div>
+      <div style="--fx:1 1 220px; --d:flex; --fd:column; --g:.5rem; --p:1rem;
+                  --bgc:var(--background-alt); --b:1px solid var(--border); --radius:var(--border-radius);">
+        <strong>Align</strong>
+        <p style="--m:0; --size:.85rem; --c:var(--text-muted); --lh:1.6;">--mt:auto pins every footer link to the bottom.</p>
+        <a href="#recipes" style="--mt:auto; --c:var(--primary); --size:.85rem; --td:none; --hvr-c:var(--secondary);">Read →</a>
+      </div>
+    </div>
+    <pre style="--m:0;"><code><span class="t">&lt;div</span> style="<span class="p">--d</span>:<span class="v">flex</span>; <span class="p">--fw</span>:<span class="v">wrap</span>; <span class="p">--g</span>:<span class="v">.8rem</span>;"<span class="t">&gt;</span>
+  <span class="t">&lt;div</span> style="<span class="p">--fx</span>:<span class="v">1 1 220px</span>; <span class="p">--d</span>:<span class="v">flex</span>; <span class="p">--fd</span>:<span class="v">column</span>;"<span class="t">&gt;</span>
+    …
+    <span class="t">&lt;a</span> style="<span class="p">--mt</span>:<span class="v">auto</span>;"<span class="t">&gt;</span>Read →<span class="t">&lt;/a&gt;</span>  <span class="c">&lt;!-- footer pinned to bottom --&gt;</span>
+  <span class="t">&lt;/div&gt;</span>
+<span class="t">&lt;/div&gt;</span></code></pre>
+  </article>
+
+  <!-- holy grail -->
+  <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem; --mb:1.25rem;">
+    <h3 style="--mt:0; --mb:.7rem; --size:1.1rem;">Holy grail — stacked on phones, three columns ≥1024px</h3>
+    <div class="demo" style="--d:flex; --fd:column; --g:.5rem; --mb:.8rem; --size:.85rem; --weight:600; --ta:center;">
+      <header style="--p:.7rem; --bgc:var(--black); --c:var(--white); --radius:var(--border-radius);">header</header>
+      <div style="--d:flex; --fd:column; --fd-lg:row; --g:.5rem;">
+        <nav style="--fx-lg:0 0 140px; --p:.7rem; --bgc:var(--background-alt); --radius:var(--border-radius); --b:1px solid var(--border);">nav</nav>
+        <main style="--fx-lg:1; --p:1.6rem .7rem; --bgc:var(--yellow); --c:var(--black); --radius:var(--border-radius);">main · --fx-lg:1</main>
+        <aside style="--fx-lg:0 0 140px; --p:.7rem; --bgc:var(--background-alt); --radius:var(--border-radius); --b:1px solid var(--border);">aside</aside>
+      </div>
+      <footer style="--p:.7rem; --bgc:var(--black); --c:var(--white); --radius:var(--border-radius);">footer</footer>
+    </div>
+    <pre style="--m:0;"><code><span class="t">&lt;div</span> style="<span class="p">--d</span>:<span class="v">flex</span>; <span class="p">--fd</span>:<span class="v">column</span>; <span class="p">--fd-lg</span>:<span class="v">row</span>; <span class="p">--g</span>:<span class="v">.5rem</span>;"<span class="t">&gt;</span>
+  <span class="t">&lt;nav</span>   style="<span class="p">--fx-lg</span>:<span class="v">0 0 140px</span>;"<span class="t">&gt;</span>   <span class="c">&lt;!-- rigid rail --&gt;</span>
+  <span class="t">&lt;main</span>  style="<span class="p">--fx-lg</span>:<span class="v">1</span>;"<span class="t">&gt;</span>          <span class="c">&lt;!-- takes the rest --&gt;</span>
+  <span class="t">&lt;aside</span> style="<span class="p">--fx-lg</span>:<span class="v">0 0 140px</span>;"<span class="t">&gt;</span>
+<span class="t">&lt;/div&gt;</span></code></pre>
+  </article>
+
+  <!-- sticky footer + media object -->
+  <div style="--d:grid; --gtc:1fr; --gtc-md:1fr 1fr; --g:1.25rem;">
+    <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem;">
+      <h3 style="--mt:0; --mb:.7rem; --size:1.1rem;">Sticky footer</h3>
+      <pre style="--m:0;"><code><span class="t">&lt;body</span> style="<span class="p">--d</span>:<span class="v">flex</span>; <span class="p">--fd</span>:<span class="v">column</span>;
+             <span class="p">--minh</span>:<span class="v">100dvh</span>; <span class="p">--m</span>:<span class="v">0</span>;"<span class="t">&gt;</span>
+  <span class="t">&lt;main</span> style="<span class="p">--fg</span>:<span class="v">1</span>;"<span class="t">&gt;</span>…<span class="t">&lt;/main&gt;</span>
+  <span class="t">&lt;footer&gt;</span>always at the bottom<span class="t">&lt;/footer&gt;</span>
+<span class="t">&lt;/body&gt;</span></code></pre>
+    </article>
+    <article style="--bgc:var(--background); --b:1px solid var(--border); --radius:var(--border-radius); --p:1.4rem;">
+      <h3 style="--mt:0; --mb:.7rem; --size:1.1rem;">Media object</h3>
+      <div class="demo" style="--d:flex; --g:.8rem; --ai:flex-start; --mb:.8rem;">
+        <div style="--fs:0; --w:52px; --h:52px; --radius:var(--border-radius); --bgc:var(--primary);
+                    --d:flex; --ai:center; --jc:center; --c:var(--white); --size:1.3rem;">◆</div>
+        <div>
+          <strong style="--size:.9rem;">--fs:0 keeps the avatar rigid</strong>
+          <p style="--m:.2rem 0 0; --size:.85rem; --c:var(--text-muted); --lh:1.6;">while this text column shrinks and wraps as the space demands.</p>
+        </div>
+      </div>
+      <pre style="--m:0;"><code><span class="t">&lt;div</span> style="<span class="p">--d</span>:<span class="v">flex</span>; <span class="p">--g</span>:<span class="v">.8rem</span>; <span class="p">--ai</span>:<span class="v">flex-start</span>;"<span class="t">&gt;</span>
+  <span class="t">&lt;img</span> style="<span class="p">--fs</span>:<span class="v">0</span>;"<span class="t">&gt;</span>
+  <span class="t">&lt;div&gt;</span>…<span class="t">&lt;/div&gt;</span></code></pre>
+    </article>
+  </div>
+</section>
+
+<!-- ================= CHEATSHEET ================= -->
+<section id="cheatsheet" style="--pt:3rem;">
+  <h2 style="--size:1.7rem; --mb:.4rem;">6 · Cheatsheet</h2>
+  <p style="--c:var(--text-muted); --lh:1.7; --mb:1.25rem;">
+    Every flexbox utility on one table. Each of them takes the
+    <code>-sm / -md / -lg / -xl</code> suffixes, so anything here can change its mind
+    at a breakpoint.
+  </p>
+  <div style="--of:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Prop</th>
+          <th>CSS property</th>
+          <th>Set on</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>--d</code></td><td>display</td><td>container</td><td><code>--d:flex</code> · <code>--d:inline-flex</code></td></tr>
+        <tr><td><code>--fd</code></td><td>flex-direction</td><td>container</td><td><code>--fd:column; --fd-md:row</code></td></tr>
+        <tr><td><code>--fw</code></td><td>flex-wrap</td><td>container</td><td><code>--fw:wrap</code></td></tr>
+        <tr><td><code>--jc</code></td><td>justify-content</td><td>container</td><td><code>--jc:space-between</code></td></tr>
+        <tr><td><code>--ai</code></td><td>align-items</td><td>container</td><td><code>--ai:center</code></td></tr>
+        <tr><td><code>--ac</code></td><td>align-content</td><td>container (multi-line)</td><td><code>--ac:space-evenly</code></td></tr>
+        <tr><td><code>--g</code></td><td>gap</td><td>container</td><td><code>--g:.5rem 1.5rem</code></td></tr>
+        <tr><td><code>--cg</code></td><td>column-gap</td><td>container</td><td><code>--cg:2rem</code></td></tr>
+        <tr><td><code>--o</code></td><td>order</td><td>item</td><td><code>--o:2; --o-lg:0</code></td></tr>
+        <tr><td><code>--fg</code></td><td>flex-grow</td><td>item</td><td><code>--fg:1</code> (default 0)</td></tr>
+        <tr><td><code>--fs</code> ⚠</td><td>flex-shrink <em>/ font-style</em></td><td>item</td><td><code>--fs:0</code> (default 1)</td></tr>
+        <tr><td><code>--fb</code></td><td>flex-basis</td><td>item</td><td><code>--fb:240px</code> (default auto)</td></tr>
+        <tr><td><code>--fx</code></td><td>flex (shorthand ★)</td><td>item</td><td><code>--fx:1 1 240px</code></td></tr>
+        <tr><td><code>--as</code></td><td>align-self</td><td>item</td><td><code>--as:flex-end</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= FOOTGUNS ================= -->
+<section id="footguns" style="--pt:3rem; --pb:3rem;">
+  <h2 style="--size:1.7rem; --mb:.4rem;">7 · Footguns &amp; fine print</h2>
+  <p style="--c:var(--text-muted); --lh:1.7; --maxw:68ch; --mb:1.5rem;">
+    A framework that hides its sharp edges just cuts you later. Here are ours,
+    out in the open.
+  </p>
+  <div style="--d:grid; --gtc:1fr; --gtc-md:1fr 1fr; --g:1.25rem;">
+    <div style="--b:2px solid var(--yellow); --radius:var(--border-radius); --p:1.3rem;">
+      <h3 style="--mt:0; --mb:.4rem; --size:1rem;">Typos fail silently</h3>
+      <p style="--m:0; --size:.9rem; --lh:1.65;">Misspell a prop and nothing happens. No error, no layout — <code>--d:flax</code> is just a variable nobody reads. If a prop "isn't working," check your spelling first, then confirm it exists in the <a href="https://startr.style/docs/utilities/" style="--c:inherit;">utilities table</a>.</p>
+    </div>
+    <div style="--b:2px solid var(--yellow); --radius:var(--border-radius); --p:1.3rem;">
+      <h3 style="--mt:0; --mb:.4rem; --size:1rem;">Shared shorthands</h3>
+      <p style="--m:0; --size:.9rem; --lh:1.65;">Some props moonlight. <code>--fs</code> covers flex-shrink <em>and</em> font-style, while <code>--td</code> covers text-decoration <em>and</em> transition-delay. Pick one meaning per element; the same variable can't hold down two jobs at once.</p>
+    </div>
+    <div style="--b:2px solid var(--yellow); --radius:var(--border-radius); --p:1.3rem;">
+      <h3 style="--mt:0; --mb:.4rem; --size:1rem;">--br is border-right now</h3>
+      <p style="--m:0; --size:.9rem; --lh:1.65;">Older startr markup used <code>--br</code> for border-radius. These days it means border-<em>right</em>, and rounding lives at <code>--radius</code>. Upgrading a legacy page? Hunt down every <code>--br</code> before it bites.</p>
+    </div>
+    <div style="--b:2px solid var(--yellow); --radius:var(--border-radius); --p:1.3rem;">
+      <h3 style="--mt:0; --mb:.4rem; --size:1rem;">Inline styles are flat</h3>
+      <p style="--m:0; --size:.9rem; --lh:1.65;">There's no cascade or nesting to lean on. Hovers are covered by <code>--hvr-c</code> / <code>--hvr-bgc</code> / <code>--hvr-bc</code>, but <code>:focus-visible</code> and <code>:active</code> still need a small <code>&lt;style&gt;</code> block. Pair every hover with a focus style so keyboard users aren't left guessing. (This page does.)</p>
+    </div>
+    <div style="--b:2px solid var(--yellow); --radius:var(--border-radius); --p:1.3rem;">
+      <h3 style="--mt:0; --mb:.4rem; --size:1rem;">Overriding from JS</h3>
+      <p style="--m:0; --size:.9rem; --lh:1.65;">Always <code>el.style.setProperty('--d','none')</code>, never <code>el.style.display = 'none'</code>. A direct assignment outranks every startr suffix, so one careless line of JS quietly kills your breakpoints for the rest of the page's life.</p>
+    </div>
+    <div style="--b:2px solid var(--yellow); --radius:var(--border-radius); --p:1.3rem;">
+      <h3 style="--mt:0; --mb:.4rem; --size:1rem;">Desktop-first is the enemy</h3>
+      <p style="--m:0; --size:.9rem; --lh:1.65;">Suffixes are min-width queries, full stop. Start from a desktop layout and you'll spend all afternoon trying to walk it back down, because the framework only climbs. Your base is the phone. Everything above it is an upgrade.</p>
+    </div>
+  </div>
+</section>
+
+<footer style="--d:flex; --fd:column; --fd-md:row; --g:.5rem; --jc-md:space-between; --ai-md:center;
+               --bt:1px solid var(--border); --p:1.5rem 0 2.5rem; --size:.85rem; --c:var(--text-muted);">
+  <span>Built entirely with <a href="https://startr.style" style="--c:var(--primary);">startr.style</a> inline props. Nothing to hide: stick <code>view-source:</code> in front of the URL and read this page raw.</span>
+  <span>The concepts belong to the W3C's Flexible Box Layout Module. The attitude is ours.</span>
+</footer>
+
+</main>
+
+<script>
+/* Interactive demos: startr props ARE custom properties, so toggling a
+   value is one setProperty call. The readout echoes the change. */
+document.querySelectorAll('[data-set]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var parts  = btn.dataset.set.split('|');
+    var target = document.getElementById(parts[0]);
+    var prop   = '--' + parts[1];
+    target.style.setProperty(prop, btn.dataset.value);
+
+    var group = btn.closest('[data-group]');
+    if (group) group.querySelectorAll('button').forEach(function(b){
+      b.classList.toggle('on', b === btn);
+    });
+
+    var readout = document.getElementById(parts[0] + '-' + parts[1] + '-value');
+    if (readout) readout.textContent = btn.dataset.value;
+  });
+});
+</script>
+</body>
+</html>
