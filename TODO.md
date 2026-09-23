@@ -39,14 +39,65 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 - Reduced onboarding time for new projects
 - Easier maintenance and updates across the entire Startr ecosystem
 
+## 🔀 Startr Swap — the first JavaScript this project ships
+
+Built and proven in `sage-is/AI-UI` on 2026-08-09; moved here 2026-09-05 byte-identical
+(sha256 `d93c4f093dc8c4f06b63ad74712446e453a163980723be761be8bac0bfa44486`). Source of truth is now
+`src/static/swap.js`; AI-UI and the realestate CRM vendor copies. Full reasoning:
+`WEB-AI--Sage-is-AI-UI/docs/decisions/2026-08-09-startr-swap-link-swapping.md`. The original cards
+are in `docs/board-dossiers.md`.
+
+- [x] **⚖️ Licence settled — MIT for the whole repo** (2026-09-05). #licence #critical
+  - The AGPL `LICENSE` was the 2023-02-01 GitHub-template artefact; the MIT `LICENSE.txt` (© 2023 OpenCo and Startr, © 2020 ciar4n) came with the code and is now `LICENSE`.
+  - `package.json` reads `MIT` and `1.3.2`, closing the README/package.json version drift.
+
+- [x] **📏 Size ratchet ported and held** — `make swap_check`, `make swap_teeth` (`scripts/gates/startr-swap/check.py`). #perf #ratchet
+  - `swap.js` is 13,802 bytes raw / 5,343 gzipped; htmx is 50,917 / 16,367. Ceiling: 8,192 gzipped, half of htmx.
+  - The gate also holds every `src/static/v*/swap.js` to its `.sha256`, and `make release` depends on it. Self-test proves all four checks can fail.
+
+- [ ] **📦 Publish `/v1/swap.js` (pinned, SRI) and `/swap.js` (rolling)** — in the tree, live once `v1.3.3` deploys. #versioning #security
+  - `make swap_snapshot V=1` wrote `src/static/v1/swap.js` + `swap.js.sha256`; `netlify.toml` gives `/v*/*` `Cache-Control: public, max-age=31536000, immutable`.
+  - SRI: `sha384-8Y08Zw/VDvaVCy/KtaWr74UVCwN9nFkiMksvlmcQyQVecrpdmPkOH84i4aaIN6DX`.
+  - Sage.is AI-UI keeps serving its own copy (zero third-party requests, nothing to 5xx); the CDN build is for everyone else.
+  - [ ] [MANUALLY] `make patch_release` then `make release_finish` (v1.3.3); confirm Netlify deploys `master`.
+  - [ ] [WE] `curl -sI https://startr.style/v1/swap.js`: 200, `max-age=31536000, immutable`, `access-control-allow-origin: *`; body sha256 equals the pin.
+  - [ ] Realestate CRM `scripts/vendor_kit.py`: `SWAP_SOURCE` becomes `https://startr.style/v1/swap.js`; `make kit_fetch && make kit_check` stays green.
+
+- [x] **📚 API documented** at `/docs/swap/` (`src/docs/swap.njk`): three attributes, four events, the nesting rule, the findings, size, licence. #ContentExcellence #docs
+
+- [x] **🎪 Demo shipped** at `/demo/swap/a.html`, `b.html`, `none.html` (`src/demo/swap/`), ported from AI-UI `cypress/fixtures/swap/`. `none.html` keeps a `<main>` on purpose. #ContentExcellence
+
+- [x] **🪤 Findings carried into the docs** — no `<main>` default; click captures, submit bubbles; a redirected POST pushes history; plus the two found dogfooding (v1.1 card). #docs #footgun
+
+- [x] **🌱 Employed here** (2026-09-05): `<script defer src="/swap.js">` in `head.njk`, `data-swap` on `<main>` in `layout.njk`, `swap-host.njk` re-runs inline scripts. #dogfood
+  - The home page declares no region (its hero sits outside `<main>`); the logo and Introduction links carry `data-swap-off`. `index.njk` no longer waits for `DOMContentLoaded`.
+  - Proven headless (Chrome over CDP, 2026-09-05): sentinel survives docs-to-docs swaps and Back, inline `liveprop` re-runs, home and demo `none.html` navigate normally, no console errors.
+
+- [ ] **🔧 v1.1 — first changes at the new source of truth.** #library
+  - [ ] `swap:after` and `adoptScripts` run after `transition(run)` returns, but `startViewTransition` runs the callback asynchronously: under a View Transition the event precedes the DOM update and `pushState`. Move both inside the callback.
+  - [ ] Decide whether the library re-creates inline `<script>` elements in a swapped region; the host workaround is `src/_includes/swap-host.njk`.
+  - [ ] Add a `License: MIT` line to the `/*!` header. It changes the pin, so every consumer re-pins once.
+  - [ ] Make the comments ASCII-only: 173 `─` rulers, 18 em dashes and one `…` (192 non-ASCII characters, none in code). A host that serves `.js` without a charset shows them as `â€¦` in the raw view; Netlify sends `charset=UTF-8`, the Eleventy dev server does not. Saves about 500 bytes raw. Same pin change as the header line, so ship both together.
+  - [ ] Have AI-UI's `scripts/gates/startr-swap/check.py` compare its copy against `https://startr.style/v1/swap.js.sha256` so the two cannot drift silently.
+
 ## 📋 Backlog
 
 - [ ]  📦 Versioning & Rollback
+  - Machinery landed 2026-09-05: `scripts/snapshot-version.sh` (`make version_snapshot`), `netlify.toml` `/v*/*` immutable for a year, and `/v1/swap.js` as the first pinned path. The CSS snapshot of 1.3.2 waits on the `--maxw-sm` revert at the top of this board.
+  - Trap: a Netlify UI redirect of the shape `/:w.:h/*` sends any dotted first segment to `image.startr.cloud` (`/v1.3.2/style.min.css` answers 302 today). A real file should shadow it; verify with `curl -sI` after the first CSS snapshot deploys.
   - [ ] **Ship pinned and rolling CDN versions**: Currently unversioned — any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path. Publish `/v1/`, `/v2/`, and a rolling `/latest/`. Implementation approach: submodule structure where `v1/` is a submodule pointing to the project at the v1 tag, `v2/` at v2, etc. — versioned URLs serve from the pinned submodule, `latest/` serves from `master`.
   - [ ] Consumers pin to a version in prod; `latest` is for the Startr studio itself. Migration plan needed for existing Sage.is / Sage.Education `<link>` tags currently pointing at the unversioned URL. *(Surfaced by Zach Leatherman in a panel review of Sage.is, 2026-04-18.)*
   - [ ] **Cache headers — versioned vs rolling**: `/v1/style.css`, `/v2/style.css`, etc. → `Cache-Control: public, max-age=31536000, immutable` (one year, immutable; the URL's contents never change by design). `/latest/style.css` → `Cache-Control: public, max-age=60, must-revalidate` (short TTL + revalidate so studio pushes propagate quickly and stale copies don't linger). *(Surfaced by Zach Leatherman, 2026-04-18.)*
   - [ ] **Emit SRI integrity hashes for each pinned release**: Generate `sha384` integrity hashes at release time and publish them alongside the versioned URL so consumers can use `<link rel="stylesheet" href="/v1/style.css" integrity="sha384-..." crossorigin="anonymous">`. Gives consumers an integrity guarantee even though Startr.Style is on a separate origin. *(Surfaced by Zach Leatherman, 2026-04-18.)*
   - [ ] **Resolve version drift between README and package.json**: `README.md` opens with `1.3.1`; `package.json` declares `1.2.2.2`. Pick one source of truth (conventionally `package.json`) and make the README read from it, or bump them in lockstep via `scripts/release.sh`. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+
+- [ ] 🧨 Silent-Failure DX — unknown props are no-ops
+
+  - [ ] **Give prop typos a failure mode**: An inline prop with no matching `[style*="--X:"]` rule fails silently — no error, no fallback, the declaration just sits inert. Two real hits in build.sage.education (2026-08-25, commit 3198f0b): `--ovx` written for `--ofx`, `--lst` written for `--lis`; both shipped broken layout and were caught only in a 360px visual pass. #dx #landmine
+    - [ ] Publish the canonical prop list as a JSON artifact per release (extractable from the built sheet by regexing `[style*="--X:"]` selectors — proof-of-concept script exists in build.sage.education's `--br` audit).
+    - [ ] Authoring-time linter: check every `--*` in template `style=""` attributes against that list; run in consumer CI.
+    - [ ] Dev-mode runtime warner: a tiny opt-in script that scans `[style*="--"]` elements and console.warns unknown props.
+  - [ ] **Shorthand dual bindings** (`--br` = border-radius AND border-right; `--bs`, `--td`, `--fs`, `--cr` value-disjoint pairs): the naming decision is filed in `WEB-startr.style.core/TODO.md` — resolve it there, then mirror the outcome here. Consumers are already routing around the DSL (build.sage.education writes plain `flex-shrink:0` to avoid `--fs`). #landmine
 
 - [ ] ♿ Accessibility
 
@@ -415,7 +466,7 @@ We have **Total: 25+ existing components identified across 12+ major categories*
 - [ ] **Typography prop names silently collide with non-typography intents** #critical — Three pairs of identical custom-prop names mean reasonable-looking inline styles silently render as invalid declarations the browser drops without warning:
   - `--fs` is bound TWICE: `font-style` (typography) AND `flex-shrink` (flex). A consumer writing `style="--fs: 1.5rem"` expecting font-size gets *neither* font-size nor a meaningful warning — both bindings receive `1.5rem` and both are invalid for what the author intended. Font-size's actual canonical prop is `--size`.
   - `--fw` is `flex-wrap` only. A consumer writing `style="--fw: 600"` expecting font-weight sets `flex-wrap: 600`, invalid, silently dropped. Font-weight's actual canonical prop is `--weight`.
-  - `--br` is bound TWICE: `border-radius` AND `border-right`. Disambiguates by value type at runtime, which works but is fragile.
+  - `--br` is bound TWICE: `border-radius` AND `border-right`. It does **not** disambiguate by value — both rules are `[style*="--br:"] { … !important }` at equal specificity, so the later one (`border-right`, built sheet line 839) wins unconditionally. `--br:12px` yields `border-right:12px` and no radius. Reach for the `--radius` alias. Re-confirmed against `src/static/style.css` on 2026-09-18 during the Sage.is `/plans/` page build; the decision is filed in `WEB-startr.style.core/TODO.md`.
 
   **Why this matters:** the convention "shorter custom-prop name" naturally pulls authors toward `--fs` and `--fw` (Tailwind muscle memory: `fs` ≈ font-size, `fw` ≈ font-weight). Both are footguns that produce no visible breakage at build time — the layout just looks "almost right" because UA defaults take over. Found 2026-06-08 during Sage.is signup-gate work: every `--fs: 1.5rem` on headings was being dropped, breakpoint typography wasn't firing, and the bug was only caught when the author read the framework source.
 

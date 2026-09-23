@@ -15,6 +15,23 @@ Now with Print only `-pt` responsive utility shorthand!!!
 - Allow for customization without the need for hyper-overriding styles.
 - A framework that hinders creativity and innovation is not useful.
 
+## Startr Swap
+
+The first JavaScript this project ships: same-origin links and forms swap in
+place instead of reloading, wrapped in a CSS View Transition. One script tag
+and one word of markup. Docs and demo: [startr.style/docs/swap/](https://startr.style/docs/swap/).
+Consumers pin `/v1/swap.js` with an SRI hash; `/swap.js` is the rolling build.
+
+```bash
+make swap_check          # the library names no application, stays under half of htmx gzipped, pins intact
+make swap_teeth          # prove the gate can fail
+make swap_snapshot V=2   # freeze src/static/swap.js as /v2/swap.js (immutable)
+```
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).
+
 ## Style Core (Subtree)
 
 The CSS framework source lives in its own repo

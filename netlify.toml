@@ -3,3 +3,19 @@
   for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
+
+# Pinned version paths — /v1.3.2/style.min.css and friends.
+#
+# These are immutable by construction: scripts/snapshot-version.sh refuses to
+# overwrite an existing snapshot, so the bytes behind a version URL never
+# change and may be cached for a year. Consumers that pin a version get one
+# fetch, ever, plus a stable target for an SRI hash.
+#
+# The unversioned /style.css and /style.min.css deliberately keep the short
+# default TTL: they float to the newest build, so existing consumers see
+# updates without changing their markup.
+[[headers]]
+  for = "/v*/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=31536000, immutable"

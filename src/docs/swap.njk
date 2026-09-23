@@ -1,0 +1,110 @@
+{% extends "layout.njk" %}
+
+{% block article %}
+<h2 id="startr-swap">Startr Swap</h2>
+<p>Startr Swap swaps links and forms in place, with no build step. Drop it in, mark a region, and
+  same-origin links stop reloading the page: they swap in place instead, wrapped in a CSS View
+  Transition.</p>
+<p>It fetches the page and parses it with <code>fetch</code> + <code>DOMParser</code>. There is no
+  hidden iframe. An iframe performs a REAL navigation, so scripts in the response execute inside
+  it, in the wrong document, silently, and every swap re-requests the page's stylesheets.
+  <code>fetch</code> + <code>DOMParser</code> parses inert, and reports a redirect honestly.</p>
+<p>Lineage is htmz (MIT, &copy; Lean Rada), whose hash-names-the-target convention it keeps.</p>
+
+<h2 id="install">Install</h2>
+
+{% highlight "html" %}
+<script defer src="https://startr.style/v1/swap.js"
+        integrity="sha384-8Y08Zw/VDvaVCy/KtaWr74UVCwN9nFkiMksvlmcQyQVecrpdmPkOH84i4aaIN6DX"
+        crossorigin="anonymous"></script>
+<main data-swap> ... </main>
+{% endhighlight %}
+
+<p><code>/v1/swap.js</code> is immutable and cached for a year. <code>/swap.js</code> is the rolling
+  build this site uses itself and carries no integrity guarantee. The sha256 is published at
+  <code>/v1/swap.js.sha256</code>.</p>
+
+<h2 id="markup">Markup</h2>
+<p>The API is three attributes and four events, and that is the whole thing.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Placed on</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>data-swap</code></td>
+      <td>a region</td>
+      <td>Marks it swappable. A value narrows which links are taken over to a path prefix, and
+        nested regions inherit it.</td>
+    </tr>
+    <tr>
+      <td><code>data-swap-target</code></td>
+      <td>a control</td>
+      <td>Updates THAT region, by selector, instead of the one this control lives in.</td>
+    </tr>
+    <tr>
+      <td><code>data-swap-off</code></td>
+      <td>a control</td>
+      <td>Never swaps this one.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Only the region swaps; everything outside it stays. A page whose chrome differs outside the
+  region should not declare one, and links into it should carry <code>data-swap-off</code>. This
+  site does exactly that for its home page, whose hero sits outside <code>&lt;main&gt;</code>.</p>
+
+<h2 id="events">Events</h2>
+<p>All four fire on the region, bubbling, cancelable.</p>
+<ul>
+  <li><code>swap:before</code> — cancel to abandon the swap; the browser navigates normally.</li>
+  <li><code>swap:navigate</code> — cancel to own the address bar yourself.</li>
+  <li><code>swap:after</code> — content is in.</li>
+  <li><code>swap:error</code> — cancel to suppress the fallback navigation.</li>
+</ul>
+<p>Regions nest, so sub-swaps cost no syntax at all. A pager inside a region updates that region
+  and leaves the page alone, declaring nothing. A sub-swap region does need an <code>id</code>,
+  because the response has to be able to name the piece coming back.</p>
+
+<h2 id="things-every-consumer-hits">Things every consumer hits</h2>
+<ol>
+  <li><strong>There is no <code>&lt;main&gt;</code> default, deliberately.</strong> The first
+    version claimed <code>&lt;main&gt;</code> when no region was declared. Any document can end up
+    running this file — a host application that adopts a fetched page's scripts adopts this one
+    too — and a <code>&lt;main&gt;</code> default would then take over every link in a document
+    that never asked for it. <strong>A region must be declared.</strong></li>
+  <li><strong>The click listener CAPTURES; the submit listener does not.</strong> A single-page
+    router binds its own document-level click listener at boot, so in the bubble phase it always
+    wins. Capture puts a declared region ahead of a generic router. Submit stays in the bubble
+    phase on purpose, because attribute-driven libraries bind submits on the FORM, and capturing
+    would take their submits away from them.</li>
+  <li><strong>A POST that redirected must push history; a POST that answered in place must
+    not.</strong> Post/Redirect/Get lands on a plain address a reader can reload and share. A POST
+    that answered in place has an address that only accepts POST, so pushing it hands the reader a
+    reload that 405s. <code>res.redirected</code> is the exact signal.</li>
+  <li><strong>An inline <code>&lt;script&gt;</code> in a swapped region never runs.</strong> The
+    library re-runs only <code>script[src]</code>. Re-create inline scripts from the host, as this
+    site does in <code>src/_includes/swap-host.njk</code> with a MutationObserver.</li>
+  <li><strong>Under a View Transition, <code>swap:after</code> fires before the update callback has
+    run</strong>, so it may see the old content. Observe the region instead. Fix planned for
+    v1.1.</li>
+</ol>
+
+<h2 id="size">Size</h2>
+<p>13,802 bytes raw, 5,343 gzipped (as the gate measures it). htmx is 50,917 raw and 16,367 gzipped. The gate
+  <code>scripts/gates/startr-swap/check.py</code> holds a ceiling of 8,192 gzipped.</p>
+
+<h2 id="demo">Demo</h2>
+<p><a href="/demo/swap/a.html">/demo/swap/a.html</a> and <code>b.html</code> swap between each
+  other.</p>
+<p><a href="/demo/swap/none.html">/demo/swap/none.html</a> loads the script, declares no region,
+  keeps a <code>&lt;main&gt;</code> on purpose, and must navigate normally.</p>
+
+<h2 id="licence">Licence</h2>
+<p>MIT, the same as the framework. Source: <a
+    href="https://github.com/Startr/Style">https://github.com/Startr/Style</a>.</p>
+{% endblock %}

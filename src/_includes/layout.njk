@@ -14,7 +14,9 @@
     {% include "theme-toggle.njk" %}
     {% endblock %} {% block body %} <input type="checkbox" id="menu-control" style="--d:none" />
     {% block header %}{% endblock %}
-    <main style="--d: flex; --maxw: min(68rem, 100vw); --m: 0 auto;">
+    {# Startr Swap region. The home page keeps its hero outside <main>, so it
+       declares no region: swapping into or out of it would mismatch the chrome. #}
+    <main {% if page.url != "/" %}data-swap {% endif %}style="--d: flex; --maxw: min(68rem, 100vw); --m: 0 auto;">
       <aside aria-label="Table of Contents" class="book-menu" style="
           --fx: 0 0 16rem;
           --ta: right;
@@ -34,7 +36,7 @@
         ">
         {% block aside %}
 
-        <a href="/">
+        <a href="/" data-swap-off>
           <img src="/logo.png" alt="Startr/Style"
           style="--m: 20px -15px 1.6em auto; --maxw: 100px;" />
         </a>
@@ -91,6 +93,7 @@
     </footer>
     {% block scripts %}
     {% include "theme-scripts.njk" %}
+    {% include "swap-host.njk" %}
     {% endblock %}
     
     {% include "footer.njk" %}

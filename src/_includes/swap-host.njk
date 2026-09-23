@@ -1,0 +1,28 @@
+<!-- Startr Swap host glue — the gallery's own use of /swap.js.
+     A <script> that arrives through DOMParser never executes, and the library
+     re-runs only script[src]. The docs pages wire their live demos with inline
+     scripts, so the host re-creates those when the region's children are
+     replaced. A MutationObserver rather than swap:after: under a View Transition
+     the library fires swap:after before the update callback has run, so the
+     event cannot be trusted to see the new content. -->
+<script>
+  (function () {
+    var region = document.querySelector("main[data-swap]");
+    if (!region || !window.MutationObserver) return;
+    new MutationObserver(function (records) {
+      records.forEach(function (record) {
+        Array.prototype.forEach.call(record.addedNodes, function (node) {
+          if (node.nodeType !== 1) return;
+          var scripts = node.matches("script:not([src])")
+            ? [node]
+            : node.querySelectorAll("script:not([src])");
+          Array.prototype.forEach.call(scripts, function (stale) {
+            var fresh = document.createElement("script");
+            fresh.textContent = stale.textContent;
+            stale.replaceWith(fresh);
+          });
+        });
+      });
+    }).observe(region, { childList: true });
+  })();
+</script>

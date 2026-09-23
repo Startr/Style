@@ -173,5 +173,24 @@ setup:
 # ---------------------------------------------------------------------------
 # Interactive release (full flow via ~/bin/git-release)
 # ---------------------------------------------------------------------------
-release:
+release: swap_check
 	@scripts/release.sh
+
+# Freeze the current build under /v<version>/ so consumers can pin it.
+# Version comes from the latest git tag; pass V=1.3.3 to override.
+version_snapshot:
+	@scripts/snapshot-version.sh $(V)
+
+# ── Startr Swap ──────────────────────────────────────────────────────
+# src/static/swap.js is the source of truth and the rolling /swap.js.
+# src/static/v*/swap.js are pinned builds consumers load with an SRI hash,
+# so they are immutable: the gate fails if one stops matching its .sha256.
+swap_check:  ## Gate: swap.js names no application, stays under half of htmx gzipped, pins intact
+	@python3 scripts/gates/startr-swap/check.py --check
+
+swap_teeth:  ## Prove the swap gate can fail
+	@python3 scripts/gates/startr-swap/check.py --self-test
+
+# Freeze src/static/swap.js as /v$(V)/swap.js. Refuses to overwrite.
+swap_snapshot:
+	@scripts/snapshot-swap.sh $(V)
