@@ -47,41 +47,17 @@ stylesheets. On a static site that is a CDN hit per click. `fetch` + `DOMParser`
     It exists for exactly one case the nearest-ancestor rule cannot reach: a control that lives
     **outside** the region it updates, such as a search form above its own results.
   - `data-swap-off` on a control means never.
-  - `swap:before`, `swap:navigate`, `swap:after`, `swap:error` — all on the region, bubbling,
-    cancelable. Cancelling `swap:navigate` is how a host takes the address bar back.
-  - **Regions nest, so sub-swaps cost no syntax at all.** A pager inside a region updates that
-    region and leaves the page alone, declaring nothing. A sub-swap region does need an `id`,
-    because the response has to be able to name the piece coming back.
+  - `swap:before`, `swap:navigate`, `swap:after`, `swap:error` — all on the region, bubbling, cancelable. Cancelling `swap:navigate` is how a host takes the address bar back.
+  - **Regions nest, so sub-swaps cost no syntax at all.** A pager inside a region updates that region and leaves the page alone, declaring nothing. A sub-swap region does need an `id`, because the response has to be able to name the piece coming back.
   #ContentExcellence #docs
 
-- [ ] **🎪 Build the demo: two static pages linking to each other, and nothing else.** The whole
-  integration is a `<script defer>` tag and one word of markup, and the gallery should show
-  exactly that rather than a framework tour. AI-UI proves this with a fixture pair
-  (`cypress/fixtures/swap/a.html`, `b.html`) plus a third page — `none.html` — that loads the
-  script, declares no region, and **carries a `<main>` on purpose**. Port all three; the third is
-  the interesting one, see below. #ContentExcellence
+- [ ] **🎪 Build the demo: two static pages linking to each other, and nothing else.** The whole integration is a `<script defer>` tag and one word of markup, and the gallery should show exactly that rather than a framework tour. AI-UI proves this with a fixture pair (`cypress/fixtures/swap/a.html`, `b.html`) plus a third page — `none.html` — that loads the script, declares no region, and **carries a `<main>` on purpose**. Port all three; the third is the interesting one, see below. #ContentExcellence
 
-- [ ] **🪤 Carry these three findings into the docs — every consumer will hit them.** Each cost
-  real time to find, and each is silent when wrong.
-  1. **There is no `<main>` default, deliberately.** The first version claimed `<main>` when no
-     region was declared. Any document can end up running this file — a host application that
-     adopts a fetched page's scripts adopts this one too — and a `<main>` default would then take
-     over every link in a document that never asked for it. In AI-UI it did not fire *only*
-     because that SPA renders no `<main>` at all. Working by luck. **A region must be declared.**
-  2. **The click listener CAPTURES; the submit listener does not.** A single-page router binds its
-     own document-level click listener at boot, so in the bubble phase it always wins — it takes
-     the click, finds the address is not one of its routes, and does a full page load. Capture puts
-     a declared region ahead of a generic router. Submit stays in the bubble phase on purpose,
-     because attribute-driven libraries bind submits on the FORM, and an element listener runs
-     after a document capture — capturing would take their submits away from them.
+- [ ] **🪤 Carry these three findings into the docs — every consumer will hit them.** Each cost real time to find, and each is silent when wrong.
+  1. **There is no `<main>` default, deliberately.** The first version claimed `<main>` when no region was declared. Any document can end up running this file — a host application that adopts a fetched page's scripts adopts this one too — and a `<main>` default would then take over every link in a document that never asked for it. In AI-UI it did not fire *only* because that SPA renders no `<main>` at all. Working by luck. **A region must be declared.**
+  2. **The click listener CAPTURES; the submit listener does not.** A single-page router binds its own document-level click listener at boot, so in the bubble phase it always wins — it takes a declared region ahead of a generic router. Submit stays in the bubble phase on purpose, because attribute-driven libraries bind submits on the FORM, and an element listener runs after a document capture — capturing would take their submits away from them.
   3. **A POST that redirected must push history; a POST that answered in place must not.**
-     Post/Redirect/Get lands on a plain address a reader can reload and share. A POST that answered
-     in place has an address that only accepts POST, so pushing it hands the reader a reload that
-     405s. `res.redirected` is the exact signal. Get this wrong and the content swaps to the page
-     you asked for while the address stays on the one you left.
-  #docs #footgun
+     Post/Redirect/Get lands on a plain address a reader can reload and share. A POST that answered in place has an address that only accepts POST, so pushing it hands the reader a reload that
+     405s. `res.redirected` is the exact signal. Get this wrong and the content swaps to the page you asked for while the address stays on the one you left. #docs #footgun
 
-- [ ] **🌱 Employ it here.** This site is the obvious first consumer: it is a static Eleventy build
-  of many small documentation pages, which is precisely the shape the library is for. Adopting it
-  is also the honest test of the docs above — if the gallery cannot be wired from its own
-  documentation, the documentation is wrong. #dogfood
+- [ ] **🌱 Employ it here.** This site is the obvious first consumer: it is a static Eleventy build of many small documentation pages, which is precisely the shape the library is for. Adopting it is also the test of the docs above — if the gallery cannot be wired from its own documentation, the documentation is wrong. #dogfood
