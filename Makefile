@@ -153,6 +153,23 @@ style_core_push:
 	# Push subtree changes back to the core repo
 	git subtree push --prefix=$(STYLE_CORE_PREFIX) $(STYLE_CORE_REMOTE) $(STYLE_CORE_BRANCH)
 
+# ── Publish the CSS built from the core ──────────────────────────────
+# The core is the source of truth: src/static/style.css is generated, not
+# edited by hand. scripts/core-publish.sh builds CORE into a temp dir, runs the
+# core's parity check, then copies the sheets and props.json to DEST (props.json
+# also to DATA, where the docs read it). Nothing is copied if either step fails.
+# It refuses to overwrite src/static/style.css until the latest release has its
+# snapshot in src/static/v<version>/ (make version_snapshot), so a pinned URL
+# keeps serving the bytes it shipped. V=x.y.z names another version to guard.
+#
+#   make core_publish CORE=../WEB-startr.style.core DEST=/tmp/out DATA=/tmp/out
+CORE ?= $(STYLE_CORE_PREFIX)
+DEST ?= src/static
+DATA ?= src/_data
+
+core_publish:  ## Build CORE, check parity, publish style.css, style.min.css, props.json to DEST; refuses until the live release has a snapshot
+	@CORE="$(CORE)" DEST="$(DEST)" DATA="$(DATA)" scripts/core-publish.sh $(V)
+
 things_clean:
 	git clean --exclude=!.env -Xdf
 

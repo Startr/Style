@@ -26,8 +26,8 @@ module.exports = function (eleventyConfig) {
 
   // set directories to pass through to the dist directory
   eleventyConfig.addPassthroughCopy({ static: "/" });
-  // Startr.Style Core subtree — serve pre-built CSS at /startr.css
-  eleventyConfig.addPassthroughCopy({ "style-core/dist/startr.min.css": "/startr.css" });
+  // /startr.css is static/startr.css, written by `make core_publish` from the
+  // core build (core no longer tracks dist/, so the subtree carries none).
   // include run folder for passing users scripts that can be called with curl
   eleventyConfig.addPassthroughCopy({ run: "/run" });
   // Copy any .jpg file to `_site`, via Glob pattern
