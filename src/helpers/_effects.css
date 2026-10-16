@@ -1,0 +1,45 @@
+/* Effects: --text-grad, --bdf, --glow. */
+
+/* --bdf: backdrop-filter, with the breakpoint tiers. */
+@mixin svar-mq backdrop-filter, --bdf;
+
+/* --text-grad: <gradient> fills the text. It sets the background image and
+   the text clip, and leaves the colour alone: add --c:transparent. */
+[style*="--text-grad:"] {
+  background-image: var(--text-grad) !important;
+  background-clip: text !important;
+}
+
+/* --glow: N is --levitate's four growing layers with no lift and a colour.
+   --glow-c sets it (default --primary). N sets the reach and the strength:
+   each layer is N*4% opaque, so 25 and up is solid.
+   The base rule is a literal #470183, the default --primary, for browsers
+   without color-mix. A declaration holding var() never falls back to an
+   earlier one when it turns out invalid, so the swap happens under @supports,
+   not in the cascade. Like --levitate and --shadow, it is not !important, so
+   the -hvr and -hover shadow helpers and --boxs-hover can still take over. */
+[style*="--glow:"] {
+  --_glow: rgba(71, 1, 131, calc(var(--glow) * .04));
+  box-shadow: 0 0 calc(var(--glow) * .6px) var(--_glow),
+              0 0 calc(var(--glow) * 1.2px) var(--_glow),
+              0 0 calc(var(--glow) * 2.4px) var(--_glow),
+              0 0 calc(var(--glow) * 4.4px) var(--_glow);
+}
+
+@supports (color: color-mix(in srgb, red, blue)) {
+  [style*="--glow:"] {
+    --_glow: color-mix(in srgb, var(--glow-c, var(--primary)) calc(var(--glow) * 4%), transparent);
+  }
+}
+
+/* --button-hover: set it (on :root or any ancestor) to give buttons a hover
+   colour. Unset, the fallback is the button's own background, so the default
+   look does not change. :root no longer defines the token: a value fixed
+   there as var(--primary) froze at the root and ignored a page that changed
+   --primary or --element-bg. */
+button:hover,
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  background-color: var(--button-hover, var(--element-bg, var(--primary)));
+}

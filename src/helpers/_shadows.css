@@ -1,5 +1,13 @@
 /* Shadow Helpers */
 
+/* TODO: Inset shadows don't play well with other shadows. When combining
+   --shadow-inset with --shadow or --shadow-hover (--shadow-hvr), the later box-shadow
+   declaration overwrites the earlier one instead of composing them. Each selector sets
+   box-shadow independently, so e.g. hovering on an element with both --shadow-inset
+   and --shadow-hover loses the inset shadow entirely. Needs a compositing approach
+   (e.g. combining values into a single box-shadow list).
+   Discovered on sage.is/hardware configurator. */
+
 [style*="--levitate:"] {
     box-shadow: 0 calc(var(--levitate) * .5px) calc(var(--levitate) * .6px) rgba(0,0,0,calc(var(--levitate) * .013)), 
                 0 calc(var(--levitate) * 1px) calc(var(--levitate) * 1.2px) rgba(0,0,0,calc(var(--levitate) * .013)), 
@@ -8,15 +16,39 @@
     transform: translateY(calc(var(--levitate) * -1.2px));
 }
 
+/* The hover looks. --levitate-hover and --shadow-hover are the names. --levitate-hvr and --shadow-hvr are
+   deprecated aliases: a one-line rule copies the old value into the new variable, so one set of rules serves
+   both. An inline --x-hover beats the copy, so the new name wins when both are given. The hover rule sits in
+   @media (hover:hover); the :focus-visible copy is a separate rule outside it. */
+@define-mixin levitate-look {
+    box-shadow: 0 calc(var(--levitate-hover) * .5px) calc(var(--levitate-hover) * .6px) rgba(0,0,0,calc(var(--levitate-hover) * .013)), 
+                0 calc(var(--levitate-hover) * 1px) calc(var(--levitate-hover) * 1.2px) rgba(0,0,0,calc(var(--levitate-hover) * .013)), 
+                0 calc(var(--levitate-hover) * 2px) calc(var(--levitate-hover) * 2.4px) rgba(0,0,0,calc(var(--levitate-hover) * .013)), 
+                0 calc(var(--levitate-hover) * 4px) calc(var(--levitate-hover) * 4.4px) rgba(0,0,0,calc(var(--levitate-hover) * .013)); 
+    transform: translateY(calc(var(--levitate-hover) * -1.2px));
+}
+
+@define-mixin shadow-look {
+    box-shadow: 0 calc(var(--shadow-hover) * .1px) calc(var(--shadow-hover) * .2px) rgba(0,0,0,calc(var(--shadow-hover) * .02)), 
+                0 calc(var(--shadow-hover) * .2px) calc(var(--shadow-hover) * .4px) rgba(0,0,0,calc(var(--shadow-hover) * .02)), 
+                0 calc(var(--shadow-hover) * .4px) calc(var(--shadow-hover) * .8px) rgba(0,0,0,calc(var(--shadow-hover) * .02)), 
+                0 calc(var(--shadow-hover) * .8px) calc(var(--shadow-hover) * 1.6px) rgba(0,0,0,calc(var(--shadow-hover) * .02)); 
+}
+
+[style*="--levitate-hvr:"] {
+    --levitate-hover: var(--levitate-hvr);
+}
+
+[style*="--levitate-hover:"],
 [style*="--levitate-hvr:"] {
     transition: var(--transition);
-    &:hover,
-    &:focus {
-        box-shadow: 0 calc(var(--levitate-hvr) * .5px) calc(var(--levitate-hvr) * .6px) rgba(0,0,0,calc(var(--levitate-hvr) * .013)), 
-                    0 calc(var(--levitate-hvr) * 1px) calc(var(--levitate-hvr) * 1.2px) rgba(0,0,0,calc(var(--levitate-hvr) * .013)), 
-                    0 calc(var(--levitate-hvr) * 2px) calc(var(--levitate-hvr) * 2.4px) rgba(0,0,0,calc(var(--levitate-hvr) * .013)), 
-                    0 calc(var(--levitate-hvr) * 4px) calc(var(--levitate-hvr) * 4.4px) rgba(0,0,0,calc(var(--levitate-hvr) * .013)); 
-        transform: translateY(calc(var(--levitate-hvr) * -1.2px));
+    @media (hover:hover) {
+        &:hover {
+            @mixin levitate-look;
+        }
+    }
+    &:focus-visible {
+        @mixin levitate-look;
     }
 }
 
@@ -50,12 +82,18 @@
 }
 
 [style*="--shadow-hvr:"] {
+    --shadow-hover: var(--shadow-hvr);
+}
+
+[style*="--shadow-hover:"],
+[style*="--shadow-hvr:"] {
     transition: var(--transition);
-    &:hover,
-    &:focus {
-    box-shadow: 0 calc(var(--shadow-hvr) * .1px) calc(var(--shadow-hvr) * .2px) rgba(0,0,0,calc(var(--shadow-hvr) * .02)), 
-                0 calc(var(--shadow-hvr) * .2px) calc(var(--shadow-hvr) * .4px) rgba(0,0,0,calc(var(--shadow-hvr) * .02)), 
-                0 calc(var(--shadow-hvr) * .4px) calc(var(--shadow-hvr) * .8px) rgba(0,0,0,calc(var(--shadow-hvr) * .02)), 
-                0 calc(var(--shadow-hvr) * .8px) calc(var(--shadow-hvr) * 1.6px) rgba(0,0,0,calc(var(--shadow-hvr) * .02)); 
+    @media (hover:hover) {
+        &:hover {
+            @mixin shadow-look;
+        }
+    }
+    &:focus-visible {
+        @mixin shadow-look;
     }
 }

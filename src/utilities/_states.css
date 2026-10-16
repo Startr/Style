@@ -1,0 +1,76 @@
+/* States: --x-hover, --x-focus, --x-active, --x-on, --x-in-on, --x-in-hover. Emitted by state, not by prop.
+   Source order is the precedence ladder: in-hover < hover < in-on < on < focus < active.
+   The deprecated --hvr-* names and --cur ride at the head of the hover section, as aliases of --x-hover.
+   scripts/bands.test.ts checks every rule's band and place; mixins.css explains the bands. */
+
+/* in-hover */
+@mixin svar:in-hover background, --bg-in-hover;
+@mixin svar:in-hover background-color, --bgc-in-hover;
+@mixin svar:in-hover color, --c-in-hover;
+@mixin svar:in-hover border, --b-in-hover;
+@mixin svar:in-hover border-color, --bc-in-hover;
+@mixin svar:in-hover box-shadow, --boxs-in-hover;
+@mixin svar:in-hover opacity, --op-in-hover;
+@mixin svar:in-hover transform, --t-in-hover;
+@mixin svar:in-hover outline, --oe-in-hover;
+
+/* hover */
+@mixin svar:hvr background, --hvr-bg;
+@mixin svar:hvr background-color, --hvr-bgc;
+@mixin svar:hvr color, --hvr-c;
+@mixin svar:hvr border, --hvr-b;
+@mixin svar:hvr border-color, --hvr-bc;
+@mixin svar:hvr cursor, --cur;
+@mixin svar:hover background, --bg-hover;
+@mixin svar:hover background-color, --bgc-hover;
+@mixin svar:hover color, --c-hover;
+@mixin svar:hover border, --b-hover;
+@mixin svar:hover border-color, --bc-hover;
+@mixin svar:hover box-shadow, --boxs-hover;
+@mixin svar:hover opacity, --op-hover;
+@mixin svar:hover transform, --t-hover;
+@mixin svar:hover outline, --oe-hover;
+
+/* in-on */
+@mixin svar:in-on background, --bg-in-on;
+@mixin svar:in-on background-color, --bgc-in-on;
+@mixin svar:in-on color, --c-in-on;
+@mixin svar:in-on border, --b-in-on;
+@mixin svar:in-on border-color, --bc-in-on;
+@mixin svar:in-on box-shadow, --boxs-in-on;
+@mixin svar:in-on opacity, --op-in-on;
+@mixin svar:in-on transform, --t-in-on;
+@mixin svar:in-on outline, --oe-in-on;
+
+/* on */
+@mixin svar:on background, --bg-on;
+@mixin svar:on background-color, --bgc-on;
+@mixin svar:on color, --c-on;
+@mixin svar:on border, --b-on;
+@mixin svar:on border-color, --bc-on;
+@mixin svar:on box-shadow, --boxs-on;
+@mixin svar:on opacity, --op-on;
+@mixin svar:on transform, --t-on;
+@mixin svar:on outline, --oe-on;
+
+/* focus */
+@mixin svar:focus background, --bg-focus;
+@mixin svar:focus background-color, --bgc-focus;
+@mixin svar:focus color, --c-focus;
+@mixin svar:focus border, --b-focus;
+@mixin svar:focus border-color, --bc-focus;
+@mixin svar:focus box-shadow, --boxs-focus;
+@mixin svar:focus opacity, --op-focus;
+@mixin svar:focus transform, --t-focus;
+@mixin svar:focus outline, --oe-focus;
+
+/* active */
+@mixin svar:active background, --bg-active;
+@mixin svar:active background-color, --bgc-active;
+@mixin svar:active color, --c-active;
+@mixin svar:active border, --b-active;
+@mixin svar:active border-color, --bc-active;
+@mixin svar:active box-shadow, --boxs-active;
+@mixin svar:active opacity, --op-active;
+@mixin svar:active transform, --t-active;
+@mixin svar:active outline, --oe-active;

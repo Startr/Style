@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Startr.Style motion and effects</title>
+<!-- scripts/motion.test.ts builds into a temp dir, copies this page to the same place in it
+     (test/fixtures/), and opens it in headless Chrome, with and without reduced motion.
+     To look at it by hand, run `bun run build` and open it from the repo.
+     Every probe has an id the test reads. -->
+<link rel="stylesheet" href="../../dist/startr.min.css">
+<style>
+/* Page chrome. It sets nothing a probe tests. */
+.fx { margin: .5rem 0; padding: .5rem 1rem; border: 1px dashed #888; }
+/* The glows get room, so a pixel beside each box is clear of its neighbours. */
+.glows { display: flex; flex-wrap: wrap; gap: 3rem; padding: 3rem; }
+.glows > * { width: 10rem; }
+/* The worst case for the reduced-motion guard: a later rule at the base
+   specificity (0,1,0), also !important. The guard has to win by specificity. */
+[data-late="anim"] { animation: st-pop 7s linear both !important; }
+[data-late="tn"] { transition: opacity 6s linear !important; }
+.narrow { width: 12rem; }
+/* Component CSS that sets only a duration: --tp then picks what moves. */
+.slow { transition-duration: 5s; }
+</style>
+</head>
+<body>
+<h1>Motion and effects</h1>
+
+<h2>--anim</h2>
+<div class="fx" id="a-rise" style="--i: 3; --anim: st-rise var(--dur-3) var(--ease-out) calc(var(--i) * 45ms) both">st-rise, third in a stagger</div>
+<div class="fx" id="a-live" style="--anim: st-fade 10s linear both">st-fade over ten seconds, to watch it run</div>
+<div class="fx" id="a-tiers" style="--anim: st-fade 10s linear both; --anim-sm: st-fade 9s linear both; --anim-md: st-fade 8s linear both; --anim-lg: st-fade 7s linear both; --anim-xl: st-fade 6s linear both">one tier per breakpoint, told apart by duration</div>
+<div class="fx" id="a-none">no --anim</div>
+<div class="fx" id="l-anim" data-late="anim" style="--anim: st-fade 10s linear both">--anim, with a later rule at (0,1,0) after it</div>
+
+<h2>Keyframes, sampled by seeking</h2>
+<div class="fx" id="k-fade" style="--anim: st-fade 10s linear both">st-fade</div>
+<div class="fx" id="k-rise" style="--anim: st-rise 10s linear both">st-rise</div>
+<div class="fx" id="k-slide" style="--anim: st-slide-in 10s linear both">st-slide-in</div>
+<div dir="rtl">
+  <div class="fx" id="k-slide-rtl" style="--anim: st-slide-in 10s linear both">st-slide-in, right to left</div>
+  <div dir="ltr"><div class="fx" id="k-slide-island" style="--anim: st-slide-in 10s linear both">st-slide-in, an LTR island inside it</div></div>
+</div>
+<div class="fx" id="k-pop" style="--anim: st-pop 10s linear both">st-pop</div>
+<div class="fx narrow" id="k-rise-stack" style="--t: rotate(10deg); --anim: st-rise 10s linear both">st-rise on top of --t</div>
+<div class="fx" id="k-fade-op" style="--op: .5; --anim: st-fade 10s linear both">st-fade under --op</div>
+
+<h2>Transitions</h2>
+<div class="fx" id="x-tn" style="--tn: opacity 10s linear">--tn</div>
+<div class="fx" id="x-tdn" style="--tdn: 2s">--tdn</div>
+<div class="fx" id="x-tp" style="--tp: transform; --tdn: 2s">--tp</div>
+<div class="fx slow" id="x-tp-only" style="--tp: opacity">--tp alone, over a duration from CSS</div>
+<div class="fx" id="x-tiers" style="--tn-sm: opacity 9s; --tn-md: opacity 8s; --tn-lg: opacity 7s; --tn-xl: opacity 6s">--tn, one tier per breakpoint</div>
+<div class="fx" id="l-tn" data-late="tn" style="--tn: opacity 10s linear">--tn, with a later rule at (0,1,0) after it</div>
+<div class="fx" id="h-state" style="--bgc-hover: red; --tn: background-color 10s linear">--bgc-hover with --tn</div>
+
+<h2>Hover helpers, old names and new</h2>
+<div class="fx" id="h-shadow-hvr" style="--shadow-hvr: 5">--shadow-hvr</div>
+<div class="fx" id="h-levitate-hvr" style="--levitate-hvr: 3">--levitate-hvr</div>
+<div class="fx" id="h-translate-hvr" style="--translatey-hvr: -4px">--translatey-hvr</div>
+<div class="fx" id="h-shadow-hover" style="--shadow-hover: 5">--shadow-hover</div>
+<div class="fx" id="h-levitate-hover" style="--levitate-hover: 3">--levitate-hover</div>
+<div class="fx" id="h-translate-hover" style="--translatey-hover: -4px">--translatey-hover</div>
+
+<h2>--text-grad</h2>
+<div style="color: rgb(10, 20, 30); font-size: 3rem; font-weight: 700">
+  <span id="g-text" style="--text-grad: linear-gradient(90deg, red, blue)">Gradient</span>
+  <span id="g-text-clear" style="--text-grad: linear-gradient(90deg, red, blue); --c: transparent">Gradient</span>
+</div>
+
+<h2>--bdf</h2>
+<div class="fx" id="b-bdf" style="--bdf: blur(6px) saturate(1.4)">--bdf</div>
+<div class="fx" id="b-tiers" style="--bdf: blur(1px); --bdf-sm: blur(2px); --bdf-md: blur(3px); --bdf-lg: blur(4px); --bdf-xl: blur(5px)">--bdf, one tier per breakpoint</div>
+
+<h2>--glow</h2>
+<div class="glows">
+  <div class="fx" id="e-glow-1" style="--glow: 1">--glow: 1</div>
+  <div class="fx" id="e-glow" style="--glow: 5">--glow: 5</div>
+  <div class="fx" id="e-glow-10" style="--glow: 10">--glow: 10</div>
+  <div class="fx" id="e-glow-red" style="--glow: 5; --glow-c: red">--glow: 5, --glow-c: red</div>
+  <div style="--primary: rgb(0, 128, 0)"><div class="fx" id="e-glow-theme" style="--glow: 5">--glow: 5, --primary set above it</div></div>
+  <div class="fx" id="e-glow-shadow-hover" style="--glow: 5; --shadow-hover: 8">--glow: 5, --shadow-hover: 8</div>
+  <div class="fx" id="e-glow-boxs-hover" style="--glow: 5; --boxs-hover: 0 0 0 3px rgb(255, 0, 0)">--glow: 5, --boxs-hover</div>
+</div>
+<div class="fx" id="e-primary" style="color: var(--primary)">--primary, for reference</div>
+</body>
+</html>

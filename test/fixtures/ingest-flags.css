@@ -1,0 +1,95 @@
+/* Each rule trips one flag, or none. scripts/ingest.test.ts counts them. */
+
+@import url("https://fonts.googleapis.com/css2?family=Sora");
+@import "//cdn.example.com/x.css";
+@import url("local.css");
+
+@font-face {
+  font-family: "Local";
+  src: url("/fonts/local.woff2");
+}
+
+@font-face {
+  font-family: "Remote";
+  src: url("https://cdn.example.com/remote.woff2");
+}
+
+:root {
+  --lp-accent: #6022ff;
+  --lp-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+[data-a] {
+  background: url(https://example.com/bg.png);
+  color: #fff;
+  border-color: rgb(0 0 0 / 50%);
+  outline-color: hsl(210 50% 40%);
+  box-shadow: 0 0 4px oklch(60% 0.2 280);
+  fill: red;
+  font-family: "IBM Plex Mono", monospace;
+  padding: 8px !important;
+}
+
+/* None of these is a literal or a leaving request. */
+[data-b] {
+  color: transparent;
+  background: url(/local.png), url(data:image/gif;base64,AAAA), url(#frag);
+  border-color: currentColor;
+  outline-color: var(--primary);
+  fill: rgb(var(--x) / 50%);
+  font-family: var(--font-sans);
+  font-family: inherit;
+}
+
+[data-c] {
+  font: 600 0.8rem "Sora", sans-serif;
+}
+
+[data-d] {
+  font-family: Georgia, serif;
+}
+
+.card {
+  color: var(--primary);
+}
+
+[data-e] .child {
+  color: var(--primary);
+}
+
+a:not(.hidden) {
+  color: var(--primary);
+}
+
+/* A dot inside an attribute value is no class. */
+[href$=".pdf"] {
+  color: var(--primary);
+}
+
+a[href*="x.y"] {
+  color: var(--primary);
+}
+
+@media (max-width: 719px) {
+  [data-f] {
+    padding: 8px;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 900px) {
+  [data-f] {
+    padding: 16px;
+  }
+}
+
+@media (width <= 600px) {
+  [data-f] {
+    padding: 4px;
+  }
+}
+
+@media (min-width: 768px) {
+  [data-f] {
+    padding: 24px;
+  }
+}

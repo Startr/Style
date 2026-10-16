@@ -35,20 +35,85 @@
   }
 }
 
+/* The state mixins. Every rule is !important, so specificity decides and source order breaks ties.
+   Band A (0,1,0): svar, svar-mq. Band B (0,2,0): svar:hvr, svar:in-hover, svar:hover.
+   Band C (0,3,0): svar:in-on, svar:on, svar:focus, svar:active. utilities/_states.css emits them in that order.
+   postcss-combine-media-query hoists every @media block to the end of the sheet, in order of first use. So the
+   (hover:hover) rules land after in-hover's :focus-visible copy, and hover's :focus-visible copy rides in
+   @media (min-width:0), which is always true, to land after them. Spell it (hover:hover) everywhere: another
+   spelling makes a second block. scripts/bands.test.ts holds all of this in place. */
+
+/* Deprecated --hvr-* and --cur: hover only, now !important so they beat --bg. Treated as aliases of hover. */
+@define-mixin svar:hvr $prop, $var {
+  @media (hover:hover) {
+    [style*="$(var):"]:hover {
+      $(prop): var($(var)) !important;
+    }
+  }
+}
+
+/* --x-in-hover: the parent is hovered or keyboard-focused. The :focus-visible copy is a separate rule outside the query. */
+@define-mixin svar:in-hover $prop, $var {
+  @media (hover:hover) {
+    :hover>[style*="$(var):"] {
+      $(prop): var($(var)) !important;
+    }
+  }
+  :focus-visible>[style*="$(var):"] {
+    $(prop): var($(var)) !important;
+  }
+}
+
+/* --x-hover: the element is hovered or keyboard-focused. The :focus-visible copy is a separate rule in @media (min-width:0). */
 @define-mixin svar:hover $prop, $var {
-  [style*="$(var):"]:hover {
-    $(prop): var($(var), var(--$(prop)));
+  @media (hover:hover) {
+    [style*="$(var):"]:hover {
+      $(prop): var($(var)) !important;
+    }
+  }
+  @media (min-width:0) {
+    [style*="$(var):"]:focus-visible {
+      $(prop): var($(var)) !important;
+    }
+  }
+}
+
+/* --x-in-on: a direct child of an element that is on. The :is() list must match svar:on. */
+@define-mixin svar:in-on $prop, $var {
+  :is([aria-current]:not([aria-current="false"],[aria-current=""]),[aria-selected="true"],[aria-pressed="true"],[aria-expanded="true"],[open],:checked,[data-on]:not([data-on="false"]))>[style*="$(var):"] {
+    $(prop): var($(var)) !important;
+  }
+}
+
+/* --x-on: the element is on. One :not(a,b) keeps :is() at (0,2,0), so the rule stays at (0,3,0). */
+@define-mixin svar:on $prop, $var {
+  [style*="$(var):"]:is([aria-current]:not([aria-current="false"],[aria-current=""]),[aria-selected="true"],[aria-pressed="true"],[aria-expanded="true"],[open],:checked,[data-on]:not([data-on="false"])) {
+    $(prop): var($(var)) !important;
+  }
+}
+
+/* --x-focus: keyboard focus (:focus-visible). [style] pads the rule to (0,3,0). */
+@define-mixin svar:focus $prop, $var {
+  [style][style*="$(var):"]:focus-visible {
+    $(prop): var($(var)) !important;
+  }
+}
+
+/* --x-active: pressed. [style] pads the rule to (0,3,0). */
+@define-mixin svar:active $prop, $var {
+  [style][style*="$(var):"]:active {
+    $(prop): var($(var)) !important;
   }
 }
 
 @define-mixin svar:before $prop, $var {
   [style*="$(var):"]::before {
-    $(prop): var($(var), var(--$(prop)));
+    $(prop): var($(var));
   }
 }
 
 @define-mixin svar:after $prop, $var {
   [style*="$(var):"]::after {
-    $(prop): var($(var), var(--$(prop)));
+    $(prop): var($(var));
   }
 }

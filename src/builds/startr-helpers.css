@@ -8,3 +8,6 @@
 @import '../helpers/_spacing.css';
 @import '../helpers/_transform.css';
 @import '../helpers/_typography.css';
+@import '../helpers/_color.css';
+@import '../helpers/_motion.css';
+@import '../helpers/_effects.css';

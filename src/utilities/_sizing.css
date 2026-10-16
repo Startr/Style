@@ -3,5 +3,7 @@
 @mixin svar-mq height, --h;
 @mixin svar-mq min-width, --minw;
 @mixin svar-mq min-height, --minh;
+/* --maxw-sm is back in 1.4.0. 1.3.2 switched it off for a presentation
+   (2026-06-25); the pinned /v1.3.2/ sheet keeps it off. */
 @mixin svar-mq max-width, --maxw;
 @mixin svar-mq max-height, --maxh;

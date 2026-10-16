@@ -1,12 +1,15 @@
 {
   "name": "Startr.Style",
-  "version": "1.2.2",
+  "version": "1.4.0",
   "description": "Largely classless, blazing fast and super light-weight. Startr.Style, a base CSS framework for modern browsers",
   "main": "dist/Startr.Style.min.css",
   "scripts": {
     "build": "bun run build.ts",
     "serve": "bun run serve.ts",
-    "watch": "bun --watch run build.ts"
+    "watch": "bun --watch run build.ts",
+    "parity": "bun run scripts/parity.ts",
+    "test": "bun test scripts",
+    "ingest": "bun run scripts/ingest.ts"
   },
   "repository": {
     "type": "git",
@@ -15,7 +18,7 @@
   "keywords": [
     "css",
     "css-framework",
-    "256-color-palette"
+    "color-mix"
   ],
   "author": "Startr",
   "license": "MIT",
@@ -29,7 +32,8 @@
     "postcss-import": "^16.1.0",
     "postcss-inline-svg": "^6.0.0",
     "postcss-mixins": "^11.0.3",
-    "postcss-nested": "^7.0.2"
+    "postcss-nested": "^7.0.2",
+    "postcss-selector-parser": "7.1.1"
   },
   "files": [
     "dist",

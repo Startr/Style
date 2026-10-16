@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="canonical" href="https://example.com/page">
+<link rel="stylesheet" href="/static/local.css">
+<style>
+.wrap { max-width: 40rem; margin: 0 auto; }
+[data-demo] { animation: fade-up .5s ease both; animation-delay: calc(var(--i) * 45ms); }
+</style>
+</head>
+<body>
+<div class="wrap" data-demo style="--i:2; padding:18px; --opacity:.5; --list-style:none; --max-w:20rem">demo</div>
+<!-- <style>.hidden-in-comment { color: red }</style> <i style="--in-comment:1"></i> -->
+
+<script type="text/plain" id="code-css" data-name="card.css" data-path="app/static/card.css (new)">
+[data-card] { display: flex; padding: 12px; }
+[data-card]:hover { background: #f5f5f5; }
+</script>
+
+<script type="text/plain" id="code-nav" data-name="CSS" data-path="app/static/nav.css (same file; the :root tokens are shared)">
+[data-nav] a[aria-current] { font-weight: 600; }
+</script>
+
+<script type="text/plain" id="code-mystery" data-name="mystery">
+[data-mystery] { margin: 0; }
+</script>
+
+<script type="text/plain" id="code-tpl" data-name="chip.html" data-path="app/templates/chip.html (new)">
+{% extends "base.html" %}
+{# a note with style="--in-note:1" in it #}
+<span style="--bg:var(--primary-tint); --c:var(--primary); --bg-hover:red"></span>
+<span style="--fs:0.875rem; --br:4px; --hvr-bg:red; --bg-hover-md:blue; --bg-md-hover:blue; --oe-md:1px; --BG:red; --bg : red; --c-hover:red">chip</span>
+<li style="--i:{{ loop.index0 }}; --w:{{ [100, done * 100 // total]|min }}%; --brand:{{ "x" }}"></li>
+{% set chip = "--bg:var(--good-bg); --c:var(--good); --tn:color .2s" %}
+<b style="{{ chip }}"></b>
+<b style="padding:{{ p }}px; margin:0 auto; --not-a-prop:1"></b>
+</script>
+
+<script type="text/plain" id="code-js" data-name="chip.js" data-path="app/static/chip.js (new)">
+el.style.setProperty("--dx", "4px");
+</script>
+
+<script>
+document.body.innerHTML += '<i style="--w:40%"></i>';
+</script>
+</body>
+</html>
