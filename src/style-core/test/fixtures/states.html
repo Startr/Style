@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Startr.Style states</title>
+<!-- scripts/states.test.ts copies this page next to a fresh build and points the link at it.
+     To look at it by hand, run `bun run build` and open it from the repo. -->
+<link rel="stylesheet" href="../../dist/startr.css">
+<style>*, *::before, *::after { transition: none !important; }</style>
+</head>
+<body>
+<h1>States</h1>
+<p>Every block is one case. The numbers are rgb values the test reads back.</p>
+
+<!-- Hover, and the old --hvr-bg that used to lose to --bg. -->
+<div id="hover" style="--bg:rgb(255,255,255); --bg-hover:rgb(0,128,0)">--bg-hover</div>
+<div id="legacy" style="--bg:rgb(255,255,255); --hvr-bg:rgb(0,0,255)">--hvr-bg beats --bg</div>
+
+<!-- A tier and a state: the state wins. Tiers apply from 768px (-md). -->
+<div id="tier" style="--bg:rgb(1,0,0); --bg-md:rgb(2,0,0); --bg-hover:rgb(3,0,0)">tier, then hover</div>
+
+<!-- Keyboard. Tab from the anchor reaches the focus ring, then the link, then the current item. -->
+<button id="kbd-anchor">anchor</button>
+<button id="kbd-focus" style="--oe-focus:3px solid rgb(0,0,255); --oo:2px">--oe-focus</button>
+<a id="kbd-hover" href="#kbd-hover" style="--c:rgb(0,0,0); --c-hover:rgb(200,0,0)">hover look on focus</a>
+<a id="kbd-both" href="#kbd-both" aria-current="page"
+   style="--bg:rgb(255,255,255); --bg-hover:rgb(1,1,1); --bg-on:rgb(2,2,2); --bg-focus:rgb(3,3,3)">current, hovered, focused</a>
+<button id="click-me" style="--oe-focus:3px solid rgb(0,0,255)">a mouse click is not focus</button>
+
+<!-- Press and hold. -->
+<button id="press" style="--bg:rgb(255,255,255); --bg-active:rgb(9,9,9)">--bg-active</button>
+
+<!-- A parent that is hovered, for real. -->
+<div id="rh-parent" style="padding:1rem">
+  <span id="rh-child" style="--c:rgb(0,0,0); --c-in-hover:rgb(0,0,200)">--c-in-hover</span>
+</div>
+<div id="rh-away">elsewhere</div>
+
+<!-- Parent state reaches a direct child, not a grandchild. -->
+<details id="det" open>
+  <summary id="det-child" style="--c:rgb(0,0,0); --c-in-on:rgb(0,128,0)">summary</summary>
+  <div id="det-div" style="--c:rgb(0,0,0); --c-in-on:rgb(0,128,0)">
+    <span id="det-grand" style="--c:rgb(0,0,0); --c-in-on:rgb(0,128,0)">grandchild</span>
+  </div>
+</details>
+<details id="det-shut">
+  <summary id="det-shut-child" style="--c:rgb(0,0,0); --c-in-on:rgb(0,128,0)">summary of a closed one</summary>
+</details>
+
+<!-- The full ladder on one element. The parent takes the in-* states, the element takes the rest. -->
+<div id="ladder-parent">
+  <div id="ladder" tabindex="0"
+       style="--bg:rgb(1,0,0); --bg-md:rgb(2,0,0); --bg-in-hover:rgb(3,0,0); --bg-hover:rgb(4,0,0);
+              --bg-in-on:rgb(5,0,0); --bg-on:rgb(6,0,0); --bg-focus:rgb(7,0,0); --bg-active:rgb(8,0,0)">ladder</div>
+</div>
+
+<!-- The test builds its own elements here (the state matrix, the aria cases, the helper twins). -->
+<div id="lab"></div>
+</body>
+</html>

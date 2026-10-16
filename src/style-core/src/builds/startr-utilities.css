@@ -14,3 +14,8 @@
 @import '../utilities/_transform.css';
 @import '../utilities/_transition.css';
 @import '../utilities/_misc.css';
+
+@import '../utilities/_states.css';
+
+/* --anim, its keyframes, and the reduced-motion guard that also covers --tn, --tdn and --tp above. */
+@import '../helpers/_motion.css';

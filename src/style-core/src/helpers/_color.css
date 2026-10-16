@@ -1,0 +1,112 @@
+/* Colour by math: --mix and --tone.
+
+   Two numbers stand in for the 245 palette tokens that used to sit on :root
+   (the --mix-RGB cube and the --gray-N ramp). An element asks for a colour
+   with a number, reads the answer from one variable, and pays nothing when no
+   element asks.
+
+     --mix: RGB        three digits, each 0-5. 314 is red 3, green 1, blue 4.
+                       Sets --mixed: the cell --mix-314 used to name. The
+                       cube is a trilinear color-mix in oklch, in 20% steps,
+                       between the base colours --color-0 to --color-7.
+                       A digit above 5 counts as 5.
+     --tone: N         a number, 0 to 100. Sets --toned: N% of --tone-of
+                       mixed into --background. --tone-of defaults to
+                       --text-main, so greys and tints flip with the theme.
+
+   Use it like this, and always give var() a fallback:
+     style="--mix:314; --bg:var(--mixed, #7c61c1)"
+     style="--tone:76; --b:1px solid var(--toned, #545454)"
+     style="--tone:8; --tone-of:var(--green); --bg:var(--toned, #f0f6f3)"
+
+   Each formula sits on its own [style*="..."] rule, never on :root. A var()
+   inside a custom property resolves where the property is declared, so the
+   formula has to run on the element that holds the number (--levitate works
+   the same way).
+
+   Nothing leaks down the tree. The inputs and the outputs are registered with
+   inherits:false, so a child without its own --mix or --tone sees no colour
+   from its parent: var(--mixed, X) gives X, and --mix reads 0. That includes
+   --tone-of. It is an author-supplied value that cannot carry a default
+   (var(--text-main) is not computationally independent), so it takes the
+   universal syntax, which starts as the guaranteed-invalid value and sends
+   var(--tone-of, var(--text-main)) to --text-main. Where @property is missing
+   (Firefox before 128, Safari before 16.4) the values inherit instead. The
+   formulas still run, because the rules match only the elements that hold
+   the number.
+
+   A registered number can animate: transition or animate --tone and the
+   colour follows. (--mix steps through whole numbers, so its digits jump.)
+   Bad input (--mix:3.5, --tone:abc) falls to 0 and DevTools flags it, where
+   an unregistered property would fail without a word.
+
+   Needs round() and mod() (Chrome 125, Safari 15.4, Firefox 118). Without
+   them --mixed is invalid, and the fallback in var() applies. */
+
+@property --mix {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --tone {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --tone-of {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --mixed {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --toned {
+  syntax: "*";
+  inherits: false;
+}
+
+/* The cube. Red picks a point on each of four edges (black to red, green to
+   yellow, blue to magenta, cyan to white). Green mixes within each pair of
+   edges. Blue mixes the two results.
+
+   One trap. color-mix() gives a colour with no hue (a pure grey) the hue of
+   its partner, even at 0% or 100%. The old tokens skipped those mixes by
+   hand. A formula cannot skip, so a plain stack of seven mixes tints the
+   greys --color-0 and --color-7 with a hue they never had, and 48 of the 216
+   cells move (the worst by 0.24 in OKLab). Three guards undo it:
+     --_bk     passes through oklab, which takes a grey's hue away again and
+               leaves a colour with real chroma alone.
+     green 0   cells use a direct mix of --_bk and --_bl, as the old tokens
+               did. The last weight picks it: 100% at green 0, 0% above.
+     red 5     cells mix the blue edge with the raw --color-7 for the same
+               reason. A weight of 100% at red 5 picks that mix.
+   Picking a colour that has a hue, by a weight of 0% or 100%, is exact.
+   Chrome counts chroma up to 0.02 as grey. The black-to-red edge stays above
+   that past red 0 only while --color-1 has chroma over 0.1. A paler red would
+   lose its hue at red 1. */
+[style*="--mix:"] {
+  --_mr: clamp(0%, round(down, var(--mix) / 100, 1) * 20%, 100%);
+  --_mg: clamp(0%, round(down, mod(var(--mix), 100) / 10, 1) * 20%, 100%);
+  --_mb: clamp(0%, mod(var(--mix), 10) * 20%, 100%);
+  --_bk: color-mix(in oklab, color-mix(in oklch, var(--color-0), var(--color-1) var(--_mr)), transparent 0%);
+  --_gn: color-mix(in oklch, var(--color-2), var(--color-3) var(--_mr));
+  --_bl: color-mix(in oklch, var(--color-4), var(--color-5) var(--_mr));
+  --_cn: color-mix(in oklch, var(--color-6), var(--color-7) var(--_mr));
+  --mixed: color-mix(in oklch,
+    color-mix(in oklch,
+      color-mix(in oklch, var(--_bk), var(--_gn) var(--_mg)),
+      color-mix(in oklch,
+        color-mix(in oklch, var(--_bl), var(--_cn) var(--_mg)),
+        color-mix(in oklch, var(--_bl), var(--color-7) var(--_mg)) clamp(0%, 100% - (100% - var(--_mr)) * 5, 100%))
+      var(--_mb)),
+    color-mix(in oklch, var(--_bk), var(--_bl) var(--_mb)) max(0%, 100% - var(--_mg) * 5));
+}
+
+[style*="--tone:"] {
+  --toned: color-mix(in oklch, var(--tone-of, var(--text-main)) clamp(0%, var(--tone) * 1%, 100%), var(--background));
+}

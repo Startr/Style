@@ -1,0 +1,101 @@
+/* Shapes the manifest must read, copied from the built sheet. Used by scripts/manifest.test.ts. */
+
+/* A plain prop with every tier, the way svar-mq builds it. */
+[style*="--p:"] { padding: var(--p) !important; }
+@media only screen and (min-width:640px) { [style*="--p-sm:"] { padding: var(--p-sm) !important; } }
+@media only screen and (min-width:768px) { [style*="--p-md:"] { padding: var(--p-md) !important; } }
+@media only screen and (min-width:1024px) { [style*="--p-lg:"] { padding: var(--p-lg) !important; } }
+@media only screen and (min-width:1280px) { [style*="--p-xl:"] { padding: var(--p-xl) !important; } }
+@media print { [style*="--p-pt:"] { padding: var(--p-pt) !important; } }
+
+/* "--pt" ends in "-pt" but it is padding-top, a base name. Its print tier is "--pt-pt". */
+[style*="--pt:"] { padding-top: var(--pt) !important; }
+@media print { [style*="--pt-pt:"] { padding-top: var(--pt-pt) !important; } }
+
+/* A tier suffix outside any query is no tier: this is its own prop. */
+[style*="--maxw-sm:"] { max-width: var(--maxw-sm) !important; }
+
+/* Autoprefixer twins fold into the property they copy. A prefix with no twin stays. */
+[style*="--us:"] {
+  -webkit-user-select: var(--us) !important;
+  -moz-user-select: var(--us) !important;
+  user-select: var(--us) !important;
+}
+[style*="--line-clamp:"] {
+  display: -webkit-box;
+  -webkit-line-clamp: var(--line-clamp);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* One rule that sets several properties is still a plain prop, and not a collision. */
+[style*="--px:"] { padding-inline-start: var(--px); padding-inline-end: var(--px); }
+[style*="--inset:"] { top: var(--inset); right: var(--inset); bottom: var(--inset); left: var(--inset); }
+
+/* One name, two properties, two rules: a collision. It repeats in every tier. */
+[style*="--br:"] { border-radius: var(--br) !important; }
+[style*="--br:"] { border-right: var(--br) !important; }
+@media only screen and (min-width:640px) {
+  [style*="--br-sm:"] { border-radius: var(--br-sm) !important; }
+  [style*="--br-sm:"] { border-right: var(--br-sm) !important; }
+}
+
+/* The same property in two rules is a duplicate. Add a second property and it is a collision. */
+[style*="--ct:"] { content: var(--ct) !important; }
+[style*="--ct:"] { content: var(--ct) !important; }
+[style*="--td:"] { text-decoration: var(--td) !important; }
+[style*="--td:"] { transition-delay: var(--td) !important; }
+[style*="--td:"] { text-decoration: var(--td) !important; }
+
+/* A rule that sets a superset of another rule's properties is not a collision. */
+[style*="--nest:"] { color: var(--nest) !important; }
+[style*="--nest:"]:hover { color: var(--nest) !important; fill: var(--nest) !important; }
+
+/* Tokens that the helpers below read. A read of a token is not a read of an extra input. */
+:root { --cursor: pointer; --background: white; --transition: all ease 0.2s; --text-main: black; }
+
+/* Helpers: a formula, a value built from another token, a literal, a custom-property output. */
+[style*="--levitate:"] {
+  box-shadow: 0 calc(var(--levitate) * .5px) calc(var(--levitate) * .6px) rgba(0,0,0,calc(var(--levitate) * .013));
+  transform: translateY(calc(var(--levitate) * -1.2px));
+}
+[style*="--grid-cols:"] { grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr)); }
+[style*="--shadow-hvr:"] { transition: var(--transition); }
+[style*="--shadow-hvr:"]:hover, [style*="--shadow-hvr:"]:focus { box-shadow: 0 calc(var(--shadow-hvr) * .1px) calc(var(--shadow-hvr) * .2px) rgba(0,0,0,.2); }
+.wrapper, [style*="--wrapper:"] { max-width: var(--wrapper); margin-left: auto; padding-left: var(--gutter); }
+@media only screen and (min-width:640px) { .wrapper, [style*="--wrapper:"] { --gutter: var(--gutter-sm); } }
+[style*="--translate:"], [style*="--scale:"] { transform: translate(var(--translate, 0)) scale(var(--scale, 100%)); }
+[style*="--tone:"] { --toned: color-mix(in srgb, var(--tone-of, var(--text-main)) calc(var(--tone) * 1%), var(--background)); }
+[style*="--grad:"] { background-image: linear-gradient(var(--grad), rgba(0,0,0,0), var(--grad-color, rgba(0,0,0,1))); }
+[style*="--mix:"] { --mixed: color-mix(in oklch, red, blue calc(var(--mix) * 1%)); }
+[style*="--glow:"] { --_glow: var(--glow); box-shadow: 0 0 var(--_glow) currentColor; }
+[style*="--alias:"] { --target: var(--alias); }
+
+/* A pass-through may carry a fallback. */
+[style*="--cur:"]:hover { cursor: var(--cur, var(--cursor)); }
+[style*="--hvr-bg:"]:hover { background: var(--hvr-bg, var(--background)); }
+
+/* Rules with a class beside the name. The grid props have tiers and no bare rule. */
+@media only screen and (min-width:440px) {
+  .grid[style*="--col-xs:"] { grid-template-columns: repeat(var(--col-xs, 1), 1fr); }
+  .grid > [style*="--sc-xs:"] { grid-column: span var(--sc-xs, 1); }
+}
+@media only screen and (min-width: 1024px) {
+  .grid[style*="--col-lg:"] { grid-template-columns: repeat(var(--col-lg, 1), 1fr); }
+}
+
+/* A single dash is no custom property. */
+[style*="-ttf:"] { transition-timing-function: var(-ttf) !important; }
+@media only screen and (min-width:640px) { [style*="-ttf-sm:"] { transition-timing-function: var(-ttf-sm) !important; } }
+
+/* A name inside :is() is a condition. This rule must not turn --anim or --tn into helpers. */
+[style*="--anim:"] { animation: var(--anim) !important; }
+[style*="--tn:"] { transition: var(--tn) !important; }
+@media (prefers-reduced-motion: reduce) {
+  [style]:is([style*="--anim:"], [style*="--tn:"], [style*="-hvr:"], [style*="-hover:"]) { animation: none !important; transition: none !important; }
+}
+
+/* Not props. */
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+a[style*="color"] { text-decoration: none; }
+/* [style*="--commented:"] { color: red; } */

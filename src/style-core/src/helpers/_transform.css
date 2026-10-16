@@ -15,6 +15,51 @@
     skew(var(--skew, 0));
 }
 
+/* The hover transforms. --translate-hover and its five kin are the names. The -hvr names are deprecated
+   aliases: a one-line rule per name copies the old value into the new variable, so one set of rules serves
+   both, even when an element mixes old and new names. An inline --x-hover beats the copy, so the new name
+   wins when both are given. The hover rule sits in @media (hover:hover); the :focus-visible copy is a
+   separate rule outside it. */
+@define-mixin transform-look {
+    transform: 
+      translate(var(--translate-hover, 0)) 
+      translateX(var(--translatex-hover, 0)) 
+      translateY(var(--translatey-hover, 0))
+      scale(var(--scale-hover, 100%)) 
+      rotate(var(--rotate-hover, 0))
+      skew(var(--skew-hover, 0));
+}
+
+[style*="--translate-hvr:"] {
+  --translate-hover: var(--translate-hvr);
+}
+
+[style*="--translatex-hvr:"] {
+  --translatex-hover: var(--translatex-hvr);
+}
+
+[style*="--translatey-hvr:"] {
+  --translatey-hover: var(--translatey-hvr);
+}
+
+[style*="--scale-hvr:"] {
+  --scale-hover: var(--scale-hvr);
+}
+
+[style*="--rotate-hvr:"] {
+  --rotate-hover: var(--rotate-hvr);
+}
+
+[style*="--skew-hvr:"] {
+  --skew-hover: var(--skew-hvr);
+}
+
+[style*="--translate-hover:"],
+[style*="--translatex-hover:"],
+[style*="--translatey-hover:"],
+[style*="--scale-hover:"],
+[style*="--rotate-hover:"],
+[style*="--skew-hover:"],
 [style*="--translate-hvr:"],
 [style*="--translatex-hvr:"],
 [style*="--translatey-hvr:"],
@@ -23,14 +68,13 @@
 [style*="--skew-hvr:"] {
   transition: var(--transition);
 
-  &:hover {
-    transform: 
-      translate(var(--translate-hvr, 0)) 
-      translateX(var(--translatex-hvr, 0)) 
-      translateY(var(--translatey-hvr, 0))
-      scale(var(--scale-hvr, 100%)) 
-      rotate(var(--rotate-hvr, 0))
-      skew(var(--skew-hvr, 0));
+  @media (hover:hover) {
+    &:hover {
+      @mixin transform-look;
+    }
+  }
+
+  &:focus-visible {
+    @mixin transform-look;
   }
 }
-

@@ -1,0 +1,18 @@
+/* Native CSS nesting. The rules come out as the flat selectors they mean, at the lines they were written. */
+
+[data-menu] {
+  display: flex;
+  gap: 8px;
+
+  & > a {
+    color: var(--primary);
+
+    &:hover {
+      color: var(--secondary);
+    }
+  }
+
+  @media (min-width: 768px) {
+    gap: 16px;
+  }
+}

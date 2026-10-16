@@ -1,0 +1,23 @@
+[
+  {
+    "kind": "changed",
+    "selector": "^:root$",
+    "media": "^$",
+    "prop": "^--(white|grey|dark-grey|black|green|blue|red|purple|yellow)$",
+    "reason": "Layer 2 names point at the base-16 tokens (--black: var(--color-0), and so on), so one edit to --color-N re-themes the names, the framework tokens and --mix. P writes each colour out as a literal. The resolved colours are the same values; the theme creator and --mix both read --color-N."
+  },
+  {
+    "kind": "extra",
+    "selector": "^\\[data-theme=\"dark\"\\]$",
+    "media": "^$",
+    "prop": "^--(primary-tint|good-bg|warn-bg|bad-bg)$",
+    "reason": "New tint tokens. The dark block carries a literal default for each tint, as :root does, so a browser without color-mix() keeps a readable pale fill in dark mode. The color-mix() versions replace these under @supports."
+  },
+  {
+    "kind": "extra",
+    "selector": "^\\[data-theme\\]$",
+    "media": "^@supports ",
+    "prop": "^--(primary-tint|good-bg|warn-bg|bad-bg)$",
+    "reason": "New tint tokens. The @supports block that holds the color-mix() versions targets :root and [data-theme], so a nested data-theme container recomputes its own tints from its own --background. The :root half passes as an extra custom property; this is the other half of the same rule."
+  }
+]

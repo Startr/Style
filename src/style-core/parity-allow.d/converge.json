@@ -1,0 +1,34 @@
+[
+  {
+    "kind": "missing",
+    "selector": ".*",
+    "prop": "^(-ms-text-size-adjust|-webkit-(margin|padding)-(start|end|before|after)|-ms-user-select|-(webkit|ms)-writing-mode|-webkit-filter)$",
+    "reason": "Autoprefixer output. An older autoprefixer run wrote these prefixes into P. The build targets today's browserslist, so it neither emits nor keeps them. Each one sits beside its unprefixed twin, which C ships."
+  },
+  {
+    "kind": "missing",
+    "selector": "^(::-webkit-input-placeholder|:-ms-input-placeholder|::-ms-input-placeholder)$",
+    "media": "^$",
+    "reason": "Autoprefixer output. Old placeholder selectors from the same older run. C keeps ::placeholder and ::-moz-placeholder."
+  },
+  {
+    "kind": "missing",
+    "selector": "^100%$",
+    "media": "^@-webkit-keyframes spin$",
+    "reason": "Autoprefixer output. The prefixed copy of @keyframes spin (P:1544-1548) is not ported, because autoprefixer removes prefixes today's browsers do not need. C ships the unprefixed @keyframes spin."
+  },
+  {
+    "kind": "missing",
+    "selector": ".*",
+    "media": "^$",
+    "prop": "^position$",
+    "value": "^-webkit-sticky$",
+    "reason": "Autoprefixer output. The ported .book-toc nav and .markdown .property-table th rules (P:1567, P:2069) keep position: -webkit-sticky in the source, and autoprefixer drops it from the build. position: sticky stays."
+  },
+  {
+    "kind": "extra",
+    "selector": "^\\[style\\*=\"--maxw-sm:\"\\]$",
+    "prop": "^max-width$",
+    "reason": "--maxw-sm is re-enabled in 1.4.0 (Startr/Style TODO.md, 'Revert — Temporary Hack'). The published 1.3.2 sheet carries it commented out, and the pinned /v1.3.2/ snapshot keeps it off."
+  }
+]

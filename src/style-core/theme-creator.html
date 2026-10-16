@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Startr.Style Theme Creator</title>
-    <meta name="description" content="Create custom Startr.Style themes by editing the base 16 colors. All 256 palette colors cascade automatically.">
+    <meta name="description" content="Create custom Startr.Style themes by editing the base 16 colors. --mix and --tone compute every other shade.">
     <link rel="stylesheet" href="dist/startr.min.css">
     <link rel="shortcut icon" href="icons/favicon.ico">
     <style>
@@ -138,8 +138,7 @@
     <div style="--wrapper:1200px; --gutter:2vw;">
       <h1 style="--ta:center">Startr.Style Theme Creator</h1>
       <p style="--ta:center; --maxw:600px; --m:0 auto 2rem">
-        Edit the base 16 colors to generate a full 256-color palette.
-        Named colors, framework tokens, and the entire UI cascade automatically.
+        Edit the base 16 colors. Named colors and framework tokens follow, and <code style="white-space:nowrap">--mix</code> and <code style="white-space:nowrap">--tone</code> compute every other shade.
         <br><a href="index.html">Back to Startr.Style</a>
       </p>
 
@@ -210,15 +209,36 @@
           </div>
 
           <div class="panel">
-            <h2>216-Color Cube</h2>
-            <p><small>Trilinear interpolation via <code>color-mix(in oklch, ...)</code> from the 8 standard colors.</small></p>
-            <div id="cube-container"></div>
-          </div>
-
-          <div class="panel">
-            <h2>Grayscale Ramp</h2>
-            <p><small>24 steps from <code>--color-0</code> (black) to <code>--color-7</code> (white).</small></p>
-            <div class="color-grid" id="ramp-grid"></div>
+            <h2>Color by Math</h2>
+            <h3>--mix cube</h3>
+            <p><small>Six slices, one per red level. Each swatch sets <code>--mix:RGB</code> (three digits, 0-5) and paints <code>var(--mixed)</code>.</small></p>
+            <div id="mix-cube-container"></div>
+            <div style="--mt:1rem; display:flex; align-items:center; gap:0.75rem;">
+              <label for="mix-input">Try a value (three digits, 0-5):</label>
+              <input id="mix-input" type="text" inputmode="numeric" pattern="[0-5]{3}" maxlength="3" value="314" oninput="updateMix(this.value)" style="--w:5rem">
+              <div id="mix-live-swatch" class="swatch-box" style="--mix:314; background-color:var(--mixed, transparent); width:3rem;"></div>
+              <code id="mix-snippet">style="--mix:314; --bg:var(--mixed, #888)"</code>
+            </div>
+            <h3 style="--mt:1.5rem">--tone ramp</h3>
+            <p><small>Each swatch sets <code>--tone:N</code> and paints <code>var(--toned)</code>: N% of the tone color mixed into the background. Toggle dark mode to watch it follow.</small></p>
+            <label for="tone-of-select">Tone color: </label>
+            <select id="tone-of-select" onchange="updateToneOf(this.value)">
+              <option value="--text-main">default (text-main)</option>
+              <option value="--black">black</option>
+              <option value="--red">red</option>
+              <option value="--green">green</option>
+              <option value="--blue">blue</option>
+              <option value="--purple">purple</option>
+              <option value="--primary">primary</option>
+            </select>
+            <div class="color-grid" id="tone-grid"></div>
+            <h3 style="--mt:1.5rem">Tints</h3>
+            <div class="named-row">
+              <div class="named-swatch"><div class="named-swatch-box" style="background:var(--primary-tint)"></div><span>--primary-tint</span></div>
+              <div class="named-swatch"><div class="named-swatch-box" style="background:var(--good-bg)"></div><span>--good-bg</span></div>
+              <div class="named-swatch"><div class="named-swatch-box" style="background:var(--warn-bg)"></div><span>--warn-bg</span></div>
+              <div class="named-swatch"><div class="named-swatch-box" style="background:var(--bad-bg)"></div><span>--bad-bg</span></div>
+            </div>
           </div>
         </main>
       </div>
@@ -268,8 +288,6 @@
       function init() {
         const controls = document.getElementById('controls');
         const baseGrid = document.getElementById('base-grid');
-        const rampGrid = document.getElementById('ramp-grid');
-        const cubeContainer = document.getElementById('cube-container');
 
         // Create controls and base grid
         for (let i = 0; i < 16; i++) {
@@ -289,7 +307,8 @@
           namedRow.appendChild(div);
         });
 
-        // Create cube slices
+        // Create computed mix cube
+        const cubeContainer = document.getElementById('mix-cube-container');
         for (let r = 0; r < 6; r++) {
           const slice = document.createElement('div');
           slice.className = 'cube-slice';
@@ -298,17 +317,26 @@
           grid.className = 'color-grid';
           for (let g = 0; g < 6; g++) {
             for (let b = 0; b < 6; b++) {
-              grid.appendChild(createSwatch(16 + (r * 36) + (g * 6) + b));
+              const rgb = `${r}${g}${b}`;
+              const swatch = document.createElement('div');
+              swatch.className = 'swatch';
+              swatch.innerHTML = `<div class="swatch-box" style="--mix:${rgb}; background-color:var(--mixed, transparent)"></div><span>${rgb}</span>`;
+              grid.appendChild(swatch);
             }
           }
           slice.appendChild(grid);
           cubeContainer.appendChild(slice);
         }
 
-        // Create ramp
-        for (let i = 232; i < 256; i++) {
-          rampGrid.appendChild(createSwatch(i, `gray-${i - 231}`));
+        // Create computed tone ramp
+        const toneGrid = document.getElementById('tone-grid');
+        for (let tone = 96; tone >= 4; tone -= 4) {
+          const swatch = document.createElement('div');
+          swatch.className = 'swatch';
+          swatch.innerHTML = `<div class="swatch-box" style="--tone:${tone}; background-color:var(--toned, transparent)"></div><span>${tone}</span>`;
+          toneGrid.appendChild(swatch);
         }
+        updateToneOf('--text-main');
 
         loadPreset('startr');
       }
@@ -318,6 +346,19 @@
         div.className = 'swatch';
         div.innerHTML = `<div class="swatch-box" style="background-color:var(--color-${index})"></div><span>${label || index}</span>`;
         return div;
+      }
+
+      function updateMix(value) {
+        if (!/^[0-5]{3}$/.test(value)) return;
+        const swatch = document.getElementById('mix-live-swatch');
+        swatch.style.setProperty('--mix', value);
+        document.getElementById('mix-snippet').textContent = `style="--mix:${value}; --bg:var(--mixed, #888)"`;
+      }
+
+      function updateToneOf(value) {
+        document.querySelectorAll('#tone-grid .swatch-box').forEach(swatch => {
+          swatch.style.setProperty('--tone-of', `var(${value})`);
+        });
       }
 
       function updateColor(index, value) {
@@ -350,38 +391,7 @@
         css += "  --dark-grey: var(--color-8);\n";
         css += "  --grey: var(--color-15);\n";
 
-        css += "\n  /* 216 Cube (--mix-RGB via trilinear interpolation) */\n";
-
-        function mix(c1, c2, p) {
-          if (p === 0) return c1;
-          if (p === 100) return c2;
-          return `color-mix(in oklch, ${c1}, ${c2} ${p}%)`;
-        }
-
-        for (let r = 0; r < 6; r++) {
-          let pr = r * 20;
-          let c0 = mix("var(--color-0)", "var(--color-1)", pr);
-          let c1 = mix("var(--color-2)", "var(--color-3)", pr);
-          let c2 = mix("var(--color-4)", "var(--color-5)", pr);
-          let c3 = mix("var(--color-6)", "var(--color-7)", pr);
-          for (let g = 0; g < 6; g++) {
-            let pg = g * 20;
-            let c4 = mix(c0, c1, pg);
-            let c5 = mix(c2, c3, pg);
-            for (let b = 0; b < 6; b++) {
-              let pb = b * 20;
-              let c6 = mix(c4, c5, pb);
-              let idx = 16 + (36 * r) + (6 * g) + b;
-              css += `  --mix-${r}${g}${b}: ${c6};\n`;
-            }
-          }
-        }
-
-        css += "\n  /* Grayscale Ramp */\n";
-        for (let i = 0; i < 24; i++) {
-          let p = Math.round(((i + 1) / 25) * 100);
-          css += `  --gray-${i + 1}: ${mix('var(--color-0)', 'var(--color-7)', p)};\n`;
-        }
+        css += "\n  /* Other shades come from --mix:RGB and --tone:N. Nothing else to export. */\n";
         css += "}\n";
 
         document.getElementById('dynamic-palette-css').textContent = generateLivePaletteCSS();
@@ -396,35 +406,6 @@
           css += `  --color-${i}: ${val};\n`;
         }
 
-        function mix(c1, c2, p) {
-          if (p === 0) return c1;
-          if (p === 100) return c2;
-          return `color-mix(in oklch, ${c1}, ${c2} ${p}%)`;
-        }
-
-        for (let r = 0; r < 6; r++) {
-          let pr = r * 20;
-          let c0 = mix("var(--color-0)", "var(--color-1)", pr);
-          let c1 = mix("var(--color-2)", "var(--color-3)", pr);
-          let c2 = mix("var(--color-4)", "var(--color-5)", pr);
-          let c3 = mix("var(--color-6)", "var(--color-7)", pr);
-          for (let g = 0; g < 6; g++) {
-            let pg = g * 20;
-            let c4 = mix(c0, c1, pg);
-            let c5 = mix(c2, c3, pg);
-            for (let b = 0; b < 6; b++) {
-              let pb = b * 20;
-              let c6 = mix(c4, c5, pb);
-              let idx = 16 + (36 * r) + (6 * g) + b;
-              css += `  --color-${idx}: ${c6};\n`;
-            }
-          }
-        }
-
-        for (let i = 0; i < 24; i++) {
-          let p = Math.round(((i + 1) / 25) * 100);
-          css += `  --color-${232 + i}: ${mix('var(--color-0)', 'var(--color-7)', p)};\n`;
-        }
         css += "}";
         return css;
       }

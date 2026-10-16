@@ -1,0 +1,85 @@
+/* Motion: --anim, the st-* keyframes, reduced motion. */
+
+/* --anim sets the whole animation shorthand, so stagger rides inside it:
+     --anim: st-rise var(--dur-3) var(--ease-out) calc(var(--i, 0) * 45ms) both
+   Give --i a fallback. An unset --i voids the whole shorthand and nothing runs. */
+@mixin svar-mq animation, --anim;
+
+/* Each keyframe has a "from" and no "to", so the end is the element's own
+   value and "both" never pins a stale end state. Moves use the translate and
+   scale properties, not transform, so they stack on --t, --levitate and the
+   rest instead of replacing them. One clash stays: --op is !important and the
+   cascade ranks important author rules above animations, so --op beats the
+   opacity keyframe. */
+@keyframes st-fade {
+  from { opacity: 0; }
+}
+
+@keyframes st-rise {
+  from { opacity: 0; translate: 0 6px; }
+}
+
+/* From the inline end: right in LTR, left in RTL. Keyframes cannot take
+   logical directions, so they read --st-dir on the animated element: 1, or -1
+   inside an RTL subtree. It is registered as not inheriting, so an LTR island
+   inside an RTL page gets 1 again instead of its parent's -1. */
+@property --st-dir {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+@keyframes st-slide-in {
+  from { opacity: 0; translate: calc(var(--st-dir, 1) * 1.5rem) 0; }
+}
+
+@keyframes st-pop {
+  from { opacity: 0; scale: .92; }
+}
+
+:dir(rtl) {
+  --st-dir: -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Reduced motion. The kit's props are !important at (0,1,0), so the guard is
+     !important too and takes (0,2,0) from [style]:is(...). It wins wherever it
+     sits in the sheet. It stops --anim in every tier, the transition props, and
+     the hover helpers' `transition: var(--transition)` in both families
+     (-hvr and -hover). With animation gone, elements show their end state. */
+  [style]:is(
+    [style*="--anim:"],
+    [style*="--anim-sm:"],
+    [style*="--anim-md:"],
+    [style*="--anim-lg:"],
+    [style*="--anim-xl:"],
+    [style*="--anim-pt:"]
+  ) {
+    animation: none !important;
+  }
+
+  [style]:is(
+    [style*="--tn:"],
+    [style*="--tn-sm:"],
+    [style*="--tn-md:"],
+    [style*="--tn-lg:"],
+    [style*="--tn-xl:"],
+    [style*="--tn-pt:"],
+    [style*="--tdn:"],
+    [style*="--tdn-sm:"],
+    [style*="--tdn-md:"],
+    [style*="--tdn-lg:"],
+    [style*="--tdn-xl:"],
+    [style*="--tdn-pt:"],
+    [style*="--tp:"],
+    [style*="--tp-sm:"],
+    [style*="--tp-md:"],
+    [style*="--tp-lg:"],
+    [style*="--tp-xl:"],
+    [style*="--tp-pt:"],
+    [style*="-hvr:"],
+    [style*="-hover:"]
+  ) {
+    transition: none !important;
+  }
+}

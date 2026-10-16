@@ -1,0 +1,37 @@
+/* The state rules, in the shapes the states build emits. Used by scripts/manifest.test.ts. */
+
+/* Base and tiers come first, so every state has a bare name to hang on. */
+[style*="--bg:"] { background: var(--bg) !important; }
+@media only screen and (min-width:768px) { [style*="--bg-md:"] { background: var(--bg-md) !important; } }
+[style*="--c:"] { color: var(--c) !important; }
+[style*="--oe:"] { outline: var(--oe) !important; }
+[style*="--oo:"] { outline-offset: var(--oo) !important; }
+
+/* --bg-in-hover: the parent is hovered; the keyboard copy sits outside the query. */
+:focus-visible>[style*="--bg-in-hover:"] { background: var(--bg-in-hover) !important; }
+@media (hover:hover) {
+  :hover>[style*="--bg-in-hover:"] { background: var(--bg-in-hover) !important; }
+  [style*="--bg-hover:"]:hover { background: var(--bg-hover) !important; }
+}
+@media (min-width: 0) {
+  [style*="--bg-hover:"]:focus-visible { background: var(--bg-hover) !important; }
+}
+
+/* --bg-in-on and --bg-on share one list of "on" selectors. */
+:is([aria-current]:not([aria-current="false"],[aria-current=""]),[aria-selected="true"],[aria-pressed="true"],[aria-expanded="true"],[open],:checked,[data-on])>[style*="--bg-in-on:"] { background: var(--bg-in-on) !important; }
+[style*="--bg-on:"]:is([aria-current]:not([aria-current="false"],[aria-current=""]),[aria-selected="true"],[aria-pressed="true"],[aria-expanded="true"],[open],:checked,[data-on]) { background: var(--bg-on) !important; }
+
+/* Focus and active pad the rule with [style]. */
+[style][style*="--bg-focus:"]:focus-visible { background: var(--bg-focus) !important; }
+[style][style*="--bg-active:"]:active { background: var(--bg-active) !important; }
+
+/* --c gets only hover and in-on, to prove the list per prop is read, not assumed. */
+@media (hover:hover) { [style*="--c-hover:"]:hover { color: var(--c-hover) !important; } }
+:is([data-on])>[style*="--c-in-on:"] { color: var(--c-in-on) !important; }
+
+/* --oe-hover, then a state-looking name whose base does not exist: it stays a prop of its own. */
+@media (hover:hover) { [style*="--oe-hover:"]:hover { outline: var(--oe-hover) !important; } }
+[style*="--button-hover:"] { background: var(--button-hover) !important; }
+
+/* The old grammar. These keep their own names and are listed as deprecated. */
+@media (hover:hover) { [style*="--hvr-bg:"]:hover { background: var(--hvr-bg) !important; } }

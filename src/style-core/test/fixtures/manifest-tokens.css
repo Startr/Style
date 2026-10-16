@@ -1,0 +1,41 @@
+/* Tokens: custom properties on :root, one of each type. Used by scripts/manifest.test.ts. */
+:root {
+  --primary: hsl(272, 98%, 26%);
+  --accent: var(--primary);
+  --white: #fff;
+  --named: rebeccapurple;
+  --blend: color-mix(in oklch, var(--primary), white 20%);
+  --pair: light-dark(white, black);
+  --base-size: 1rem;
+  --pct: 50%;
+  --space-2: calc(var(--base-size) * 2);
+  --measure: calc(100% - 2rem);
+  --fluid: clamp(1rem, 2vw, 3rem);
+  --ratio: 1.25;
+  --zero: 0;
+  --count: calc(2 * 3);
+  --scaled: calc(var(--ratio) * 4);
+  --dur: 0.2s;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --font-sans: "Nunito Sans", sans-serif;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --arrow: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E");
+  --fallback: var(--nowhere, 12px);
+  --loop-a: var(--loop-b);
+  --loop-b: var(--loop-a);
+  --_private: red;
+}
+
+/* A dark-mode override never changes a token's type, and a token set only here still counts. */
+@media (prefers-color-scheme: dark) {
+  :root { --primary: 12px; --dark-only: #000; }
+}
+
+html { --on-html: 3; }
+:root:not([data-theme="light"]) { --themed: blue; }
+:root[data-theme="dark"] { --dark-theme: #111; }
+
+/* Not :root: these are overrides and component scopes, not tokens. */
+[data-theme="dark"] { --scoped-override: #222; }
+.card { --card-gap: 8px; }
+:root .inner { --nested: 1px; }

@@ -26,8 +26,6 @@
 
 @mixin svar-mq direction, --dir;
 
-@mixin svar:hover color, --hvr-c;
-
 [style*="--bi:"] {
     page-break-inside: var(--bi);
     break-inside: var(--bi);

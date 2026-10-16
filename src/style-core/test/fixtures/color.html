@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>colour by math: fixture</title>
+<!--
+  Driven by scripts/color.test.ts. The test copies this file, palette-1x.css and
+  the built sheets into one temp dir and opens it in headless Chrome with
+  ?sheet=startr.css or ?sheet=startr.min.css. The page measures, writes the
+  results as JSON into #results, and the test reads them out of the dumped DOM.
+
+  presets.js (optional) holds the theme creator's presets as window.PRESETS, a map
+  of name -> sixteen hex colours. The test writes it from theme-creator.html.
+
+  palette-1x.css supplies the old enumerated tokens (--mix-RGB, --gray-N). The
+  built sheet supplies --mix, --tone and the tints. Every pair below is
+  { helper, ref }: the computed colour the new helper gives, and the colour the
+  old token or a plain color-mix() gives. The test measures the distance.
+-->
+<link rel="stylesheet" href="palette-1x.css">
+<script src="presets.js"></script>
+</head>
+<body>
+<div id="stage" style="position:absolute; left:0; top:0; width:200px"></div>
+<pre id="results">pending</pre>
+<script>
+(async () => {
+  const R = { errors: [] };
+  const sheet = new URLSearchParams(location.search).get("sheet") || "startr.min.css";
+  R.sheet = sheet;
+
+  // Chrome fires "error" on a <link> when an @import inside it fails, and the
+  // sheet starts with the font @import, which has no file to load here. The
+  // rules still apply, so both events mean "done"; the probe below checks.
+  await new Promise((done) => {
+    const l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = sheet;
+    l.onload = () => { R.sheetEvent = "load"; done(); };
+    l.onerror = () => { R.sheetEvent = "error"; done(); };
+    document.head.appendChild(l);
+  });
+  if (!getComputedStyle(document.documentElement).getPropertyValue("--color-0")) {
+    R.errors.push("sheet " + sheet + " did not apply: --color-0 is empty");
+    document.getElementById("results").textContent = JSON.stringify(R);
+    return;
+  }
+
+  const stage = document.getElementById("stage");
+  const html = document.documentElement;
+  const cs = (el) => getComputedStyle(el);
+  const bgOf = (el) => cs(el).backgroundColor;
+  const mk = (style, parent = stage, attrs = {}) => {
+    const el = document.createElement("div");
+    el.setAttribute("style", style);
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+    parent.appendChild(el);
+    return el;
+  };
+  // A legacy colour (hsl, rgb) serializes rounded to 8 bits; an oklch mix does
+  // not. Passing both sides of a pair through color-mix(in oklab) keeps full
+  // precision on both, so the distance measures the formula, not the rounding.
+  const exact = (style) =>
+    style.replace(/background-color:\s*([^;]+)/, (_, v) => `background-color:color-mix(in oklab, ${v.trim()}, transparent 0%)`);
+  const pair = (name, helperStyle, refStyle, parent) => {
+    const a = mk(exact(helperStyle), parent);
+    const b = mk(exact(refStyle), parent);
+    return { name, helper: bgOf(a), ref: bgOf(b) };
+  };
+  const section = (key, fn) => {
+    try { R[key] = fn(); } catch (e) { R.errors.push(key + ": " + e); }
+  };
+  // 8-bit sRGB of colour `c` painted over colour `under`, through a canvas.
+  const cv = document.createElement("canvas");
+  cv.width = cv.height = 1;
+  const cx = cv.getContext("2d", { colorSpace: "srgb", willReadFrequently: true });
+  const px = (c, under) => {
+    cx.clearRect(0, 0, 1, 1);
+    cx.fillStyle = under;
+    cx.fillRect(0, 0, 1, 1);
+    cx.fillStyle = c;
+    cx.fillRect(0, 0, 1, 1);
+    return Array.from(cx.getImageData(0, 0, 1, 1).data).slice(0, 3);
+  };
+
+  R.env = {
+    ua: navigator.userAgent,
+    colorMix: CSS.supports("color", "color-mix(in oklch, red, blue)"),
+    round: CSS.supports("width", "round(down, 3.4px, 1px)"),
+  };
+
+  // 1. All 216 cells: --mix:RGB against the old --mix-RGB token.
+  section("cube", () => {
+    const out = [];
+    for (let r = 0; r < 6; r++)
+      for (let g = 0; g < 6; g++)
+        for (let b = 0; b < 6; b++) {
+          const i = `${r}${g}${b}`;
+          out.push(pair(i, `--mix:${i}; background-color:var(--mixed)`, `background-color:var(--mix-${i})`));
+        }
+    return out;
+  });
+
+  // 2. Digits above 5 count as 5. Out-of-range input must not void the colour.
+  section("mixClamp", () => [
+    pair("777 = 555", "--mix:777; background-color:var(--mixed)", "background-color:var(--mix-555)"),
+    pair("600 = 500", "--mix:600; background-color:var(--mixed)", "background-color:var(--mix-500)"),
+    pair("1000 = 500", "--mix:1000; background-color:var(--mixed)", "background-color:var(--mix-500)"),
+  ]);
+  // A negative number has no digits to read, but the clamps keep the colour
+  // valid: the fallback must not fire.
+  section("mixNegative", () => bgOf(mk("--mix:-5; background-color:var(--mixed, rgb(1, 2, 3))")));
+
+  // 3. Bad input falls back to the registered initial value, 0.
+  section("bad", () => {
+    const m = mk("--mix:3.5; background-color:var(--mixed, rgb(1, 2, 3))");
+    const t = mk("--tone:abc; background-color:var(--toned, rgb(1, 2, 3))");
+    return { mix: cs(m).getPropertyValue("--mix"), tone: cs(t).getPropertyValue("--tone") };
+  });
+
+  // 4. --tone against the old --gray-N ramp (N% of black into white), the
+  //    default --tone-of, the ends, the clamps, a custom colour, a fraction.
+  section("tone", () => {
+    const T = { ramp: [] };
+    for (let m = 1; m <= 24; m++)
+      T.ramp.push(pair(`gray-${m}`, `--tone:${100 - 4 * m}; --tone-of:var(--black); background-color:var(--toned)`, `background-color:var(--gray-${m})`));
+    T.default = pair("default tone-of = gray-6", "--tone:76; background-color:var(--toned)", "background-color:var(--gray-6)");
+    T.zero = pair("0 = background", "--tone:0; background-color:var(--toned)", "background-color:var(--background)");
+    T.full = pair("100 = text-main", "--tone:100; background-color:var(--toned)", "background-color:var(--text-main)");
+    T.over = pair("150 clamps to 100", "--tone:150; background-color:var(--toned)", "background-color:var(--text-main)");
+    T.under = pair("-20 clamps to 0", "--tone:-20; background-color:var(--toned)", "background-color:var(--background)");
+    T.of = pair("30 of red", "--tone:30; --tone-of:var(--red); background-color:var(--toned)", "background-color:color-mix(in oklch, var(--red) 30%, var(--background))");
+    T.ofLiteral = pair("30 of a literal", "--tone:30; --tone-of:rebeccapurple; background-color:var(--toned)", "background-color:color-mix(in oklch, rebeccapurple 30%, var(--background))");
+    T.fraction = pair("8.5", "--tone:8.5; background-color:var(--toned)", "background-color:color-mix(in oklch, var(--text-main) 8.5%, var(--background))");
+
+    // The same element, light then dark: --toned follows the theme.
+    const el = mk("--tone:40; background-color:var(--toned)");
+    const light = bgOf(el);
+    html.setAttribute("data-theme", "dark");
+    const dark = bgOf(el);
+    const darkPair = pair("40 in dark", "--tone:40; background-color:var(--toned)", "background-color:color-mix(in oklch, var(--text-main) 40%, var(--background))");
+    html.removeAttribute("data-theme");
+    T.follow = { light, dark };
+    T.dark = darkPair;
+    return T;
+  });
+
+  // 5. Nothing leaks from a parent into a child.
+  section("leak", () => {
+    const L = {};
+    // --mix
+    const mp = mk("--mix:314");
+    const mc = mk("background-color:var(--mixed, rgb(1, 2, 3))", mp);
+    const mg = mk("--mix:555; background-color:var(--mixed)", mc);
+    L.mix = {
+      parentHasMixed: cs(mp).getPropertyValue("--mixed").length > 0,
+      childMix: cs(mc).getPropertyValue("--mix"),
+      childMixed: cs(mc).getPropertyValue("--mixed"),
+      childBg: bgOf(mc),
+      grandBg: bgOf(mg),
+      whiteBg: bgOf(mk("background-color:var(--mix-555)")),
+    };
+    // --tone
+    const tp = mk("--tone:30");
+    const tc = mk("background-color:var(--toned, rgb(1, 2, 3))", tp);
+    L.tone = {
+      parentHasToned: cs(tp).getPropertyValue("--toned").length > 0,
+      childTone: cs(tc).getPropertyValue("--tone"),
+      childToned: cs(tc).getPropertyValue("--toned"),
+      childBg: bgOf(tc),
+    };
+    // --tone-of: a parent's colour must not reach a child that sets only --tone.
+    const op = mk("--tone-of:var(--red)");
+    const oc = mk("--tone:50; background-color:var(--toned)", op);
+    const oRef = mk("background-color:color-mix(in oklch, var(--text-main) 50%, var(--background))");
+    const oRed = mk("background-color:color-mix(in oklch, var(--red) 50%, var(--background))");
+    L.toneOf = {
+      childToneOf: cs(oc).getPropertyValue("--tone-of"),
+      child: bgOf(oc),
+      expected: bgOf(oRef),
+      ifLeaked: bgOf(oRed),
+    };
+    return L;
+  });
+
+  // 6. The tints, in the page theme, in dark, and in a nested dark container.
+  section("tints", () => {
+    const rows = [
+      ["primary-tint", "--primary", 8],
+      ["good-bg", "--green", 10],
+      ["warn-bg", "--orange", 10],
+      ["bad-bg", "--red", 10],
+    ];
+    const read = (container) => {
+      const bg = bgOf(mk("background-color:var(--background)", container));
+      const out = { background: bg };
+      for (const [name, col, pct] of rows) {
+        const have = mk(`background-color:var(--${name})`, container);
+        const want = mk(`background-color:color-mix(in oklch, var(${col}) ${pct}%, var(--background))`, container);
+        const via = mk(`--tone:${pct}; --tone-of:var(${col}); background-color:var(--toned)`, container);
+        out[name] = {
+          helper: bgOf(have),
+          ref: bgOf(want),
+          viaTone: bgOf(via),
+          token: cs(have).getPropertyValue(`--${name}`).length > 0,
+          px: px(bgOf(have), bg),
+        };
+      }
+      return out;
+    };
+    const T = {};
+    T.light = read(stage);
+    const nested = mk("", stage, { "data-theme": "dark" });
+    T.nested = read(nested);
+    html.setAttribute("data-theme", "dark");
+    T.dark = read(stage);
+    html.removeAttribute("data-theme");
+    return T;
+  });
+
+  // 7. The usage the docs show, through the kit's own --bg and --b props.
+  section("usage", () => {
+    const bg = mk("--mix:314; --bg:var(--mixed, rgb(1, 2, 3))");
+    const bgRef = mk("background-color:var(--mix-314)");
+    const b = mk("--tone:76; --tone-of:var(--black); --b:1px solid var(--toned, rgb(1, 2, 3))");
+    const bRef = mk("background-color:var(--gray-6)");
+    return {
+      bg: { helper: bgOf(bg), ref: bgOf(bgRef) },
+      border: { helper: cs(b).borderTopColor, ref: bgOf(bRef), width: cs(b).borderTopWidth },
+    };
+  });
+
+  // 8. Animating the number animates the colour.
+  section("anim", () => {
+    const el = mk("--tone:0; background-color:var(--toned)");
+    const a = el.animate({ "--tone": ["0", "100"] }, { duration: 1000, fill: "both" });
+    a.pause();
+    a.currentTime = 500;
+    const ref = mk("background-color:color-mix(in oklch, var(--text-main) 50%, var(--background))");
+    return { tone: cs(el).getPropertyValue("--tone"), helper: bgOf(el), ref: bgOf(ref) };
+  });
+
+  // 9. A theme moves the base colours, and the cube has to follow them cell for
+  //    cell. Each preset repaints --color-0..15 on the root; the old tokens read
+  //    the same variables, so the two sides stay comparable.
+  section("presets", () => {
+    const P = window.PRESETS;
+    if (!P) return null;
+    const out = {};
+    for (const [name, colors] of Object.entries(P)) {
+      stage.replaceChildren();
+      colors.forEach((c, i) => html.style.setProperty(`--color-${i}`, c));
+      const cells = [];
+      for (let r = 0; r < 6; r++)
+        for (let g = 0; g < 6; g++)
+          for (let b = 0; b < 6; b++) {
+            const i = `${r}${g}${b}`;
+            cells.push(pair(i, `--mix:${i}; background-color:var(--mixed)`, `background-color:var(--mix-${i})`));
+          }
+      out[name] = cells;
+    }
+    for (let i = 0; i < 16; i++) html.style.removeProperty(`--color-${i}`);
+    stage.replaceChildren();
+    return out;
+  });
+
+  document.getElementById("results").textContent = JSON.stringify(R);
+})();
+</script>
+</body>
+</html>

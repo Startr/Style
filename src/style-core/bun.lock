@@ -13,6 +13,7 @@
         "postcss-inline-svg": "^6.0.0",
         "postcss-mixins": "^11.0.3",
         "postcss-nested": "^7.0.2",
+        "postcss-selector-parser": "7.1.1",
       },
     },
   },

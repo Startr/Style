@@ -1,0 +1,26 @@
+[
+  {
+    "kind": "missing",
+    "selector": "^\\[style\\*=\"--(hvr-(bg|bgc|b|bc|c)|cur):\"\\]:hover$",
+    "media": "^$",
+    "reason": "The --hvr-* and --cur hover rules moved inside @media (hover:hover) and gained !important, so --hvr-bg beats --bg (in P the non-important hover rule lost to the !important base rule and never showed). The dead var(--background)-style fallbacks are gone. C has the same selectors one level down, in the media query."
+  },
+  {
+    "kind": "missing",
+    "selector": "^\\[style\\*=\"-ttf(-(sm|md|lg|xl|pt))?:\"\\]$",
+    "reason": "P's single-dash -ttf is invalid: var(-ttf) is not a custom property, and the substring match also fires on --ttf, which resets the timing function to ease. C has --ttf, with the same five tiers, instead."
+  },
+  {
+    "kind": "missing",
+    "selector": "^\\[style\\*=\"--(levitate|shadow|translate|translatex|translatey|scale|rotate|skew)-hvr:\"\\]:(hover|focus)$",
+    "media": "^$",
+    "reason": "The -hvr helpers (deprecated aliases of the new -hover names) keep their looks, but the hover part now sits inside @media (hover:hover) and :focus became a separate :focus-visible rule outside it. C has the same selectors in the media query and under :focus-visible."
+  },
+  {
+    "kind": "extra",
+    "selector": "^\\[style\\*=\"--(levitate|shadow|translate|translatex|translatey|scale|rotate|skew)-hvr:\"\\]$",
+    "media": "^$",
+    "prop": "^--(levitate|shadow|translate|translatex|translatey|scale|rotate|skew)-hover$",
+    "reason": "The -hvr helpers are deprecated aliases now. Each old name copies its value into the matching -hover variable, so one set of hover and focus rules serves both names. An inline -hover value beats the copy."
+  }
+]

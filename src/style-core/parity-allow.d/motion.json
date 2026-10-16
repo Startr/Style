@@ -1,0 +1,15 @@
+[
+  {
+    "kind": "extra",
+    "selector": "^\\[style\\]:is\\(",
+    "media": "prefers-reduced-motion",
+    "reason": "The reduced-motion guard (helpers/_motion.css). P has no prefers-reduced-motion block. Its selectors are [style]:is([style*=\"--anim:\"], ...) because the kit's props are !important at (0,1,0) and the guard needs (0,2,0) to win from any place in the sheet. It stops --anim in every tier, the --tn/--tdn/--tp transition props, and the helpers' `transition: var(--transition)` in both families (-hvr and -hover)."
+  },
+  {
+    "kind": "extra",
+    "selector": "^:dir\\(rtl\\)$",
+    "media": "^$",
+    "prop": "^--st-dir$",
+    "reason": "Writing direction for @keyframes st-slide-in (helpers/_motion.css). Keyframes cannot take logical directions, so they read --st-dir: 1 by default, -1 inside an RTL subtree, which makes the slide start at the inline end."
+  }
+]
