@@ -4,7 +4,8 @@ Welcome, brave developer, to the Startr Style Project TODO list! This isn't just
 
 ## ⚠️ Revert — Temporary Hack (Bialik presentation)
 
-- [ ] **🔥 Re-enable the `--maxw-sm` responsive max-width rule** (`src/static/style.css`, ~line 2528): it is currently commented out with the note *"Dissabled temporarily for the Bialik presentation"* (2026-06-25). **This kills the `--maxw-sm` utility framework-wide for every consumer (Sage.is, Sage.Education, etc.).** Restore the block inside the `-sm` media query:
+- [x] **🔥 Re-enable the `--maxw-sm` responsive max-width rule** (`src/static/style.css`, ~line 2528): it is currently commented out with the note *"Dissabled temporarily for the Bialik presentation"* (2026-06-25). **This kills the `--maxw-sm` utility framework-wide for every consumer (Sage.is, Sage.Education, etc.).** Restore the block inside the `-sm` media query:
+  - [x] Back in 1.4.0, live 2026-10-16 (core src/utilities/_sizing.css); the pinned /v1.3.2/ keeps it off as served
   ```css
   [style*="--maxw-sm:"] {
     max-width: var(--maxw-sm) !important;
@@ -85,8 +86,11 @@ are in `docs/board-dossiers.md`.
 - [ ]  📦 Versioning & Rollback
   - Machinery landed 2026-09-05: `scripts/snapshot-version.sh` (`make version_snapshot`), `netlify.toml` `/v*/*` immutable for a year, and `/v1/swap.js` as the first pinned path. The CSS snapshot of 1.3.2 waits on the `--maxw-sm` revert at the top of this board.
   - Order changed 2026-10-16: snapshot 1.3.2 first, as served (the `--maxw-sm` hack included), because `make core_publish` refuses to overwrite src/static/style.css until v1.3.2/ holds the tag's bytes; the `--maxw-sm` revert then ships in the next version
-  - [ ] **Publish 1.x built by core** (`make core_publish`): the steps and their owners are on the "Publish 1.x from core" card in WEB-startr.style.core/TODO.md
+  - [x] **Publish 1.x built by core** (`make core_publish`): the steps and their owners are on the "Publish 1.x from core" card in WEB-startr.style.core/TODO.md
+    - [x] 1.4.0 live 2026-10-16 (tag v1.4.0): /style.css b845cff…, /startr.css and /props.json from core; /style-core/ pages styled again
+  - [ ] **Move the /style.min.css consumers to the 1.4.0 min after a visual check** (Sage.is, Startr.cloud): the rolling min still serves the drifted 1.3.2 bytes; 1.4.0's min changes about 250 element rules for them (body, h4, pre, forms, tables)
   - Trap: a Netlify UI redirect of the shape `/:w.:h/*` sends any dotted first segment to `image.startr.cloud` (`/v1.3.2/style.min.css` answers 302 today). A real file should shadow it; verify with `curl -sI` after the first CSS snapshot deploys.
+  - [ ] [MANUALLY] **Narrow the Cloudflare image rule**: it is a redirect rule on the startr.style zone, not Netlify (the 302 carries no x-nf-request-id), and real files do not shadow it: /v1.3.2/ and /v1.4.0/ both 302 to image.startr.cloud (checked 2026-10-16). Match only numeric WxH
   - [ ] **Ship pinned and rolling CDN versions**: Currently unversioned — any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path. Publish `/v1/`, `/v2/`, and a rolling `/latest/`. Implementation approach: submodule structure where `v1/` is a submodule pointing to the project at the v1 tag, `v2/` at v2, etc. — versioned URLs serve from the pinned submodule, `latest/` serves from `master`.
   - [ ] Consumers pin to a version in prod; `latest` is for the Startr studio itself. Migration plan needed for existing Sage.is / Sage.Education `<link>` tags currently pointing at the unversioned URL. *(Surfaced by Zach Leatherman in a panel review of Sage.is, 2026-04-18.)*
   - [ ] **Cache headers — versioned vs rolling**: `/v1/style.css`, `/v2/style.css`, etc. → `Cache-Control: public, max-age=31536000, immutable` (one year, immutable; the URL's contents never change by design). `/latest/style.css` → `Cache-Control: public, max-age=60, must-revalidate` (short TTL + revalidate so studio pushes propagate quickly and stale copies don't linger). *(Surfaced by Zach Leatherman, 2026-04-18.)*
