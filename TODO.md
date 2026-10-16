@@ -84,6 +84,8 @@ are in `docs/board-dossiers.md`.
 
 - [ ]  📦 Versioning & Rollback
   - Machinery landed 2026-09-05: `scripts/snapshot-version.sh` (`make version_snapshot`), `netlify.toml` `/v*/*` immutable for a year, and `/v1/swap.js` as the first pinned path. The CSS snapshot of 1.3.2 waits on the `--maxw-sm` revert at the top of this board.
+  - Order changed 2026-10-16: snapshot 1.3.2 first, as served (the `--maxw-sm` hack included), because `make core_publish` refuses to overwrite src/static/style.css until v1.3.2/ holds the tag's bytes; the `--maxw-sm` revert then ships in the next version
+  - [ ] **Publish 1.x built by core** (`make core_publish`): the steps and their owners are on the "Publish 1.x from core" card in WEB-startr.style.core/TODO.md
   - Trap: a Netlify UI redirect of the shape `/:w.:h/*` sends any dotted first segment to `image.startr.cloud` (`/v1.3.2/style.min.css` answers 302 today). A real file should shadow it; verify with `curl -sI` after the first CSS snapshot deploys.
   - [ ] **Ship pinned and rolling CDN versions**: Currently unversioned — any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path. Publish `/v1/`, `/v2/`, and a rolling `/latest/`. Implementation approach: submodule structure where `v1/` is a submodule pointing to the project at the v1 tag, `v2/` at v2, etc. — versioned URLs serve from the pinned submodule, `latest/` serves from `master`.
   - [ ] Consumers pin to a version in prod; `latest` is for the Startr studio itself. Migration plan needed for existing Sage.is / Sage.Education `<link>` tags currently pointing at the unversioned URL. *(Surfaced by Zach Leatherman in a panel review of Sage.is, 2026-04-18.)*
@@ -94,20 +96,26 @@ are in `docs/board-dossiers.md`.
 - [ ] 🧨 Silent-Failure DX — unknown props are no-ops
 
   - [ ] **Give prop typos a failure mode**: An inline prop with no matching `[style*="--X:"]` rule fails silently — no error, no fallback, the declaration just sits inert. Two real hits in build.sage.education (2026-08-25, commit 3198f0b): `--ovx` written for `--ofx`, `--lst` written for `--lis`; both shipped broken layout and were caught only in a 360px visual pass. #dx #landmine
-    - [ ] Publish the canonical prop list as a JSON artifact per release (extractable from the built sheet by regexing `[style*="--X:"]` selectors — proof-of-concept script exists in build.sage.education's `--br` audit).
+    - [x] Publish the canonical prop list as a JSON artifact per release (extractable from the built sheet by regexing `[style*="--X:"]` selectors — proof-of-concept script exists in build.sage.education's `--br` audit).
+      - [x] Core's build writes props.json (every prop, tier, state, collision, deprecation); `make core_publish` copies it to src/static/props.json and src/_data/props.json, and src/docs/utilities.njk renders from it (2026-10-16)
+      - [ ] scripts/snapshot-version.sh pins no props.json, so a pinned sheet has no pinned dictionary
     - [ ] Authoring-time linter: check every `--*` in template `style=""` attributes against that list; run in consumer CI.
+      - [x] Core's `bun run ingest <page>` lints inline props against props.json: unknown, deprecated, collision, tier-state (2026-10-16); consumer CI hookup still open
     - [ ] Dev-mode runtime warner: a tiny opt-in script that scans `[style*="--"]` elements and console.warns unknown props.
   - [ ] **Shorthand dual bindings** (`--br` = border-radius AND border-right; `--bs`, `--td`, `--fs`, `--cr` value-disjoint pairs): the naming decision is filed in `WEB-startr.style.core/TODO.md` — resolve it there, then mirror the outcome here. Consumers are already routing around the DSL (build.sage.education writes plain `flex-shrink:0` to avoid `--fs`). #landmine
 
 - [ ] ♿ Accessibility
 
-  - [ ] **Audit `-hvr` coverage for `:focus` and `:focus-visible`**: Every `[style*="--X-hvr:"]:hover` rule should be paired with `:focus, :focus-visible` so keyboard users get the same affordance as mouse users. `--shadow-hvr` covers `:focus` today; audit and enumerate the rest (`--hvr-bgc`, `--hvr-c`, `--hvr-bdc`, etc.). Land coverage systematically, not ad-hoc. *(Surfaced by Adam Wathan in a panel review of Sage.is, 2026-04-18.)*
+  - [x] **Audit `-hvr` coverage for `:focus` and `:focus-visible`**: Every `[style*="--X-hvr:"]:hover` rule should be paired with `:focus, :focus-visible` so keyboard users get the same affordance as mouse users. `--shadow-hvr` covers `:focus` today; audit and enumerate the rest (`--hvr-bgc`, `--hvr-c`, `--hvr-bdc`, etc.). Land coverage systematically, not ad-hoc. *(Surfaced by Adam Wathan in a panel review of Sage.is, 2026-04-18.)*
+    - [x] Done in core (2026-10-16): every hover rule, the new `--x-hover` props and the `-hvr`/`-hover` helpers, has a `:focus-visible` copy; scripts/bands.test.ts and states.test.ts hold it
   - [ ] **Reconcile `:focus-visible` audit status with spoken claims**: The `-hvr` coverage audit above has been open since 2026-04-18, yet a verbal claim of "keyboard accessibility tested, no issues" was made during the 2026-04-20 panel. Either close the audit with a landed commit, or retract the claim. Both states cannot be true at once. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*
 
 - [ ] 🎨 Colour System Invariants
 
-  - [ ] **Audit every colour leaf for IACVT-safe fallbacks**: The 216-cell `color-mix(in oklch, …)` cascade in `src/style-core/src/variables.css` invalidates whole declarations when any component is unparseable. Every consumer leaf (e.g. `background: var(--primary)`) must resolve to `var(--primary, <literal-fallback>)`, not `inherit`/`initial`. Audit the whole leaf surface, not one line — otherwise the DSL has accents. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+  - [x] **Audit every colour leaf for IACVT-safe fallbacks**: The 216-cell `color-mix(in oklch, …)` cascade in `src/style-core/src/variables.css` invalidates whole declarations when any component is unparseable. Every consumer leaf (e.g. `background: var(--primary)`) must resolve to `var(--primary, <literal-fallback>)`, not `inherit`/`initial`. Audit the whole leaf surface, not one line — otherwise the DSL has accents. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+    - [x] Moot since 2026-10-16: the 216-cell cascade is gone (`--mix`/`--tone` compute on the element); the new tints ship literal defaults with color-mix() under @supports
   - [ ] **Register critical custom properties with `@property`**: Without registration, the browser treats colour and layout variables as untyped strings. Downstream `color-mix()` and `calc()` can silently IACVT when consumers pass malformed values. Register `--primary`, `--background`, `--text-main`, and the 216-cell cube entries so the browser can validate inputs and animate between them. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+    - [x] `--mix`, `--tone`, `--tone-of`, `--mixed` and `--toned` are registered, inherits:false (2026-10-16); `--primary`, `--background` and `--text-main` are not
 
 - [ ] 📊 Performance Methodology
 
