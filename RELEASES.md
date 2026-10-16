@@ -1,5 +1,27 @@
 # Release Notes
 
+## Version 1.4.0 - 2026-10-16
+
+### ✨ New Features & Enhancements
+
+*   **The core builds the sheet**: `style.css` now comes from Startr/WEB-startr.style.core through `make core_publish`. A parity check proves it matches 1.3.2 before anything is copied, and `props.json` lists every prop, tier, state and token at `/props.json`.
+*   **States**: `--bg-hover`, `--oe-focus` (keyboard focus), `--bg-active` and `--bg-on` style an element in that state; `--c-in-on` and `--c-in-hover` style a direct child of an element in that state. They work on bg, bgc, c, b, bc, boxs, op, t and oe. "On" means `aria-current`, `aria-selected`, `aria-pressed` or `aria-expanded`, `[open]`, `:checked`, or `data-on`.
+*   **Motion**: `--anim` with the `st-fade`, `st-rise`, `st-slide-in` and `st-pop` keyframes; `--ease-*` and `--dur-*` tokens. Reduced motion stops kit animations and transitions.
+*   **Colour by math**: `--mix: RGB` gives any cell of the 6x6x6 cube and `--tone: N` gives a tint or grey, computed on the element. Tint tokens `--primary-tint`, `--good-bg`, `--warn-bg` and `--bad-bg`.
+*   **Effects**: `--text-grad` (gradient text), `--glow: N`, `--bdf` (backdrop-filter), `--oo` (outline-offset), `--font-sans` and `--font-mono`.
+*   **Pinned versions**: `/v1.3.2/` and `/v1.4.0/` serve fixed bytes.
+
+### 🐛 Bug Fixes
+
+*   **Hover props work**: `--hvr-bg` and the other hover props now beat their base prop. They stay as aliases of the new `--x-hover` names.
+*   **`--maxw-sm` is back**: 1.3.2 switched it off for a presentation; `/v1.3.2/` keeps it off.
+*   **`--ttf`**: the transition timing prop was misspelt `-ttf` and never worked.
+*   **`--button-hover`** now sets the button hover colour; unset, buttons look the same as before.
+
+### Notes
+
+*   The rolling `/style.min.css` stays at its 1.3.2 bytes for now. It had drifted from `style.css`; `/v1.4.0/style.min.css` is the current minified build.
+
 ## Version 1.2.2.2 - 2025-06-25
 
 ### 🐛 Bug Fixes
