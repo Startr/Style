@@ -83,4 +83,10 @@ bun remove [package]   →  npm uninstall [package]
 - Corporate environments with npm-only policies
 - Rare Bun compatibility issues (< 1% of cases)
 
+## startr.style props
+
+`props.json` is the list of valid prop names, each with its tiers, states and any deprecation or collision. Check every `--x` you put in a `style` attribute against it: an unknown name does nothing and raises no error. `make core_publish` writes it to `src/static/props.json`, which the site serves at `/props.json`.
+
+The design-ingest runbook lives at `docs/design-ingest.md` in `Startr/WEB-startr.style.core`. In this repo it appears at `src/style-core/docs/design-ingest.md` after `make style_core_update` pulls the subtree.
+
 ## See the [DEVELOPMENT_WORKFLOW.md](docs/DEVELOPMENT_WORKFLOW.md) for more details.
