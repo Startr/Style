@@ -28,6 +28,18 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ static: "/" });
   // /startr.css is static/startr.css, written by `make core_publish` from the
   // core build (core no longer tracks dist/, so the subtree carries none).
+  // The core subtree is CSS source, not site content: its docs, tests and
+  // fixtures hold Jinja and Liquid examples that would stop the build. Its two
+  // public pages are served as plain files at their existing URLs, styled by
+  // the published build at the relative paths they link (dist/startr.min.css).
+  eleventyConfig.ignores.add("style-core/**");
+  eleventyConfig.addPassthroughCopy({
+    "style-core/index.html": "/style-core/index.html",
+    "style-core/theme-creator.html": "/style-core/theme-creator/index.html",
+    "static/startr.css": "/style-core/dist/startr.min.css",
+  });
+  // A second key for the same file: passthrough copies are keyed by source path.
+  eleventyConfig.addPassthroughCopy({ "./static/startr.css": "/style-core/theme-creator/dist/startr.min.css" });
   // include run folder for passing users scripts that can be called with curl
   eleventyConfig.addPassthroughCopy({ run: "/run" });
   // Copy any .jpg file to `_site`, via Glob pattern
