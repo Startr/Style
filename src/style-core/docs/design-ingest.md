@@ -214,7 +214,8 @@ Then:
   - The build prints `startr.css: <raw>KB → <min>KB min → <gz>KB gz`.
   - Build before and after into two scratch folders. Put the gzip delta in the proposal.
   - The 1.x plan set the budget: states at most 0.7 KB gzip, colour helpers at most 0.3 KB, the whole 1.x extension at most 2 KB. No automated size gate exists yet.
-- [MANUALLY] A versioned release ships it. A person snapshots the sheet under an immutable version path with `scripts/snapshot-version.sh` in Startr/Style, then commits, tags and deploys.
+- [MANUALLY] A versioned release ships it. While Startr/Style's Makefile sets `HOLD_MIN`, the rolling `/style.min.css` keeps that version's bytes and the current min ships as `/startr.css`; `make core_publish` and `make version_snapshot` both follow it.
+- [MANUALLY] A person snapshots the sheet under an immutable version path with `scripts/snapshot-version.sh` in Startr/Style, then commits, tags and deploys.
 - Until the release ships, a consumer can bridge a simple prop with the plain CSS property in the same style attribute, such as `aspect-ratio:16/9`. Swap it for the prop after the release.
 - Hover, focus, motion and parent state have no bridge. That component waits for the release.
 
@@ -383,6 +384,10 @@ Footguns:
 - Silent typos do nothing. Workaround: lint against `props.json`. Fix: the manifest ships with the sheet. Consumer gate lint is planned.
 - An unversioned CDN sheet is a risk. Workaround: vendor the sheet with a checksum pin. Fix: versioned URLs from `scripts/snapshot-version.sh` in Startr/Style.
 - Old browsers may lack `color-mix()` and `@property`. Workaround: always write a fallback. Fix: none, by design.
+- `--text-grad` with a `--bg-*` state loses the gradient: `background` is a shorthand, so on hover or on it resets the image and `background-clip`, and with `--c:transparent` the text disappears. Workaround: on an element with `--text-grad`, use `--bgc-*` states, which set only the colour. Fix: a lint, on core's `TODO.md`.
+- The effect helpers' hover twins (`--shadow-hover`, `--levitate-hover`, the `--translate-hover` family) are not `!important`, so a `--boxs` or `--t` on the same element wins and the hover never shows. Workaround: do not mix the two families on one element. Fix: a lint, on core's `TODO.md`.
+- `--x-in-on` never fires under `:checked`: inputs have no children. Workaround: put `--x-on` on the input itself, or make the state an attribute on a parent (`data-on`).
+- `--gutter-sm` to `--gutter-xl` are never defined, so the `.wrapper` tier gutters do nothing. Workaround: set the padding with `--px` and its tiers. Fix: on core's `TODO.md`.
 
 ## Commands cheat-sheet
 

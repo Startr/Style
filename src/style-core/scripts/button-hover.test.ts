@@ -17,9 +17,11 @@ const RED = "rgb(255, 0, 0)";
 const CRIMSON = "rgb(220, 20, 60)";
 const TEAL = "rgb(0, 128, 128)";
 const INK = "rgb(1, 2, 3)";
+const CLEAR = "rgba(0, 0, 0, 0)";
 
 const page = (sheet: string) => `<!doctype html>
-<html><head><meta charset="utf-8"><link rel="stylesheet" href="${sheet}"></head>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="${sheet}">
+<style>/* a consumer sheet, loaded after the kit, as Tailwind's is in AI-UI */ .bg-transparent { background-color: transparent; }</style></head>
 <body>
   <button id="plain">Plain</button>
   <a id="link" class="button" href="#">Link button</a>
@@ -28,6 +30,8 @@ const page = (sheet: string) => `<!doctype html>
   <button id="crimson" style="--element-bg: ${CRIMSON}">Crimson</button>
   <div style="--primary: ${TEAL}"><button id="teal">Teal</button></div>
   <button id="prop" style="--bg: ${INK}">Prop</button>
+  <button id="tw" class="bg-transparent">Tailwind reset</button>
+  <div style="--button-hover: ${RED}"><button id="twset" class="bg-transparent">Tailwind reset under a token</button></div>
 </body></html>`;
 
 suite("--button-hover", () => {
@@ -95,6 +99,11 @@ suite("--button-hover", () => {
 
     test("--primary changed on an ancestor: hover follows it, not the root's primary", async () => {
       expect(await restAndHover("#teal")).toEqual([TEAL, TEAL]);
+    });
+
+    test("a consumer class reset keeps its background on hover, with or without a token (1.4.0 painted it --primary)", async () => {
+      expect(await restAndHover("#tw")).toEqual([CLEAR, CLEAR]);
+      expect(await restAndHover("#twset")).toEqual([CLEAR, CLEAR]);
     });
 
     test("an inline --bg prop still wins on hover", async () => {

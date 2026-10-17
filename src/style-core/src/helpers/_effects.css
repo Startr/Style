@@ -36,10 +36,12 @@
    colour. Unset, the fallback is the button's own background, so the default
    look does not change. :root no longer defines the token: a value fixed
    there as var(--primary) froze at the root and ignored a page that changed
-   --primary or --element-bg. */
-button:hover,
-.button:hover,
-input[type="submit"]:hover,
-input[type="button"]:hover {
+   --primary or --element-bg.
+   :where() keeps this at the specificity of one class (0,1,0), the same as a
+   consumer's own button reset (Tailwind's .bg-transparent, AI-UI's icon
+   buttons). A consumer sheet loads after the kit, so its reset wins the tie
+   at rest and on hover alike. 1.4.0 wrote this as button:hover (0,1,1) and
+   painted every such button solid --primary on hover. */
+:where(button, .button, input[type="submit"], input[type="button"]):hover {
   background-color: var(--button-hover, var(--element-bg, var(--primary)));
 }
