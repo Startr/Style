@@ -37,11 +37,17 @@
    look does not change. :root no longer defines the token: a value fixed
    there as var(--primary) froze at the root and ignored a page that changed
    --primary or --element-bg.
-   :where() keeps this at the specificity of one class (0,1,0), the same as a
-   consumer's own button reset (Tailwind's .bg-transparent, AI-UI's icon
-   buttons). A consumer sheet loads after the kit, so its reset wins the tie
-   at rest and on hover alike. 1.4.0 wrote this as button:hover (0,1,1) and
-   painted every such button solid --primary on hover. */
-:where(button, .button, input[type="submit"], input[type="button"]):hover {
+   Each hover selector has exactly its base rule's specificity (button is
+   (0,0,1), .button (0,1,0), input[type=…] (0,1,1)): :where(:hover) adds none.
+   The hover rule comes later in the sheet, so it beats the base; and any
+   consumer rule that overrides the base at rest (Tailwind's preflight
+   `button { background-color: transparent }`, a `.bg-transparent` class)
+   overrides the hover the same way. 1.4.0 used button:hover and painted
+   every transparent button --primary; 1.4.1's :where(button, …):hover still
+   outranked an element-level reset. */
+button:where(:hover),
+.button:where(:hover),
+input[type="submit"]:where(:hover),
+input[type="button"]:where(:hover) {
   background-color: var(--button-hover, var(--element-bg, var(--primary)));
 }

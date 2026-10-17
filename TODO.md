@@ -10,6 +10,7 @@
   - [x] Core generates the published sheet (Alexander, 2026-10-16: converge, then extend 1.x); proof: `bun run parity` → PARITY OK against test/fixtures/published-1.3.2.css. Core had the `-pt` tier all along (src/mixins.css)
 
 - [ ] **Publish 1.x from core: 1.4.0 is live (2026-10-16); the pinned /v*/ URLs wait on a Cloudflare rule** #release
+  - [x] 1.4.1 hotfix (2026-10-17): `button:hover` outranked a consumer's class reset and painted AI-UI's transparent icon buttons solid `--primary`; now `:where(button, …):hover` at one class of specificity. Found by the 1.4.0 regression run, not by the tests
   - [x] Core merged to master through PR #1 (e027981, 2026-10-16)
   - [x] Startr/Style: 1.3.2 pinned as served, subtree pulled, `bun install` in src/style-core (2026-10-16)
   - [x] Startr/Style: `make core_publish`, release v1.4.0, deploy; live /style.css b845cff…, /props.json, /startr.css (2026-10-16)
@@ -19,6 +20,7 @@
 
 ## 📋 Backlog
 
+- [ ] **Hover gate in consumer CI**: run `bun run probe:hover <url> --login …` against AI-UI's chat shell and admin settings (and Trellis's pages) before a kit release; the 1.4.0 button regression went live because no check forced hover on real pages. The probe takes 4 s a page
 - [ ] **Lint two silent pairings** (ingest and Trellis kit_lint): `--text-grad` with a `--bg-*` state (the shorthand resets background-clip, so the text vanishes on hover or on), and a `*-hover` effect helper with `--boxs`/`--t` on one element (the helper is not `!important` and never shows)
 - [ ] `--gutter-sm..xl` are never defined (src/helpers/_layout.css:12-21), so the `.wrapper` tier gutters do nothing
 - [ ] **Size: the 1.x extension costs +2.35 KB gzip against a 2 KB budget** (11.65 → 14.0 KB, both minified by cssnano, 2026-10-16); no size gate yet
