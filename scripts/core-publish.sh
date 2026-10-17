@@ -79,11 +79,18 @@ if [ -n "$LIVE_P" ] && [ "$DEST_P" = "$LIVE_P" ] && { [ -e "$DEST/style.css" ] |
 	# The snapshot must be the release, not a copy of some later build.
 	if git rev-parse -q --verify "refs/tags/v$VERSION" >/dev/null 2>&1; then
 		for f in style.css style.min.css; do
-			if git cat-file -e "v$VERSION:$LIVE/$f" 2>/dev/null && ! git show "v$VERSION:$LIVE/$f" | cmp -s - "$SNAP/$f"; then
+			src="$f"
+			# While the rolling min is held (HOLD_MIN), a release pins its current
+			# min, which it shipped as startr.css.
+			if [ "$f" = style.min.css ] && [ -n "${HOLD_MIN:-}" ] && [ "$VERSION" != "$HOLD_MIN" ] &&
+				git cat-file -e "v$VERSION:$LIVE/startr.css" 2>/dev/null; then
+				src=startr.css
+			fi
+			if git cat-file -e "v$VERSION:$LIVE/$src" 2>/dev/null && ! git show "v$VERSION:$LIVE/$src" | cmp -s - "$SNAP/$f"; then
 				{
 					echo "error: refusing to overwrite $LIVE/style.css."
-					echo "       $SNAP/$f is not what tag v$VERSION shipped, so /v$VERSION/$f would lie."
-					echo "       Compare: git show v$VERSION:$LIVE/$f | diff - $SNAP/$f"
+					echo "       $SNAP/$f is not what tag v$VERSION shipped as $src, so /v$VERSION/$f would lie."
+					echo "       Compare: git show v$VERSION:$LIVE/$src | diff - $SNAP/$f"
 				} >&2
 				exit 1
 			fi
@@ -99,6 +106,20 @@ command -v bun >/dev/null || die "bun is not on PATH (the core builds with bun)"
 [ -d "$CORE/node_modules" ] || die "CORE=$CORE has no node_modules. Run: (cd $CORE && bun install)"
 # An older build.ts ignores STARTR_DIST and writes into CORE/dist, inside this repo.
 grep -q STARTR_DIST "$CORE/build.ts" || die "CORE=$CORE/build.ts predates STARTR_DIST and would write into its own dist/. Pull a newer core first (make style_core_update)"
+
+# ── Guard: the rolling min may be held ───────────────────────────────────────
+# HOLD_MIN names a version whose minified bytes /style.min.css keeps serving,
+# because the sites that load it (Sage.is, Startr.cloud) have not been checked
+# against the current min yet. The current min still ships as /startr.css, and
+# version_snapshot pins it as v<version>/style.min.css. Empty HOLD_MIN (make
+# core_publish HOLD_MIN=) to let /style.min.css move.
+HOLD=""
+if [ -n "${HOLD_MIN:-}" ] && [ -n "$LIVE_P" ] && [ "$DEST_P" = "$LIVE_P" ]; then
+	held="$LIVE/v$HOLD_MIN/style.min.css"
+	[ -f "$held" ] || die "HOLD_MIN=$HOLD_MIN, but $held does not exist. Nothing was published"
+	cmp -s "$DEST/style.min.css" "$held" || die "HOLD_MIN=$HOLD_MIN, but $DEST/style.min.css no longer matches $held. Restore it, or empty HOLD_MIN once its sites are checked. Nothing was published"
+	HOLD="$HOLD_MIN"
+fi
 
 # ── Build the core into a temp dir ───────────────────────────────────────────
 TMP="$(mktemp -d "${TMPDIR:-/tmp}/startr-core-publish.XXXXXX")"
@@ -131,7 +152,11 @@ echo "$PARITY_LOG" | tail -n 1 | sed 's/^/  /'
 # cat > writes into the existing file, so a hardlinked style.css keeps its inode.
 mkdir -p "$DEST" "$DATA"
 cat "$TMP/startr.css" >"$DEST/style.css"
-cat "$TMP/startr.min.css" >"$DEST/style.min.css"
+if [ -n "$HOLD" ]; then
+	echo "held: $DEST/style.min.css stays at v$HOLD (HOLD_MIN); the current min ships as startr.css"
+else
+	cat "$TMP/startr.min.css" >"$DEST/style.min.css"
+fi
 cat "$TMP/startr.min.css" >"$DEST/startr.css"
 cat "$TMP/props.json" >"$DEST/props.json"
 cat "$TMP/props.json" >"$DATA/props.json"
