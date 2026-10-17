@@ -37,8 +37,21 @@ if [ -e "$DEST" ]; then
 	exit 1
 fi
 
+# While the rolling min is held at an older version (HOLD_MIN, see
+# core-publish.sh), the current min is startr.css, so that is what this
+# version pins.
+MIN_SRC="$SRC/style.min.css"
+if [ -n "${HOLD_MIN:-}" ] && [ "$VERSION" != "$HOLD_MIN" ]; then
+	MIN_SRC="$SRC/startr.css"
+	if [ ! -f "$MIN_SRC" ]; then
+		echo "error: HOLD_MIN=$HOLD_MIN, but $MIN_SRC is missing — run make core_publish first" >&2
+		exit 1
+	fi
+fi
+
 mkdir -p "$DEST"
-cp "$SRC/style.css" "$SRC/style.min.css" "$DEST/"
+cp "$SRC/style.css" "$DEST/style.css"
+cp "$MIN_SRC" "$DEST/style.min.css"
 
 echo "pinned v$VERSION"
 for f in style.css style.min.css; do

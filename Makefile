@@ -164,11 +164,15 @@ style_core_push:
 #
 #   make core_publish CORE=../WEB-startr.style.core DEST=/tmp/out DATA=/tmp/out
 CORE ?= $(STYLE_CORE_PREFIX)
+# The rolling /style.min.css keeps this version's bytes until Sage.is and
+# Startr.cloud are checked against the current min (they load the min; the
+# 1.3.2 min had drifted from style.css). Empty it to let the min move.
+HOLD_MIN ?= 1.3.2
 DEST ?= src/static
 DATA ?= src/_data
 
 core_publish:  ## Build CORE, check parity, publish style.css, style.min.css, props.json to DEST; refuses until the live release has a snapshot
-	@CORE="$(CORE)" DEST="$(DEST)" DATA="$(DATA)" scripts/core-publish.sh $(V)
+	@CORE="$(CORE)" DEST="$(DEST)" DATA="$(DATA)" HOLD_MIN="$(HOLD_MIN)" scripts/core-publish.sh $(V)
 
 things_clean:
 	git clean --exclude=!.env -Xdf
@@ -196,7 +200,7 @@ release: swap_check
 # Freeze the current build under /v<version>/ so consumers can pin it.
 # Version comes from the latest git tag; pass V=1.3.3 to override.
 version_snapshot:
-	@scripts/snapshot-version.sh $(V)
+	@HOLD_MIN="$(HOLD_MIN)" scripts/snapshot-version.sh $(V)
 
 # ── Startr Swap ──────────────────────────────────────────────────────
 # src/static/swap.js is the source of truth and the rolling /swap.js.
