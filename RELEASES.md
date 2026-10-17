@@ -1,5 +1,12 @@
 # Release Notes
 
+## Version 1.4.1 - 2026-10-17
+
+### 🐛 Bug Fixes
+
+*   **Button hover painted over a consumer's own reset**: 1.4.0's `button:hover` rule outranked a class reset such as Tailwind's `.bg-transparent`, so transparent icon buttons filled solid `--primary` on hover (AI-UI: 34 of 50 buttons in the chat shell). The rule is now `:where(button, …):hover`, one class of specificity, so a consumer sheet loaded after the kit wins the tie. Unset `--button-hover` still means "unchanged on hover".
+*   **A gate for this class of bug**: `bun run probe:hover <url>` in the core forces hover on every button in a page and flags any that fills without asking. It runs in seconds.
+
 ## Version 1.4.0 - 2026-10-16
 
 ### ✨ New Features & Enhancements
