@@ -21,7 +21,8 @@ const CLEAR = "rgba(0, 0, 0, 0)";
 
 const page = (sheet: string) => `<!doctype html>
 <html><head><meta charset="utf-8"><link rel="stylesheet" href="${sheet}">
-<style>/* a consumer sheet, loaded after the kit, as Tailwind's is in AI-UI */ .bg-transparent { background-color: transparent; }</style></head>
+<style>/* a consumer sheet, loaded after the kit, as Tailwind's is in AI-UI */ .bg-transparent { background-color: transparent; }
+/* Tailwind's preflight resets buttons at element specificity, (0,0,1); :where() keeps the wrapper id out of it */ :where(#el-wrap) button { background-color: transparent; }</style></head>
 <body>
   <button id="plain">Plain</button>
   <a id="link" class="button" href="#">Link button</a>
@@ -32,6 +33,7 @@ const page = (sheet: string) => `<!doctype html>
   <button id="prop" style="--bg: ${INK}">Prop</button>
   <button id="tw" class="bg-transparent">Tailwind reset</button>
   <div style="--button-hover: ${RED}"><button id="twset" class="bg-transparent">Tailwind reset under a token</button></div>
+  <div id="el-wrap"><button id="el">Element reset</button><div style="--button-hover: ${RED}"><button id="elset">Element reset under a token</button></div></div>
 </body></html>`;
 
 suite("--button-hover", () => {
@@ -104,6 +106,11 @@ suite("--button-hover", () => {
     test("a consumer class reset keeps its background on hover, with or without a token (1.4.0 painted it --primary)", async () => {
       expect(await restAndHover("#tw")).toEqual([CLEAR, CLEAR]);
       expect(await restAndHover("#twset")).toEqual([CLEAR, CLEAR]);
+    });
+
+    test("an element-level reset (Tailwind preflight) keeps its background on hover, with or without a token (1.4.1 painted it --primary)", async () => {
+      expect(await restAndHover("#el")).toEqual([CLEAR, CLEAR]);
+      expect(await restAndHover("#elset")).toEqual([CLEAR, CLEAR]);
     });
 
     test("an inline --bg prop still wins on hover", async () => {

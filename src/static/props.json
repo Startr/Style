@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_from": {"file":"startr.css","sha256":"931e22f326b64fb73c6392ef78824d16c263ec0eeb8e2bf48e18898cdb1a5850"},
+  "generated_from": {"file":"startr.css","sha256":"c10bda2d5e9fa828e5f437d8f727d6694a1f8069ef2150d76c37d98925a8160c"},
   "breakpoints": {"xs":440,"sm":640,"md":768,"lg":1024,"xl":1280},
   "props": {
     "--ac": {"properties":["align-content"],"kind":"prop","tiers":["sm","md","lg","xl","pt"],"states":[]},

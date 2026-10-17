@@ -1616,7 +1616,10 @@ mark {
   }
 }
 
-:where(button, .button, input[type="submit"], input[type="button"]):hover {
+button:where(:hover),
+.button:where(:hover),
+input[type="submit"]:where(:hover),
+input[type="button"]:where(:hover) {
   background-color: var(--button-hover, var(--element-bg, var(--primary)));
 }
 

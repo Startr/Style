@@ -1,5 +1,11 @@
 # Release Notes
 
+## Version 1.4.2 - 2026-10-17
+
+### 🐛 Bug Fixes
+
+*   **Button hover, again**: 1.4.1's fix held against a class reset but not against Tailwind's preflight (`button { background-color: transparent }`), so AI-UI's icon buttons still filled `--primary` on hover. Each hover selector now carries exactly its base rule's specificity (`button:where(:hover)` and kin), so whatever overrides a button's background at rest overrides it on hover too. Checked against AI-UI's real pages with the core's `probe:hover --sheet` before this release: 0 unasked fills, against 45 on 1.4.1.
+
 ## Version 1.4.1 - 2026-10-17
 
 ### 🐛 Bug Fixes
