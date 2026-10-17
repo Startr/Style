@@ -1,6 +1,6 @@
 {
   "name": "Startr.Style",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Largely classless, blazing fast and super light-weight. Startr.Style, a base CSS framework for modern browsers",
   "main": "dist/Startr.Style.min.css",
   "scripts": {
@@ -9,7 +9,8 @@
     "watch": "bun --watch run build.ts",
     "parity": "bun run scripts/parity.ts",
     "test": "bun test scripts",
-    "ingest": "bun run scripts/ingest.ts"
+    "ingest": "bun run scripts/ingest.ts",
+    "probe:hover": "bun run scripts/hover-probe.ts"
   },
   "repository": {
     "type": "git",
