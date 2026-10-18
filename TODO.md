@@ -74,7 +74,7 @@ are in `docs/board-dossiers.md`.
   - The home page declares no region (its hero sits outside `<main>`); the logo and Introduction links carry `data-swap-off`. `index.njk` no longer waits for `DOMContentLoaded`.
   - Proven headless (Chrome over CDP, 2026-09-05): sentinel survives docs-to-docs swaps and Back, inline `liveprop` re-runs, home and demo `none.html` navigate normally, no console errors.
 
-- [ ] **🔧 v1.1 — first changes at the new source of truth.** #library — built on `feature/swap-1.1`, snapshotted as `/v1.1/swap.js`, not released
+- [ ] **🔧 v1.1 — first changes at the new source of truth.** #library — merged to develop (faa4f55), snapshotted as `/v1.1/swap.js`, not released
   - [x] `swap:after` and `adoptScripts` now run inside the `transition(run)` callback, after the DOM replace and `pushState` (Trellis's patch, minus its header note)
     - `make swap_timing` (`scripts/gates/startr-swap/timing.ts`): headless Chrome over the demo pages, a -> b -> a, the `swap:after` listener must read the destination's content
     - `make swap_timing_teeth`: fails `/v1/swap.js` (reads "A" going to B), passes `src/static/swap.js`
@@ -82,7 +82,7 @@ are in `docs/board-dossiers.md`.
   - [x] `License: MIT` line in the `/*!` header
   - [x] ASCII-only comments: 173 `─`, 18 em dashes and one `…` replaced; raw 13,802 to 13,748 B net (the ASCII saves about 365 B; the licence line and the timing comment add about 310), gzip 5,343 to 5,436 B, ceiling 8,192
   - [x] `make swap_snapshot V=1.1`: `src/static/v1.1/swap.js`, sha256 `8a4f07ee8f4b8286e7a254cecd482227550957c540c5e633395ccbcfe7b191bc`, SRI `sha384-/r9AsVAT1hdM4Gnh+mBr87H2TByKjMe9SG2H8RYYvaD5rSY90Q9afydmOHxtGX6V`; `src/docs/swap.njk` names it and says `/v1/` keeps the old timing
-  - [ ] [MANUALLY] Ship it in the next release and `curl -sI https://startr.style/v1.1/swap.js`: the Cloudflare image rule sends a dotted first segment to image.startr.cloud (`/v1.3.2/` 302s), so narrow it first
+  - [ ] [WE] Ship it in the next release and `curl -sI https://startr.style/v1.1/swap.js`: the Cloudflare image rule sends a dotted first segment to image.startr.cloud (`/v1.3.2/` 302s), so narrow it first
   - [ ] After it is live: point `src/demo/swap/*.njk` at `/v1.1/swap.js`, and Trellis's `SWAP_SOURCE` at `/v1.1/swap.js` (drops its patched copy)
   - [ ] Decide whether the library re-creates inline `<script>` elements in a swapped region; the host workaround is `src/_includes/swap-host.njk` (kept: it still serves pages on `/v1/`)
   - [ ] Have AI-UI's `scripts/gates/startr-swap/check.py` compare its copy against `https://startr.style/v1.1/swap.js.sha256` so the two cannot drift silently.
@@ -97,8 +97,11 @@ are in `docs/board-dossiers.md`.
     - [x] 1.4.1 hotfix 2026-10-17 (tag v1.4.1, /style.css 931e22f…): 1.4.0's `button:hover` painted over a consumer's own reset (AI-UI's transparent icon buttons went solid primary); now `:where(button, …):hover`. Found by the regression run; `bun run probe:hover` in core is the gate
     - [x] 1.4.2 hotfix 2026-10-17 (tag v1.4.2, /style.css c10bda2…): 1.4.1 still outranked Tailwind's preflight; each hover selector now carries its base rule's specificity (`button:where(:hover)`); 0 unasked fills on AI-UI's real pages with the core's `probe:hover --sheet` before release
   - [ ] **Move the /style.min.css consumers to the current min after a visual check** (Sage.is, Startr.cloud): `HOLD_MIN ?= 1.3.2` in the Makefile keeps the drifted 1.3.2 min; the current min changes ~250 element rules for them. Empty HOLD_MIN once checked
+    - `probe:diff` 2026-10-18, live 1.3.2 min against the 1.5.0 min: Sage.is no change beyond its own noise; Startr.cloud 84 elements at 390 and 75 at 1280 (project titles 28 to 32px tall, some paragraphs rewrap shorter); screenshots sent to Alexander
   - Trap: a Netlify UI redirect of the shape `/:w.:h/*` sends any dotted first segment to `image.startr.cloud` (`/v1.3.2/style.min.css` answers 302 today). A real file should shadow it; verify with `curl -sI` after the first CSS snapshot deploys. Superseded 2026-10-16: the redirect is a Cloudflare rule, not Netlify, and real files do not shadow it (next line).
-  - [ ] [MANUALLY] **Narrow the Cloudflare image rule**: a redirect rule on the startr.style zone (not Netlify: no x-nf-request-id) sends dotted first segments to image.startr.cloud, and real files do not shadow it; /v1.3.2/ and /v1.4.0/ 302 (2026-10-16). Match numeric WxH only
+  - [ ] **Narrow the Cloudflare image rule**: a redirect rule on the startr.style zone (not Netlify: no x-nf-request-id) sends dotted first segments to image.startr.cloud, and real files do not shadow it; /v1.3.2/ and /v1.4.0/ 302 (2026-10-16). Match numeric WxH only
+    - [ ] [MANUALLY] Add a token scoped to the startr.style zone to the Agents vault as `cloudflare-startr-style` (Zone Read, Single Redirect Edit, Page Rules Edit); `cloudflare-startr-llc` cannot see this zone (checked 2026-10-18)
+    - [ ] [WE] Read the rule, exclude `/v…` paths (or match numeric sizes), verify `/v1.4.2/style.css` 200 and an image path still 302
   - [ ] **Ship pinned and rolling CDN versions**: Currently unversioned — any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path.
     - [x] Per-release pins: `make version_snapshot` wrote `/v1.3.2/`, `/v1.4.0/`, `/v1.4.1/`, `/v1.4.2/` under src/static (2026-10-16/17); served once the Cloudflare rule is narrowed
     - [ ] Publish `/v1/`, `/v2/`, and a rolling `/latest/`.
