@@ -14,15 +14,20 @@
 <h2 id="install">Install</h2>
 
 {% highlight "html" %}
-<script defer src="https://startr.style/v1/swap.js"
-        integrity="sha384-8Y08Zw/VDvaVCy/KtaWr74UVCwN9nFkiMksvlmcQyQVecrpdmPkOH84i4aaIN6DX"
+<script defer src="https://startr.style/v1.1/swap.js"
+        integrity="sha384-/r9AsVAT1hdM4Gnh+mBr87H2TByKjMe9SG2H8RYYvaD5rSY90Q9afydmOHxtGX6V"
         crossorigin="anonymous"></script>
 <main data-swap> ... </main>
 {% endhighlight %}
 
-<p><code>/v1/swap.js</code> is immutable and cached for a year. <code>/swap.js</code> is the rolling
+<p><code>/v1.1/swap.js</code> is immutable and cached for a year. <code>/swap.js</code> is the rolling
   build this site uses itself and carries no integrity guarantee. The sha256 is published at
-  <code>/v1/swap.js.sha256</code>.</p>
+  <code>/v1.1/swap.js.sha256</code>.</p>
+<p><code>/v1/swap.js</code> stays exactly as it shipped, so its integrity hash keeps matching, and it
+  keeps the old timing: under a View Transition <code>swap:after</code> fires before the new content
+  is in. A listener that reads the swapped content wants <code>/v1.1/</code> or later. Version 1.1
+  also adds a <code>License: MIT</code> line to the header and makes the comments ASCII-only, which
+  is why every pin changes.</p>
 
 <h2 id="markup">Markup</h2>
 <p>The API is three attributes and four events, and that is the whole thing.</p>
@@ -63,7 +68,9 @@
 <ul>
   <li><code>swap:before</code> — cancel to abandon the swap; the browser navigates normally.</li>
   <li><code>swap:navigate</code> — cancel to own the address bar yourself.</li>
-  <li><code>swap:after</code> — content is in.</li>
+  <li><code>swap:after</code> — content is in. From 1.1 on this holds under a View Transition
+    too: the event fires inside the transition's update callback, after the content, the title
+    and the history entry. <code>/v1/swap.js</code> fires it earlier.</li>
   <li><code>swap:error</code> — cancel to suppress the fallback navigation.</li>
 </ul>
 <p>Regions nest, so sub-swaps cost no syntax at all. A pager inside a region updates that region
@@ -89,13 +96,14 @@
   <li><strong>An inline <code>&lt;script&gt;</code> in a swapped region never runs.</strong> The
     library re-runs only <code>script[src]</code>. Re-create inline scripts from the host, as this
     site does in <code>src/_includes/swap-host.njk</code> with a MutationObserver.</li>
-  <li><strong>Under a View Transition, <code>swap:after</code> fires before the update callback has
-    run</strong>, so it may see the old content. Observe the region instead. Fix planned for
-    v1.1.</li>
+  <li><strong>On <code>/v1/swap.js</code>, under a View Transition, <code>swap:after</code> fires
+    before the update callback has run</strong>, so it sees the old content. Fixed in
+    <code>/v1.1/swap.js</code>. If you must stay on <code>/v1/</code>, observe the region with a
+    MutationObserver instead.</li>
 </ol>
 
 <h2 id="size">Size</h2>
-<p>13,802 bytes raw, 5,343 gzipped (as the gate measures it). htmx is 50,917 raw and 16,367 gzipped. The gate
+<p>13,748 bytes raw, 5,436 gzipped (as the gate measures it). htmx is 50,917 raw and 16,367 gzipped. The gate
   <code>scripts/gates/startr-swap/check.py</code> holds a ceiling of 8,192 gzipped.</p>
 
 <h2 id="demo">Demo</h2>

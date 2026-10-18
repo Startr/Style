@@ -212,6 +212,15 @@ swap_check:  ## Gate: swap.js names no application, stays under half of htmx gzi
 swap_teeth:  ## Prove the swap gate can fail
 	@python3 scripts/gates/startr-swap/check.py --self-test
 
+# swap:after must see the NEW content. Loads the demo pages (src/demo/swap) in headless
+# Chrome with the build under test, clicks a -> b -> a, and reads what the listener saw.
+# Needs Chrome and bun; SWAP=path tests another build (default src/static/swap.js).
+swap_timing:  ## Gate: swap:after sees the new content (headless Chrome, View Transitions)
+	@bun run scripts/gates/startr-swap/timing.ts --swap "$(or $(SWAP),src/static/swap.js)"
+
+swap_timing_teeth:  ## Prove the timing gate can fail: it must fail /v1/swap.js and pass swap.js
+	@bun run scripts/gates/startr-swap/timing.ts --self-test
+
 # Freeze src/static/swap.js as /v$(V)/swap.js. Refuses to overwrite.
 swap_snapshot:
 	@scripts/snapshot-swap.sh $(V)

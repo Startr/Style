@@ -20,11 +20,13 @@ Now with Print only `-pt` responsive utility shorthand!!!
 The first JavaScript this project ships: same-origin links and forms swap in
 place instead of reloading, wrapped in a CSS View Transition. One script tag
 and one word of markup. Docs and demo: [startr.style/docs/swap/](https://startr.style/docs/swap/).
-Consumers pin `/v1/swap.js` with an SRI hash; `/swap.js` is the rolling build.
+Consumers pin `/v1.1/swap.js` with an SRI hash; `/swap.js` is the rolling build. `/v1/swap.js` stays as shipped and keeps the old `swap:after` timing.
 
 ```bash
 make swap_check          # the library names no application, stays under half of htmx gzipped, pins intact
 make swap_teeth          # prove the gate can fail
+make swap_timing         # swap:after sees the new content (headless Chrome over the demo pages)
+make swap_timing_teeth   # prove it: fails /v1/swap.js, passes swap.js
 make swap_snapshot V=2   # freeze src/static/swap.js as /v2/swap.js (immutable)
 ```
 

@@ -1,15 +1,16 @@
 /*!
- * Startr Swap — swap links and forms in place, with no build step.
+ * Startr Swap -- swap links and forms in place, with no build step.
+ * License: MIT
  *
  * Drop it in, mark a region, and same-origin links stop reloading the page:
  *
  *   <script defer src="swap.js"></script>
- *   <main data-swap> … </main>
+ *   <main data-swap> ... </main>
  *
  * Lineage: htmz (MIT, (c) Lean Rada), whose hash-names-the-target convention this
  * keeps. The hidden iframe does not survive: an iframe performs a REAL
- * navigation, so scripts in the response execute inside it — in the wrong
- * document, silently — and every swap re-requests the page's stylesheets.
+ * navigation, so scripts in the response execute inside it -- in the wrong
+ * document, silently -- and every swap re-requests the page's stylesheets.
  * `fetch` + `DOMParser` parses inert, and reports a redirect honestly.
  *
  * MARKUP
@@ -20,7 +21,7 @@
  *                                    the one this control lives in.
  *   data-swap-off      on a control  never swap this one.
  *
- * EVENTS — on the region, bubbling, cancelable.
+ * EVENTS -- on the region, bubbling, cancelable.
  *   swap:before    cancel to abandon the swap; the browser navigates normally
  *   swap:navigate  cancel to own the address bar yourself
  *   swap:after     content is in
@@ -31,7 +32,7 @@
  * true this file has stopped being publishable.
  *
  * No [data-swap] in the document: it does nothing at all and every link
- * navigates. That is the correct answer, not a degraded one — see `region`.
+ * navigates. That is the correct answer, not a degraded one -- see `region`.
  */
 (function () {
 	var html = document.documentElement;
@@ -44,7 +45,7 @@
 	var owned = false;
 	var loaded = null;
 
-	// ── Finding the region ──────────────────────────────────────────────────
+	// -- Finding the region --------------------------------------------------
 
 	function root() {
 		return document.querySelector('[data-swap]');
@@ -53,7 +54,7 @@
 	/**
 	 * The region a control updates: what it names, else the one it lives in.
 	 *
-	 * `closest` is what makes sub-swaps free — a pager inside a region updates
+	 * `closest` is what makes sub-swaps free -- a pager inside a region updates
 	 * that region and leaves the rest of the page alone, declaring nothing.
 	 * `data-swap-target` covers only what `closest` cannot reach: a control that
 	 * lives OUTSIDE the region it updates, a search form above its own results.
@@ -61,8 +62,8 @@
 	 * THERE IS NO FALLBACK TO <main>, and that is a decision rather than an
 	 * omission. A one-word opt-in costs an author nothing and buys the property
 	 * that matters: this file governs only what it was handed. Any document can
-	 * end up running it — a host application that adopts a fetched page's
-	 * scripts adopts this one too — and a version that claimed `<main>` by
+	 * end up running it -- a host application that adopts a fetched page's
+	 * scripts adopts this one too -- and a version that claimed `<main>` by
 	 * default would then take over every link in a document that never asked
 	 * for it. That failure is silent and total.
 	 */
@@ -76,7 +77,7 @@
 	 * How to find this region again in the response.
 	 *
 	 * An id names one element in a document, so it is the only reliable answer
-	 * for a sub-swap — which is the whole reason a sub-swap region needs one.
+	 * for a sub-swap -- which is the whole reason a sub-swap region needs one.
 	 */
 	function selectorFor(dest) {
 		return dest.id ? '#' + CSS.escape(dest.id) : '[data-swap]';
@@ -96,7 +97,7 @@
 		return prefix ? url.pathname.indexOf(prefix) === 0 : true;
 	}
 
-	// ── Swapping ────────────────────────────────────────────────────────────
+	// -- Swapping ------------------------------------------------------------
 
 	function fire(el, name, detail) {
 		return el.dispatchEvent(
@@ -118,7 +119,7 @@
 	/**
 	 * Run the scripts the response declared.
 	 *
-	 * A <script> that arrives through DOMParser NEVER executes — the spec says
+	 * A <script> that arrives through DOMParser NEVER executes -- the spec says
 	 * so, and there is no error. Re-creating the element is the only way.
 	 *
 	 * The set is seeded from what the document already has, which is what stops
@@ -177,7 +178,7 @@
 		fetch(url, init)
 			.then(function (res) {
 				// res.url is the FINAL url. Landing outside scope means the server
-				// sent us somewhere else — a signed-out reader to a sign-in page.
+				// sent us somewhere else -- a signed-out reader to a sign-in page.
 				// That is an instruction to follow, not content to render, and it
 				// is checked BEFORE the status because the redirect target answers
 				// a perfectly good 200.
@@ -205,12 +206,12 @@
 
 				transition(function () {
 					// Snapshot before moving: childNodes is LIVE, and moving out of
-					// it while iterating skips every second node. Silent — you get
+					// it while iterating skips every second node. Silent -- you get
 					// half a region and no error.
 					dest.replaceChildren.apply(dest, Array.prototype.slice.call(next.childNodes));
 					// Only a swap of the document's own main content changed the
 					// page, so only that changes the title. A sub-swap did not.
-					// Neither did a region hosted inside somebody else's page —
+					// Neither did a region hosted inside somebody else's page --
 					// there the surrounding application owns the title, and taking
 					// it would make the tab flicker between two brandings.
 					if (dest === document.querySelector('main')) document.title = doc.title;
@@ -218,7 +219,7 @@
 					// A POST that REDIRECTED is Post/Redirect/Get: it finished
 					// somewhere else, and that somewhere is a plain address the
 					// reader can reload and share, so it belongs in history. A POST
-					// that answered in place does not — its address only accepts
+					// that answered in place does not -- its address only accepts
 					// POST, and putting it in history hands the reader a reload that
 					// 405s.
 					//
@@ -230,9 +231,13 @@
 						history.pushState(null, '', got.url);
 						owned = true;
 					}
+					// Still inside the transition's callback, which runs ASYNCHRONOUSLY
+					// once the old frame is captured. Fired after transition() returned,
+					// `swap:after` would reach its listeners before the content is in,
+					// and a listener that reads the new content would read the old.
+					adoptScripts(doc);
+					fire(dest, 'swap:after', { url: got.url });
 				});
-				adoptScripts(doc);
-				fire(dest, 'swap:after', { url: got.url });
 			})
 			.catch(function (err) {
 				// A swap that fails must never leave a dead page: fall back to what
@@ -241,11 +246,11 @@
 			});
 	}
 
-	// ── Taking over ─────────────────────────────────────────────────────────
+	// -- Taking over ---------------------------------------------------------
 	//
 	// Delegated on the document, which is why there is no re-enhancement step.
 	// Per-element wiring goes stale the moment a swap replaces the elements, and
-	// the page then quietly falls back to full reloads — working, no longer
+	// the page then quietly falls back to full reloads -- working, no longer
 	// smooth, and nobody files it.
 
 	document.addEventListener('click', function (e) {
@@ -268,14 +273,14 @@
 		// CAPTURE, and this is the difference between working and not.
 		//
 		// A single-page router binds its own document-level click listener when the
-		// application boots — long before this file is loaded, and certainly before
+		// application boots -- long before this file is loaded, and certainly before
 		// it is loaded by being adopted from a fetched page. Listeners on the same
 		// node fire in registration order, so in the bubble phase the router always
 		// wins: it takes the click, finds the address is not one of its routes, and
 		// falls back to a full page navigation. The region never sees it.
 		//
 		// Capture puts a declared region ahead of a generic router, which is the
-		// right precedence — an author who wrote `data-swap` on an element said
+		// right precedence -- an author who wrote `data-swap` on an element said
 		// what should happen to links inside it. Nothing is claimed that a region
 		// does not match, and every early return above happens BEFORE
 		// `preventDefault`, so a link this file declines is still the router's.
@@ -283,7 +288,7 @@
 
 	// Bubble, deliberately, unlike the click above. Nothing here competes for
 	// submits at the document level, while attribute-driven libraries bind them on
-	// the FORM — and an element listener runs after a document capture. Capturing
+	// the FORM -- and an element listener runs after a document capture. Capturing
 	// would take their submits away from them.
 	document.addEventListener('submit', function (e) {
 		if (e.defaultPrevented) return;
