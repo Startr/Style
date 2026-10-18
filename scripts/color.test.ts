@@ -19,6 +19,7 @@ import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
+import { contrast, resolve as resolveColor, token, tokens, type RGB } from "./wcag";
 
 const ROOT = resolve(import.meta.dir, "..");
 const CHROME = process.env.CHROME ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
@@ -130,6 +131,52 @@ describe("sources", () => {
     expect(tints.slice(0, tints.indexOf("@supports"))).not.toContain("color-mix(in oklch");
     expect(supports?.[2]).toContain(":root");
     expect(supports?.[2]).toContain("[data-theme]");
+  });
+});
+
+// --- text contrast ------------------------------------------------------------------
+
+// --text-bright is the secondary text colour, and it has to read: 4.5:1 on --background, the AA line
+// for body text. --text-muted is for disabled and decorative text, which WCAG exempts, and is allowed to
+// sit under it. The numbers come from variables.css itself, through the resolver in wcag.ts.
+
+const AA = 4.5;
+const ratio = (theme: "light" | "dark", name: string) => contrast(token(variables, theme, name), token(variables, theme, "--background"));
+
+describe("text contrast, from the source", () => {
+  test("the light --text-bright reaches AA on --background, with room to spare but not by much", () => {
+    const c = ratio("light", "--text-bright");
+    console.log(`light --text-bright on --background: ${c.toFixed(2)}:1`);
+    expect(c).toBeGreaterThanOrEqual(AA);
+    expect(c).toBeLessThan(5.5); // darker than that and it is --text-main with extra steps
+  });
+
+  test("the dark --text-bright reaches AA on the dark --background", () => {
+    expect(ratio("dark", "--text-bright")).toBeGreaterThanOrEqual(AA);
+  });
+
+  test("the order holds in both themes: --text-main, then --text-bright, then --text-muted", () => {
+    for (const theme of ["light", "dark"] as const) {
+      expect(ratio(theme, "--text-main")).toBeGreaterThan(ratio(theme, "--text-bright"));
+      expect(ratio(theme, "--text-bright")).toBeGreaterThan(ratio(theme, "--text-muted"));
+    }
+  });
+
+  test("the form text and the placeholder follow the two tokens", () => {
+    expect(tokens(variables, "light").get("--form-text")).toBe("var(--text-bright)");
+    expect(tokens(variables, "light").get("--form-placeholder")).toBe("var(--text-muted)");
+  });
+
+  test("teeth: the old 60% mix fails the same check", () => {
+    const map = tokens(variables, "light");
+    const old = resolveColor("color-mix(in srgb, var(--black) 60%, var(--white) 40%)", map);
+    const c = contrast(old, token(variables, "light", "--background"));
+    expect(c).toBeLessThan(AA);
+    expect(c).toBeGreaterThan(3.9);
+  });
+
+  test("--text-muted is documented as the disabled and decorative colour", () => {
+    expect(variables).toMatch(/--text-muted is for disabled and decorative text/);
   });
 });
 
@@ -405,6 +452,18 @@ describe.skipIf(!HAVE_CHROME)("in headless Chrome", () => {
       test("animating --tone animates the colour", () => {
         expect(R.anim.tone).toBe("50");
         expect(dist(R.anim.helper, R.anim.ref)).toBeLessThan(TIGHT);
+      });
+
+      test("the text tokens, painted: --text-bright is AA on --background in both themes", () => {
+        for (const theme of ["light", "dark"] as const) {
+          const C = R.contrast[theme];
+          const painted = contrast(C["text-bright"] as RGB, C.background as RGB);
+          expect(painted).toBeGreaterThanOrEqual(AA);
+          // The browser and the source resolver agree to within 8-bit rounding (min.css rounds the base colours).
+          const fromSource = ratio(theme, "--text-bright");
+          expect(Math.abs(painted - fromSource) / fromSource).toBeLessThan(0.02);
+          expect(contrast(C["text-main"] as RGB, C.background as RGB)).toBeGreaterThan(painted);
+        }
       });
     });
   }

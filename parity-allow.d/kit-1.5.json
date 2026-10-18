@@ -1,0 +1,54 @@
+[
+  {
+    "kind": "changed",
+    "selector": "^:root$",
+    "media": "^$",
+    "prop": "^--text-bright$",
+    "value": "64%",
+    "reason": "Kit 1.5.0. The light --text-bright mixes 64% --black into --white instead of 60%: 4.67:1 on --background, over the 4.5:1 AA line (P's was about 4.1:1, a Lighthouse failure on Trellis). It also darkens --form-text, which reads it. The dark value and --text-muted are unchanged. scripts/color.test.ts computes the contrast from the source and from the built sheet."
+  },
+  {
+    "kind": "extra",
+    "selector": "^:root$",
+    "media": "^$",
+    "prop": "^--button-text$",
+    "reason": "Kit 1.5.0. New token: the text colour on a filled button, var(--color-7). It is the base white, which the dark block does not touch, so button text stays light in both themes. P read var(--white) there, and the dark block turns --white near-black (about 1.5:1 on --primary). Override per element with --btn-c."
+  },
+  {
+    "kind": "changed",
+    "selector": "^(button|\\.button|input\\[type=\"(submit|button|reset)\"\\])$",
+    "media": "^$",
+    "prop": "^color$",
+    "reason": "Kit 1.5.0. The button's default text reads var(--btn-c, var(--button-text)) instead of var(--btn-c, var(--white)). In light mode the colour is the same white. In dark mode it stays white instead of following --white to near-black. --btn-c overrides (.white, .grey, .transparent, .black) still win. scripts/button-text.test.ts holds both themes."
+  },
+  {
+    "kind": "changed",
+    "selector": "^\\.outline:(hover|focus|active)$",
+    "media": "^$",
+    "prop": "^color$",
+    "reason": "Kit 1.5.0. The filled state of .outline uses the same text token as the button (var(--btn-c, var(--button-text))), so it stays white on --primary in dark mode instead of near-black."
+  },
+  {
+    "kind": "extra",
+    "selector": "^\\.black$",
+    "media": "^$",
+    "prop": "^--btn-c$",
+    "reason": "Kit 1.5.0. .black is the one fill that flips with the theme (--black is light grey in dark mode), so its button text keeps flipping too: --btn-c is var(--white), which is white on black in light mode and near-black on light grey in dark mode, exactly what P's fallback gave. Without it the new non-inverting default would put white text on light grey."
+  },
+  {
+    "kind": "missing",
+    "selector": "^svg$",
+    "media": "^$",
+    "prop": "^height$",
+    "value": "^1\\.2em$",
+    "reason": "Kit 1.5.0. svg no longer sets a height itself: an svg that carries a height attribute keeps it, so icons shrink with a small --size instead of being forced to 1.2em. The 1.2em height moved to svg:where(:not([height]))."
+  },
+  {
+    "kind": "extra",
+    "selector": "^svg:where\\(:not\\(\\[height\\]\\)\\)$",
+    "media": "^$",
+    "prop": "^height$",
+    "value": "^1\\.2em$",
+    "reason": "Kit 1.5.0. The 1.2em svg height now applies only to an svg without a height attribute. :where() holds the specificity at one element, as P's svg rule had, so a consumer's own `svg { height }` still wins by order (a bare svg:not([height]) would outrank it)."
+  }
+]

@@ -10,7 +10,9 @@
     "parity": "bun run scripts/parity.ts",
     "test": "bun test scripts",
     "ingest": "bun run scripts/ingest.ts",
-    "probe:hover": "bun run scripts/hover-probe.ts"
+    "probe:hover": "bun run scripts/hover-probe.ts",
+    "probe:tap": "bun run scripts/tap-probe.ts",
+    "probe:diff": "bun run scripts/diff-probe.ts"
   },
   "repository": {
     "type": "git",

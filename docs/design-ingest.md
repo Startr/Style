@@ -152,7 +152,7 @@ Then:
 
 | The draft has | Write it as |
 | --- | --- |
-| A grey, ink or hairline | A token (`--text-main`, `--text-bright`, `--text-muted`, `--border`) or `--tone:N`. `--tone:N` mixes N percent of `--tone-of` (default `--text-main`) into `--background`. Low N is pale and high N is dark. It follows dark mode. |
+| A grey, ink or hairline | A token (`--text-main`, `--text-bright`, `--text-muted`, `--border`) or `--tone:N`. `--tone:N` mixes N percent of `--tone-of` (default `--text-main`) into `--background`. Low N is pale and high N is dark. It follows dark mode. `--text-bright` is secondary text people read (4.5:1 on `--background` since 1.5.0). `--text-muted` is for disabled and decorative text only (about 2.4:1). |
 | A pale tint of the brand or of a status colour | `--primary-tint`, `--good-bg`, `--warn-bg`, `--bad-bg`, or `--tone:8; --tone-of:var(--green)` |
 | Any cell of the 6x6x6 colour cube | `--mix:RGB`, an integer of three digits, each 0 to 5 |
 | A surface, an accent or a status colour | `--background` or `--background-alt`. `--primary` or `--secondary`. `--green`, `--orange` or `--red` |
@@ -163,7 +163,7 @@ Then:
 - Keep fonts self-hosted. Never load a face from another origin. Map the draft's face to `--font-sans` or `--font-mono` first. A face the kit lacks goes to Alexander as a branding decision [MANUALLY].
 - Set a button's hover colour once with `--button-hover`, on `:root` or on any ancestor. Every button below it takes that colour on hover. Unset, hover keeps the button's own background.
 - Tokens flip with `[data-theme="dark"]`, so a page that uses tokens needs no dark-mode rules of its own. Dark mode keeps the published 1.x values.
-- `--white` and `--black` flip in dark mode. For a white or black that never flips, use the base tokens `--color-7` and `--color-0`. Text on `--primary` wants `--color-7`.
+- `--white` and `--black` flip in dark mode. For a white or black that never flips, use the base tokens `--color-7` and `--color-0`. Text on `--primary` wants `--color-7`. A button's text already reads it: `--button-text` is `--color-7`, so button text stays white in both themes. Override it with `--btn-c` on one button or `--button-text` on a subtree.
 - `--mixed` and `--toned` need `color-mix()` and `@property` (Safari 16.4, Firefox 128). `--mixed` also needs `round()` and `mod()` (Chrome 125). Where those are missing, the variable is invalid and the `var()` fallback applies.
 - Always write a fallback: `var(--toned, #hex)`. Prefer a nearby token when it gives the same look, such as `var(--toned, var(--text-muted))`. Otherwise use the hex the formula gives. This fallback is the one place a literal hex may sit in a template.
 - Give every element that reads `--toned` or `--mixed` its own `--tone` or `--mix`. The variables are registered with `inherits:false`. A browser without `@property` lets them inherit instead, so never rely on inheritance.
@@ -202,7 +202,7 @@ Then:
   2. Parity: `bun run parity` prints `PARITY OK`.
   3. Manifest test: `props.json` and the sheet agree both ways, with no new collision and no warnings.
   4. Band test: every state rule keeps its band's specificity, shape and source order.
-  5. Browser tests: states, motion, colour and button-hover, in headless Chrome.
+  5. Browser tests: states, motion, colour, button-hover, button-text and svg-height, in headless Chrome. The probe scripts (tap-probe, diff-probe) have their own tests, with a local server.
   6. Size budget: the gzip size the build prints.
 - [WE] Parity details:
   - A purely additive rule needs no entry. That means a new rule whose selectors all end in a `[style*="--x:"]` attribute selector, a new `@keyframes` or `@property`, or a new `:root` custom property.
@@ -307,6 +307,11 @@ becomes `--t:translateX(100%); --t-md:none`. The 719px breakpoint snaps to 768px
 - Check a parent that is on.
 - Check reduced motion by emulating `prefers-reduced-motion: reduce`.
 - Check the page with JS off in a real browser.
+- Run the probes against the real page. Each takes seconds and each can read a candidate sheet with `--sheet FILE` (served wherever the page loads the kit from startr.style; `probe:diff` also takes `--match REGEX` for a vendored kit):
+  - `bun run probe:hover <url> [--login email:password]` forces `:hover` on every button and flags a transparent one that paints without asking. Exit 1 when something is flagged.
+  - `bun run probe:tap <url> <selector> --expect <css selector>` taps once on a phone viewport with real touch input and checks that `--expect` matches. Exit 1 means the page needs a second tap.
+  - `bun run probe:diff <url> --sheet <candidate.css> [--base <base.css>] [--widths 390,1280] [--shots DIR]` loads the page with the live kit and with the candidate, and lists the elements whose box moved or resized by more than 1px, or whose colour, font-size or display changed. `--max N` makes it a gate. A page that moves on its own (a carousel, a clock) shows up as noise: run the base against itself to see how much.
+  - `--login` signs in the AI-UI way. `--cookie name=value` sets a cookie before the load, for a Django session.
 - Use `test/fixtures/states.html`, `motion.html` and `color.html` as models.
 - Use `scripts/cdp.ts` as the harness. It has `launch`, `newPage`, `setViewport`, `forcePseudoState`, `press`, `hover`, `click`, `style`, `eval` and `send`.
 - Startr/Style runs axe accessibility audits on its own pages.
@@ -388,6 +393,11 @@ Footguns:
 - The effect helpers' hover twins (`--shadow-hover`, `--levitate-hover`, the `--translate-hover` family) are not `!important`, so a `--boxs` or `--t` on the same element wins and the hover never shows. Workaround: do not mix the two families on one element. Fix: a lint, on core's `TODO.md`.
 - `--x-in-on` never fires under `:checked`: inputs have no children. Workaround: put `--x-on` on the input itself, or make the state an attribute on a parent (`data-on`).
 - `--gutter-sm` to `--gutter-xl` are never defined, so the `.wrapper` tier gutters do nothing. Workaround: set the padding with `--px` and its tiers. Fix: on core's `TODO.md`.
+- `--inset` takes ONE value and writes it to all four sides; it is not CSS's four-value `inset` shorthand, and it has no tiers. `--inset:auto 0 0 0` is invalid and dropped, so a fixed element stays at its static position. Workaround: `--top`, `--right`, `--bottom`, `--left`, which take values and tiers. Fix: a four-value form, or a lint on multi-value `--inset`, on core's `TODO.md`.
+- The kit's root font-size is 15px, so `rem` geometry drifts from a script's px: `4.75rem` is 71px, not 76. Write a component's geometry in the unit its script uses.
+- Before kit 1.5.0 the kit sized every `svg` at `height: 1.2em`, over the element's own `height` attribute. Under a small `--size` an icon shrank with the label: a 22px icon beside a `.68rem` label rendered at 12px. Since 1.5.0 the rule is `svg:where(:not([height]))`, so an svg with a `height` attribute keeps it. On an older pinned kit, put `--h:22px` on the icon.
+- The kit dresses `<details>` as a card (margin, border, background, side padding) and `<summary>` as a button (background, padding, border, `width:100%`, `outline:none`). A disclosure that is neither resets both: `--m:0; --b:0; --bg:transparent; --radius:0`, plus `--px:0` on the details and `--p:0` on the summary. The state prop `--oe-focus` still wins over that `outline:none`.
+- An overlay above a control eats its taps: a decorative element with no `--pe:none` is what `elementFromPoint` returns, and `closest("a")` finds nothing. Every decorative overlay gets `--pe:none`.
 
 ## Commands cheat-sheet
 

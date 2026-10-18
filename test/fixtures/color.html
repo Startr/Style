@@ -264,6 +264,22 @@
     return out;
   });
 
+  // 10. The text tokens against --background, in both themes, as 8-bit pixels. The test turns
+  //     them into WCAG contrast and checks the source says the same.
+  section("contrast", () => {
+    const read = () => {
+      const bg = bgOf(mk("background-color:var(--background)"));
+      const out = { background: px(bg, "#fff") };
+      for (const name of ["text-main", "text-bright", "text-muted"]) out[name] = px(cs(mk(`color:var(--${name})`)).color, bg);
+      return out;
+    };
+    const C = { light: read() };
+    html.setAttribute("data-theme", "dark");
+    C.dark = read();
+    html.removeAttribute("data-theme");
+    return C;
+  });
+
   document.getElementById("results").textContent = JSON.stringify(R);
 })();
 </script>

@@ -62,7 +62,7 @@ details > summary,
 
 .outline:hover, .outline:focus, .outline:active {
   box-shadow: none;
-  color: var(--btn-c, var(--white));
+  color: var(--btn-c, var(--button-text));
   background-color: var(--element-bg, var(--primary));
 }
 
@@ -119,7 +119,7 @@ input[type="reset"] {
 
   background-color: var(--element-bg, var(--primary));
   line-height: inherit;
-  color: var(--btn-c, var(--white));
+  color: var(--btn-c, var(--button-text));
   box-shadow: var(--button-shadow);
 }
 
