@@ -78,11 +78,16 @@ if [ -n "$LIVE_P" ] && [ "$DEST_P" = "$LIVE_P" ] && { [ -e "$DEST/style.css" ] |
 
 	# The snapshot must be the release, not a copy of some later build.
 	if git rev-parse -q --verify "refs/tags/v$VERSION" >/dev/null 2>&1; then
+		# The hold that was in force when v$VERSION was cut, read from that tag's
+		# Makefile: emptying HOLD_MIN later must not make an older held release
+		# look like a lie. An explicit HOLD_MIN still overrides.
+		held_then=$(git show "v$VERSION:Makefile" 2>/dev/null | sed -n 's/^HOLD_MIN ?= *//p')
+		hold="${HOLD_MIN:-$held_then}"
 		for f in style.css style.min.css; do
 			src="$f"
-			# While the rolling min is held (HOLD_MIN), a release pins its current
-			# min, which it shipped as startr.css.
-			if [ "$f" = style.min.css ] && [ -n "${HOLD_MIN:-}" ] && [ "$VERSION" != "$HOLD_MIN" ] &&
+			# While the rolling min is held, a release pins its current min, which
+			# it shipped as startr.css.
+			if [ "$f" = style.min.css ] && [ -n "$hold" ] && [ "$VERSION" != "$hold" ] &&
 				git cat-file -e "v$VERSION:$LIVE/startr.css" 2>/dev/null; then
 				src=startr.css
 			fi
