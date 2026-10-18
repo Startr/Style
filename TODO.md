@@ -74,7 +74,7 @@ are in `docs/board-dossiers.md`.
   - The home page declares no region (its hero sits outside `<main>`); the logo and Introduction links carry `data-swap-off`. `index.njk` no longer waits for `DOMContentLoaded`.
   - Proven headless (Chrome over CDP, 2026-09-05): sentinel survives docs-to-docs swaps and Back, inline `liveprop` re-runs, home and demo `none.html` navigate normally, no console errors.
 
-- [ ] **🔧 v1.1 — first changes at the new source of truth.** #library — merged to develop (faa4f55), snapshotted as `/v1.1/swap.js`, not released
+- [ ] **🔧 v1.1 — first changes at the new source of truth.** #library — released in v1.5.0 (2026-10-18); `/v1.1/` serves once the Cloudflare rule is narrowed
   - [x] `swap:after` and `adoptScripts` now run inside the `transition(run)` callback, after the DOM replace and `pushState` (Trellis's patch, minus its header note)
     - `make swap_timing` (`scripts/gates/startr-swap/timing.ts`): headless Chrome over the demo pages, a -> b -> a, the `swap:after` listener must read the destination's content
     - `make swap_timing_teeth`: fails `/v1/swap.js` (reads "A" going to B), passes `src/static/swap.js`
@@ -82,7 +82,7 @@ are in `docs/board-dossiers.md`.
   - [x] `License: MIT` line in the `/*!` header
   - [x] ASCII-only comments: 173 `─`, 18 em dashes and one `…` replaced; raw 13,802 to 13,748 B net (the ASCII saves about 365 B; the licence line and the timing comment add about 310), gzip 5,343 to 5,436 B, ceiling 8,192
   - [x] `make swap_snapshot V=1.1`: `src/static/v1.1/swap.js`, sha256 `8a4f07ee8f4b8286e7a254cecd482227550957c540c5e633395ccbcfe7b191bc`, SRI `sha384-/r9AsVAT1hdM4Gnh+mBr87H2TByKjMe9SG2H8RYYvaD5rSY90Q9afydmOHxtGX6V`; `src/docs/swap.njk` names it and says `/v1/` keeps the old timing
-  - [ ] [WE] Ship it in the next release and `curl -sI https://startr.style/v1.1/swap.js`: the Cloudflare image rule sends a dotted first segment to image.startr.cloud (`/v1.3.2/` 302s), so narrow it first
+  - [x] Shipped in v1.5.0 (2026-10-18): `/swap.js` serves 1.1 (sha256 `8a4f07ee…`); `/v1.1/swap.js` is deployed but 302s to the image server until the Cloudflare rule is narrowed (card above)
   - [ ] After it is live: point `src/demo/swap/*.njk` at `/v1.1/swap.js`, and Trellis's `SWAP_SOURCE` at `/v1.1/swap.js` (drops its patched copy)
   - [ ] Decide whether the library re-creates inline `<script>` elements in a swapped region; the host workaround is `src/_includes/swap-host.njk` (kept: it still serves pages on `/v1/`)
   - [ ] Have AI-UI's `scripts/gates/startr-swap/check.py` compare its copy against `https://startr.style/v1.1/swap.js.sha256` so the two cannot drift silently.

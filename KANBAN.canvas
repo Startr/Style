@@ -563,10 +563,10 @@
           "text": "`make swap_snapshot V=1.1`: `src/static/v1.1/swap.js`, sha256 `8a4f07ee8f4b8286e7a254cecd482227550957c540c5e633395ccbcfe7b191bc`, SRI `sha384-/r9AsVAT1hdM4Gnh+mBr87H2TByKjMe9SG2H8RYYvaD5rSY90Q9afydmOHxtGX6V`; `src/docs/swap.njk` names it and says `/v1/` keeps the old timing"
         },
         {
-          "checked": false,
+          "checked": true,
           "line_num": 85,
           "tags": [],
-          "text": "[WE] Ship it in the next release and `curl -sI https://startr.style/v1.1/swap.js`: the Cloudflare image rule sends a dotted first segment to image.startr.cloud (`/v1.3.2/` 302s), so narrow it first"
+          "text": "Shipped in v1.5.0 (2026-10-18): `/swap.js` serves 1.1 (sha256 `8a4f07ee\u2026`); `/v1.1/swap.js` is deployed but 302s to the image server until the Cloudflare rule is narrowed (card above)"
         },
         {
           "checked": false,
@@ -589,11 +589,11 @@
       ],
       "file_path": "TODO.md",
       "height": 80,
-      "id": "3dc632822bcb18d0",
+      "id": "ef43395caa18817b",
       "line_num": 77,
       "source": "todo_md",
       "tags": [],
-      "text": "**\ud83d\udd27 v1.1 \u2014 first changes at the new source of truth. #library \u2014 merged to develop (faa4f55), snapshotted as `/v1.1/swap.js`, not released**\n- [x] `swap:after` and `adoptScripts` now run inside the `transition(run)` callback, after the DOM replace and `pushState` (Trellis's patch, minus its header note)\n- [x] `License: MIT` line in the `/*!` header\n- [x] ASCII-only comments: 173 `\u2500`, 18 em dashes and one `\u2026` replaced; raw 13,802 to 13,748 B net (the ASCII saves about 365 B; the licence line and the timing comment add about 310), gzip 5,343 to 5,436 B, ceiling 8,192\n- [x] `make swap_snapshot V=1.1`: `src/static/v1.1/swap.js`, sha256 `8a4f07ee8f4b8286e7a254cecd482227550957c540c5e633395ccbcfe7b191bc`, SRI `sha384-/r9AsVAT1hdM4Gnh+mBr87H2TByKjMe9SG2H8RYYvaD5rSY90Q9afydmOHxtGX6V`; `src/docs/swap.njk` names it and says `/v1/` keeps the old timing\n- [ ] [WE] Ship it in the next release and `curl -sI https://startr.style/v1.1/swap.js`: the Cloudflare image rule sends a dotted first segment to image.startr.cloud (`/v1.3.2/` 302s), so narrow it first\n- [ ] After it is live: point `src/demo/swap/*.njk` at `/v1.1/swap.js`, and Trellis's `SWAP_SOURCE` at `/v1.1/swap.js` (drops its patched copy)\n- [ ] Decide whether the library re-creates inline `<script>` elements in a swapped region; the host workaround is `src/_includes/swap-host.njk` (kept: it still serves pages on `/v1/`)\n- [ ] Have AI-UI's `scripts/gates/startr-swap/check.py` compare its copy against `https://startr.style/v1.1/swap.js.sha256` so the two cannot drift silently.\n\n`TODO.md:L77`",
+      "text": "**\ud83d\udd27 v1.1 \u2014 first changes at the new source of truth. #library \u2014 released in v1.5.0 (2026-10-18); `/v1.1/` serves once the Cloudflare rule is narrowed**\n- [x] `swap:after` and `adoptScripts` now run inside the `transition(run)` callback, after the DOM replace and `pushState` (Trellis's patch, minus its header note)\n- [x] `License: MIT` line in the `/*!` header\n- [x] ASCII-only comments: 173 `\u2500`, 18 em dashes and one `\u2026` replaced; raw 13,802 to 13,748 B net (the ASCII saves about 365 B; the licence line and the timing comment add about 310), gzip 5,343 to 5,436 B, ceiling 8,192\n- [x] `make swap_snapshot V=1.1`: `src/static/v1.1/swap.js`, sha256 `8a4f07ee8f4b8286e7a254cecd482227550957c540c5e633395ccbcfe7b191bc`, SRI `sha384-/r9AsVAT1hdM4Gnh+mBr87H2TByKjMe9SG2H8RYYvaD5rSY90Q9afydmOHxtGX6V`; `src/docs/swap.njk` names it and says `/v1/` keeps the old timing\n- [x] Shipped in v1.5.0 (2026-10-18): `/swap.js` serves 1.1 (sha256 `8a4f07ee\u2026`); `/v1.1/swap.js` is deployed but 302s to the image server until the Cloudflare rule is narrowed (card above)\n- [ ] After it is live: point `src/demo/swap/*.njk` at `/v1.1/swap.js`, and Trellis's `SWAP_SOURCE` at `/v1.1/swap.js` (drops its patched copy)\n- [ ] Decide whether the library re-creates inline `<script>` elements in a swapped region; the host workaround is `src/_includes/swap-host.njk` (kept: it still serves pages on `/v1/`)\n- [ ] Have AI-UI's `scripts/gates/startr-swap/check.py` compare its copy against `https://startr.style/v1.1/swap.js.sha256` so the two cannot drift silently.\n\n`TODO.md:L77`",
       "type": "text",
       "width": 280,
       "x": 360,
