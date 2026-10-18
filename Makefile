@@ -164,10 +164,11 @@ style_core_push:
 #
 #   make core_publish CORE=../WEB-startr.style.core DEST=/tmp/out DATA=/tmp/out
 CORE ?= $(STYLE_CORE_PREFIX)
-# The rolling /style.min.css keeps this version's bytes until Sage.is and
-# Startr.cloud are checked against the current min (they load the min; the
-# 1.3.2 min had drifted from style.css). Empty it to let the min move.
-HOLD_MIN ?= 1.3.2
+# Set to a version to keep /style.min.css at that version's bytes while its
+# consumers (Sage.is, Startr.cloud load the min) are checked. Empty since
+# 2026-10-18: Alexander passed the probe:diff screenshots of Startr.cloud on
+# the 1.5.0 min, and Sage.is showed no change.
+HOLD_MIN ?=
 DEST ?= src/static
 DATA ?= src/_data
 
