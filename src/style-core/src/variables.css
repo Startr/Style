@@ -54,8 +54,16 @@
   --background-alt: color-mix(in srgb, var(--white) 85%, var(--primary) 35%);
   --selection: color-mix(in srgb, var(--grey) 60%, var(--black) 40%);
   --text-main: var(--black);
-  --text-bright: color-mix(in srgb, var(--black) 60%, var(--white) 40%);
+  /* --text-bright is secondary text that people have to read: 4.67:1 on --background, over the 4.5:1 AA
+     line for body text (scripts/color.test.ts computes it, from this file and from the built sheet).
+     --text-muted is for disabled and decorative text only: it is about 2.4:1 on white, and WCAG exempts
+     only that kind of text. For text that carries meaning, use --text-bright. */
+  --text-bright: color-mix(in srgb, var(--black) 64%, var(--white) 36%);
   --text-muted: color-mix(in srgb, var(--black) 40%, var(--white) 60%);
+  /* Text on a filled button. The fills (--primary and the colour classes) are mid and dark tones in both
+     themes, so this is the base white and does not follow --white into dark mode. A button overrides it
+     with --btn-c (.white, .grey, .transparent and .black do). */
+  --button-text: var(--color-7);
   --links: var(--primary);
   --focus: color-mix(in srgb, var(--blue) 35%, var(--background) 65%);
   --border: color-mix(in srgb, var(--black) 20%, var(--white) 80%);

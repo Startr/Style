@@ -20,12 +20,17 @@ footer {
   color: var(--text-muted);
 }
 
+/* An svg that carries a height attribute keeps it; the rest are 1.2em tall. :where() holds the height rule
+   at one element of specificity, as `svg` had it, so a consumer's own `svg { height }` still wins by order. */
 svg {
   display: inline-block;
   font-size: inherit;
-  height: 1.2em;
   vertical-align: -.2em;
   overflow: visible;
+}
+
+svg:where(:not([height])) {
+  height: 1.2em;
 }
 
 figure {
