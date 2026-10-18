@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_from": {"file":"startr.css","sha256":"c10bda2d5e9fa828e5f437d8f727d6694a1f8069ef2150d76c37d98925a8160c"},
+  "generated_from": {"file":"startr.css","sha256":"0d8693035254943b0f2d4517e6cbfb5bc104c5cb7712d191bdacecf787b8efe4"},
   "breakpoints": {"xs":440,"sm":640,"md":768,"lg":1024,"xl":1280},
   "props": {
     "--ac": {"properties":["align-content"],"kind":"prop","tiers":["sm","md","lg","xl","pt"],"states":[]},
@@ -184,6 +184,7 @@
     "--border": {"type":"color"},
     "--border-radius": {"type":"length"},
     "--button-shadow": {"type":"other"},
+    "--button-text": {"type":"color"},
     "--code": {"type":"color"},
     "--color-0": {"type":"color"},
     "--color-1": {"type":"color"},

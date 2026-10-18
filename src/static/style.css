@@ -35,8 +35,9 @@
   --background-alt: color-mix(in srgb, var(--white) 85%, var(--primary) 35%);
   --selection: color-mix(in srgb, var(--grey) 60%, var(--black) 40%);
   --text-main: var(--black);
-  --text-bright: color-mix(in srgb, var(--black) 60%, var(--white) 40%);
+  --text-bright: color-mix(in srgb, var(--black) 64%, var(--white) 36%);
   --text-muted: color-mix(in srgb, var(--black) 40%, var(--white) 60%);
+  --button-text: var(--color-7);
   --links: var(--primary);
   --focus: color-mix(in srgb, var(--blue) 35%, var(--background) 65%);
   --border: color-mix(in srgb, var(--black) 20%, var(--white) 80%);
@@ -248,7 +249,7 @@ details > summary,
 
 .outline:hover, .outline:focus, .outline:active {
   box-shadow: none;
-  color: var(--btn-c, var(--white));
+  color: var(--btn-c, var(--button-text));
   background-color: var(--element-bg, var(--primary));
 }
 
@@ -305,7 +306,7 @@ input[type="reset"] {
 
   background-color: var(--element-bg, var(--primary));
   line-height: inherit;
-  color: var(--btn-c, var(--white));
+  color: var(--btn-c, var(--button-text));
   box-shadow: var(--button-shadow);
 }
 
@@ -524,9 +525,12 @@ footer {
 svg {
   display: inline-block;
   font-size: inherit;
-  height: 1.2em;
   vertical-align: -.2em;
   overflow: visible;
+}
+
+svg:where(:not([height])) {
+  height: 1.2em;
 }
 
 figure {
@@ -716,6 +720,7 @@ mark {
 .black {
   --text-c: var(--black);
   --element-bg: var(--black);
+  --btn-c: var(--white);
 }
 
 .transparent {
