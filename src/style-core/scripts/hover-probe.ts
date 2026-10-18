@@ -52,6 +52,11 @@ let served = 0;
 try {
   const page = await chrome.newPage();
   await page.setViewport(width, 900);
+  // Loaded, fonts in, and the page's buttons steady for 750 ms: a single-page
+  // app keeps rendering after load, and a probe that reads too early counts
+  // a fraction of the buttons.
+  const stable = `new Promise(r => { let last = -1, same = 0; const t = setInterval(() => { const n = document.querySelectorAll('button, .button, input[type="submit"], input[type="button"]').length; if (n === last) { if (++same >= 3) { clearInterval(t); r(n); } } else { same = 0; last = n; } }, 250); setTimeout(() => { clearInterval(t); r(last); }, 8000); })`;
+  const ready = async () => { await page.eval(settled); await page.eval(stable); };
 
   if (sheet) {
     const body = readFileSync(sheet).toString("base64");
@@ -78,7 +83,7 @@ try {
   }
 
   await page.goto(url);
-  await page.eval(settled);
+  await ready();
 
   if (login) {
     const [email, password] = login.split(":", 2);
@@ -93,7 +98,7 @@ try {
       process.exit(2);
     }
     await page.goto(url);
-    await page.eval(settled);
+    await ready();
   }
 
   if (sheet && served === 0) {

@@ -45,6 +45,8 @@
 .black {
   --text-c: var(--black);
   --element-bg: var(--black);
+  /* --black flips to a light grey in dark mode, so its button text flips with --white as before. */
+  --btn-c: var(--white);
 }
 
 .transparent {
