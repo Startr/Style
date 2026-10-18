@@ -1,5 +1,23 @@
 # Release Notes
 
+## Version 1.5.0 - 2026-10-18
+
+### ✨ New Features & Enhancements
+
+*   **Startr Swap 1.1** at `/v1.1/swap.js` (pinned, with SRI): `swap:after` now fires once the new content is in, and the scripts a response declares load then too. Under a View Transition, 1.0 fired the event before the update ran, so a listener read the old page; in Trellis a phone needed two taps to open a pane. `/v1/` keeps the old timing; the rolling `/swap.js` is 1.1. `make swap_timing` fails 1.0 and passes 1.1. The header now says MIT and the comments are ASCII.
+*   **Two release probes in the core**: `bun run probe:tap` taps once on a phone-sized page and checks the result; `bun run probe:diff --sheet` lists every element a candidate sheet moves, resizes or recolours on a real page.
+
+### 🐛 Bug Fixes
+
+*   **Readable secondary text**: `--text-bright` now reaches 4.67:1 on white, above the 4.5:1 AA line (it was 4.1:1). Form text reads it, so it darkens a shade. `--text-muted` stays for disabled and decorative text.
+*   **Icons keep their size**: `svg { height: 1.2em }` now applies only to an svg with no height attribute, at the same specificity as before.
+*   **Button text in dark mode**: buttons read `--button-text`, white in both themes. They read `--white`, which goes near-black in dark mode, so button text was about 1.5:1 on `--primary`. A `.black` button still flips with the theme.
+*   **The min moves**: `/style.min.css` now serves the current min instead of 1.3.2's drifted bytes. Checked on Sage.is and Startr.cloud with `probe:diff` before release.
+
+### Note
+
+*   `/v1.5.0/` and `/v1.1/swap.js` deploy with this release. A Cloudflare redirect still sends dotted first segments to the image server; they serve once that rule is narrowed.
+
 ## Version 1.4.2 - 2026-10-17
 
 ### 🐛 Bug Fixes
