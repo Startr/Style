@@ -56,13 +56,13 @@ are in `docs/board-dossiers.md`.
   - `swap.js` is 13,802 bytes raw / 5,343 gzipped; htmx is 50,917 / 16,367. Ceiling: 8,192 gzipped, half of htmx.
   - The gate also holds every `src/static/v*/swap.js` to its `.sha256`, and `make release` depends on it. Self-test proves all four checks can fail.
 
-- [ ] **📦 Publish `/v1/swap.js` (pinned, SRI) and `/swap.js` (rolling)** — in the tree, live once `v1.3.3` deploys. #versioning #security
+- [x] **📦 Publish `/v1/swap.js` (pinned, SRI) and `/swap.js` (rolling)** — live; verified 2026-10-18 (filed to ship as `v1.3.3`). #versioning #security
   - `make swap_snapshot V=1` wrote `src/static/v1/swap.js` + `swap.js.sha256`; `netlify.toml` gives `/v*/*` `Cache-Control: public, max-age=31536000, immutable`.
   - SRI: `sha384-8Y08Zw/VDvaVCy/KtaWr74UVCwN9nFkiMksvlmcQyQVecrpdmPkOH84i4aaIN6DX`.
   - Sage.is AI-UI keeps serving its own copy (zero third-party requests, nothing to 5xx); the CDN build is for everyone else.
-  - [ ] [MANUALLY] `make patch_release` then `make release_finish` (v1.3.3); confirm Netlify deploys `master`.
-  - [ ] [WE] `curl -sI https://startr.style/v1/swap.js`: 200, `max-age=31536000, immutable`, `access-control-allow-origin: *`; body sha256 equals the pin.
-  - [ ] Realestate CRM `scripts/vendor_kit.py`: `SWAP_SOURCE` becomes `https://startr.style/v1/swap.js`; `make kit_fetch && make kit_check` stays green.
+  - [x] [MANUALLY] `make patch_release` then `make release_finish` (v1.3.3); confirm Netlify deploys `master`. Shipped with v1.4.0 (2026-10-16); there is no v1.3.3 tag.
+  - [x] [WE] `curl -sI https://startr.style/v1/swap.js`: 200, `max-age=31536000, immutable`, `access-control-allow-origin: *`; body sha256 equals the pin. Verified 2026-10-18: all four hold (`d93c4f09…`).
+  - [x] Realestate CRM `scripts/vendor_kit.py`: `SWAP_SOURCE` becomes `https://startr.style/v1/swap.js`; `make kit_fetch && make kit_check` stays green. `SWAP_SOURCE` is `/v1/swap.js` in Trellis; `make kit_fetch` not re-run, because it would drop Trellis's patched copy until the v1.1 `swap:after` fix ships.
 
 - [x] **📚 API documented** at `/docs/swap/` (`src/docs/swap.njk`): three attributes, four events, the nesting rule, the findings, size, licence. #ContentExcellence #docs
 
@@ -76,9 +76,12 @@ are in `docs/board-dossiers.md`.
 
 - [ ] **🔧 v1.1 — first changes at the new source of truth.** #library
   - [ ] `swap:after` and `adoptScripts` run after `transition(run)` returns, but `startViewTransition` runs the callback asynchronously: under a View Transition the event precedes the DOM update and `pushState`. Move both inside the callback.
+    - Trellis carries this fix in its vendored copy since 2026-10-18 (feature/frontend-ux cb5bd68): a phone needed two taps to open a split pane; a CDP touch probe shows one tap after.
   - [ ] Decide whether the library re-creates inline `<script>` elements in a swapped region; the host workaround is `src/_includes/swap-host.njk`.
   - [ ] Add a `License: MIT` line to the `/*!` header. It changes the pin, so every consumer re-pins once.
-  - [ ] Make the comments ASCII-only: 173 `─` rulers, 18 em dashes and one `…` (192 non-ASCII characters, none in code). A host that serves `.js` without a charset shows them as `â€¦` in the raw view; Netlify sends `charset=UTF-8`, the Eleventy dev server does not. Saves about 500 bytes raw. Same pin change as the header line, so ship both together.
+  - [ ] Make the comments ASCII-only: 173 `─` rulers, 18 em dashes and one `…` (192 non-ASCII characters, none in code). Saves about 500 bytes raw.
+    - A host that serves `.js` without a charset shows them as `â€¦` in the raw view; Netlify sends `charset=UTF-8`, the Eleventy dev server does not.
+    - Same pin change as the header line, so ship both together.
   - [ ] Have AI-UI's `scripts/gates/startr-swap/check.py` compare its copy against `https://startr.style/v1/swap.js.sha256` so the two cannot drift silently.
 
 ## 📋 Backlog
@@ -91,44 +94,57 @@ are in `docs/board-dossiers.md`.
     - [x] 1.4.1 hotfix 2026-10-17 (tag v1.4.1, /style.css 931e22f…): 1.4.0's `button:hover` painted over a consumer's own reset (AI-UI's transparent icon buttons went solid primary); now `:where(button, …):hover`. Found by the regression run; `bun run probe:hover` in core is the gate
     - [x] 1.4.2 hotfix 2026-10-17 (tag v1.4.2, /style.css c10bda2…): 1.4.1 still outranked Tailwind's preflight; each hover selector now carries its base rule's specificity (`button:where(:hover)`); 0 unasked fills on AI-UI's real pages with the core's `probe:hover --sheet` before release
   - [ ] **Move the /style.min.css consumers to the current min after a visual check** (Sage.is, Startr.cloud): `HOLD_MIN ?= 1.3.2` in the Makefile keeps the drifted 1.3.2 min; the current min changes ~250 element rules for them. Empty HOLD_MIN once checked
-  - Trap: a Netlify UI redirect of the shape `/:w.:h/*` sends any dotted first segment to `image.startr.cloud` (`/v1.3.2/style.min.css` answers 302 today). A real file should shadow it; verify with `curl -sI` after the first CSS snapshot deploys.
+  - Trap: a Netlify UI redirect of the shape `/:w.:h/*` sends any dotted first segment to `image.startr.cloud` (`/v1.3.2/style.min.css` answers 302 today). A real file should shadow it; verify with `curl -sI` after the first CSS snapshot deploys. Superseded 2026-10-16: the redirect is a Cloudflare rule, not Netlify, and real files do not shadow it (next line).
   - [ ] [MANUALLY] **Narrow the Cloudflare image rule**: a redirect rule on the startr.style zone (not Netlify: no x-nf-request-id) sends dotted first segments to image.startr.cloud, and real files do not shadow it; /v1.3.2/ and /v1.4.0/ 302 (2026-10-16). Match numeric WxH only
-  - [ ] **Ship pinned and rolling CDN versions**: Currently unversioned — any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path. Publish `/v1/`, `/v2/`, and a rolling `/latest/`. Implementation approach: submodule structure where `v1/` is a submodule pointing to the project at the v1 tag, `v2/` at v2, etc. — versioned URLs serve from the pinned submodule, `latest/` serves from `master`.
+  - [ ] **Ship pinned and rolling CDN versions**: Currently unversioned — any change to Startr.Style hits every consumer (Sage.is, Sage.Education) instantly, with no rollback path.
+    - [x] Per-release pins: `make version_snapshot` wrote `/v1.3.2/`, `/v1.4.0/`, `/v1.4.1/`, `/v1.4.2/` under src/static (2026-10-16/17); served once the Cloudflare rule is narrowed
+    - [ ] Publish `/v1/`, `/v2/`, and a rolling `/latest/`.
+    - [ ] Implementation approach: submodule structure where `v1/` is a submodule pointing to the project at the v1 tag, `v2/` at v2, etc. — versioned URLs serve from the pinned submodule, `latest/` serves from `master`.
   - [ ] Consumers pin to a version in prod; `latest` is for the Startr studio itself. Migration plan needed for existing Sage.is / Sage.Education `<link>` tags currently pointing at the unversioned URL. *(Surfaced by Zach Leatherman in a panel review of Sage.is, 2026-04-18.)*
-  - [ ] **Cache headers — versioned vs rolling**: `/v1/style.css`, `/v2/style.css`, etc. → `Cache-Control: public, max-age=31536000, immutable` (one year, immutable; the URL's contents never change by design). `/latest/style.css` → `Cache-Control: public, max-age=60, must-revalidate` (short TTL + revalidate so studio pushes propagate quickly and stale copies don't linger). *(Surfaced by Zach Leatherman, 2026-04-18.)*
-  - [ ] **Emit SRI integrity hashes for each pinned release**: Generate `sha384` integrity hashes at release time and publish them alongside the versioned URL so consumers can use `<link rel="stylesheet" href="/v1/style.css" integrity="sha384-..." crossorigin="anonymous">`. Gives consumers an integrity guarantee even though Startr.Style is on a separate origin. *(Surfaced by Zach Leatherman, 2026-04-18.)*
-  - [ ] **Resolve version drift between README and package.json**: `README.md` opens with `1.3.1`; `package.json` declares `1.2.2.2`. Pick one source of truth (conventionally `package.json`) and make the README read from it, or bump them in lockstep via `scripts/release.sh`. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+  - [ ] **Cache headers — versioned vs rolling** *(Surfaced by Zach Leatherman, 2026-04-18.)*
+    - [x] `/v1/style.css`, `/v2/style.css`, etc. → `Cache-Control: public, max-age=31536000, immutable` (one year, immutable; the URL's contents never change by design): `netlify.toml` gives `/v*/*` that header; `/v1/swap.js` answers it (2026-10-18)
+    - [ ] `/latest/style.css` → `Cache-Control: public, max-age=60, must-revalidate` (short TTL + revalidate so studio pushes propagate quickly and stale copies don't linger).
+  - [ ] **Emit SRI integrity hashes for each pinned release**: Generate `sha384` integrity hashes at release time and publish them alongside the versioned URL. *(Surfaced by Zach Leatherman, 2026-04-18.)*
+    - Consumers can then use `<link rel="stylesheet" href="/v1/style.css" integrity="sha384-..." crossorigin="anonymous">`: an integrity guarantee even though Startr.Style is on a separate origin.
+    - `/v1/swap.js` has one (the swap card above); the CSS snapshots under `/v1.x.y/` do not (2026-10-18).
+  - [ ] **Resolve version drift between README and package.json**: `README.md` opens with `1.3.2`; `package.json` declares `1.4.2` (2026-10-18). Filed at `1.3.1` vs `1.2.2.2`; the licence card closed it once at 1.3.2.
+    - [ ] Pick one source of truth (conventionally `package.json`) and make the README read from it, or bump them in lockstep via `scripts/release.sh`. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
 
 - [ ] 🧨 Silent-Failure DX — unknown props are no-ops
 
-  - [ ] **Give prop typos a failure mode**: An inline prop with no matching `[style*="--X:"]` rule fails silently — no error, no fallback, the declaration just sits inert. Two real hits in build.sage.education (2026-08-25, commit 3198f0b): `--ovx` written for `--ofx`, `--lst` written for `--lis`; both shipped broken layout and were caught only in a 360px visual pass. #dx #landmine
+  - [ ] **Give prop typos a failure mode**: An inline prop with no matching `[style*="--X:"]` rule fails silently — no error, no fallback, the declaration just sits inert. #dx #landmine
+    - Two real hits in build.sage.education (2026-08-25, commit 3198f0b): `--ovx` written for `--ofx`, `--lst` written for `--lis`; both shipped broken layout and were caught only in a 360px visual pass.
     - [x] Publish the canonical prop list as a JSON artifact per release (extractable from the built sheet by regexing `[style*="--X:"]` selectors — proof-of-concept script exists in build.sage.education's `--br` audit).
       - [x] Core's build writes props.json (every prop, tier, state, collision, deprecation); `make core_publish` copies it to src/static/props.json and src/_data/props.json, and src/docs/utilities.njk renders from it (2026-10-16)
       - [ ] scripts/snapshot-version.sh pins no props.json, so a pinned sheet has no pinned dictionary
     - [ ] Authoring-time linter: check every `--*` in template `style=""` attributes against that list; run in consumer CI.
       - [x] Core's `bun run ingest <page>` lints inline props against props.json: unknown, deprecated, collision, tier-state (2026-10-16); consumer CI hookup still open
+      - [x] Trellis `make kit_check` lints every template `style=` prop against its vendored props.json and fails on an unknown one (2026-10-16)
     - [ ] Dev-mode runtime warner: a tiny opt-in script that scans `[style*="--"]` elements and console.warns unknown props.
-  - [ ] **Shorthand dual bindings** (`--br` = border-radius AND border-right; `--bs`, `--td`, `--fs`, `--cr` value-disjoint pairs): the naming decision is filed in `WEB-startr.style.core/TODO.md` — resolve it there, then mirror the outcome here. Consumers are already routing around the DSL (build.sage.education writes plain `flex-shrink:0` to avoid `--fs`). #landmine
+  - [ ] **Shorthand dual bindings** (`--br` = border-radius AND border-right; `--bs`, `--td`, `--fs`, `--cr` value-disjoint pairs): the naming decision is filed in `WEB-startr.style.core/TODO.md` — resolve it there, then mirror the outcome here. #landmine
+    - Consumers are already routing around the DSL (build.sage.education writes plain `flex-shrink:0` to avoid `--fs`).
 
 - [ ] ♿ Accessibility
 
   - [x] **Audit `-hvr` coverage for `:focus` and `:focus-visible`**: Every `[style*="--X-hvr:"]:hover` rule should be paired with `:focus, :focus-visible` so keyboard users get the same affordance as mouse users. `--shadow-hvr` covers `:focus` today; audit and enumerate the rest (`--hvr-bgc`, `--hvr-c`, `--hvr-bdc`, etc.). Land coverage systematically, not ad-hoc. *(Surfaced by Adam Wathan in a panel review of Sage.is, 2026-04-18.)*
     - [x] Done in core (2026-10-16): every hover rule, the new `--x-hover` props and the `-hvr`/`-hover` helpers, has a `:focus-visible` copy; scripts/bands.test.ts and states.test.ts hold it
-  - [ ] **Reconcile `:focus-visible` audit status with spoken claims**: The `-hvr` coverage audit above has been open since 2026-04-18, yet a verbal claim of "keyboard accessibility tested, no issues" was made during the 2026-04-20 panel. Either close the audit with a landed commit, or retract the claim. Both states cannot be true at once. *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*
+  - [x] **Reconcile `:focus-visible` audit status with spoken claims**: closed with a landed commit, the `-hvr` coverage audit above (core, 2026-10-16; scripts/bands.test.ts and states.test.ts hold it). *(Surfaced by Heydon Pickering in a panel review of Startr.Style, 2026-04-20.)*
 
 - [ ] 🎨 Colour System Invariants
 
   - [x] **Audit every colour leaf for IACVT-safe fallbacks**: The 216-cell `color-mix(in oklch, …)` cascade in `src/style-core/src/variables.css` invalidates whole declarations when any component is unparseable. Every consumer leaf (e.g. `background: var(--primary)`) must resolve to `var(--primary, <literal-fallback>)`, not `inherit`/`initial`. Audit the whole leaf surface, not one line — otherwise the DSL has accents. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
     - [x] Moot since 2026-10-16: the 216-cell cascade is gone (`--mix`/`--tone` compute on the element); the new tints ship literal defaults with color-mix() under @supports
-  - [ ] **Register critical custom properties with `@property`**: Without registration, the browser treats colour and layout variables as untyped strings. Downstream `color-mix()` and `calc()` can silently IACVT when consumers pass malformed values. Register `--primary`, `--background`, `--text-main`, and the 216-cell cube entries so the browser can validate inputs and animate between them. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+  - [ ] **Register critical custom properties with `@property`**: Without registration, the browser treats colour and layout variables as untyped strings. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+    - Downstream `color-mix()` and `calc()` can silently IACVT when consumers pass malformed values.
+    - [ ] Register `--primary`, `--background`, `--text-main` so the browser can validate inputs and animate between them; the 216-cell cube entries are moot since 2026-10-16 (the cube is gone).
     - [x] `--mix`, `--tone`, `--tone-of`, `--mixed` and `--toned` are registered, inherits:false (2026-10-16); `--primary`, `--background` and `--text-main` are not
 
 - [ ] 📊 Performance Methodology
 
   - [ ] **Replace the "17% faster than Tailwind" eye-balling with a real harness**: Pick three comparable pages per site (landing, docs, gallery/component showcase). Throttle to Slow 4G, mid-tier Android, cold cache, five runs, publish median.
   - [ ] Publish the harness and raw numbers in `docs/benchmarks/`. Until then, the 17% claim is a vibe, not a metric — use it at parties, not in the README. *(Surfaced by Jeremy Keith in a panel review of Startr.Style, 2026-04-20.)*
-  - [ ] **Re-run LCP on a page that exercises the colour cube**: Current LCP of 0.55s has `<p>` as the LCP element, meaning the 216-cell `color-mix()` cascade is not in the critical render path of the tested page.
-  - [ ] Re-measure on `theme-creator.html` and the component gallery once it exists — pages that actually resolve the cube. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)*
+  - [x] **Re-run LCP on a page that exercises the colour cube**: Current LCP of 0.55s has `<p>` as the LCP element, meaning the 216-cell `color-mix()` cascade is not in the critical render path of the tested page. Moot since 2026-10-16: the 216-cell cube is gone (`--mix`/`--tone` compute on the element).
+  - [x] Re-measure on `theme-creator.html` and the component gallery once it exists — pages that actually resolve the cube. *(Surfaced by Lea Verou in a panel review of Startr.Style, 2026-04-20.)* Moot since 2026-10-16: the 216-cell cube is gone (`--mix`/`--tone` compute on the element).
 
 - [ ] 🧹 Repo Hygiene
 
@@ -137,8 +153,14 @@ are in `docs/board-dossiers.md`.
 
 - [ ] 🖼️ Element Resets
 
-  - [ ] **Reset replaced elements to `display: block`**: Startr.Style ships `img { max-width: 100% }` but never resets `display` or `vertical-align`, so every `<img>` stays `display: inline` and sits on the text baseline. The line box reserves descender space *below* the baseline, which surfaces as a ~2–4px phantom gap under any image that's the tallest item in a flex/grid cell. Every consumer rediscovers this and patches it locally (Startr.ca card sections needed a per-image `--d: block`; a `--mb: -2px` magic-number was the tempting wrong fix). The conventional reset — shared by Tailwind Preflight, `sanitize.css`, `normalize.css` — is `img, svg, video, canvas, audio, iframe, embed, object { display: block; vertical-align: middle; }`. Decide whether to fold this into the framework's base reset. *(Surfaced while debugging the Startr.ca card layout, 2026-07-01.)*
-  - [ ] **Gauge blast radius before landing**: a global `img { display: block }` shifts any consumer that *intends* inline images flowed with text (icons mid-sentence, inline logos/badges, emoji-style glyphs). Before committing, `grep` the known consumers (`WEB-Sage.is`, `WEB-Sage.Education`, `WEB-startr`, `WEB-AI--Sage-is-AI-UI`) for inline-image usage; if the fallout is real, prefer `vertical-align: middle` alone (kills the descender gap while keeping images inline) over forcing `display: block`.
+  - [ ] **Reset replaced elements to `display: block`**: Startr.Style ships `img { max-width: 100% }` but never resets `display` or `vertical-align`, so every `<img>` stays `display: inline` and sits on the text baseline. *(Surfaced while debugging the Startr.ca card layout, 2026-07-01.)*
+    - The line box reserves descender space *below* the baseline, which surfaces as a ~2–4px phantom gap under any image that's the tallest item in a flex/grid cell.
+    - Every consumer rediscovers this and patches it locally (Startr.ca card sections needed a per-image `--d: block`; a `--mb: -2px` magic-number was the tempting wrong fix).
+    - The conventional reset — shared by Tailwind Preflight, `sanitize.css`, `normalize.css` — is `img, svg, video, canvas, audio, iframe, embed, object { display: block; vertical-align: middle; }`.
+    - [ ] Decide whether to fold this into the framework's base reset.
+  - [ ] **Gauge blast radius before landing**: a global `img { display: block }` shifts any consumer that *intends* inline images flowed with text (icons mid-sentence, inline logos/badges, emoji-style glyphs).
+    - [ ] Before committing, `grep` the known consumers (`WEB-Sage.is`, `WEB-Sage.Education`, `WEB-startr`, `WEB-AI--Sage-is-AI-UI`) for inline-image usage.
+    - [ ] If the fallout is real, prefer `vertical-align: middle` alone (kills the descender gap while keeping images inline) over forcing `display: block`.
 
 - [X] 🎉 **Done — Recent Accomplishments**
   - [x] **Enhanced Design Philosophy Pages** - Added comprehensive practical examples to Brutalism, Modernism, and Experimentalism pages
@@ -473,9 +495,22 @@ We have **Total: 25+ existing components identified across 12+ major categories*
 
 ## Backlog
 
-- [ ] **Framework `--c` / `--bg` / `--b` bindings should cover form controls + links**: `[style*="--c"] { color: var(--c) }` loses to UA defaults on `<input>`, `<button>`, `<select>`, `<textarea>`, `<a>` (system color keywords `ButtonText`/`FieldText` and `-webkit-link` win). Consumers have to pull `color: var(--c)` explicitly in component CSS, defeating the inline-primitive promise. Either (a) extend the framework's bindings with the form-control selector list, or (b) document the gotcha prominently. Surfaced 2026-06-08 during Sage.is signup-gate refactor — the unlock button rendered text in browser's default ButtonText (black) on a `--bg: var(--c-ink)` (black) pill despite inline `--c: var(--c-cream)`. Workaround applied at `WEB-Sage.is/src/_includes/signup-gate.njk` (CSS rule explicitly pulls `color: var(--c)` into `.signup-gate__submit` / `.signup-gate__input` / `.signup-gate__provider`).
+- [ ] **Framework `--c` / `--bg` / `--b` bindings should cover form controls + links**: `[style*="--c"] { color: var(--c) }` loses to UA defaults on `<input>`, `<button>`, `<select>`, `<textarea>`, `<a>` (system color keywords `ButtonText`/`FieldText` and `-webkit-link` win).
+  - Consumers have to pull `color: var(--c)` explicitly in component CSS, defeating the inline-primitive promise.
+  - [ ] Either (a) extend the framework's bindings with the form-control selector list, or (b) document the gotcha prominently.
+  - Surfaced 2026-06-08 during Sage.is signup-gate refactor — the unlock button rendered text in browser's default ButtonText (black) on a `--bg: var(--c-ink)` (black) pill despite inline `--c: var(--c-cream)`.
+  - Workaround applied at `WEB-Sage.is/src/_includes/signup-gate.njk` (CSS rule explicitly pulls `color: var(--c)` into `.signup-gate__submit` / `.signup-gate__input` / `.signup-gate__provider`).
 
-- [ ] **Document the brand "gradient text" default + ship `.text-flat` opt-out utility**: The site-wide rule `h1, h2, h3, h4, h5, button, .button, strong { background-image: linear-gradient(...); background-clip: text; -webkit-text-fill-color: transparent; }` is a deliberate brand default (Sage.is keeps strong defaults to stay simple). It bites consumers who build custom components with solid backgrounds — the text fill is transparent and the gradient is hidden behind the solid bg, leaving invisible text. The three-property opt-out incantation (`background-image: none; background-clip: border-box; -webkit-text-fill-color: currentColor;`) is non-obvious. Action: (a) document the default behavior + the opt-out in startr.style docs alongside the framework primitives, and (b) ship a utility class — e.g. `.text-flat` or `.no-gradient-text` — that bundles the three-property opt-out so consumers can write `<button class="text-flat">` instead of remembering the recipe. **Smarter-defaults option to weigh:** drop `button, .button` from the selector list entirely — interactive controls almost always have a solid background that hides the gradient anyway, so the default does nothing useful there and only causes the invisible-text trap. Keep the gradient on `h1-h5, strong` where it actually reads. Surfaced 2026-06-08 during Sage.is signup-gate work — the submit button, h2 heading, and `<strong>` titles all needed the same three-line reset. Workaround currently lives in `WEB-Sage.is/src/_includes/signup-gate.njk` and `whats-included.njk`.
+- [ ] **Document the brand "gradient text" default + ship `.text-flat` opt-out utility**: the site-wide gradient rule leaves invisible text on custom components with solid backgrounds.
+  - The rule `h1, h2, h3, h4, h5, button, .button, strong { background-image: linear-gradient(...); background-clip: text; -webkit-text-fill-color: transparent; }` is a deliberate brand default (Sage.is keeps strong defaults to stay simple).
+  - It bites consumers who build custom components with solid backgrounds — the text fill is transparent and the gradient is hidden behind the solid bg, leaving invisible text.
+  - The three-property opt-out incantation (`background-image: none; background-clip: border-box; -webkit-text-fill-color: currentColor;`) is non-obvious.
+  - [ ] (a) Document the default behavior + the opt-out in startr.style docs alongside the framework primitives.
+  - [ ] (b) Ship a utility class — e.g. `.text-flat` or `.no-gradient-text` — that bundles the three-property opt-out so consumers can write `<button class="text-flat">` instead of remembering the recipe.
+  - [ ] **Smarter-defaults option to weigh:** drop `button, .button` from the selector list entirely — interactive controls almost always have a solid background that hides the gradient anyway.
+    - The default does nothing useful there and only causes the invisible-text trap. Keep the gradient on `h1-h5, strong` where it actually reads.
+  - Surfaced 2026-06-08 during Sage.is signup-gate work — the submit button, h2 heading, and `<strong>` titles all needed the same three-line reset.
+  - Workaround currently lives in `WEB-Sage.is/src/_includes/signup-gate.njk` and `whats-included.njk`.
 
 - [ ] **Typography prop names silently collide with non-typography intents** #critical — Three pairs of identical custom-prop names mean reasonable-looking inline styles silently render as invalid declarations the browser drops without warning:
   - `--fs` is bound TWICE: `font-style` (typography) AND `flex-shrink` (flex). A consumer writing `style="--fs: 1.5rem"` expecting font-size gets *neither* font-size nor a meaningful warning — both bindings receive `1.5rem` and both are invalid for what the author intended. Font-size's actual canonical prop is `--size`.
