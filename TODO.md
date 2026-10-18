@@ -74,15 +74,18 @@ are in `docs/board-dossiers.md`.
   - The home page declares no region (its hero sits outside `<main>`); the logo and Introduction links carry `data-swap-off`. `index.njk` no longer waits for `DOMContentLoaded`.
   - Proven headless (Chrome over CDP, 2026-09-05): sentinel survives docs-to-docs swaps and Back, inline `liveprop` re-runs, home and demo `none.html` navigate normally, no console errors.
 
-- [ ] **🔧 v1.1 — first changes at the new source of truth.** #library
-  - [ ] `swap:after` and `adoptScripts` run after `transition(run)` returns, but `startViewTransition` runs the callback asynchronously: under a View Transition the event precedes the DOM update and `pushState`. Move both inside the callback.
+- [ ] **🔧 v1.1 — first changes at the new source of truth.** #library — built on `feature/swap-1.1`, snapshotted as `/v1.1/swap.js`, not released
+  - [x] `swap:after` and `adoptScripts` now run inside the `transition(run)` callback, after the DOM replace and `pushState` (Trellis's patch, minus its header note)
+    - `make swap_timing` (`scripts/gates/startr-swap/timing.ts`): headless Chrome over the demo pages, a -> b -> a, the `swap:after` listener must read the destination's content
+    - `make swap_timing_teeth`: fails `/v1/swap.js` (reads "A" going to B), passes `src/static/swap.js`
     - Trellis carries this fix in its vendored copy since 2026-10-18 (feature/frontend-ux cb5bd68): a phone needed two taps to open a split pane; a CDP touch probe shows one tap after.
-  - [ ] Decide whether the library re-creates inline `<script>` elements in a swapped region; the host workaround is `src/_includes/swap-host.njk`.
-  - [ ] Add a `License: MIT` line to the `/*!` header. It changes the pin, so every consumer re-pins once.
-  - [ ] Make the comments ASCII-only: 173 `─` rulers, 18 em dashes and one `…` (192 non-ASCII characters, none in code). Saves about 500 bytes raw.
-    - A host that serves `.js` without a charset shows them as `â€¦` in the raw view; Netlify sends `charset=UTF-8`, the Eleventy dev server does not.
-    - Same pin change as the header line, so ship both together.
-  - [ ] Have AI-UI's `scripts/gates/startr-swap/check.py` compare its copy against `https://startr.style/v1/swap.js.sha256` so the two cannot drift silently.
+  - [x] `License: MIT` line in the `/*!` header
+  - [x] ASCII-only comments: 173 `─`, 18 em dashes and one `…` replaced; raw 13,802 to 13,748 B net (the ASCII saves about 365 B; the licence line and the timing comment add about 310), gzip 5,343 to 5,436 B, ceiling 8,192
+  - [x] `make swap_snapshot V=1.1`: `src/static/v1.1/swap.js`, sha256 `8a4f07ee8f4b8286e7a254cecd482227550957c540c5e633395ccbcfe7b191bc`, SRI `sha384-/r9AsVAT1hdM4Gnh+mBr87H2TByKjMe9SG2H8RYYvaD5rSY90Q9afydmOHxtGX6V`; `src/docs/swap.njk` names it and says `/v1/` keeps the old timing
+  - [ ] [MANUALLY] Ship it in the next release and `curl -sI https://startr.style/v1.1/swap.js`: the Cloudflare image rule sends a dotted first segment to image.startr.cloud (`/v1.3.2/` 302s), so narrow it first
+  - [ ] After it is live: point `src/demo/swap/*.njk` at `/v1.1/swap.js`, and Trellis's `SWAP_SOURCE` at `/v1.1/swap.js` (drops its patched copy)
+  - [ ] Decide whether the library re-creates inline `<script>` elements in a swapped region; the host workaround is `src/_includes/swap-host.njk` (kept: it still serves pages on `/v1/`)
+  - [ ] Have AI-UI's `scripts/gates/startr-swap/check.py` compare its copy against `https://startr.style/v1.1/swap.js.sha256` so the two cannot drift silently.
 
 ## 📋 Backlog
 
