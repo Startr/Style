@@ -1,8 +1,8 @@
 # Startr Style–less
 
-**1.3.2**
+**1.5.0**
 
-Temporary patch release for dealing with presentation issues.
+See [RELEASES.md](RELEASES.md) for what each release changed.
 
 Now with Print only `-pt` responsive utility shorthand!!!
 
